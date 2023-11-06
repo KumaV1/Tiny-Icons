@@ -1,0 +1,20 @@
+{
+  "name": "tiny-icons",
+  "version": "2.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "esbuild": "node scripts/esbuild.js --",
+    "esbuildzip": "node scripts/esbuildzip.js --",
+    "release": "standard-version --path ./ && pnpm run esbuild && pnpm run esbuildzip",
+    "dryrelease": "standard-version --dry-run --path ./ && pnpm run esbuild --skip && pnpm run esbuildzip"
+  },
+  "license": "ISC",
+  "devDependencies": {
+    "archiver": "^6.0.1",
+    "melvor-types": "https://github.com/GamesByMalcsPtyLtd/Melvor-Typing-Project"
+  },
+  "standard-version": {
+    "tag-prefix": "Tiny-Icons@v"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "namespace": "tinyIcons",
+  "name": "Tiny Icons",
+  "icon": "https://i.imgur.com/CbXRKjY.png",
+  "setup": "setup.mjs",
+  "version": "2.0.0"
+}
