@@ -1,0 +1,8 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "outDir": "./esdist",
+    "rootDir": "./"
+  },
+  "include": ["./src/**/*", "node_modules/melvor-types"]
+}
