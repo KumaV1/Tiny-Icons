@@ -1,0 +1,7 @@
+{
+  "namespace": "tinyIcons",
+  "name": "Tiny Icons",
+  "icon": "https://i.ibb.co/3fywpFD/ti-icon.png",
+  "setup": "setup.mjs",
+  "version": "2.0.4"
+}
