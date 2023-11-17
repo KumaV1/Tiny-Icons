@@ -1,0 +1,7 @@
+node_modules
+packed
+esdist
+backup
+version.txt
+package
+meta.json
