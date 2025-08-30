@@ -26,7 +26,7 @@ export class IconManager {
    */
   public getIconHTML(
     modifier: string,
-    value: SkillModifier | number,
+    value: unknown, //SkillModifier | number,
     secondary?: boolean,
     size?: string,
   ): string {
@@ -61,9 +61,13 @@ export class IconManager {
    */
   private getIconForModifier(
     modKey: string,
-    value: SkillModifier | number,
+    value: unknown, // SkillModifier | number,
     secondary?: boolean,
   ): string {
+      if (modKey.includes(':')) {
+          // TODO ONLY FOR TESTING
+          modKey = modKey.split(':')[1];
+    }
     const modTags: string[] = modifierTags[modKey];
     if (!modTags) {
       console.warn(`[Tiny Icons] No tags found for modifier ${modKey}`);
@@ -72,7 +76,7 @@ export class IconManager {
 
     if (typeof value === 'object' && modTags.includes('skill')) {
       return !secondary
-        ? value?.skill?.media ?? this.paths.srcForTag['book']
+        ? /*value?.skill?.media ??*/ this.paths.srcForTag['book']
         : this.paths.srcForTag[modTags[1]] ?? '';
     }
 
@@ -98,21 +102,44 @@ export class IconManager {
    */
   private viewAllPassivesOnClick() {
     let passives = `<h5 class="font-w600 font-size-sm mb-1 text-combat-smoke">All Game Modifiers</h5><h5 class="font-w600 font-size-sm mb-3 text-warning"><small>(Visual Only)</small></h5>`;
-    const descriptions: any[] = [];
-    const mods = Array.from(Object.keys(modifierData));
-    for (const mod of mods)
-      modifierData[mod].isSkill
-        ? descriptions.push(
-            printPlayerModifier(mod as any, { skill: game.agility, value: 0 }),
-          )
-        : descriptions.push(printPlayerModifier(mod as any, 0));
+    //const descriptions: any[] = [];
+    //const mods = Array.from(Object.keys(modifierData));
+    //for (const mod of mods)
+    //  modifierData[mod].isSkill
+    //    ? descriptions.push(
+    //        printPlayerModifier(mod as any, { skill: game.agility, value: 0 }),
+    //      )
+    //    : descriptions.push(printPlayerModifier(mod as any, 0));
 
-    passives += descriptions
-      .map(
-        ([text, textClass]) =>
-          `<h5 class="font-w400 font-size-sm mb-1 ${textClass}">${text}</h5>`,
-      )
-      .join('');
+    //passives += descriptions
+    //  .map(
+    //    ([text, textClass]) =>
+    //      `<h5 class="font-w400 font-size-sm mb-1 ${textClass}">${text}</h5>`,
+    //  )
+    //  .join('');
+
+      passives += '<p class="font-w600">MOD REFACTOR IN PROGRESS</p>';
+
+      for (const mod of game.modifierRegistry.registeredObjects) {
+          const modifier = mod[1];;
+
+          if (modifier.allowPositive) {
+              const modVal = new ModifierValue(mod[1], 1);
+              passives += `<h5 class="font-w400 font-size-sm mb-1">${modVal.getDescription().description}</h5>`
+          }
+
+          if (modifier.allowNegative) {
+              const modVal = new ModifierValue(mod[1], -1);
+              passives += `<h5 class="font-w400 font-size-sm mb-1">${modVal.getDescription().description}</h5>`
+          }
+          
+          //modifierData[mod].isSkill
+          //    ? descriptions.push(
+          //        printPlayerModifier(mod as any, { skill: game.agility, value: 0 }),
+          //    )
+          //    : descriptions.push(printPlayerModifier(mod as any, 0));
+          //passives += `<h5 class="font-w400 font-size-sm mb-1">${modVal.getDescription().description}</h5>`
+      }
 
     SwalLocale.fire({ html: passives });
   }
@@ -142,16 +169,17 @@ export class IconManager {
         modifier: string;
         tag: [string, string?];
       }) => {
-        for (const mod of Object.keys(customModifiers)) {
-          if (modifierTags[mod]) {
-            console.warn(
-              `[Tiny Icons] Modifier ${mod} already exists. Skipping.`,
-            );
-            continue;
-          }
-
-          modifierTags[mod] = customModifiers[mod];
-        }
+          console.warn('MOD REFACTOR IN PROGRESS');
+        //for (const mod of Object.keys(customModifiers)) {
+        //  if (modifierTags[mod]) {
+        //    console.warn(
+        //      `[Tiny Icons] Modifier ${mod} already exists. Skipping.`,
+        //    );
+        //    continue;
+        //  }
+        //
+        //  modifierTags[mod] = customModifiers[mod];
+        //}
       },
 
       /**
@@ -173,7 +201,7 @@ export class IconManager {
        */
       getIconHTMLForModifier: (
         modifier: string,
-        value: SkillModifier | number,
+        value: unknown, //SkillModifier | number,
         secondary: boolean,
         size?: string,
       ): string => this.getIconHTML(modifier, value, secondary, size),

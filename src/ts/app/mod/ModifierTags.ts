@@ -2,8 +2,11 @@ import { AllIconTags } from './ModifierIcons';
 
 /**
  * An object mapping all modifiers to tags that represent relevant icons.
+ * TODO: REWRITE MAP, AS QUITE A FEW MODIFIERS WERE RENAMED! BTW, SOME ICONS WERE BASED ON NEGATIVE VERSUS POSITIVE,
+ * WHICH WILL ALSO HAVE TO BE KEPT IN MIND
  */
-export const modifierTags: Record<ModifierKeys, AllIconTags[]> = {
+export const modifierTags: Record<keyof PlayerModifierTable | string, AllIconTags[]> = {
+  accuracyRating: ['ti_combat_up'],
   increasedGlobalAccuracy: ['ti_combat_up'],
   increasedMeleeAccuracyBonus: ['offense_up', 'combat'],
   increasedMeleeMaxHit: ['ti_strength_up', 'combat'],

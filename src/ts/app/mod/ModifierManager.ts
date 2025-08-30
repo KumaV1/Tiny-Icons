@@ -82,9 +82,10 @@ class PatchManager {
     private modifierCtx: ModifierIconContext,
     private modifierEl: ModifierIconHandler,
   ) {
-    this.contextPatches(this);
-    this.patchPotionItems(patch, this);
-  }
+
+    //this.contextPatches(this);
+    //this.patchPotionItems(patch, this);
+    }    
 
   /**
    * A series of context-aware patches for various game methods. This method utilizes
@@ -94,42 +95,42 @@ class PatchManager {
    * - Patches for different game abilities and menus to capture context when and if to prepend icons to modifier text.
    * - Special handling for the "Show Locked Astrology Modifiers" mod.
    */
-  private contextPatches(that: PatchManager) {
-    this.patchWithContext(Agility, 'viewAllPassivesOnClick');
-    this.patchWithContext(Astrology, 'viewAllModifiersOnClick');
-    this.patchWithContext(Agility, 'displayBlueprintSwal');
-
-    // Current open page as context
-    this.patchWithContext(MappedModifiers, 'getActiveModifierDescriptions');
-
-    this.patchWithContext(
-      MapRefinementMenuElement,
-      'updateRefinements',
-      undefined,
-      undefined,
-      (self: MapRefinementMenuElement) =>
-        self.refinements.forEach((refinement) =>
-          that.modifierEl.processModifier(refinement),
-        ),
-    );
-
-    this.patchWithContext(
-      MapRefinementMenuElement,
-      'updateNewRefinement',
-      undefined,
-      undefined,
-      (self: MapRefinementMenuElement) =>
-        self.refinementSelects.forEach((button) =>
-          that.modifierEl.processModifier(button),
-        ),
-    );
-
-    this.patchWithContext(
-      AncientRelicsMenu,
-      'selectSkill',
-      (skill: AnySkill) => skill.localID,
-    );
-  }
+  //private contextPatches(that: PatchManager) {
+  //  this.patchWithContext(Agility, 'viewAllPassivesOnClick');
+  //  this.patchWithContext(Astrology, 'viewAllModifiersOnClick');
+  //  this.patchWithContext(Agility, 'displayBlueprintSwal');
+  //
+  //  // Current open page as context
+  //  this.patchWithContext(MappedModifiers, 'getActiveModifierDescriptions');
+  //
+  //  this.patchWithContext(
+  //    MapRefinementMenuElement,
+  //    'updateRefinements',
+  //    undefined,
+  //    undefined,
+  //    (self: MapRefinementMenuElement) =>
+  //      self.refinements.forEach((refinement) =>
+  //        that.modifierEl.processModifier(refinement),
+  //      ),
+  //  );
+  //
+  //  this.patchWithContext(
+  //    MapRefinementMenuElement,
+  //    'updateNewRefinement',
+  //    undefined,
+  //    undefined,
+  //    (self: MapRefinementMenuElement) =>
+  //      self.refinementSelects.forEach((button) =>
+  //        that.modifierEl.processModifier(button),
+  //      ),
+  //  );
+  //
+  //  this.patchWithContext(
+  //    AncientRelicsMenu,
+  //    'selectSkill',
+  //    (skill: AnySkill) => skill.localID,
+  //  );
+  //}
 
   /**
    * Patches a method within a target class, providing hooks for before and after
@@ -141,54 +142,54 @@ class PatchManager {
    * @param {Function} [beforeHook] - Optional function to be executed before the method.
    * @param {Function} [afterHook] - Optional function to be executed after the method.
    */
-  private patchWithContext(
-    targetClass: ClassHandle,
-    classMethod: string,
-    contextFunction?: ((...args: any) => string) | undefined,
-    beforeHook?: (...args: any) => any[] | void,
-    afterHook?: (returnValue: any, ...args: any) => any | void,
-  ) {
-    const that = this;
-    this.patch(targetClass, classMethod).before(function (...args: any) {
-      contextFunction
-        ? that.modifierCtx.setContext(contextFunction(...args))
-        : that.modifierCtx.setContext();
-
-      if (beforeHook) beforeHook(...args);
-      if (args) return args;
-    });
-
-    this.patch(targetClass, classMethod).after(function (
-      returnValue: any,
-      ...args: any
-    ) {
-      if (afterHook) afterHook(this, returnValue, ...args);
-      that.modifierCtx.resetContext();
-    });
-  }
+  //private patchWithContext(
+  //  targetClass: ClassHandle,
+  //  classMethod: string,
+  //  contextFunction?: ((...args: any) => string) | undefined,
+  //  beforeHook?: (...args: any) => any[] | void,
+  //  afterHook?: (returnValue: any, ...args: any) => any | void,
+  //) {
+  //  const that = this;
+  //  this.patch(targetClass, classMethod).before(function (...args: any) {
+  //    contextFunction
+  //      ? that.modifierCtx.setContext(contextFunction(...args))
+  //      : that.modifierCtx.setContext();
+  //
+  //    if (beforeHook) beforeHook(...args);
+  //    if (args) return args;
+  //  });
+  //
+  //  this.patch(targetClass, classMethod).after(function (
+  //    returnValue: any,
+  //    ...args: any
+  //  ) {
+  //    if (afterHook) afterHook(this, returnValue, ...args);
+  //    that.modifierCtx.resetContext();
+  //  });
+  //}
 
   /**
    * Patch for Agility and Astrology potions to always have tiny icons
    */
-  private patchPotionItems(
-    patch: Modding.ModContext['patch'],
-    that: PatchManager,
-  ) {
-    patch(PotionItem, 'description').get(function (o): any {
-      if ([game.agility.id, game.astrology.id].includes(this.action.id)) {
-        that.modifierCtx.setContext(
-          this.action.id === game.agility.id ? 'Agility' : 'Astrology',
-        );
-        that.modifierCtx.potionRelevance = true;
-        const desc = o();
-        that.modifierCtx.resetContext();
-        return desc;
-      }
-
-      that.modifierCtx.potionRelevance = false;
-      return o();
-    });
-  }
+  //private patchPotionItems(
+  //  patch: Modding.ModContext['patch'],
+  //  that: PatchManager,
+  //) {
+  //  patch(PotionItem, 'description').get(function (o): any {
+  //    if ([game.agility.id, game.astrology.id].includes(this.action.id)) {
+  //      that.modifierCtx.setContext(
+  //        this.action.id === game.agility.id ? 'Agility' : 'Astrology',
+  //      );
+  //      that.modifierCtx.potionRelevance = true;
+  //      const desc = o();
+  //      that.modifierCtx.resetContext();
+  //      return desc;
+  //    }
+  //
+  //    that.modifierCtx.potionRelevance = false;
+  //    return o();
+  //  });
+  //}
 }
 
 /**
@@ -203,112 +204,127 @@ class ModifierIconHandler {
     private iconManager: IconManager,
     private ctx: Modding.ModContext,
   ) {
-    this.ctx.onInterfaceAvailable(() => {
-      this.patchCreateElement();
-      this.patchPrintPlayerModifier();
-      this.patchGetPlainModifierDescriptions();
-      this.patchApplyDescriptionModifications();
-    });
+      this.patchModifierValue(this);
+    //this.ctx.onInterfaceAvailable(() => {
+    //  this.patchCreateElement();
+    //  this.patchPrintPlayerModifier();
+    //  this.patchGetPlainModifierDescriptions();
+    //  this.patchApplyDescriptionModifications();
+    //});
   }
 
   /**
    * Patch to use passed key and value to append relevant icons to the modifier text
    */
-  private patchPrintPlayerModifier() {
-    const originalPrintPlayerModifier = printPlayerModifier;
-    window.printPlayerModifier = (
-      key: any,
-      value: any,
-      precision?: number | undefined,
-    ): [string, string] => {
-      // original [modifier text, text class]
-      let originalReturn = originalPrintPlayerModifier(key, value, precision);
-      if (
-        this.modifierContext.globalIconsEnabled ||
-        this.modifierContext.isAstrologyContext() ||
-        this.modifierContext.isAgilityContext() ||
-        this.modifierContext.isOnRelevantPage()
-      ) {
-        // Insert the relevant icon before the modifier text
-        originalReturn = [
-          this.iconManager.getIconHTML(key, value) + originalReturn[0],
-          originalReturn[1],
-        ];
-      }
-      return originalReturn;
-    };
-  }
+  //private patchPrintPlayerModifier() {
+  //  const originalPrintPlayerModifier = printPlayerModifier;
+  //  window.printPlayerModifier = (
+  //    key: any,
+  //    value: any,
+  //    precision?: number | undefined,
+  //  ): [string, string] => {
+  //    // original [modifier text, text class]
+  //    let originalReturn = originalPrintPlayerModifier(key, value, precision);
+  //    if (
+  //      this.modifierContext.globalIconsEnabled ||
+  //      this.modifierContext.isAstrologyContext() ||
+  //      this.modifierContext.isAgilityContext() ||
+  //      this.modifierContext.isOnRelevantPage()
+  //    ) {
+  //      // Insert the relevant icon before the modifier text
+  //      originalReturn = [
+  //        this.iconManager.getIconHTML(key, value) + originalReturn[0],
+  //        originalReturn[1],
+  //      ];
+  //    }
+  //    return originalReturn;
+  //  };
+    //}
+
+    private patchModifierValue(that: ModifierIconHandler) {
+        that.ctx.patch(ModifierValue, 'getDescription').after(function (returnValue: {
+            description: string;
+            isNegative: boolean;
+        }, negMult?: number, posMult?: number, precision?: number) {
+            return {
+                // TODO: Change the icon manager to not require a "value" anymore, which was used primarily for secondary icons
+                // ^ this shoud instead be a new functionality to add additional icons based on scope?
+                description: that.iconManager.getIconHTML(this.modifier.id, 0) + returnValue.description,
+                isNegative: returnValue.isNegative
+            };
+        });
+    }
 
   /**
    * Patch for item descriptions that have special formatting for status effects.
    * Process the modifier descriptions to remove non unique tiny icon tags.
    * This prevents duplicate icons from being displayed in the description.
    */
-  private patchApplyDescriptionModifications() {
-    const originalApplyDescriptionModifications =
-      window.applyDescriptionModifications;
-    window.applyDescriptionModifications = (desc): string => {
-      if (setLang !== 'en') return desc;
-
-      // Extract and remove all tiny-icon tags
-      const cleanDesc = desc.replace(ModifierIconHandler.TINY_ICON_TAGS, '');
-
-      // Process the clean description through the original function
-      const modifiedDesc = originalApplyDescriptionModifications(cleanDesc);
-
-      // Extract paths after `assets/` from all img src in modifiedDesc
-      const uniqueSources = new Set<string>();
-      const srcRegex = /<img[^>]*src="[^"]*assets\/([^"]+)"[^>]*>/g;
-      let matches: RegExpExecArray | null;
-      while ((matches = srcRegex.exec(modifiedDesc))) {
-        uniqueSources.add(matches[1]);
-      }
-
-      //  Restore tiny-icons in the original description, unless they were already added by the original function
-      const finalDesc = desc.replace(
-        ModifierIconHandler.TINY_ICON_TAGS,
-        (match) => {
-          const srcMatch = match.match(/src="[^"]*assets\/([^"]+)"/);
-          // Remove the tiny icon if it's already in the description and it's not unique
-          return srcMatch && uniqueSources.has(srcMatch[1]) ? '' : match;
-        },
-      );
-
-      // Pass the desc now with tiny icon tags (if any) that wont get mangled
-      return originalApplyDescriptionModifications(finalDesc);
-    };
-  }
+  //private patchApplyDescriptionModifications() {
+  //  const originalApplyDescriptionModifications =
+  //    window.applyDescriptionModifications;
+  //  window.applyDescriptionModifications = (desc): string => {
+  //    if (setLang !== 'en') return desc;
+  //
+  //    // Extract and remove all tiny-icon tags
+  //    const cleanDesc = desc.replace(ModifierIconHandler.TINY_ICON_TAGS, '');
+  //
+  //    // Process the clean description through the original function
+  //    const modifiedDesc = originalApplyDescriptionModifications(cleanDesc);
+  //
+  //    // Extract paths after `assets/` from all img src in modifiedDesc
+  //    const uniqueSources = new Set<string>();
+  //    const srcRegex = /<img[^>]*src="[^"]*assets\/([^"]+)"[^>]*>/g;
+  //    let matches: RegExpExecArray | null;
+  //    while ((matches = srcRegex.exec(modifiedDesc))) {
+  //      uniqueSources.add(matches[1]);
+  //    }
+  //
+  //    //  Restore tiny-icons in the original description, unless they were already added by the original function
+  //    const finalDesc = desc.replace(
+  //      ModifierIconHandler.TINY_ICON_TAGS,
+  //      (match) => {
+  //        const srcMatch = match.match(/src="[^"]*assets\/([^"]+)"/);
+  //        // Remove the tiny icon if it's already in the description and it's not unique
+  //        return srcMatch && uniqueSources.has(srcMatch[1]) ? '' : match;
+  //      },
+  //    );
+  //
+  //    // Pass the desc now with tiny icon tags (if any) that wont get mangled
+  //    return originalApplyDescriptionModifications(finalDesc);
+  //  };
+  //}
 
   /**
    * Patch to reset context in case it persists from Astrology or Agility
    * Context is used to determine which icons to display if global icons disabled
    * This prevents icons in prayers, items, tooltips, etc. when global icons disabled
    */
-  private patchGetPlainModifierDescriptions() {
-    const originalGetPlainModifierDescriptions =
-      window.getPlainModifierDescriptions;
-    window.getPlainModifierDescriptions = (modifiers): string[] => {
-      // reset context in case it persists from Astrology or Agility
-      if (!this.modifierContext.potionRelevance)
-        this.modifierContext.resetContext();
-      return originalGetPlainModifierDescriptions(modifiers);
-    };
-  }
-
-  /**
-   * Patch to process any element created with tiny icon img tags in textContent
-   */
-  private patchCreateElement() {
-    const originalCreateElement = window.createElement;
-    window.createElement = (tagName, options = {}): HTMLElement => {
-      const originalElem = originalCreateElement(tagName, options);
-      if (!originalElem.textContent?.includes('tiny-icon')) return originalElem;
-
-      this.fixTextContentImgTag(originalElem);
-
-      return originalElem;
-    };
-  }
+  //private patchGetPlainModifierDescriptions() {
+  //  const originalGetPlainModifierDescriptions =
+  //    window.getPlainModifierDescriptions;
+  //  window.getPlainModifierDescriptions = (modifiers): string[] => {
+  //    // reset context in case it persists from Astrology or Agility
+  //    if (!this.modifierContext.potionRelevance)
+  //      this.modifierContext.resetContext();
+  //    return originalGetPlainModifierDescriptions(modifiers);
+  //  };
+  //}
+  //
+  ///**
+  // * Patch to process any element created with tiny icon img tags in textContent
+  // */
+  //private patchCreateElement() {
+  //  const originalCreateElement = window.createElement;
+  //  window.createElement = (tagName, options = {}): HTMLElement => {
+  //    const originalElem = originalCreateElement(tagName, options);
+  //    if (!originalElem.textContent?.includes('tiny-icon')) return originalElem;
+  //
+  //    this.fixTextContentImgTag(originalElem);
+  //
+  //    return originalElem;
+  //  };
+  //}
 
   /**
    * Recursively process all modifier elements with tiny icon img tags in textContent
