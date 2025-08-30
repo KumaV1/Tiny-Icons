@@ -5,3 +5,13 @@ backup
 version.txt
 package
 meta.json
+dist
+NOTES.md
+bun.lockb
+package-lock.json
+package.json
+pnpm-lock.yaml
+tsconfig.json
+webpack.config.js
+bundleHtml.js
+zip.js
