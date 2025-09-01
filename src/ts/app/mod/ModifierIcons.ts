@@ -31,7 +31,10 @@ export class ModifierIconPaths {
     specific?: string,
     ext: string = 'svg',
   ): string => {
-    if (type === 'bank') ext = 'png';
+    if (type === 'bank') {
+      ext = 'png';
+    }
+
     switch (type) {
       case 'skills':
         if (name === 'skill') return this.basePath('main', 'Book1', 'png');
@@ -104,13 +107,14 @@ export class ModifierIconPaths {
       autoeat: this.iconPath('shop', 'autoeat'),
       bank: this.iconPath('main', 'bank_header'),
       barrier: this.iconPath('skills', 'combat', 'barrier'),
-      book: this.iconPath('main', 'Book1', 'png'),
+      book: this.iconPath('main', 'Book1', undefined, 'png'),
       coins: this.iconPath('main', 'coins'),
       consumable: this.iconPath('bank', 'consumable'),
       curse: this.iconPath('skills', 'combat', 'curses'),
       dig: this.iconPath('skills', 'archaeology', 'digsites'),
       double: this.iconPath('main', 'double'),
       dungeon: this.iconPath('skills', 'combat', 'dungeon'),
+      stronghold: this.iconPath('skills', 'combat', 'strongholds'),
       equip_set: this.iconPath('shop', 'equipment_set'),
       equip_swap: this.iconPath('shop', 'equipment_swap'),
       gem: this.iconPath('bank', 'diamond'),
@@ -121,7 +125,8 @@ export class ModifierIconPaths {
       lemon: cdnMedia('assets/april/images/lemon.jpg'),
       map: this.iconPath('skills', 'archaeology', 'map_colour'),
       mastery: this.iconPath('main', 'mastery_header'),
-      mods: this.iconPath('mods', 'placeholder_icon', 'png'),
+      placeholder: this.iconPath('mods', 'placeholder_icon', undefined, 'png'),
+      mods: this.iconPath('mods', 'placeholder_icon', undefined, 'png'),
       pet: this.iconPath('pets', 'bandit_base'),
       potion: this.iconPath('skills', 'herblore', 'potion_empty'),
       preservation: this.iconPath('main', 'preservation'),

@@ -245,11 +245,11 @@ class ModifierIconHandler {
         that.ctx.patch(ModifierValue, 'getDescription').after(function (returnValue: {
             description: string;
             isNegative: boolean;
-        }, negMult?: number, posMult?: number, precision?: number) {
+        }, negMult?: number, posMult?: number, precision?: number) {          
             return {
                 // TODO: Change the icon manager to not require a "value" anymore, which was used primarily for secondary icons
                 // ^ this shoud instead be a new functionality to add additional icons based on scope?
-                description: that.iconManager.getIconHTML(this.modifier.id, 0) + returnValue.description,
+                description: that.iconManager.getIconHTML(this, !returnValue.isNegative, true) + returnValue.description,
                 isNegative: returnValue.isNegative
             };
         });
