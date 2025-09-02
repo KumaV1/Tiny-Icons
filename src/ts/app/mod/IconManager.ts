@@ -5,7 +5,6 @@ import {
   IconTagSources,
   ModifierIconPaths,
 } from './ModifierIcons';
-import { modifierTags } from './ModifierTags';
 import { modifierTagMap } from './ModifierTags';
 
 /**
@@ -417,13 +416,24 @@ export class IconManager {
       },
 
       /**
-       * Returns the icon tags defined for a given modifier.
+       * Returns the STATIC icon tags defined for a given modifier.
        * The first tag is the primary icon and the second tag is the secondary icon if any.
        * @param {string} modifier The name of the modifier.
        * @returns {string[]} The icon tags defined for the modifier in array of up to 2 string elements.
        */
-      getIconTagsForModifier: (modifier: string): AllIconTags[] =>
-        modifierTags[modifier],
+      getIconTagsForModifier: (modifier: string): AllIconTags[] => {
+        console.warn('[Tiny Icons] getIconTagsForModifier has been deprecated, due to new structure. Use getIconTagMapForModifier instead')
+        return [];
+      },
+
+      /**
+       * Returns tag attributes object for given modifier, if one is set up for that modifier
+       * @param modifier The name of the modifier.
+       * @returns {ModifierTagMapEntryAttributes | undefined} An object of modifier tag attributes
+       */
+      getIconTagMapForModifier: (modifier: string): ModifierTagMapEntryAttributes | undefined => {
+        return modifierTagMap.get(modifier);
+      },
 
       /**
        * Returns the HTML for the icon associated with the given modifier and value.

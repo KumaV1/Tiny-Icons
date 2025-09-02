@@ -1,5 +1,6 @@
 import { IconManager } from './IconManager';
 import { ModifierIconPaths } from './ModifierIcons';
+import { CustomContext } from './types/customContext';
 
 /**
  * Mod assembly.
@@ -55,7 +56,7 @@ export class ModifierManagerInit {
     modifierCtx: ModifierIconContext,
     modifierEl: ModifierIconHandler,
   ): PatchManager {
-    return new PatchManager(ctx.patch, modifierCtx, modifierEl);
+    return new PatchManager(ctx, modifierCtx, modifierEl);
   }
 }
 
@@ -66,7 +67,7 @@ class ModifierManager {
     private patchManager: PatchManager,
     private modifierCtx: ModifierIconContext,
     private modifierEl: ModifierIconHandler,
-  ) {}
+  ) { }
 
   public init(): void {
     this.iconManager.exposeAPI();
@@ -78,14 +79,13 @@ class ModifierManager {
  */
 class PatchManager {
   constructor(
-    private patch: Modding.ModContext['patch'],
+    private ctx: Modding.ModContext,
     private modifierCtx: ModifierIconContext,
     private modifierEl: ModifierIconHandler,
   ) {
-
-    //this.contextPatches(this);
+    this.contextPatches(this);
     //this.patchPotionItems(patch, this);
-    }    
+  }
 
   /**
    * A series of context-aware patches for various game methods. This method utilizes
@@ -95,42 +95,62 @@ class PatchManager {
    * - Patches for different game abilities and menus to capture context when and if to prepend icons to modifier text.
    * - Special handling for the "Show Locked Astrology Modifiers" mod.
    */
-  //private contextPatches(that: PatchManager) {
-  //  this.patchWithContext(Agility, 'viewAllPassivesOnClick');
-  //  this.patchWithContext(Astrology, 'viewAllModifiersOnClick');
-  //  this.patchWithContext(Agility, 'displayBlueprintSwal');
-  //
-  //  // Current open page as context
-  //  this.patchWithContext(MappedModifiers, 'getActiveModifierDescriptions');
-  //
-  //  this.patchWithContext(
-  //    MapRefinementMenuElement,
-  //    'updateRefinements',
-  //    undefined,
-  //    undefined,
-  //    (self: MapRefinementMenuElement) =>
-  //      self.refinements.forEach((refinement) =>
-  //        that.modifierEl.processModifier(refinement),
-  //      ),
-  //  );
-  //
-  //  this.patchWithContext(
-  //    MapRefinementMenuElement,
-  //    'updateNewRefinement',
-  //    undefined,
-  //    undefined,
-  //    (self: MapRefinementMenuElement) =>
-  //      self.refinementSelects.forEach((button) =>
-  //        that.modifierEl.processModifier(button),
-  //      ),
-  //  );
-  //
-  //  this.patchWithContext(
-  //    AncientRelicsMenu,
-  //    'selectSkill',
-  //    (skill: AnySkill) => skill.localID,
-  //  );
-  //}
+  private contextPatches(that: PatchManager) {
+    //this.patchWithContext(Agility, 'viewAllPassivesOnClick');
+    //this.patchWithContext(Astrology, 'viewAllModifiersOnClick');
+    //this.patchWithContext(Agility, 'displayBlueprintSwal');
+
+    // If the character does not have global icons enabled, then we need to patch certain methods to set a custom context for enabling the icons at specific locations
+    this.ctx.onCharacterLoaded(() => {
+      if (!that.modifierCtx.globalIconsEnabled) {
+        this.ctx.patch(BuiltAgilityObstacleElement, 'updatePassives').before(function(obstacle: AgilityObstacle): void {
+          that.modifierCtx.setCustomContext('agility');
+        });
+        this.ctx.patch(BuiltAgilityObstacleElement, 'updatePassives').after(function(returnValue: void, obstacle: AgilityObstacle) {
+          that.modifierCtx.resetCustomContext();
+        });
+
+        this.ctx.patch(AstrologyModifierDisplayElement, 'setModifier').before(function(astroMod: AstrologyModifier, mult: number): void {
+          that.modifierCtx.setCustomContext('astrology');
+        });
+        this.ctx.patch(AstrologyModifierDisplayElement, 'setModifier').after(function(returnValue: void, astroMod: AstrologyModifier, mult: number) {
+          that.modifierCtx.resetCustomContext();
+        });
+      }
+    })
+
+
+    // Current open page as context
+    //this.patchWithContext(MappedModifiers, 'getActiveModifierDescriptions');
+
+    //this.patchWithContext(
+    //  MapRefinementMenuElement,
+    //  'updateRefinements',
+    //  undefined,
+    //  undefined,
+    //  (self: MapRefinementMenuElement) =>
+    //    self.refinements.forEach((refinement) =>
+    //      that.modifierEl.processModifier(refinement),
+    //    ),
+    //);
+    //
+    //this.patchWithContext(
+    //  MapRefinementMenuElement,
+    //  'updateNewRefinement',
+    //  undefined,
+    //  undefined,
+    //  (self: MapRefinementMenuElement) =>
+    //    self.refinementSelects.forEach((button) =>
+    //      that.modifierEl.processModifier(button),
+    //    ),
+    //);
+    //
+    //this.patchWithContext(
+    //  AncientRelicsMenu,
+    //  'selectSkill',
+    //  (skill: AnySkill) => skill.localID,
+    //);
+  }
 
   /**
    * Patches a method within a target class, providing hooks for before and after
@@ -152,24 +172,26 @@ class PatchManager {
   //  const that = this;
   //  this.patch(targetClass, classMethod).before(function (...args: any) {
   //    contextFunction
-  //      ? that.modifierCtx.setContext(contextFunction(...args))
-  //      : that.modifierCtx.setContext();
-  //
+  //      ? that.modifierCtx.setCustomContext(contextFunction(...args))
+  //      : that.modifierCtx.setCustomContext();
+//
   //    if (beforeHook) beforeHook(...args);
   //    if (args) return args;
   //  });
-  //
+//
   //  this.patch(targetClass, classMethod).after(function (
   //    returnValue: any,
   //    ...args: any
   //  ) {
   //    if (afterHook) afterHook(this, returnValue, ...args);
-  //    that.modifierCtx.resetContext();
+  //    that.modifierCtx.resetCustomContext();
   //  });
   //}
 
   /**
    * Patch for Agility and Astrology potions to always have tiny icons
+   * TODO: Apparently a "PotionItem" includes the action it applies to, so may add this one back.
+   * ^ That being said, the description also mentiones the skill it applies to, so maybe less important now?
    */
   //private patchPotionItems(
   //  patch: Modding.ModContext['patch'],
@@ -177,12 +199,12 @@ class PatchManager {
   //) {
   //  patch(PotionItem, 'description').get(function (o): any {
   //    if ([game.agility.id, game.astrology.id].includes(this.action.id)) {
-  //      that.modifierCtx.setContext(
+  //      that.modifierCtx.setCustomContext(
   //        this.action.id === game.agility.id ? 'Agility' : 'Astrology',
   //      );
   //      that.modifierCtx.potionRelevance = true;
   //      const desc = o();
-  //      that.modifierCtx.resetContext();
+  //      that.modifierCtx.resetCustomContext();
   //      return desc;
   //    }
   //
@@ -204,7 +226,7 @@ class ModifierIconHandler {
     private iconManager: IconManager,
     private ctx: Modding.ModContext,
   ) {
-      this.patchModifierValue(this);
+    this.patchModifierDescription(this);
     //this.ctx.onInterfaceAvailable(() => {
     //  this.patchCreateElement();
     //  this.patchPrintPlayerModifier();
@@ -239,21 +261,27 @@ class ModifierIconHandler {
   //    }
   //    return originalReturn;
   //  };
-    //}
+  //}
 
-    private patchModifierValue(that: ModifierIconHandler) {
-        that.ctx.patch(ModifierValue, 'getDescription').after(function (returnValue: {
-            description: string;
-            isNegative: boolean;
-        }, negMult?: number, posMult?: number, precision?: number) {          
-            return {
-                // TODO: Change the icon manager to not require a "value" anymore, which was used primarily for secondary icons
-                // ^ this shoud instead be a new functionality to add additional icons based on scope?
-                description: that.iconManager.getIconHTML(this, !returnValue.isNegative, true) + returnValue.description,
-                isNegative: returnValue.isNegative
-            };
-        });
-    }
+  private patchModifierDescription(that: ModifierIconHandler) {
+    that.ctx.patch(ModifierValue, 'getDescription').after(function (returnValue: {
+      description: string;
+      isNegative: boolean;
+    }, negMult?: number, posMult?: number, precision?: number) {
+      console.log('ModifierValue.getDecription.after called');
+      const printIcons = that.modifierContext.globalIconsEnabled
+        || that.modifierContext.isRelevantLocation();
+      console.log('that.modifierContext.globalIconsEnabled', that.modifierContext.globalIconsEnabled);
+      console.log('that.modifierContext.isRelevantLocation()', that.modifierContext.isRelevantLocation());
+
+      return printIcons
+        ? {
+          description: that.iconManager.getIconHTML(this, !returnValue.isNegative, true) + returnValue.description,
+          isNegative: returnValue.isNegative
+        }
+        : returnValue;
+    });
+  }
 
   /**
    * Patch for item descriptions that have special formatting for status effects.
@@ -306,7 +334,7 @@ class ModifierIconHandler {
   //  window.getPlainModifierDescriptions = (modifiers): string[] => {
   //    // reset context in case it persists from Astrology or Agility
   //    if (!this.modifierContext.potionRelevance)
-  //      this.modifierContext.resetContext();
+  //      this.modifierContext.resetCustomContext();
   //    return originalGetPlainModifierDescriptions(modifiers);
   //  };
   //}
@@ -379,11 +407,11 @@ class ModifierIconHandler {
  */
 class ModifierIconContext {
   private relevantPotion: boolean = false;
-  private currentContext: string | undefined = '';
+  private currentCustomContext: CustomContext | undefined;
 
   constructor(
     private settings: ReturnType<Modding.ModContext['settings']['section']>,
-  ) {}
+  ) { }
 
   get globalIconsEnabled(): boolean {
     return this.settings.get('global-icons') as boolean;
@@ -396,23 +424,46 @@ class ModifierIconContext {
     return this.relevantPotion;
   }
 
-  setContext(context: string | undefined = undefined): void {
-    this.currentContext = context ?? game.openPage?.localID;
+  setCustomContext(context: CustomContext): void {
+    this.currentCustomContext = context;
   }
 
-  resetContext(): void {
-    this.currentContext = '';
+  resetCustomContext(): void {
+    this.currentCustomContext = undefined;
   }
 
-  isAstrologyContext(): boolean {
-    return this.currentContext === 'Astrology';
+  isAgilityPage(): boolean {
+    return game.openPage?.id === game.agility.id;
   }
 
-  isAgilityContext(): boolean {
-    return this.currentContext === 'Agility';
+  isAstrologyPage(): boolean {
+    return game.openPage?.id === game.astrology.id;
   }
 
+  //isAstrologyContext(): boolean {
+  //  return this.currentContext === 'Astrology';
+  //}
+  //
+  //isAgilityContext(): boolean {
+  //  return this.currentContext === 'Agility';
+  //}
+
+  /**
+   * Whether the user is on a page that should always display icons
+   * @returns
+   */
   isOnRelevantPage(): boolean {
-    return ['Astrology', 'Agility'].includes(game.openPage?.localID || '');
+    return this.isAgilityPage() || this.isAstrologyPage();
+  }
+
+  /**
+   * Whether the logic is run at a location that should always display icons.
+   * This can even include the {@link isOnRelevantPage}, as some logic on said page may be run before the page location is actually updated
+   * @returns
+   */
+  isRelevantLocation(): boolean {
+    return this.currentCustomContext === 'agility'
+      || this.currentCustomContext === 'astrology'
+      || this.isOnRelevantPage();
   }
 }
