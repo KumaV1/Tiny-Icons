@@ -1,7 +1,7 @@
 import { ModifierTagMapEntryAttributes } from './models/ModifierTagMapEntryAttributes';
 import {
   PathType,
-  AllIconTags,
+  StaticModifierIconTag,
   IconTagSources,
   ModifierIconPaths,
 } from './ModifierIcons';
@@ -235,7 +235,7 @@ export class IconManager {
         const hasScope = Object.getOwnPropertyNames(scopeObj).length > 0;
 
         // Initialize Modifier value with given scope object
-        // Rather than "allow" positive and negative, checking the description and whether there are ones unfiltered or only for "above" or "below" (0) seems more robust 
+        // Rather than "allow" positive and negative, checking the description and whether there are ones unfiltered or only for "above" or "below" (0) seems more robust
         if (modifier.allowPositive) {
           const modVal = new ModifierValue(mod[1], 1, scopeObj);
           const description: StatDescription = modVal.print();
@@ -269,7 +269,7 @@ export class IconManager {
   /**
    * TEMP: Provide text to append to modifier overview, to signify scopes
    * @param scope
-   * @returns 
+   * @returns
    */
   private getScopeInfoSuffixForOverview(scope: IModifierScope) {
     let scopeNames: string[] = [];
@@ -281,7 +281,7 @@ export class IconManager {
   }
 
   /* DEV NOTE:
-  
+
   Regarding getting src for some of the scopes, aside from a "scope" source, the "skill" may also be a valid scope source
 
   const hasScopeSource = this.scopeSource !== undefined || this.scopes.skill;
@@ -298,82 +298,110 @@ export class IconManager {
 
   /**
    * Get icon source for skill scope
-   * @param skill 
-   * @returns 
+   * @param skill
+   * @returns
    */
   private getIconSrcForSkillScope(skill: AnySkill): string {
-    return skill.getMediaURL(skill._media);
+    return skill.media;//skill.getMediaURL(skill._media);
   }
 
   /**
    * Get icon source for damageType scope
-   * @param damageType 
-   * @returns 
+   * @param damageType
+   * @returns
    */
   private getIconSrcForDamageTypeScope(damageType: DamageType): string {
-    return damageType.getMediaURL(damageType._media);
+    return damageType.media;//damageType.getMediaURL(damageType._media);
   }
 
   /**
    * Get icon source for realm scope
-   * @param realm 
-   * @returns 
+   * @param realm
+   * @returns
    */
   private getIconSrcForRealmScope(realm: Realm): string {
-    return realm.getMediaURL(realm._media);
+    return realm.media;//realm.getMediaURL(realm._media);
   }
 
   /**
    * Get icon source for currency scope
-   * @param currency 
-   * @returns 
+   * @param currency
+   * @returns
    */
   private getIconSrcForCurrencyScope(currency: Currency): string {
-    return currency.getMediaURL(currency._media);
+    return currency.media;//currency.getMediaURL(currency._media);
   }
 
   /**
    * Get icon source for category scope
-   * @param category 
-   * @returns 
+   * @param category
+   * @returns
    */
-  private getIconSrcForCategoryScope(category: NamedObject): string | undefined {
+  private getIconSrcForCategoryScope(category: NamedObject | NamedObject & { media: string }): string | undefined {
+    console.log(category);
+    /** @ts-ignore - unknown property, as unknown whether scope source has media */
+    if (category.media) {
+      /** @ts-ignore - unknown property, as unknown whether scope source has media */
+      return category.media;//category.getMediaURL(category._media);
+    }
+
     return this.paths.srcForTag['placeholder'];
   }
 
   /**
    * Get icon source for action scope
-   * @param action 
-   * @returns 
+   * @param action
+   * @returns
    */
-  private getIconSrcForActionScope(action: NamedObject): string | undefined {
+  private getIconSrcForActionScope(action: NamedObject | NamedObject & { media: string }): string | undefined {
+    console.log(action);
+    /** @ts-ignore - unknown property, as unknown whether scope source has media */
+    if (action.media) {
+      /** @ts-ignore - unknown property, as unknown whether scope source has media */
+      return action.media//action.getMediaURL(action._media);
+    }
+
     return this.paths.srcForTag['placeholder'];
   }
 
   /**
    * Get icon source for subcategory scope
-   * @param subcategory 
-   * @returns 
+   * @param subcategory
+   * @returns
    */
-  private getIconSrcForSubcagetoryScope(subcategory: NamedObject): string | undefined {
+  private getIconSrcForSubcagetoryScope(subcategory: NamedObject | NamedObject & { media: string }): string | undefined {
+    console.log(subcategory);
+    /** @ts-ignore - unknown property, as unknown whether scope source has media */
+    if (subcategory.media) {
+      /** @ts-ignore - unknown property, as unknown whether scope source has media */
+      return subcategory.media;//subcategory.getMediaURL(subcategory._media);
+    }
+
     return this.paths.srcForTag['placeholder'];
   }
 
   /**
    * Get icon source for item scope
-   * @param item 
-   * @returns 
+   * @param item
+   * @returns
    */
   private getIconSrcForItemScope(item: Item): string | undefined {
-    return item.getMediaURL(item._media);
+    return item.media;//item.getMediaURL(item._media);
   }
 
   /**
    * Get icon source for effectGroup scope
-   * @param effectGroup 
-   * @returns 
+   * @param effectGroup
+   * @returns
    */
-  private getIconSrcForCombatEffectGroupScope(effectGroup: CombatEffectGroup): string {
+  private getIconSrcForCombatEffectGroupScope(effectGroup: CombatEffectGroup | CombatEffectGroup & { media: string }): string {
+    console.log(effectGroup);
+    /** @ts-ignore - unknown property, as unknown whether scope source has media */
+    if (effectGroup.media) {
+      /** @ts-ignore - unknown property, as unknown whether scope source has media */
+      return effectGroup.media;//effectGroup.getMediaURL(effectGroup.media);
+    }
+
     return this.paths.srcForTag['placeholder'];
   }
 
@@ -421,7 +449,7 @@ export class IconManager {
        * @param {string} modifier The name of the modifier.
        * @returns {string[]} The icon tags defined for the modifier in array of up to 2 string elements.
        */
-      getIconTagsForModifier: (modifier: string): AllIconTags[] => {
+      getIconTagsForModifier: (modifier: string): StaticModifierIconTag[] => {
         console.warn('[Tiny Icons] getIconTagsForModifier has been deprecated, due to new structure. Use getIconTagMapForModifier instead')
         return [];
       },

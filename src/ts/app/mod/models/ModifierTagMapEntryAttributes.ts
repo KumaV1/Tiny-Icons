@@ -1,28 +1,31 @@
-import { AllIconTags } from "../ModifierIcons";
+import { StaticModifierIconTag } from "../ModifierIcons";
 
 /**
  * Describes key attributes by which the icon tags to use can be computed
  * IMPORTANT: The "positive" and "negative" markers are not used based on the modifier value, but whether the modifier's value is interpreted as positive or negative
  */
-export class ModifierTagMapEntryAttributes {   
+export class ModifierTagMapEntryAttributes {
 
     /**
      * Primary tag associated with the modifier. Do note, that scope tags are "more important", leading to them being placed before primary and secondary icon
      */
-    primaryTag: { positive: AllIconTags, negative: AllIconTags }
+    primaryTag: { positive: StaticModifierIconTag, negative: StaticModifierIconTag } // TODO: IDEA: Change the type to a union type of "Always" and "Conditional/only if certain scopes to dot exist"
+                                                                         // TODO: IDEA: Set both primary and secondary tag to type where the tag can be disabled if a certain or any scope is available? (basically same as above, but as a single type, which may result in more checks in code than above, not sure)
+                                                                         // TODO: THOUGHT: What about the order of the icons, though? in certain cases, one would want the "nonScopeTag.X" to explicitly replace the primary tag at its location
 
     /**
      * Optinally, a secondary tag can be provided
      */
-    secondaryTag?: { positive: AllIconTags, negative: AllIconTags }
+    secondaryTag?: { positive: StaticModifierIconTag, negative: StaticModifierIconTag }
+
+
 
     /**
-     * For performance, specify which tags the modifier may deal with, so not every property is checked
-     * TODO: Possibly to be removed, which properties to "compute" should be readable from the "ModifierValue" which should specify the current relevant scope
+     *
+     * @param primaryTag The main tag to always display for that modifier
+     * @param secondaryTag An optional second tag to display for that modifier
      */
-    //availableScopes: TrueFlags<IModifierScope>
-
-    constructor(primaryTag: AllIconTags | { positive: AllIconTags, negative: AllIconTags }, secondaryTag?: AllIconTags | { positive: AllIconTags, negative: AllIconTags }) {
+    constructor(primaryTag: StaticModifierIconTag | { positive: StaticModifierIconTag, negative: StaticModifierIconTag }, secondaryTag?: StaticModifierIconTag | { positive: StaticModifierIconTag, negative: StaticModifierIconTag }) {
         if (typeof primaryTag == 'string') {
             this.primaryTag = {
                 positive: primaryTag,

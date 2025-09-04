@@ -2,7 +2,7 @@
  * Provides utility methods to generate paths for different icons.
  */
 export class ModifierIconPaths {
-  constructor(private ctx: Modding.ModContext) {}
+  constructor(private ctx: Modding.ModContext) { }
 
   /**
    * Provides an asset path be insert to src attributes.
@@ -42,7 +42,9 @@ export class ModifierIconPaths {
           ? this.basePath('skills', `${name}/${name}`, ext)
           : this.basePath('skills', `${name}/${specific}`, ext);
       case 'ti':
-        return this.ctx.getResourceUrl(`img/${name}.${ext}`);
+        return specific
+          ? this.ctx.getResourceUrl(`img/${specific}/${name}.${ext}`)
+          : this.ctx.getResourceUrl(`img/${name}.${ext}`);
       case 'bank':
       case 'main':
       case 'shop':
@@ -56,8 +58,7 @@ export class ModifierIconPaths {
       default:
         if (type && name)
           throw new Error(
-            `Unsupported icon path: assets/media/${type}/${name}${
-              specific ? '/' + specific : ''
+            `Unsupported icon path: assets/media/${type}/${name}${specific ? '/' + specific : ''
             }.${ext}`,
           );
         else throw new Error(`Unsupported icon path.`);
@@ -119,6 +120,7 @@ export class ModifierIconPaths {
       equip_swap: this.iconPath('shop', 'equipment_swap'),
       gem: this.iconPath('bank', 'diamond'),
       golbin: this.iconPath('pets', 'golden_golbin'),
+      currency: this.iconPath('ti', 'currency_generic', 'flaticon', 'png'),
       gp: this.iconPath('main', 'coins'),
       interval: this.iconPath('main', 'timer'),
       item_alchemy: this.iconPath('skills', 'magic', 'item_alchemy'),
@@ -326,8 +328,8 @@ type ExtractKeys<T> = {
 }[keyof T];
 
 /**
- * All available icon tags based on ModifierIconPaths categories.
+ * All available icon tags (for static tagging) based on ModifierIconPaths categories.
  */
-export type AllIconTags = ExtractKeys<
+export type StaticModifierIconTag = ExtractKeys<
   typeof ModifierIconPaths.prototype.iconCategories
 >;
