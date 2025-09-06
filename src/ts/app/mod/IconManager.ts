@@ -83,7 +83,7 @@ export class IconManager {
   ): string {
     const modTagAttributes: ModifierTagMapEntryAttributes | undefined = modifierTagMap.get(modifierValue.modifier.id);
     if (!modTagAttributes) {
-      console.warn(`[Tiny Icons] No tags found for modifier ${modifierValue.modifier.id}`);
+      //console.warn(`[Tiny Icons] No tags found for modifier ${modifierValue.modifier.id}`);
       return '';
     }
 
@@ -96,7 +96,7 @@ export class IconManager {
         : modTagAttributes.primaryTag.negative;
 
     if (!tag) {
-      console.warn(`[Tiny Icons] No tag could be determined for modifier ${modifierValue.modifier.id}, positive value ${positive} and secondary value ${secondary}`);
+      //console.warn(`[Tiny Icons] No tag could be determined for modifier ${modifierValue.modifier.id}, positive value ${positive} and secondary value ${secondary}`);
       return '';
     }
 
@@ -302,7 +302,7 @@ export class IconManager {
    * @returns
    */
   private getIconSrcForSkillScope(skill: AnySkill): string {
-    return skill.media;//skill.getMediaURL(skill._media);
+    return skill.media;
   }
 
   /**
@@ -311,7 +311,7 @@ export class IconManager {
    * @returns
    */
   private getIconSrcForDamageTypeScope(damageType: DamageType): string {
-    return damageType.media;//damageType.getMediaURL(damageType._media);
+    return damageType.media;
   }
 
   /**
@@ -320,7 +320,7 @@ export class IconManager {
    * @returns
    */
   private getIconSrcForRealmScope(realm: Realm): string {
-    return realm.media;//realm.getMediaURL(realm._media);
+    return realm.media;
   }
 
   /**
@@ -329,7 +329,7 @@ export class IconManager {
    * @returns
    */
   private getIconSrcForCurrencyScope(currency: Currency): string {
-    return currency.media;//currency.getMediaURL(currency._media);
+    return currency.media;
   }
 
   /**
@@ -338,11 +338,10 @@ export class IconManager {
    * @returns
    */
   private getIconSrcForCategoryScope(category: NamedObject | NamedObject & { media: string }): string | undefined {
-    console.log(category);
     /** @ts-ignore - unknown property, as unknown whether scope source has media */
     if (category.media) {
       /** @ts-ignore - unknown property, as unknown whether scope source has media */
-      return category.media;//category.getMediaURL(category._media);
+      return category.media;
     }
 
     return this.paths.srcForTag['placeholder'];
@@ -354,11 +353,10 @@ export class IconManager {
    * @returns
    */
   private getIconSrcForActionScope(action: NamedObject | NamedObject & { media: string }): string | undefined {
-    console.log(action);
     /** @ts-ignore - unknown property, as unknown whether scope source has media */
     if (action.media) {
       /** @ts-ignore - unknown property, as unknown whether scope source has media */
-      return action.media//action.getMediaURL(action._media);
+      return action.media;
     }
 
     return this.paths.srcForTag['placeholder'];
@@ -370,11 +368,10 @@ export class IconManager {
    * @returns
    */
   private getIconSrcForSubcagetoryScope(subcategory: NamedObject | NamedObject & { media: string }): string | undefined {
-    console.log(subcategory);
     /** @ts-ignore - unknown property, as unknown whether scope source has media */
     if (subcategory.media) {
       /** @ts-ignore - unknown property, as unknown whether scope source has media */
-      return subcategory.media;//subcategory.getMediaURL(subcategory._media);
+      return subcategory.media;
     }
 
     return this.paths.srcForTag['placeholder'];
@@ -386,7 +383,7 @@ export class IconManager {
    * @returns
    */
   private getIconSrcForItemScope(item: Item): string | undefined {
-    return item.media;//item.getMediaURL(item._media);
+    return item.media;
   }
 
   /**
@@ -395,11 +392,10 @@ export class IconManager {
    * @returns
    */
   private getIconSrcForCombatEffectGroupScope(effectGroup: CombatEffectGroup | CombatEffectGroup & { media: string }): string {
-    console.log(effectGroup);
     /** @ts-ignore - unknown property, as unknown whether scope source has media */
     if (effectGroup.media) {
       /** @ts-ignore - unknown property, as unknown whether scope source has media */
-      return effectGroup.media;//effectGroup.getMediaURL(effectGroup.media);
+      return effectGroup.media;
     }
 
     return this.paths.srcForTag['placeholder'];

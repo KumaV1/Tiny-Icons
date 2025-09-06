@@ -1,4 +1,4 @@
 /**
  * Defines explicit custom contexts that can be set
  */
-export type CustomContext = 'agility' | 'astrology'
+export type CustomLocationContext = 'agility' | 'astrology'

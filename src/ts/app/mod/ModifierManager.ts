@@ -1,6 +1,6 @@
 import { IconManager } from './IconManager';
 import { ModifierIconPaths } from './ModifierIcons';
-import { CustomContext } from './types/customContext';
+import { CustomLocationContext } from './types/customLocationContext';
 
 /**
  * Mod assembly.
@@ -104,17 +104,17 @@ class PatchManager {
     this.ctx.onCharacterLoaded(() => {
       if (!that.modifierCtx.globalIconsEnabled) {
         this.ctx.patch(BuiltAgilityObstacleElement, 'updatePassives').before(function(obstacle: AgilityObstacle): void {
-          that.modifierCtx.setCustomContext('agility');
+          that.modifierCtx.setCustomLocationContext('agility');
         });
         this.ctx.patch(BuiltAgilityObstacleElement, 'updatePassives').after(function(returnValue: void, obstacle: AgilityObstacle) {
-          that.modifierCtx.resetCustomContext();
+          that.modifierCtx.resetCustomLocationContext();
         });
 
         this.ctx.patch(AstrologyModifierDisplayElement, 'setModifier').before(function(astroMod: AstrologyModifier, mult: number): void {
-          that.modifierCtx.setCustomContext('astrology');
+          that.modifierCtx.setCustomLocationContext('astrology');
         });
         this.ctx.patch(AstrologyModifierDisplayElement, 'setModifier').after(function(returnValue: void, astroMod: AstrologyModifier, mult: number) {
-          that.modifierCtx.resetCustomContext();
+          that.modifierCtx.resetCustomLocationContext();
         });
       }
     })
@@ -172,8 +172,8 @@ class PatchManager {
   //  const that = this;
   //  this.patch(targetClass, classMethod).before(function (...args: any) {
   //    contextFunction
-  //      ? that.modifierCtx.setCustomContext(contextFunction(...args))
-  //      : that.modifierCtx.setCustomContext();
+  //      ? that.modifierCtx.setCustomLocationContext(contextFunction(...args))
+  //      : that.modifierCtx.setCustomLocationContext();
 //
   //    if (beforeHook) beforeHook(...args);
   //    if (args) return args;
@@ -184,7 +184,7 @@ class PatchManager {
   //    ...args: any
   //  ) {
   //    if (afterHook) afterHook(this, returnValue, ...args);
-  //    that.modifierCtx.resetCustomContext();
+  //    that.modifierCtx.resetCustomLocationContext();
   //  });
   //}
 
@@ -199,12 +199,12 @@ class PatchManager {
   //) {
   //  patch(PotionItem, 'description').get(function (o): any {
   //    if ([game.agility.id, game.astrology.id].includes(this.action.id)) {
-  //      that.modifierCtx.setCustomContext(
+  //      that.modifierCtx.setCustomLocationContext(
   //        this.action.id === game.agility.id ? 'Agility' : 'Astrology',
   //      );
   //      that.modifierCtx.potionRelevance = true;
   //      const desc = o();
-  //      that.modifierCtx.resetCustomContext();
+  //      that.modifierCtx.resetCustomLocationContext();
   //      return desc;
   //    }
   //
@@ -227,11 +227,11 @@ class ModifierIconHandler {
     private ctx: Modding.ModContext,
   ) {
     this.patchModifierDescription(this);
+    this.patchApplyDescriptionModifications(this);
     //this.ctx.onInterfaceAvailable(() => {
     //  this.patchCreateElement();
     //  this.patchPrintPlayerModifier();
     //  this.patchGetPlainModifierDescriptions();
-    //  this.patchApplyDescriptionModifications();
     //});
   }
 
@@ -268,59 +268,122 @@ class ModifierIconHandler {
       description: string;
       isNegative: boolean;
     }, negMult?: number, posMult?: number, precision?: number) {
-      console.log('ModifierValue.getDecription.after called');
       const printIcons = that.modifierContext.globalIconsEnabled
         || that.modifierContext.isRelevantLocation();
-      console.log('that.modifierContext.globalIconsEnabled', that.modifierContext.globalIconsEnabled);
-      console.log('that.modifierContext.isRelevantLocation()', that.modifierContext.isRelevantLocation());
+      if (!printIcons) {
+        return returnValue;
+      }
 
-      return printIcons
+      const iconHtml = that.iconManager.getIconHTML(this, !returnValue.isNegative, true);
+
+      // Depending on whether this logic is called at a location that will lead to the description being modified,
+      // return the original description with tiny icons either replaced by placeholders, or set directly
+      return that.modifierContext.isDescriptionModificationContext()
         ? {
-          description: that.iconManager.getIconHTML(this, !returnValue.isNegative, true) + returnValue.description,
+          description: that.modifierContext.addDescriptionModificationsTinyIconsPlaceholders(returnValue.description, iconHtml),
           isNegative: returnValue.isNegative
         }
-        : returnValue;
+        : {
+          description: iconHtml + returnValue.description,
+          isNegative: returnValue.isNegative
+        };
     });
   }
 
   /**
-   * Patch for item descriptions that have special formatting for status effects.
-   * Process the modifier descriptions to remove non unique tiny icon tags.
+   * Patch for various locations that modify the generated description to include formatting like changing color or adding icons to certain keywords (primarily, but not exclusively, combat status effects).
+   * Sets a context to delay and belatedly apply the tiny icons, as doing so as usual ({@link ModifierValue}) would break tiny icons, if the icon path contains said keywords.
    * This prevents duplicate icons from being displayed in the description.
    */
-  //private patchApplyDescriptionModifications() {
-  //  const originalApplyDescriptionModifications =
-  //    window.applyDescriptionModifications;
-  //  window.applyDescriptionModifications = (desc): string => {
-  //    if (setLang !== 'en') return desc;
+  private patchApplyDescriptionModifications(that: ModifierIconHandler) {
+    that.ctx.patch(SpecialAttack, 'modifiedDescription').get(function(o: () => string) {
+      // Set context
+      that.modifierContext.setIsDescriptionModificationContext();
+
+      // Run original logic
+      let desc = o();
+
+      // Belatedly modify description with tiny icons
+      desc = that.modifierContext.applyTinyIconsPlaceholderReplacement(desc);
+
+      // Reset context and finish up
+      that.modifierContext.resetdescriptionModificationContext();
+      return desc;
+    });
+
+    that.ctx.patch(Item, 'modifiedDescription').get(function(o: () => string) {
+      return that.getModifiedDescription(this, o, that.modifierContext);
+    });
+    that.ctx.patch(FoodItem, 'modifiedDescription').get(function(o: () => string) {
+      return that.getModifiedDescription(this, o, that.modifierContext);
+    });
+    that.ctx.patch(EquipmentItem, 'modifiedDescription').get(function(o: () => string) {
+      return that.getModifiedDescription(this, o, that.modifierContext);
+    });
+    that.ctx.patch(PotionItem, 'modifiedDescription').get(function(o: () => string) {
+      return that.getModifiedDescription(this, o, that.modifierContext);
+    });
+
+    that.ctx.patch(CombatPassive, 'modifiedDescription').get(function(o: () => string) {
+      // Set context
+      that.modifierContext.setIsDescriptionModificationContext();
+
+      // Run original logic
+      let desc = o();
+
+      // Belatedly modify description with tiny icons
+      desc = that.modifierContext.applyTinyIconsPlaceholderReplacement(desc);
+
+      // Reset context and finish up
+      that.modifierContext.resetdescriptionModificationContext();
+      return desc;
+    });
+
+    //const originalApplyDescriptionModifications =
+    //  window.applyDescriptionModifications;
+    //  window.applyDescriptionModifications = (desc): string => {
+    //  if (setLang !== 'en') return desc;
   //
-  //    // Extract and remove all tiny-icon tags
-  //    const cleanDesc = desc.replace(ModifierIconHandler.TINY_ICON_TAGS, '');
+    //  // Extract and remove all tiny-icon tags
+    //  const cleanDesc = desc.replace(ModifierIconHandler.TINY_ICON_TAGS, '');
   //
-  //    // Process the clean description through the original function
-  //    const modifiedDesc = originalApplyDescriptionModifications(cleanDesc);
+    //  // Process the clean description through the original function
+    //  const modifiedDesc = originalApplyDescriptionModifications(cleanDesc);
   //
-  //    // Extract paths after `assets/` from all img src in modifiedDesc
-  //    const uniqueSources = new Set<string>();
-  //    const srcRegex = /<img[^>]*src="[^"]*assets\/([^"]+)"[^>]*>/g;
-  //    let matches: RegExpExecArray | null;
-  //    while ((matches = srcRegex.exec(modifiedDesc))) {
-  //      uniqueSources.add(matches[1]);
-  //    }
+    //  // Extract paths after `assets/` from all img src in modifiedDesc
+    //  const uniqueSources = new Set<string>();
+    //  const srcRegex = /<img[^>]*src="[^"]*assets\/([^"]+)"[^>]*>/g;
+    //  let matches: RegExpExecArray | null;
+    //  while ((matches = srcRegex.exec(modifiedDesc))) {
+    //    uniqueSources.add(matches[1]);
+    //  }
   //
-  //    //  Restore tiny-icons in the original description, unless they were already added by the original function
-  //    const finalDesc = desc.replace(
-  //      ModifierIconHandler.TINY_ICON_TAGS,
-  //      (match) => {
-  //        const srcMatch = match.match(/src="[^"]*assets\/([^"]+)"/);
-  //        // Remove the tiny icon if it's already in the description and it's not unique
-  //        return srcMatch && uniqueSources.has(srcMatch[1]) ? '' : match;
-  //      },
-  //    );
+    //  //  Restore tiny-icons in the original description, unless they were already added by the original function
+    //  const finalDesc = desc.replace(
+    //    ModifierIconHandler.TINY_ICON_TAGS,
+    //    (match) => {
+    //      const srcMatch = match.match(/src="[^"]*assets\/([^"]+)"/);
+    //      // Remove the tiny icon if it's already in the description and it's not unique
+    //      return srcMatch && uniqueSources.has(srcMatch[1]) ? '' : match;
+    //    },
+    //  );
   //
-  //    // Pass the desc now with tiny icon tags (if any) that wont get mangled
-  //    return originalApplyDescriptionModifications(finalDesc);
-  //  };
+    //  // Pass the desc now with tiny icon tags (if any) that wont get mangled
+    //  return originalApplyDescriptionModifications(finalDesc);
+    //};
+  }
+
+  /**
+   * Runs some custom logic, so getters calling do not break tiny icons
+   * @param getter the getter about to call "applyDescriptionModification"
+   */
+  //private applyDescriptionModificationCustom(getter: () => string) {
+  //  if (setLang !== 'en') {
+  //    return getter(); // the game only runs this logic for english language, so we should also limit this
+  //  }
+//
+  //  // Extract and remove all tiny-icon tags
+  //  const cleanDesc = desc.replace(ModifierIconHandler.TINY_ICON_TAGS, '');
   //}
 
   /**
@@ -334,7 +397,7 @@ class ModifierIconHandler {
   //  window.getPlainModifierDescriptions = (modifiers): string[] => {
   //    // reset context in case it persists from Astrology or Agility
   //    if (!this.modifierContext.potionRelevance)
-  //      this.modifierContext.resetCustomContext();
+  //      this.modifierContext.resetCustomLocationContext();
   //    return originalGetPlainModifierDescriptions(modifiers);
   //  };
   //}
@@ -367,6 +430,34 @@ class ModifierIconHandler {
         // Add all children to the stack
         for (const child of Array.from(current.children)) stack.push(child);
     }
+  }
+
+  /**
+   * Logic run in item patches (classes had to be patched separately, as the respective logics implementation specifically had to be patched)
+   * @param item
+   * @param origGetter
+   * @param ctx
+   * @returns
+   */
+  private getModifiedDescription(item: Item, origGetter: () => string, ctx: ModifierIconContext): string {
+    if (!item._modifiedDescription) {
+        // if description has already been computed, then avoid running custom logic again
+        return origGetter();
+      }
+
+      // Set context
+      ctx.setIsDescriptionModificationContext();
+
+      // Run original logic
+      let desc = origGetter();
+
+      // Belatedly modify description with tiny icons
+      desc = ctx.applyTinyIconsPlaceholderReplacement(desc);
+
+      // Reset context and finish up
+      ctx.resetdescriptionModificationContext();
+      item._modifiedDescription = desc; // otherwise it would contain the placeholders instead of the actual icons
+      return desc;
   }
 
   /**
@@ -406,30 +497,115 @@ class ModifierIconHandler {
  * Manages context from where and when to print modifier icons with printPlayerModifier.
  */
 class ModifierIconContext {
-  private relevantPotion: boolean = false;
-  private currentCustomContext: CustomContext | undefined;
+  //private relevantPotion: boolean = false;
+
+  /**
+   * "applyDescriptionModification" is a function that, in the English language,
+   * will modify certain keywords, to change their color and add their icon. For example, causing a simple "burn" to be displayed in red and adding a fire icon.
+   * However, that logic does not differentiate where that text is located in the description, breaking tiny icons with those keywords in their names.
+   * Because of that, when running into logic calling that method, we need to delay adding the tiny icons to after this function was called
+   */
+  private isApplyDescriptionModificationContext: boolean = false;
+
+  /**
+   * Remember how many times icon snippets are created for a single over-arching description (e.g. an item description with MULTIPLE modifier values)
+   */
+  private currentSnippetCount: number = 0;
+
+  /**
+   * Map the placeholder snippet index with the corresponding html snippet to replace them with later
+   */
+  private snippetMap: Map<number, string> = new Map();
+
+  /**
+   * A custom location context, used to in some cases be able to tell where modifier description creation is rendered,
+   * as there are some cases where logic is run before the "page context" is adjusted (e.g. rendering agility page elements, before actually setting the current page to agility)
+   */
+  private currentCustomLocationContext: CustomLocationContext | undefined;
 
   constructor(
     private settings: ReturnType<Modding.ModContext['settings']['section']>,
   ) { }
 
   get globalIconsEnabled(): boolean {
-    return this.settings.get('global-icons') as boolean;
+    return this.settings.get('global-icons') as boolean; // TODO: Move to settings manager
   }
 
-  set potionRelevance(isRelevant: boolean) {
-    this.relevantPotion = isRelevant;
-  }
-  get potionRelevance(): boolean {
-    return this.relevantPotion;
-  }
-
-  setCustomContext(context: CustomContext): void {
-    this.currentCustomContext = context;
+  /**
+   * Create placeholder, which includes an index to separate the different ones
+   * @param index
+   * @returns
+   */
+  private createSnippetPlaceholder(index: number): string {
+    return `{TI_IC_SN_${index}}`;
   }
 
-  resetCustomContext(): void {
-    this.currentCustomContext = undefined;
+  /**
+   * Set the info that we are running logic that will run this function
+   * @param value
+   */
+  setIsDescriptionModificationContext() {
+    this.isApplyDescriptionModificationContext = true;
+  }
+
+  /**
+   * Get whether we are currently in a situation that will call this method
+   * @param value
+   */
+  isDescriptionModificationContext(): boolean {
+    return this.isApplyDescriptionModificationContext;
+  }
+
+  /**
+   *
+   * @param description {@link ModifierValue} description
+   * @param iconHtml The icon html we will (later) want to set
+   * @returns The {@link ModifierValue} description with a placeholder added that can later be replaced
+   */
+  addDescriptionModificationsTinyIconsPlaceholders(description: string, iconHtml: string): string {
+    this.currentSnippetCount++;
+    this.snippetMap.set(this.currentSnippetCount, iconHtml);
+
+    const placeholder = this.createSnippetPlaceholder(this.currentSnippetCount);
+    return `${placeholder}${description}`;
+  }
+
+  /**
+   * Replaces the previously added placeholders with the corresponding html snippets
+   * @param description
+   */
+  applyTinyIconsPlaceholderReplacement(description: string) {
+    this.snippetMap.forEach((value: string, key: number) => {
+      const placeholder = this.createSnippetPlaceholder(key);
+      description = description.replace(placeholder, value);
+    });
+
+    return description;
+  }
+
+  /**
+   * Reset everything related to dealing with a call to this function
+   * @param value
+   */
+  resetdescriptionModificationContext() {
+    this.isApplyDescriptionModificationContext = false;
+    this.currentSnippetCount = 0;
+    this.snippetMap.clear();
+  }
+
+  //set potionRelevance(isRelevant: boolean) {
+  //  this.relevantPotion = isRelevant;
+  //}
+  //get potionRelevance(): boolean {
+  //  return this.relevantPotion;
+  //}
+
+  setCustomLocationContext(context: CustomLocationContext): void {
+    this.currentCustomLocationContext = context;
+  }
+
+  resetCustomLocationContext(): void {
+    this.currentCustomLocationContext = undefined;
   }
 
   isAgilityPage(): boolean {
@@ -462,8 +638,8 @@ class ModifierIconContext {
    * @returns
    */
   isRelevantLocation(): boolean {
-    return this.currentCustomContext === 'agility'
-      || this.currentCustomContext === 'astrology'
+    return this.currentCustomLocationContext === 'agility'
+      || this.currentCustomLocationContext === 'astrology'
       || this.isOnRelevantPage();
   }
 }
