@@ -4,7 +4,10 @@ import { ModifierManagerInit } from './mod/ModifierManager';
 export class Main {
   public init(ctx: Modding.ModContext) {
     const settingsManager = new SettingsManager();
-    settingsManager.loadSettings(ctx.settings.section('Tiny Icons'));
+    settingsManager.init(ctx.settings.section('Tiny Icons'));
+    ctx.onCharacterLoaded(function() {
+      settingsManager.setSettingsFromCharacter();
+    });
 
     const modifierManager = ModifierManagerInit.create(ctx);
     modifierManager.init();

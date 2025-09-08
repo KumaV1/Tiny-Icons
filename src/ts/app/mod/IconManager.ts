@@ -6,6 +6,8 @@ import {
   ModifierIconPaths,
 } from './ModifierIcons';
 import { modifierTagMap } from './ModifierTags';
+import { SettingsManager } from './SettingsManager';
+import { TinyIconsModSettings } from './types/tinyIconsModSettings';
 
 /**
  * Manages the icons associated with modifiers and provides the relevant HTML string.
@@ -43,7 +45,7 @@ export class IconManager {
       return '';
     }
 
-    if (!this.secondaryIconsEnabled || secondary === false) {
+    if (!SettingsManager.settings.secondaryIconsEnabled || secondary === false) {
       return scopeIcons
         ? `[Static: ${primaryIcon}][Scope: ${scopeIcons}]`
         : `${primaryIcon}`;
@@ -61,10 +63,6 @@ export class IconManager {
     return scopeIcons
       ? `[Static: ${staticIcons}][Scope: ${scopeIcons}]`
       : `${staticIcons}`;
-  }
-
-  private get secondaryIconsEnabled() {
-    return this.ctx.settings.section('Tiny Icons').get('secondary-icons');
   }
 
   /**
@@ -110,32 +108,32 @@ export class IconManager {
   private getIconsForScopes(scope: IModifierScope): string {
     let html = '';
 
-    if (scope.skill) {
+    if (scope.skill && SettingsManager.settings.scopeIcons.skill) {
       html += this.imgSource(this.getIconSrcForSkillScope(scope.skill));
     }
-    if (scope.damageType) {
+    if (scope.damageType && SettingsManager.settings.scopeIcons.damageType) {
       html += this.imgSource(this.getIconSrcForDamageTypeScope(scope.damageType));
     }
-    if (scope.realm) {
+    if (scope.realm && SettingsManager.settings.scopeIcons.realm) {
       html += this.imgSource(this.getIconSrcForRealmScope(scope.realm));
     }
-    if (scope.currency) {
+    if (scope.currency && SettingsManager.settings.scopeIcons.currency) {
       html += this.imgSource(this.getIconSrcForCurrencyScope(scope.currency));
     }
-    if (scope.category) {
+    if (scope.category && SettingsManager.settings.scopeIcons.category) {
       html += this.imgSource(this.getIconSrcForCategoryScope(scope.category) ?? '');
     }
-    if (scope.action) {
+    if (scope.action && SettingsManager.settings.scopeIcons.action) {
       html += this.imgSource(this.getIconSrcForActionScope(scope.action) ?? '');
     }
-    if (scope.subcategory) {
+    if (scope.subcategory && SettingsManager.settings.scopeIcons.subcategory) {
       html += this.imgSource(this.getIconSrcForSubcagetoryScope(scope.subcategory) ?? '');
     }
-    if (scope.item) {
+    if (scope.item && SettingsManager.settings.scopeIcons.item) {
       html += this.imgSource(this.getIconSrcForItemScope(scope.item) ?? '');
     }
-    if (scope.effectGroup) {
-      html += this.imgSource(this.getIconSrcForCombatEffectGroupScope(scope.effectGroup));
+    if (scope.effectGroup && SettingsManager.settings.scopeIcons.effectGroup) {
+      html += this.imgSource(this.getIconSrcForCombatEffectGroupScope(scope.effectGroup) ?? '');
     }
 
     return html;
@@ -344,7 +342,9 @@ export class IconManager {
       return category.media;
     }
 
-    return this.paths.srcForTag['placeholder'];
+    return SettingsManager.settings.placeholderIconEnabled
+      ? this.paths.srcForTag['placeholder']
+      : undefined;
   }
 
   /**
@@ -359,7 +359,9 @@ export class IconManager {
       return action.media;
     }
 
-    return this.paths.srcForTag['placeholder'];
+    return SettingsManager.settings.placeholderIconEnabled
+      ? this.paths.srcForTag['placeholder']
+      : undefined;
   }
 
   /**
@@ -374,7 +376,9 @@ export class IconManager {
       return subcategory.media;
     }
 
-    return this.paths.srcForTag['placeholder'];
+    return SettingsManager.settings.placeholderIconEnabled
+      ? this.paths.srcForTag['placeholder']
+      : undefined;
   }
 
   /**
@@ -391,18 +395,24 @@ export class IconManager {
    * @param effectGroup
    * @returns
    */
-  private getIconSrcForCombatEffectGroupScope(effectGroup: CombatEffectGroup | CombatEffectGroup & { media: string }): string {
+  private getIconSrcForCombatEffectGroupScope(effectGroup: CombatEffectGroup | CombatEffectGroup & { media: string }): string | undefined {
     /** @ts-ignore - unknown property, as unknown whether scope source has media */
     if (effectGroup.media) {
       /** @ts-ignore - unknown property, as unknown whether scope source has media */
       return effectGroup.media;
     }
 
-    return this.paths.srcForTag['placeholder'];
+    return SettingsManager.settings.placeholderIconEnabled
+      ? this.paths.srcForTag['placeholder']
+      : undefined;
   }
 
   public exposeAPI() {
     this.ctx.api({
+      settings: (): TinyIconsModSettings => {
+        return SettingsManager.settings;
+      },
+
       /**
        * Adds an object of custom tags and their sources to the list of icons available to Tiny Icons.
        * @param customTags An object of custom string tags and their string sources.

@@ -1,6 +1,8 @@
 import { IconManager } from './IconManager';
 import { ModifierIconPaths } from './ModifierIcons';
+import { SettingsManager } from './SettingsManager';
 import { CustomLocationContext } from './types/customLocationContext';
+import { TinyIconsModSettings } from './types/tinyIconsModSettings';
 
 /**
  * Mod assembly.
@@ -40,7 +42,7 @@ export class ModifierManagerInit {
   private static createModifierIconContext(
     ctx: Modding.ModContext,
   ): ModifierIconContext {
-    return new ModifierIconContext(ctx.settings.section('Tiny Icons'));
+    return new ModifierIconContext();
   }
 
   private static createModifierIconHandler(
@@ -102,7 +104,7 @@ class PatchManager {
 
     // If the character does not have global icons enabled, then we need to patch certain methods to set a custom context for enabling the icons at specific locations
     this.ctx.onCharacterLoaded(() => {
-      if (!that.modifierCtx.globalIconsEnabled) {
+      if (!SettingsManager.settings.globalIconsEnabled) {
         this.ctx.patch(BuiltAgilityObstacleElement, 'updatePassives').before(function(obstacle: AgilityObstacle): void {
           that.modifierCtx.setCustomLocationContext('agility');
         });
@@ -268,7 +270,7 @@ class ModifierIconHandler {
       description: string;
       isNegative: boolean;
     }, negMult?: number, posMult?: number, precision?: number) {
-      const printIcons = that.modifierContext.globalIconsEnabled
+      const printIcons = SettingsManager.settings.globalIconsEnabled
         || that.modifierContext.isRelevantLocation();
       if (!printIcons) {
         return returnValue;
@@ -523,13 +525,7 @@ class ModifierIconContext {
    */
   private currentCustomLocationContext: CustomLocationContext | undefined;
 
-  constructor(
-    private settings: ReturnType<Modding.ModContext['settings']['section']>,
-  ) { }
-
-  get globalIconsEnabled(): boolean {
-    return this.settings.get('global-icons') as boolean; // TODO: Move to settings manager
-  }
+  constructor() { }
 
   /**
    * Create placeholder, which includes an index to separate the different ones
