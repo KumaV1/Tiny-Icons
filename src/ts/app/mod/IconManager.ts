@@ -98,7 +98,7 @@ export class IconManager {
 
     if (!tag) {
       console.warn(`[Tiny Icons] No tag could be determined for modifier ${modifierValue.modifier.id}, positive value ${positive} and secondary value ${secondary}`);
-      return SettingsManager.settings.placeholderIconEnabled
+      return !secondary && SettingsManager.settings.placeholderIconEnabled // only allow setting of palceholder icon, if not even a primary tag exists
         ? this.paths.srcForTag['placeholder']
         : '';
     }

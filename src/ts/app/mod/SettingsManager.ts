@@ -69,7 +69,7 @@ export class SettingsManager {
         type: 'switch',
         name: 'placeholder-icons',
         label: 'Enable Placeholder Icons',
-        hint: 'If enabled, then whenever the mod determines an icon should have been placed, but failed to determine which one, a cog icon will be used. This is primarily relevant for dynamically determined icons, which happens when a boost has a set scope. Though it can also happen, when a new modifier is added (e.g. through another mod) which this mod doesn#t know.',
+        hint: 'If enabled, then whenever the mod determines an icon should have been placed, but failed to determine which one, a cog icon will be used. This is primarily relevant for dynamically determined icons, which happens when a boost has a set scope. Though it can also happen when a new modifier is added (e.g. through another mod) which this mod does not (yet) know.',
         default: true,
         onChange: () => {
           //game.agility.renderQueue.builtObstacles = true;
