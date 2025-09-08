@@ -4,6 +4,7 @@ import {
   StaticModifierIconTag,
   IconTagSources,
   ModifierIconPaths,
+  ModModifierIconTag,
 } from './ModifierIcons';
 import { modifierTagMap } from './ModifierTags';
 import { SettingsManager } from './SettingsManager';
@@ -47,7 +48,7 @@ export class IconManager {
 
     if (!SettingsManager.settings.secondaryIconsEnabled || secondary === false) {
       return scopeIcons
-        ? `[Static: ${primaryIcon}][Scope: ${scopeIcons}]`
+        ? `${primaryIcon}${scopeIcons}`
         : `${primaryIcon}`;
     }
 
@@ -61,7 +62,7 @@ export class IconManager {
       ? primaryIcon + secondaryIcon
       : primaryIcon;
     return scopeIcons
-      ? `[Static: ${staticIcons}][Scope: ${scopeIcons}]`
+      ? `${staticIcons}${scopeIcons}`
       : `${staticIcons}`;
   }
 
@@ -81,8 +82,10 @@ export class IconManager {
   ): string {
     const modTagAttributes: ModifierTagMapEntryAttributes | undefined = modifierTagMap.get(modifierValue.modifier.id);
     if (!modTagAttributes) {
-      //console.warn(`[Tiny Icons] No tags found for modifier ${modifierValue.modifier.id}`);
-      return '';
+      console.warn(`[Tiny Icons] No tags found for modifier ${modifierValue.modifier.id}`);
+      return SettingsManager.settings.placeholderIconEnabled
+        ? this.paths.srcForTag['placeholder']
+        : '';
     }
 
     const tag = secondary
@@ -94,8 +97,10 @@ export class IconManager {
         : modTagAttributes.primaryTag.negative;
 
     if (!tag) {
-      //console.warn(`[Tiny Icons] No tag could be determined for modifier ${modifierValue.modifier.id}, positive value ${positive} and secondary value ${secondary}`);
-      return '';
+      console.warn(`[Tiny Icons] No tag could be determined for modifier ${modifierValue.modifier.id}, positive value ${positive} and secondary value ${secondary}`);
+      return SettingsManager.settings.placeholderIconEnabled
+        ? this.paths.srcForTag['placeholder']
+        : '';
     }
 
     return this.paths.srcForTag[tag];
@@ -418,6 +423,7 @@ export class IconManager {
        * @param customTags An object of custom string tags and their string sources.
        */
       addTagSources: (customTags: { [key: string]: string }) => {
+        console.log('addTagSources', customTags);
         for (const tag in customTags) {
           if (this.paths.srcForTag[tag]) {
             console.warn(`[Tiny Icons] Tag "${tag}" already exists.`);
@@ -455,7 +461,7 @@ export class IconManager {
        * @param {string} modifier The name of the modifier.
        * @returns {string[]} The icon tags defined for the modifier in array of up to 2 string elements.
        */
-      getIconTagsForModifier: (modifier: string): StaticModifierIconTag[] => {
+      getIconTagsForModifier: (modifier: string): (StaticModifierIconTag | ModModifierIconTag)[] => {
         console.warn('[Tiny Icons] getIconTagsForModifier has been deprecated, due to new structure. Use getIconTagMapForModifier instead')
         return [];
       },

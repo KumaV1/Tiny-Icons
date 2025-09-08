@@ -333,3 +333,8 @@ type ExtractKeys<T> = {
 export type StaticModifierIconTag = ExtractKeys<
   typeof ModifierIconPaths.prototype.iconCategories
 >;
+
+/**
+ * Just a clarity type around simple strings representing tags not inherintly known to this mod
+ */
+export type ModModifierIconTag = string;
