@@ -97,8 +97,12 @@ export class IconManager {
         : modTagAttributes.primaryTag.negative;
 
     if (!tag) {
+      if (secondary) {
+        return '';
+      }
+
       console.warn(`[Tiny Icons] No tag could be determined for modifier ${modifierValue.modifier.id}, positive value ${positive} and secondary value ${secondary}`);
-      return !secondary && SettingsManager.settings.placeholderIconEnabled // only allow setting of palceholder icon, if not even a primary tag exists
+      return SettingsManager.settings.placeholderIconEnabled
         ? this.paths.srcForTag['placeholder']
         : '';
     }
