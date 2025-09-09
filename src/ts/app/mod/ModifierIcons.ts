@@ -2,7 +2,7 @@
  * Provides utility methods to generate paths for different icons.
  */
 export class ModifierIconPaths {
-  constructor(private ctx: Modding.ModContext) {}
+  constructor(private ctx: Modding.ModContext) { }
 
   /**
    * Provides an asset path be insert to src attributes.
@@ -31,7 +31,10 @@ export class ModifierIconPaths {
     specific?: string,
     ext: string = 'svg',
   ): string => {
-    if (type === 'bank') ext = 'png';
+    if (type === 'bank') {
+      ext = 'png';
+    }
+
     switch (type) {
       case 'skills':
         if (name === 'skill') return this.basePath('main', 'Book1', 'png');
@@ -39,7 +42,9 @@ export class ModifierIconPaths {
           ? this.basePath('skills', `${name}/${name}`, ext)
           : this.basePath('skills', `${name}/${specific}`, ext);
       case 'ti':
-        return this.ctx.getResourceUrl(`img/${name}.${ext}`);
+        return specific
+          ? this.ctx.getResourceUrl(`img/${specific}/${name}.${ext}`)
+          : this.ctx.getResourceUrl(`img/${name}.${ext}`);
       case 'bank':
       case 'main':
       case 'shop':
@@ -53,8 +58,7 @@ export class ModifierIconPaths {
       default:
         if (type && name)
           throw new Error(
-            `Unsupported icon path: assets/media/${type}/${name}${
-              specific ? '/' + specific : ''
+            `Unsupported icon path: assets/media/${type}/${name}${specific ? '/' + specific : ''
             }.${ext}`,
           );
         else throw new Error(`Unsupported icon path.`);
@@ -104,24 +108,27 @@ export class ModifierIconPaths {
       autoeat: this.iconPath('shop', 'autoeat'),
       bank: this.iconPath('main', 'bank_header'),
       barrier: this.iconPath('skills', 'combat', 'barrier'),
-      book: this.iconPath('main', 'Book1', 'png'),
+      book: this.iconPath('main', 'Book1', undefined, 'png'),
       coins: this.iconPath('main', 'coins'),
       consumable: this.iconPath('bank', 'consumable'),
       curse: this.iconPath('skills', 'combat', 'curses'),
       dig: this.iconPath('skills', 'archaeology', 'digsites'),
       double: this.iconPath('main', 'double'),
       dungeon: this.iconPath('skills', 'combat', 'dungeon'),
+      stronghold: this.iconPath('skills', 'combat', 'strongholds'),
       equip_set: this.iconPath('shop', 'equipment_set'),
       equip_swap: this.iconPath('shop', 'equipment_swap'),
       gem: this.iconPath('bank', 'diamond'),
       golbin: this.iconPath('pets', 'golden_golbin'),
+      currency: this.iconPath('ti', 'currency_generic', 'flaticon', 'png'),
       gp: this.iconPath('main', 'coins'),
       interval: this.iconPath('main', 'timer'),
       item_alchemy: this.iconPath('skills', 'magic', 'item_alchemy'),
       lemon: cdnMedia('assets/april/images/lemon.jpg'),
       map: this.iconPath('skills', 'archaeology', 'map_colour'),
       mastery: this.iconPath('main', 'mastery_header'),
-      mods: this.iconPath('mods', 'placeholder_icon', 'png'),
+      placeholder: this.iconPath('mods', 'placeholder_icon', undefined, 'png'),
+      mods: this.iconPath('mods', 'placeholder_icon', undefined, 'png'),
       pet: this.iconPath('pets', 'bandit_base'),
       potion: this.iconPath('skills', 'herblore', 'potion_empty'),
       preservation: this.iconPath('main', 'preservation'),
@@ -321,8 +328,13 @@ type ExtractKeys<T> = {
 }[keyof T];
 
 /**
- * All available icon tags based on ModifierIconPaths categories.
+ * All available icon tags (for static tagging) based on ModifierIconPaths categories.
  */
-export type AllIconTags = ExtractKeys<
+export type StaticModifierIconTag = ExtractKeys<
   typeof ModifierIconPaths.prototype.iconCategories
 >;
+
+/**
+ * Just a clarity type around simple strings representing tags not inherintly known to this mod
+ */
+export type ModModifierIconTag = string;
