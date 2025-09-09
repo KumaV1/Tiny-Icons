@@ -51,9 +51,6 @@ export class SettingsManager {
         hint: ' ',
         default: false,
         onChange: () => {
-          //game.agility.renderQueue.builtObstacles = true;
-          //game.astrology.onConstellationExplore();
-
           const hint = document
             .getElementById(`tinyIcons:secondary-icons`)
             ?.nextElementSibling?.querySelector('small');
@@ -72,9 +69,6 @@ export class SettingsManager {
         hint: 'If enabled, then whenever the mod determines an icon should have been placed, but failed to determine which one, a cog icon will be used. This is primarily relevant for dynamically determined icons, which happens when a boost has a set scope. Though it can also happen when a new modifier is added (e.g. through another mod) which this mod does not (yet) know.',
         default: true,
         onChange: () => {
-          //game.agility.renderQueue.builtObstacles = true;
-          //game.astrology.onConstellationExplore();
-
           const hint = document
             .getElementById(`tinyIcons:placeholder-icons`)
             ?.nextElementSibling?.querySelector('small');

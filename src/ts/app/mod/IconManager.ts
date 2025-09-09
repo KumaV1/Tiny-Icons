@@ -443,16 +443,6 @@ export class IconManager {
         tag: [string, string?];
       }) => {
         console.warn('MOD REFACTOR IN PROGRESS. ADDING MODIFIERS IS CURRENTLY DISABLED!');
-        //for (const mod of Object.keys(customModifiers)) {
-        //  if (modifierTags[mod]) {
-        //    console.warn(
-        //      `[Tiny Icons] Modifier ${mod} already exists. Skipping.`,
-        //    );
-        //    continue;
-        //  }
-        //
-        //  modifierTags[mod] = customModifiers[mod];
-        //}
       },
 
       /**
