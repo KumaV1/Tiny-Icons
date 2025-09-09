@@ -1,15 +1,15 @@
 # Tiny Icons
 
-A Melvor Idle mod on [Mod.io](https://mod.io/g/melvoridle/m/tiny-icons)
+A Melvor Idle mod on [Mod.io](https://mod.io/g/melvoridle/m/refurbished-tiny-icons). Forked from the original [Tiny Icons](https://mod.io/g/melvoridle/m/tiny-icons) mod.
 
-This mod adds tiny icons to modifiers displayed throughout the game. Every modifier in the game is associated with 1-2 icons and are prepended to the modifier description in many interfaces.
+This mod adds tiny icons to modifiers displayed throughout the game. Every modifier in the game is associated with 1-2 static icons and may add additional icons for so called "scopes" (see screenshot with mod seetings down below). Those icons are prepended to the modifier description in many interfaces.
 
-![example](media/ti-main.png)
+![example](media/ti-main-new.png)
 
 <h2 align="center">
 
-![1](media/1.png)
-![2](media/2.png)
-![3](media/3.png)
-
+![agility-1](media/agility-1.png)
+![astro-1](media/astro-1.png)
+![astro-2](media/astro-2.png)
+![settings](media/settings.png)
 </h2>

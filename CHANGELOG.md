@@ -1,8 +1,12 @@
 # Changelog
 
-All notable changes to this project will be documented in this file. See [standard-version]( for commit guidelines.
+All notable changes to this project will be documented in this file.
 
-### [2.0.4]( (2023-11-17)
+### [3.0.0] (2025-09-08)
+
+* Update for Game v1.3.1 version
+
+### [2.0.4] (2023-11-17)
 
 
 ### Features
@@ -14,20 +18,20 @@ All notable changes to this project will be documented in this file. See [standa
 
 * html string format for fa icons 
 
-### [2.0.3]( (2023-11-08)
+### [2.0.3] (2023-11-08)
 
 ### Features
 
 - Extended api for custom modifiers and icon tags 
 
-### [2.0.2]( (2023-11-07)
+### [2.0.2] (2023-11-07)
 
 ### Bug Fixes
 
 - Ancient Relics icon image path 
 - Elements with tiny-icon as textContent 
 
-### [2.0.1]( (2023-11-07)
+### [2.0.1] (2023-11-07)
 
 ### Bug Fixes
 
