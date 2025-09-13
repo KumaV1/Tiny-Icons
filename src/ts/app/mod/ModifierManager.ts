@@ -157,6 +157,11 @@ class ModifierIconHandler {
    */
   private patchApplyDescriptionModifications(that: ModifierIconHandler) {
     that.ctx.patch(SpecialAttack, 'modifiedDescription').get(function(o: () => string) {
+      if (this._modifiedDescription) {
+        // if description has already been computed, then avoid running custom logic again
+        return o();
+      }
+
       // Set context
       that.modifierContext.setIsDescriptionModificationContext();
 
@@ -185,6 +190,11 @@ class ModifierIconHandler {
     });
 
     that.ctx.patch(CombatPassive, 'modifiedDescription').get(function(o: () => string) {
+      if (this._modifiedDescription) {
+        // if description has already been computed, then avoid running custom logic again
+        return o();
+      }
+
       // Set context
       that.modifierContext.setIsDescriptionModificationContext();
 
@@ -225,24 +235,24 @@ class ModifierIconHandler {
    * @returns
    */
   private getModifiedDescription(item: Item, origGetter: () => string, ctx: ModifierIconContext): string {
-    if (!item._modifiedDescription) {
-        // if description has already been computed, then avoid running custom logic again
-        return origGetter();
-      }
+    if (item._modifiedDescription) {
+      // if description has already been computed, then avoid running custom logic again
+      return origGetter();
+    }
 
-      // Set context
-      ctx.setIsDescriptionModificationContext();
+    // Set context
+    ctx.setIsDescriptionModificationContext();
 
-      // Run original logic
-      let desc = origGetter();
+    // Run original logic
+    let desc = origGetter();
 
-      // Belatedly modify description with tiny icons
-      desc = ctx.applyTinyIconsPlaceholderReplacement(desc);
+    // Belatedly modify description with tiny icons
+    desc = ctx.applyTinyIconsPlaceholderReplacement(desc);
 
-      // Reset context and finish up
-      ctx.resetdescriptionModificationContext();
-      item._modifiedDescription = desc; // otherwise it would contain the placeholders instead of the actual icons
-      return desc;
+    // Reset context and finish up
+    ctx.resetdescriptionModificationContext();
+    item._modifiedDescription = desc; // otherwise it would contain the placeholders instead of the actual icons
+    return desc;
   }
 
   /**
