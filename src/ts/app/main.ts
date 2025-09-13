@@ -25,4 +25,10 @@ function enforceRecomputations(ctx: Modding.ModContext) {
   game.items.forEach((item) => {
     item._modifiedDescription = undefined;
   });
+  game.specialAttacks.forEach((specialAttack) => {
+    specialAttack._modifiedDescription = undefined;
+  });
+  game.combatPassives.forEach((combatPassive) => {
+    combatPassive._modifiedDescription = undefined;
+  });
 }
