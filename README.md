@@ -10,6 +10,6 @@ This mod adds tiny icons to modifiers displayed throughout the game. Every modif
 
 ![agility-1](media/agility-1.png)
 ![astro-1](media/astro-1.png)
-![astro-2](media/astro-2.png)
-![settings](media/settings.png)
+![astro-2](media/astro-2.PNG)
+![settings](media/settings.PNG)
 </h2>
