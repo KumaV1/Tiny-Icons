@@ -119,8 +119,42 @@ class ModifierIconHandler {
     private iconManager: IconManager,
     private ctx: Modding.ModContext,
   ) {
+    this.patchForHtmlParsing(this);
     this.patchModifierDescription(this);
     this.patchApplyDescriptionModifications(this);
+  }
+
+  /**
+   * Some elements may set `textContent`, causing icons to not be interpreted as such.
+   * In some cases may set a custom location context, if further formatting is necessary
+   * @param that
+   */
+  private patchForHtmlParsing(that: ModifierIconHandler) {
+    that.ctx.patch(PrayerTooltipElement, 'setPrayer').before(function(prayer: ActivePrayer): void {
+      that.modifierContext.setCustomLocationContext('prayerButtonTooltip');
+    });
+
+    that.ctx.patch(PrayerTooltipElement, 'setPrayer').after(function(returnValue: void, prayer: ActivePrayer) {
+      // TODO: Preferably explicitly target the span, to put the images inside there?
+      // Possibly fixes the placement, as first attempt probably set imgs as siblings, which with column direction caused the icons to appear above the text, rather than before it
+      this.stats.innerHTML = this.stats.innerText; // there should be no inner elements, so innerHTML should be equal to innerText, but allows to force interpret the tiny icon elements as such
+
+      that.modifierContext.resetCustomLocationContext();
+    });
+
+    that.ctx.patch(MapRefinementMenuElement, 'updateRefinements').after(function(returnValue: void, map: DigSiteMap) {
+      const self = this;
+      this.refinements.forEach((refinementEl: HTMLLIElement) => {
+        refinementEl.innerHTML = refinementEl.innerText; // there should be no inner elements, so innerHTML should be equal to innerText, but allows to force interpret the tiny icon elements as such
+      });
+    });
+
+    that.ctx.patch(MapRefinementMenuElement, 'updateNewRefinement').after(function(returnValue: void, map: DigSiteMap, cartography: Cartography, game: Game) {
+      const self = this;
+      this.refinementSelects.forEach((refinementEl: HTMLButtonElement) => {
+        refinementEl.innerHTML = refinementEl.innerText; // there should be no inner elements, so innerHTML should be equal to innerText, but allows to force interpret the tiny icon elements as such
+      });
+    });
   }
 
   private patchModifierDescription(that: ModifierIconHandler) {
@@ -388,6 +422,14 @@ class ModifierIconContext {
     this.isApplyDescriptionModificationContext = false;
     this.currentSnippetCount = 0;
     this.snippetMap.clear();
+  }
+
+  /**
+   * Get the current set value for custom location context
+   * @returns
+   */
+  getCustomLocationContext(): CustomLocationContext | undefined {
+    return this.currentCustomLocationContext;
   }
 
   /**
