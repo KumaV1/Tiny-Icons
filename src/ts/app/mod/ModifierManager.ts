@@ -136,17 +136,27 @@ class ModifierIconHandler {
 
       const iconHtml = that.iconManager.getIconHTML(this, !returnValue.isNegative, true);
 
-      // Depending on whether this logic is called at a location that will lead to the description being modified,
-      // return the original description with tiny icons either replaced by placeholders, or set directly
-      return that.modifierContext.isDescriptionModificationContext()
-        ? {
-          description: that.modifierContext.addDescriptionModificationsTinyIconsPlaceholders(returnValue.description, iconHtml),
+
+      // Set either original description with tiny icons either replaced by placeholders, or set directly
+      let iconizedDescription = that.modifierContext.isDescriptionModificationContext()
+        ? that.modifierContext.addDescriptionModificationsTinyIconsPlaceholders(returnValue.description, iconHtml)
+        : iconHtml + returnValue.description;
+
+      // Possibly adjust formatting of description further
+      switch (that.modifierContext.getCustomLocationContext()) {
+        case 'prayerButtonTooltip':
+          // Wrap description in a span, so the icon and text are placed horizontal, not vertical (as in, wrap them into single child for container)
+          iconizedDescription = `<span class="tiny-icons-prayer-bonus-wrapper-element">${iconizedDescription}</span>`;
+          break;
+        default:
+          break; // No adjustments needed
+      }
+
+      // Finalize
+      return {
+          description: iconizedDescription,
           isNegative: returnValue.isNegative
-        }
-        : {
-          description: iconHtml + returnValue.description,
-          isNegative: returnValue.isNegative
-        };
+      };
     });
   }
 
