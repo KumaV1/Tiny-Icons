@@ -2,6 +2,9 @@
 
 All notable changes to this project will be documented in this file.
 
+### [3.0.2] (2025-09-23)
+* Fixed issue where prayer tooltips and certain cartography elements didn't interpret the image tags as html
+
 ### [3.0.1] (2025-09-21)
 
 #### Bug Fixes
