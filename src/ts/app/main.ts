@@ -31,4 +31,5 @@ function enforceRecomputations(ctx: Modding.ModContext) {
   game.combatPassives.forEach((combatPassive) => {
     combatPassive._modifiedDescription = undefined;
   });
+  game.prayer.renderQueue.prayerMenu = true;
 }
