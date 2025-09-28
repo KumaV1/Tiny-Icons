@@ -1,5 +1,6 @@
 import { IconManager } from './IconManager';
 import { ModifierIconPaths } from './ModifierIcons';
+import { ModifierScopeSourceMediaMemoizer } from './ModifierScopeSourceMediaMemoizer';
 import { SettingsManager } from './SettingsManager';
 import { CustomLocationContext } from './types/customLocationContext';
 
@@ -32,7 +33,7 @@ export class ModifierManagerInit {
     ctx: Modding.ModContext,
     paths: ModifierIconPaths,
   ): IconManager {
-    return new IconManager(ctx, paths);
+    return new IconManager(ctx, paths, new ModifierScopeSourceMediaMemoizer(ctx));
   }
 
   private static createModifierIconContext(
