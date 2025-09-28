@@ -100,32 +100,33 @@ export class ModifierIconPaths {
       //ore: this.iconPath('skills', 'mining', 'rock_iron'),
       //abyssal_ore: this.iconPath()
       ore: this.iconPath('bank', 'pile_of_ores', undefined, 'png'),
-      abyssal_ore: this.iconPath('bank', 'Unholy_Gem', undefined, 'png'),
+      //abyssal_ore: this.iconPath(), // TODO: Give more fitting icon (without throwing an error when user does not have ItA)
       gem: this.iconPath('bank', 'diamond'),
-      abyssal_gem: this.iconPath('bank', 'diamond'),
-      abyssal_outcrop: this.iconPath(),
-      abyssal_essence: this.iconPath(),
+      //abyssal_gem: this.iconPath(), // TODO: Give more fitting icon (without throwing an error when user does not have ItA)
+      //abyssal_outcrop: this.iconPath(), // TODO: Give more fitting icon (without throwing an error when user does not have ItA)
+      //abyssal_essence: this.iconPath('bank', 'rune_essence'),
       rune_essence: this.iconPath('bank', 'rune_essence'),
       seed: this.iconPath('bank', 'seeds_potato'),
       stardust: this.iconPath('bank', 'stardust'),
       torment: this.iconPath('bank', 'Mask_of_Torment'),
       water_rune: this.iconPath('bank', 'rune_water'),
       soup: this.iconPath('bank', 'basic_soup', undefined, 'png'),
-      arrow_tips: this.iconPath(),
-      javelin_heads: this.iconPath(),
-      crossbow_heads: this.iconPath(),
-      abyssal_arrow_tips: this.iconPath(),
-      abyssal_javelin_heads: this.iconPath(),
-      arrows: this.iconPath(),
-      bolts: this.iconPath(),
-      javelins: this.iconPath(),
-      unstrung_bows: this.iconPath(),
-      jewelry: this.iconPath(),
-      staves: this.iconPath(),
-      abyssal_staves: this.iconPath(),
-      wands: this.iconPath(),
-      abyssal_jewelry: this.iconPath(),
+      arrow_tips: this.iconPath('bank', 'arrowtips_bronze', undefined, 'png'),
+      javelin_heads: this.iconPath('bank', 'bronze_javelin_heads', undefined, 'png'),
+      crossbow_heads: this.iconPath('bank', 'crossbow_head_bronze', undefined, 'png'),
+      //abyssal_arrow_tips: this.iconPath(), // TODO: Give more fitting icon (without throwing an error when user does not have ItA)
+      //abyssal_javelin_heads: this.iconPath(), // TODO: Give more fitting icon (without throwing an error when user does not have ItA)
+      arrows: this.iconPath('bank', 'ammo_arrow_bronze', undefined, 'png'),
+      bolts: this.iconPath('bank', 'ammo_bolt_sapphire', undefined, 'png'),
+      javelins: this.iconPath('bank', 'weapon_javelin_bronze', undefined, 'png'),
+      unstrung_bows: this.iconPath('bank', 'longbow_normal_u', undefined, 'png'),
+      jewelry: this.iconPath('bank', 'necklace_gold_topaz', undefined, 'png'),
+      staves: this.iconPath('bank', 'Basic_Staff', undefined, 'png'),
+      //abyssal_staves: this.iconPath(), // TODO: Give more fitting icon (without throwing an error when user does not have ItA)
+      wands: this.iconPath('bank', 'weapon_wand_elite', undefined, 'png'),
+      //abyssal_jewelry: this.iconPath(), // TODO: Give more fitting icon (without throwing an error when user does not have ItA)
       nature_wrath_staff: this.iconPath('bank', 'natures_wrath_staff', undefined, 'png'),
+      poison_staff: this.iconPath('bank', 'poison_staff', undefined, 'png'),
       infernal_staff: this.iconPath('bank', 'infernal_staff', undefined, 'png'),
       lighting_staff: this.iconPath('bank', 'lightning_staff', undefined, 'png'),
     },
@@ -204,10 +205,10 @@ export class ModifierIconPaths {
       water_strike: this.iconPath('skills', 'magic', 'water_strike'),
       earth_strike: this.iconPath('skills', 'magic', 'earth_strike'),
       fire_strike: this.iconPath('skills', 'magic', 'fire_strike'),
-      air_bolt: this.iconPath(),
-      air_blast: this.iconPath(),
-      air_wave: this.iconPath(),
-      air_surge: this.iconPath(),
+      air_bolt: this.iconPath('skills', 'magic', 'wind_bolt'),
+      air_blast: this.iconPath('skills', 'magic', 'wind_blast'),
+      air_wave: this.iconPath('skills', 'magic', 'wind_wave'),
+      air_surge: this.iconPath('skills', 'magic', 'wind_surge'),
       arch_brush: this.iconPath('skills', 'archaeology', 'brush'),
       arch_shovel: this.iconPath('skills', 'archaeology', 'shovel'),
       arch_sieve: this.iconPath('skills', 'archaeology', 'sieve'),
@@ -361,6 +362,11 @@ export type IconTagSources = { [key: string]: string };
 type ExtractKeys<T> = {
   [K in keyof T]: keyof T[K];
 }[keyof T];
+
+/**
+ * Just a clarity type around simple strings that serve as being a tag by which to retrieve the media for an icon to display
+ */
+export type IconTag = string;
 
 /**
  * All available icon tags (for static tagging) based on ModifierIconPaths categories.
