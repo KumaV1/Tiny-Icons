@@ -6,9 +6,10 @@ import {
   ModifierIconPaths,
   ModModifierIconTag,
 } from './ModifierIcons';
-import { modifierTagMap } from './ModifierTags';
+import { modifierTagMap } from './staticTagging/ModifierTags';
 import { SettingsManager } from './SettingsManager';
 import { TinyIconsModSettings } from './types/tinyIconsModSettings';
+import { modifierScopeSourceActionTagMap, modifierScopeSourceCategoryTagMap, modifierScopeSourceCombatEffectGroupTagMap, modifierScopeSourceSubcategoryTagMap } from './staticTagging/ModifierScopeSourceTags';
 
 /**
  * Manages the icons associated with modifiers and provides the relevant HTML string.
@@ -112,37 +113,37 @@ export class IconManager {
 
   /**
    * Determines the appropriate icons for the active scopes
-   * @param scope data on active scoping (may have none)
+   * @param modValue data on mod value, which among other things includes active scoping (may have none)
    */
-  private getIconsForScopes(scope: IModifierScope): string {
+  private getIconsForScopes(modValue: ModifierValue): string {
     let html = '';
 
-    if (scope.skill && SettingsManager.settings.scopeIcons.skill) {
-      html += this.imgSource(this.getIconSrcForSkillScope(scope.skill));
+    if (modValue.skill && SettingsManager.settings.scopeIcons.skill) {
+      html += this.imgSource(this.getIconSrcForSkillScope(modValue.skill));
     }
-    if (scope.damageType && SettingsManager.settings.scopeIcons.damageType) {
-      html += this.imgSource(this.getIconSrcForDamageTypeScope(scope.damageType));
+    if (modValue.damageType && SettingsManager.settings.scopeIcons.damageType) {
+      html += this.imgSource(this.getIconSrcForDamageTypeScope(modValue.damageType));
     }
-    if (scope.realm && SettingsManager.settings.scopeIcons.realm) {
-      html += this.imgSource(this.getIconSrcForRealmScope(scope.realm));
+    if (modValue.realm && SettingsManager.settings.scopeIcons.realm) {
+      html += this.imgSource(this.getIconSrcForRealmScope(modValue.realm));
     }
-    if (scope.currency && SettingsManager.settings.scopeIcons.currency) {
-      html += this.imgSource(this.getIconSrcForCurrencyScope(scope.currency));
+    if (modValue.currency && SettingsManager.settings.scopeIcons.currency) {
+      html += this.imgSource(this.getIconSrcForCurrencyScope(modValue.currency));
     }
-    if (scope.category && SettingsManager.settings.scopeIcons.category) {
-      html += this.imgSource(this.getIconSrcForCategoryScope(scope.category) ?? '');
+    if (modValue.category && SettingsManager.settings.scopeIcons.category) {
+      html += this.imgSource(this.getIconSrcForCategoryScope(modValue, modValue.category) ?? '');
     }
-    if (scope.action && SettingsManager.settings.scopeIcons.action) {
-      html += this.imgSource(this.getIconSrcForActionScope(scope.action) ?? '');
+    if (modValue.action && SettingsManager.settings.scopeIcons.action) {
+      html += this.imgSource(this.getIconSrcForActionScope(modValue, modValue.action) ?? '');
     }
-    if (scope.subcategory && SettingsManager.settings.scopeIcons.subcategory) {
-      html += this.imgSource(this.getIconSrcForSubcagetoryScope(scope.subcategory) ?? '');
+    if (modValue.subcategory && SettingsManager.settings.scopeIcons.subcategory) {
+      html += this.imgSource(this.getIconSrcForSubcagetoryScope(modValue, modValue.subcategory) ?? '');
     }
-    if (scope.item && SettingsManager.settings.scopeIcons.item) {
-      html += this.imgSource(this.getIconSrcForItemScope(scope.item) ?? '');
+    if (modValue.item && SettingsManager.settings.scopeIcons.item) {
+      html += this.imgSource(this.getIconSrcForItemScope(modValue.item) ?? '');
     }
-    if (scope.effectGroup && SettingsManager.settings.scopeIcons.effectGroup) {
-      html += this.imgSource(this.getIconSrcForCombatEffectGroupScope(scope.effectGroup) ?? '');
+    if (modValue.effectGroup && SettingsManager.settings.scopeIcons.effectGroup) {
+      html += this.imgSource(this.getIconSrcForCombatEffectGroupScope(modValue.effectGroup) ?? '');
     }
 
     return html;
@@ -341,16 +342,34 @@ export class IconManager {
 
   /**
    * Get icon source for category scope
+   * @param modValue
    * @param category
    * @returns
    */
-  private getIconSrcForCategoryScope(category: NamedObject | NamedObject & { media: string }): string | undefined {
+  private getIconSrcForCategoryScope(modValue: ModifierValue, category: NamedObject | NamedObject & { media: string }): string | undefined {
     /** @ts-ignore - unknown property, as unknown whether scope source has media */
     if (category.media) {
       /** @ts-ignore - unknown property, as unknown whether scope source has media */
       return category.media;
     }
 
+    switch (category.id) {
+      case SkillIDs.Fishing:
+        break;
+      case SkillIDs.Thieving:
+        break;
+      default:
+        // Try determine manual tagging from scope source
+        const source: IModifierScopeSource | undefined = this.tryGetModifierScopeSource(modValue);
+        if (source) {
+          const tag: StaticModifierIconTag | undefined = modifierScopeSourceCategoryTagMap.get(source.id)?.get(category.id);
+          if (tag) {
+            return this.paths.srcForTag[tag];
+          }
+        }
+    }
+
+    // Fallback
     return SettingsManager.settings.placeholderIconEnabled
       ? this.paths.srcForTag['placeholder']
       : undefined;
@@ -358,16 +377,27 @@ export class IconManager {
 
   /**
    * Get icon source for action scope
+   * @param modValue
    * @param action
    * @returns
    */
-  private getIconSrcForActionScope(action: NamedObject | NamedObject & { media: string }): string | undefined {
+  private getIconSrcForActionScope(modValue: ModifierValue, action: NamedObject | NamedObject & { media: string }): string | undefined {
     /** @ts-ignore - unknown property, as unknown whether scope source has media */
     if (action.media) {
       /** @ts-ignore - unknown property, as unknown whether scope source has media */
       return action.media;
     }
 
+    // Try determine manual tagging from scope source
+    const source: IModifierScopeSource | undefined = this.tryGetModifierScopeSource(modValue);
+    if (source) {
+      const tag: StaticModifierIconTag | undefined = modifierScopeSourceActionTagMap.get(source.id)?.get(action.id);
+      if (tag) {
+        return this.paths.srcForTag[tag];
+      }
+    }
+
+    // Fallback
     return SettingsManager.settings.placeholderIconEnabled
       ? this.paths.srcForTag['placeholder']
       : undefined;
@@ -375,16 +405,27 @@ export class IconManager {
 
   /**
    * Get icon source for subcategory scope
+   * @param modValue
    * @param subcategory
    * @returns
    */
-  private getIconSrcForSubcagetoryScope(subcategory: NamedObject | NamedObject & { media: string }): string | undefined {
+  private getIconSrcForSubcagetoryScope(modValue: ModifierValue, subcategory: NamedObject | NamedObject & { media: string }): string | undefined {
     /** @ts-ignore - unknown property, as unknown whether scope source has media */
     if (subcategory.media) {
       /** @ts-ignore - unknown property, as unknown whether scope source has media */
       return subcategory.media;
     }
 
+    // Try determine manual tagging from scope source
+    const source: IModifierScopeSource | undefined = this.tryGetModifierScopeSource(modValue);
+    if (source) {
+      const tag: StaticModifierIconTag | undefined = modifierScopeSourceSubcategoryTagMap.get(source.id)?.get(subcategory.id);
+      if (tag) {
+        return this.paths.srcForTag[tag];
+      }
+    }
+
+    // Fallback
     return SettingsManager.settings.placeholderIconEnabled
       ? this.paths.srcForTag['placeholder']
       : undefined;
@@ -401,6 +442,7 @@ export class IconManager {
 
   /**
    * Get icon source for effectGroup scope
+   * @param modValue
    * @param effectGroup
    * @returns
    */
@@ -411,9 +453,43 @@ export class IconManager {
       return effectGroup.media;
     }
 
+    // Try determine manual tagging from scope source
+    const tag: StaticModifierIconTag | undefined = modifierScopeSourceCombatEffectGroupTagMap.get(effectGroup.id);
+    if (tag) {
+      return this.paths.srcForTag[tag];
+    }
+
+    // Fallback
     return SettingsManager.settings.placeholderIconEnabled
       ? this.paths.srcForTag['placeholder']
       : undefined;
+  }
+
+  /**
+   * Tries to get fitting scoping, from which the source (and thereby icon to use) can be determined
+   * DEV NOTE: While skill is used at times as a fallback, that's only if is
+   * @param modValue
+   * @returns
+   */
+  private tryGetModifierScopeSource(modValue: ModifierValue): IModifierScopeSource | undefined {
+      const scopeKey = Modifier.getScopeKey(modValue);
+      const scoping = modValue.modifier.scopeMap.get(scopeKey);
+      if (!scoping) {
+        return undefined;
+      }
+
+      // If scope source exist, just return that one
+      if (scoping.scopeSource) {
+        return scoping.scopeSource;
+      }
+
+      // If no scope source exists, try falling back to skill scope, if available (mirrors behaviour from base game)
+      if (scoping.scopes.skill) {
+        return modValue.skill;
+      }
+
+      // Nothing could be found
+      return undefined;
   }
 
   public exposeAPI() {

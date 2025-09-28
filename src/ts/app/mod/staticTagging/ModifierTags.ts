@@ -1,4 +1,4 @@
-import { ModifierTagMapEntryAttributes } from './models/ModifierTagMapEntryAttributes';
+import { ModifierTagMapEntryAttributes } from '../models/ModifierTagMapEntryAttributes';
 
 /**
  * An object mapping all modifiers to tags that represent relevant icons.
