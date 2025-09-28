@@ -353,20 +353,33 @@ export class IconManager {
       return category.media;
     }
 
-    switch (category.id) {
-      case SkillIDs.Fishing:
-        break;
-      case SkillIDs.Thieving:
-        break;
-      default:
-        // Try determine manual tagging from scope source
-        const source: IModifierScopeSource | undefined = this.tryGetModifierScopeSource(modValue);
-        if (source) {
+    // If category itself doesn't have media, try searching for a scope source to check
+    const source: IModifierScopeSource | undefined = this.tryGetModifierScopeSource(modValue);
+    if (source) {
+      switch (source.id) {
+        case SkillIDs.Fishing:
+          // For fishing, prefer showing the first fish of the area as a representation
+          const fishMedia = game.fishing.areas.getObjectByID(category.id)?.fish[0].media;
+          if (fishMedia) {
+            return fishMedia;
+          }
+          break;
+        case SkillIDs.Thieving:
+          // For thieving, prefer showing the first npc of the area as a representation
+          const npcMedia = game.thieving.areas.getObjectByID(category.id)?.npcs[0].media;
+          if (npcMedia) {
+            return npcMedia;
+          }
+          break;
+        default:
+          // Try determine manual tagging
           const tag: StaticModifierIconTag | undefined = modifierScopeSourceCategoryTagMap.get(source.id)?.get(category.id);
           if (tag) {
-            return this.paths.srcForTag[tag];
+            return tag !== 'placeholder' || SettingsManager.settings.placeholderIconEnabled
+              ? this.paths.srcForTag[tag]
+              : undefined;
           }
-        }
+      }
     }
 
     // Fallback
@@ -393,7 +406,9 @@ export class IconManager {
     if (source) {
       const tag: StaticModifierIconTag | undefined = modifierScopeSourceActionTagMap.get(source.id)?.get(action.id);
       if (tag) {
-        return this.paths.srcForTag[tag];
+        return tag !== 'placeholder' || SettingsManager.settings.placeholderIconEnabled
+          ? this.paths.srcForTag[tag]
+          : undefined;
       }
     }
 
@@ -421,7 +436,9 @@ export class IconManager {
     if (source) {
       const tag: StaticModifierIconTag | undefined = modifierScopeSourceSubcategoryTagMap.get(source.id)?.get(subcategory.id);
       if (tag) {
-        return this.paths.srcForTag[tag];
+        return tag !== 'placeholder' || SettingsManager.settings.placeholderIconEnabled
+          ? this.paths.srcForTag[tag]
+          : undefined;
       }
     }
 
@@ -456,7 +473,9 @@ export class IconManager {
     // Try determine manual tagging from scope source
     const tag: StaticModifierIconTag | undefined = modifierScopeSourceCombatEffectGroupTagMap.get(effectGroup.id);
     if (tag) {
-      return this.paths.srcForTag[tag];
+      return tag !== 'placeholder' || SettingsManager.settings.placeholderIconEnabled
+          ? this.paths.srcForTag[tag]
+          : undefined;
     }
 
     // Fallback

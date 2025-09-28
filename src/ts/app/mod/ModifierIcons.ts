@@ -69,6 +69,13 @@ export class ModifierIconPaths {
    * Categories of icons with their paths.
    */
   public iconCategories = {
+    /* Todo
+      abyssal_magic: this.iconPath('mods', 'placeholder_icon', undefined, 'png'),
+      brume_magic: this.iconPath('mods', 'placeholder_icon', undefined, 'png'),
+      gloom_magic: this.iconPath('mods', 'placeholder_icon', undefined, 'png'),
+      wither_magic: this.iconPath('mods', 'placeholder_icon', undefined, 'png'),
+      nether_magic: this.iconPath('mods', 'placeholder_icon', undefined, 'png'),
+    */
     itemIcons: {
       air_rune: this.iconPath('bank', 'rune_air'),
       ash: this.iconPath('bank', 'ashes'),
@@ -90,12 +97,37 @@ export class ModifierIconPaths {
       madness: this.iconPath('bank', 'Mask_of_Madness'),
       meteorite: this.iconPath('skills', 'astrology', 'meteorite'),
       mushroom: this.iconPath('bank', 'mushroom'),
-      ore: this.iconPath('skills', 'mining', 'rock_iron'),
+      //ore: this.iconPath('skills', 'mining', 'rock_iron'),
+      //abyssal_ore: this.iconPath()
+      ore: this.iconPath('bank', 'pile_of_ores', undefined, 'png'),
+      abyssal_ore: this.iconPath('bank', 'Unholy_Gem', undefined, 'png'),
+      gem: this.iconPath('bank', 'diamond'),
+      abyssal_gem: this.iconPath('bank', 'diamond'),
+      abyssal_outcrop: this.iconPath(),
+      abyssal_essence: this.iconPath(),
       rune_essence: this.iconPath('bank', 'rune_essence'),
       seed: this.iconPath('bank', 'seeds_potato'),
       stardust: this.iconPath('bank', 'stardust'),
       torment: this.iconPath('bank', 'Mask_of_Torment'),
       water_rune: this.iconPath('bank', 'rune_water'),
+      soup: this.iconPath('bank', 'basic_soup', undefined, 'png'),
+      arrow_tips: this.iconPath(),
+      javelin_heads: this.iconPath(),
+      crossbow_heads: this.iconPath(),
+      abyssal_arrow_tips: this.iconPath(),
+      abyssal_javelin_heads: this.iconPath(),
+      arrows: this.iconPath(),
+      bolts: this.iconPath(),
+      javelins: this.iconPath(),
+      unstrung_bows: this.iconPath(),
+      jewelry: this.iconPath(),
+      staves: this.iconPath(),
+      abyssal_staves: this.iconPath(),
+      wands: this.iconPath(),
+      abyssal_jewelry: this.iconPath(),
+      nature_wrath_staff: this.iconPath('bank', 'natures_wrath_staff', undefined, 'png'),
+      infernal_staff: this.iconPath('bank', 'infernal_staff', undefined, 'png'),
+      lighting_staff: this.iconPath('bank', 'lightning_staff', undefined, 'png'),
     },
     generalIcons: {
       ancient_relics: this.iconPath(
@@ -118,7 +150,6 @@ export class ModifierIconPaths {
       stronghold: this.iconPath('skills', 'combat', 'strongholds'),
       equip_set: this.iconPath('shop', 'equipment_set'),
       equip_swap: this.iconPath('shop', 'equipment_swap'),
-      gem: this.iconPath('bank', 'diamond'),
       golbin: this.iconPath('pets', 'golden_golbin'),
       currency: this.iconPath('ti', 'currency_generic', 'flaticon', 'png'),
       gp: this.iconPath('main', 'coins'),
@@ -135,7 +166,7 @@ export class ModifierIconPaths {
       shop: this.iconPath('main', 'shop_header'),
       slayer_coins: this.iconPath('main', 'slayer_coins'),
       unholy: this.iconPath('skills', 'prayer', 'unholy_prayer'),
-      xp: this.iconPath('main', 'xp'),
+      xp: this.iconPath('main', 'xp')
     },
     effectMedia: {
       afflicted: this.iconPath('misc', 'afflicted'),
@@ -170,6 +201,13 @@ export class ModifierIconPaths {
     },
     skillMedia: {
       air_strike: this.iconPath('skills', 'magic', 'wind_strike'),
+      water_strike: this.iconPath('skills', 'magic', 'water_strike'),
+      earth_strike: this.iconPath('skills', 'magic', 'earth_strike'),
+      fire_strike: this.iconPath('skills', 'magic', 'fire_strike'),
+      air_bolt: this.iconPath(),
+      air_blast: this.iconPath(),
+      air_wave: this.iconPath(),
+      air_surge: this.iconPath(),
       arch_brush: this.iconPath('skills', 'archaeology', 'brush'),
       arch_shovel: this.iconPath('skills', 'archaeology', 'shovel'),
       arch_sieve: this.iconPath('skills', 'archaeology', 'sieve'),
@@ -179,8 +217,6 @@ export class ModifierIconPaths {
       building: this.iconPath('skills', 'township', 'menu_town'),
       confusion: this.iconPath('skills', 'magic', 'confusion'),
       decay: this.iconPath('skills', 'magic', 'decay'),
-      earth_strike: this.iconPath('skills', 'magic', 'earth_strike'),
-      fire_strike: this.iconPath('skills', 'magic', 'fire_strike'),
       protect_item: this.iconPath('skills', 'prayer', 'protect_item'),
       spellbook: this.iconPath('skills', 'combat', 'spellbook'),
       surge: this.iconPath('skills', 'magic', 'wind_surge'),
@@ -252,7 +288,6 @@ export class ModifierIconPaths {
       ts_trader: this.iconPath('skills', 'township', 'menu_trader'),
       ts_wood: this.iconPath('skills', 'township', 'wood'),
       ts_worship: this.iconPath('skills', 'township', 'worship'),
-      water_strike: this.iconPath('skills', 'magic', 'water_strike'),
     },
     skillIcons: {
       agility: this.iconPath('skills', 'agility'),
