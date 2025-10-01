@@ -1,5 +1,5 @@
 export class Constants {
-    static readonly MOD_NAMESPACE = "tiny-icons-kuma";
+    static readonly MOD_NAMESPACE = "tinyIcons";
 
     static readonly TRANSLATION_KEYS = {
         // TODO: May be retrievable through game base translations

@@ -1,3 +1,4 @@
+import { Constants } from '../constants';
 import { languages } from './languages';
 
 /**
@@ -27,7 +28,7 @@ export class TranslationManager {
                 loadedLangJson[key] = value;
             } else {
                 // TODO: Create constants class for the namespace
-                loadedLangJson[`tiny-icons-kuma_${key}`] = value;
+                loadedLangJson[`${Constants.MOD_NAMESPACE}_${key}`] = value;
             }
         }
     }
