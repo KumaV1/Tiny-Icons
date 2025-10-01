@@ -19,7 +19,7 @@
     //SETTINGS_SETTING_SECONDARY_ICONS_HINT = '',
 
     SETTINGS_SETTING_PLACEHOLDER_ICONS_LABEL: 'Enable Placeholder Icons',
-    SETTINGS_SETTING_PLACEHOLDER_ICONS_HINT: 'If enabled, then whenever the mod determines an icon should have been placed, but failed to determine which one, a cog icon will be used. This is primarily relevant for dynamically determined icons, which happens when a boost has a set scope. Though it can also happen when a new modifier is added (e.g. through another mod) which this mod does not (yet) know.',
+    SETTINGS_SETTING_PLACEHOLDER_ICONS_HINT: 'If enabled, then whenever the mod determines an icon should have been placed, but failed to determine which one, a cog icon will be used.',
 
     SETTINGS_SETTING_SCOPE_ICONS_LABEL: 'Enable scope icons',
     SETTINGS_SETTING_SCOPE_ICONS_HINT: 'Scope is the limitation of an initially "generic" buff. For example, for a generic modifier to increase your currency gain, the boost can be set to limit this effect to only GP.',
