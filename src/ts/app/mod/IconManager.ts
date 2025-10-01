@@ -9,7 +9,6 @@ import {
 import { modifierTagMap } from './staticTagging/ModifierTags';
 import { SettingsManager } from './SettingsManager';
 import { TinyIconsModSettings } from './types/tinyIconsModSettings';
-import { modifierScopeSourceActionTagMap, modifierScopeSourceCategoryTagMap, modifierScopeSourceCombatEffectGroupTagMap, modifierScopeSourceSubcategoryTagMap } from './staticTagging/ModifierScopeSourceTags';
 import { ModifierScopeSourceMediaMemoizer, NamedObjectWithMedia } from './ModifierScopeSourceMediaMemoizer';
 
 /**
@@ -512,12 +511,10 @@ export class IconManager {
       return effectGroup.media;
     }
 
-    // Try determine manual tagging from scope source
-    const tag: StaticModifierIconTag | undefined = modifierScopeSourceCombatEffectGroupTagMap.get(effectGroup.id);
-    if (tag) {
-      return tag !== 'placeholder' || SettingsManager.settings.placeholderIconEnabled
-          ? this.paths.srcForTag[tag]
-          : undefined;
+    // Try determine tagging from media map
+    const mediaObject = this.modifierScopeSourceMediaMemoizer.effectGroupMediaMap.get(effectGroup.id); // e.g. "melvorD:StunLike"
+    if (mediaObject) {
+      return mediaObject.media;
     }
 
     // Fallback
