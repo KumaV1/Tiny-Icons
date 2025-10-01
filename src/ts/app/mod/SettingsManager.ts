@@ -1,5 +1,6 @@
 import { TinyIconsModSettings } from "./types/tinyIconsModSettings";
 import { CheckboxGroupFixedConfig } from './models/CheckboxGroupFixedConfig'
+import { Constants } from "../constants";
 
 export class SettingsManager {
   private static ctxSettings: ReturnType<Modding.ModContext['settings']['section']>;
@@ -29,8 +30,8 @@ export class SettingsManager {
       {
         type: 'switch',
         name: 'global-icons',
-        label: 'Enable Global Icons',
-        hint: 'Show icons outside of Astrology and Agility',
+        label: getLangString(Constants.TRANSLATION_KEYS.SETTINGS.GLOBAL_ICONS.LABEL),
+        hint: getLangString(Constants.TRANSLATION_KEYS.SETTINGS.GLOBAL_ICONS.HINT),
         default: true,
         onChange: () => {
           const hint = document
@@ -38,7 +39,7 @@ export class SettingsManager {
             ?.nextElementSibling?.querySelector('small');
 
           if (hint) {
-            hint.textContent = 'Reload Required';
+            hint.textContent = getLangString(Constants.TRANSLATION_KEYS.SETTINGS.RELOAD_REQUIRED);
             hint.classList.add('text-warning');
           }
           this.updateButton();
@@ -47,7 +48,7 @@ export class SettingsManager {
       {
         type: 'switch',
         name: 'secondary-icons',
-        label: 'Enable Secondary Icons',
+        label: getLangString(Constants.TRANSLATION_KEYS.SETTINGS.SECONDARY_ICONS.LABEL),
         hint: ' ',
         default: false,
         onChange: () => {
@@ -56,7 +57,7 @@ export class SettingsManager {
             ?.nextElementSibling?.querySelector('small');
 
           if (hint) {
-            hint.textContent = 'Reload required';
+            hint.textContent = getLangString(Constants.TRANSLATION_KEYS.SETTINGS.RELOAD_REQUIRED);
             hint.classList.add('text-warning');
           }
           this.updateButton();
@@ -65,8 +66,8 @@ export class SettingsManager {
       {
         type: 'switch',
         name: 'placeholder-icons',
-        label: 'Enable Placeholder Icons',
-        hint: 'If enabled, then whenever the mod determines an icon should have been placed, but failed to determine which one, a cog icon will be used. This is primarily relevant for dynamically determined icons, which happens when a boost has a set scope. Though it can also happen when a new modifier is added (e.g. through another mod) which this mod does not (yet) know.',
+        label: getLangString(Constants.TRANSLATION_KEYS.SETTINGS.PLACEHOLDER_ICONS.LABEL),
+        hint: getLangString(Constants.TRANSLATION_KEYS.SETTINGS.PLACEHOLDER_ICONS.HINT),
         default: true,
         onChange: () => {
           const hint = document
@@ -74,24 +75,24 @@ export class SettingsManager {
             ?.nextElementSibling?.querySelector('small');
 
           if (hint) {
-            hint.textContent = 'Reload required';
+            hint.textContent = getLangString(Constants.TRANSLATION_KEYS.SETTINGS.RELOAD_REQUIRED);
             hint.classList.add('text-warning');
           }
           this.updateButton();
         },
       } as unknown as Modding.Settings.SwitchConfig,
-      CheckboxGroupFixedConfig.toSimpleObject(new CheckboxGroupFixedConfig<keyof IModifierScope>('scope-icons', 'Enable scope icons', [
-        { value: 'skill', label: 'Skill', hint: 'For example, a skill xp buff only affecting Agility. In which case the "Agility skill" icon should be displayed.' },
-        { value: 'damageType', label: 'Damage Type', hint: 'For example, a damage buff only affecting "Pure" damage. In which case the "Pure Damage" icon should be displayed.' },
-        { value: 'realm', label: 'Realm', hint: 'Only relevant with certain expansions and possibly mods. For example, a damage buff only working in the "Normal" realm. In which case the "Normal Realm" icon should be displayed.' },
-        { value: 'currency', label: 'Currency', hint: 'For example, a currency gain buff only affecting GP. In which case the "GP" icon should be displayed.' },
-        { value: 'category', label: 'Category', hint: 'What the "Category" is varies on the source that is affected. In Cooking, for example, a buff that only affects the Cooking Fire. In which case the icon of the Cooking Fire should be displayed.' },
-        { value: 'action', label: 'Action', hint: 'For example, a buff to gain additional resources, but only when woodcutting the willow tree. In which case, the "Willow tree" icon should be displayed.' },
-        { value: 'subcategory', label: 'Subcategory', hint: 'What the "Subcategory" is varies on the source that is affected. In Cooking, for example, this can be a "category/group", such as "All fish". In which case an icon representing "All fish" should be displayed.' },
-        { value: 'item', label: 'Item', hint: 'For example, a buff that provides you with an item during any skilling action (of a particular skill). For example, a buff that provides you a "Fire rune" whenever you craft a rune. In which case the icon of the "Fire Rune" item should be displayed.' },
-        { value: 'effectGroup', label: 'Combat effect group', hint: 'Combat effects can be singular ones (e.g. "Burn") or categorized into groups (e.g. "Damage-over-time"). For example, a debuff that reduces your damage while affected by any sort of "Damage-over-time". In which case an icon representing "Damage-over-time damage" should be displayed.' },
+      CheckboxGroupFixedConfig.toSimpleObject(new CheckboxGroupFixedConfig<keyof IModifierScope>('scope-icons', getLangString(Constants.TRANSLATION_KEYS.SETTINGS.SCOPE_ICONS.LABEL), [
+        { value: 'skill', label: 'Skill', hint: getLangString(Constants.TRANSLATION_KEYS.SETTINGS.SCOPE_ICONS.OPTIONS.SKILL_HINT) },
+        { value: 'damageType', label: 'Damage Type', hint: getLangString(Constants.TRANSLATION_KEYS.SETTINGS.SCOPE_ICONS.OPTIONS.DAMAGE_TYPE_HINT) },
+        { value: 'realm', label: 'Realm', hint: getLangString(Constants.TRANSLATION_KEYS.SETTINGS.SCOPE_ICONS.OPTIONS.REALM_HINT) },
+        { value: 'currency', label: 'Currency', hint: getLangString(Constants.TRANSLATION_KEYS.SETTINGS.SCOPE_ICONS.OPTIONS.CURRENCY_HINT) },
+        { value: 'category', label: 'Category', hint: getLangString(Constants.TRANSLATION_KEYS.SETTINGS.SCOPE_ICONS.OPTIONS.CATEGORY_HINT) },
+        { value: 'action', label: 'Action', hint: getLangString(Constants.TRANSLATION_KEYS.SETTINGS.SCOPE_ICONS.OPTIONS.ACTION_HINT) },
+        { value: 'subcategory', label: 'Subcategory', hint: getLangString(Constants.TRANSLATION_KEYS.SETTINGS.SCOPE_ICONS.OPTIONS.SUBCATEGORY_HINT) },
+        { value: 'item', label: 'Item', hint: getLangString(Constants.TRANSLATION_KEYS.SETTINGS.SCOPE_ICONS.OPTIONS.ITEM_HINT) },
+        { value: 'effectGroup', label: 'Combat effect group', hint: getLangString(Constants.TRANSLATION_KEYS.SETTINGS.SCOPE_ICONS.OPTIONS.EFFECT_GROUP_HINT) },
       ] as (Modding.Settings.CheckboxOption & { value: keyof IModifierScope })[],
-        'Scope is the limitation of an initially "generic" buff. For example, for a generic modifier to increase your currency gain, the boost can be set to limit this effect to only GP.',
+        getLangString(Constants.TRANSLATION_KEYS.SETTINGS.SCOPE_ICONS.HINT),
         ['skill', 'currency', 'category', 'action', 'subcategory', 'item', 'effectGroup'],
         () => {
           this.updateButton();
@@ -107,13 +108,13 @@ export class SettingsManager {
               hint = createElement('small', { classList: ['d-block'], parent: label });
           }
 
-          hint.textContent = 'Reload required';
+          hint.textContent = getLangString(Constants.TRANSLATION_KEYS.SETTINGS.RELOAD_REQUIRED)
           hint.classList.add("text-warning");
         })),
       {
         type: 'button',
         name: 'save-reload',
-        display: 'Save & Reload',
+        display: getLangString(Constants.TRANSLATION_KEYS.SETTINGS.SAVE_AND_RELOAD),
         color: 'primary',
         onClick: () => {
           saveData();
