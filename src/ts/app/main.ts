@@ -1,8 +1,10 @@
 import { SettingsManager } from './mod/SettingsManager';
 import { ModifierManagerInit } from './mod/ModifierManager';
+import { TranslationManager } from './mod/TranslationManager';
 
 export class Main {
   public init(ctx: Modding.ModContext) {
+    TranslationManager.register();
     const settingsManager = new SettingsManager();
     settingsManager.init(ctx.settings.section('Tiny Icons'));
     ctx.onCharacterLoaded(function() {
