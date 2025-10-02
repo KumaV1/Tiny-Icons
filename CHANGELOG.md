@@ -2,7 +2,21 @@
 
 All notable changes to this project will be documented in this file.
 
+### [3.1.0] (2025-10-02)
+
+#### Features
+* Added translation support
+  * Added German translation
+* Scopes that were previously unable to show an icon should now do so
+  * The behaviour is that the media of first reference of said scope will (e.g. a Fletching bonus for "Arrows" will display a Bronze Arrow)
+
+#### Note
+
+Technically, skills added by mods could still lead to a scope without icon (mod support for this will be implemented in the future). That being said, expansions to existing structures added via mods (e.g. a new category of items in Fletching) should already be picked up.
+
 ### [3.0.2] (2025-09-23)
+
+#### Bug Fixes
 * Fixed issue where prayer tooltips and certain cartography elements didn't interpret the image tags as html
 
 ### [3.0.1] (2025-09-21)
