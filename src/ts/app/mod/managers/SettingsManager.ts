@@ -1,6 +1,6 @@
-import { TinyIconsModSettings } from "./types/tinyIconsModSettings";
-import { CheckboxGroupFixedConfig } from './models/CheckboxGroupFixedConfig'
-import { Constants } from "../constants";
+import { Constants } from "../../constants";
+import { CheckboxGroupFixedConfig } from "../models/CheckboxGroupFixedConfig";
+import { TinyIconsModSettings } from "../types/tinyIconsModSettings";
 
 export class SettingsManager {
   private static ctxSettings: ReturnType<Modding.ModContext['settings']['section']>;

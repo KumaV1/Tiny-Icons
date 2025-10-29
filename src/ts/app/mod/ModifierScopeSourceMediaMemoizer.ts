@@ -1,4 +1,4 @@
-import { NamedObjectWithMedia } from "./types/namedObjectWithMedia";
+import { NamedObjectWithMedia } from './types/namedObjectWithMedia';
 
 /**
  * A class for managing (and preserving, for efficiency) icons for various scope sources, 
@@ -7,6 +7,14 @@ import { NamedObjectWithMedia } from "./types/namedObjectWithMedia";
  * Most tag maps are two-layered, as they are layered to "main source" (e.g. "melvorD:Fletching") and then corresponding entry (e.g. subcategory entry "melvorF:Arrows")
  */
 export class ModifierScopeSourceMediaMemoizer {
+    private static initialized: boolean = false;
+
+    // Variables to hold modded data, until the memoizer is properly initialized (so mods still overwrite whatever base initialization this mod does)
+    private static categoryMediaMapMods: Map<string, Map<string, NamedObjectWithMedia>>;
+    private static subcategoryMediaMapMods: Map<string, Map<string, NamedObjectWithMedia>>;
+    private static actionMediaMapMods: Map<string, Map<string, NamedObjectWithMedia>>;
+    private static effectGroupMediaMapMods: Map<string, NamedObjectWithMedia>;
+
     /**
      * A map of objects for {@link IModifierScope.category} entries that do not inherintly have their own media
      */
@@ -32,6 +40,11 @@ export class ModifierScopeSourceMediaMemoizer {
      * @param ctx
      */
     public static init(ctx: Modding.ModContext) {
+        ModifierScopeSourceMediaMemoizer.categoryMediaMapMods = new Map();
+        ModifierScopeSourceMediaMemoizer.subcategoryMediaMapMods = new Map();
+        ModifierScopeSourceMediaMemoizer.actionMediaMapMods = new Map();
+        ModifierScopeSourceMediaMemoizer.effectGroupMediaMapMods = new Map();
+
         ModifierScopeSourceMediaMemoizer.categoryMediaMap = new Map();
         ModifierScopeSourceMediaMemoizer.subcategoryMediaMap = new Map();
         ModifierScopeSourceMediaMemoizer.actionMediaMap = new Map();
@@ -45,8 +58,148 @@ export class ModifierScopeSourceMediaMemoizer {
             ModifierScopeSourceMediaMemoizer.initEffectGroupMediaMap();
 
             // Init tag for modded stuff
-            ModifierScopeSourceMediaMemoizer.addModData();
+            ModifierScopeSourceMediaMemoizer.initModData();
+
+            // Preserve info that initialization is done and clear now not necessary collections (clearing up very minor memory, but still)
+            ModifierScopeSourceMediaMemoizer.initialized = true;
+            ModifierScopeSourceMediaMemoizer.categoryMediaMapMods.clear();
+            ModifierScopeSourceMediaMemoizer.subcategoryMediaMapMods.clear();
+            ModifierScopeSourceMediaMemoizer.actionMediaMapMods.clear();
+            ModifierScopeSourceMediaMemoizer.effectGroupMediaMapMods.clear();
         });
+    }
+
+    /**
+     *
+     * @param scopeSourceId
+     * @param entries
+     */
+    public static registerCategoryScopeMedia(scopeSourceId: string, entries: Map<string, NamedObjectWithMedia>): void {
+        if (!game.modifierScopeSources.registeredObjects.has(scopeSourceId)) {
+            console.warn(`[Tiny Icons] Scope source id '${scopeSourceId}' is not a valid scope source (according to game.modifierScopeSources) and will therefore be skipped.`);
+            return;
+        }
+
+        const filteredEntries = new Map<string, NamedObjectWithMedia>();
+        entries.forEach((value: NamedObjectWithMedia, key: string) => {
+            if (value.media) {
+                filteredEntries.set(key, value);
+            } else {
+                console.warn(`[Tiny Icons] Category '${value.id}' for scope source '${key}' does not have media and will therefore be skipped.`);
+            }
+        });
+
+        if (ModifierScopeSourceMediaMemoizer.initialized) {
+            const map = ModifierScopeSourceMediaMemoizer.categoryMediaMap.get(scopeSourceId) ?? new Map<string, NamedObjectWithMedia>();
+
+            filteredEntries.forEach((value: NamedObjectWithMedia, key: string) => {
+              map.set(key, value);
+            });
+
+            ModifierScopeSourceMediaMemoizer.categoryMediaMap.set(scopeSourceId, map);
+        } else {
+            const map = ModifierScopeSourceMediaMemoizer.categoryMediaMapMods.get(scopeSourceId) ?? new Map<string, NamedObjectWithMedia>();
+
+            filteredEntries.forEach((value: NamedObjectWithMedia, key: string) => {
+              map.set(key, value);
+            });
+
+            ModifierScopeSourceMediaMemoizer.categoryMediaMapMods.set(scopeSourceId, map);
+        }
+    }
+
+    /**
+     *
+     * @param scopeSourceId
+     * @param entries
+     */
+    public static registerSubcategoryScopeMedia(scopeSourceId: string, entries: Map<string, NamedObjectWithMedia>): void {
+        if (!game.modifierScopeSources.registeredObjects.has(scopeSourceId)) {
+            console.warn(`[Tiny Icons] Scope source id '${scopeSourceId}' is not a valid scope source (according to game.modifierScopeSources) and will therefore be skipped.`);
+            return;
+        }
+
+        const filteredEntries = new Map<string, NamedObjectWithMedia>();
+        entries.forEach((value: NamedObjectWithMedia, key: string) => {
+            if (value.media) {
+                filteredEntries.set(key, value);
+            } else {
+                console.warn(`[Tiny Icons] Subcategory '${value.id}' for scope source '${key}' does not have media and will therefore be skipped.`);
+            }
+        });
+
+        if (ModifierScopeSourceMediaMemoizer.initialized) {
+            const map = ModifierScopeSourceMediaMemoizer.subcategoryMediaMap.get(scopeSourceId) ?? new Map<string, NamedObjectWithMedia>();
+
+            filteredEntries.forEach((value: NamedObjectWithMedia, key: string) => {
+              map.set(key, value);
+            });
+
+            ModifierScopeSourceMediaMemoizer.subcategoryMediaMap.set(scopeSourceId, map);
+        } else {
+            const map = ModifierScopeSourceMediaMemoizer.subcategoryMediaMapMods.get(scopeSourceId) ?? new Map<string, NamedObjectWithMedia>();
+
+            filteredEntries.forEach((value: NamedObjectWithMedia, key: string) => {
+              map.set(key, value);
+            });
+
+            ModifierScopeSourceMediaMemoizer.subcategoryMediaMapMods.set(scopeSourceId, map);
+        }
+    }
+
+    /**
+     *
+     * @param scopeSourceId
+     * @param entries
+     */
+    public static registerActionScopeMedia(scopeSourceId: string, entries: Map<string, NamedObjectWithMedia>): void {
+        if (!game.modifierScopeSources.registeredObjects.has(scopeSourceId)) {
+            console.warn(`[Tiny Icons] Scope source id '${scopeSourceId}' is not a valid scope source (according to game.modifierScopeSources) and will therefore be skipped.`);
+            return;
+        }
+
+        const filteredEntries = new Map<string, NamedObjectWithMedia>();
+        entries.forEach((value: NamedObjectWithMedia, key: string) => {
+            if (value.media) {
+                filteredEntries.set(key, value);
+            } else {
+                console.warn(`[Tiny Icons] Action '${value.id}' for scope source '${key}' does not have media and will therefore be skipped.`);
+            }
+        });
+
+        if (ModifierScopeSourceMediaMemoizer.initialized) {
+            const map = ModifierScopeSourceMediaMemoizer.actionMediaMap.get(scopeSourceId) ?? new Map<string, NamedObjectWithMedia>();
+
+            filteredEntries.forEach((value: NamedObjectWithMedia, key: string) => {
+              map.set(key, value);
+            });
+
+            ModifierScopeSourceMediaMemoizer.actionMediaMap.set(scopeSourceId, map);
+        } else {
+            const map = ModifierScopeSourceMediaMemoizer.actionMediaMapMods.get(scopeSourceId) ?? new Map<string, NamedObjectWithMedia>();
+
+            filteredEntries.forEach((value: NamedObjectWithMedia, key: string) => {
+              map.set(key, value);
+            });
+
+            ModifierScopeSourceMediaMemoizer.actionMediaMapMods.set(scopeSourceId, map);
+        }
+    }
+
+    /**
+     *
+     * @param entries
+     */
+    public static registerEffectGroupScopeMedia(entries: Map<string, NamedObjectWithMedia>): void {
+        if (ModifierScopeSourceMediaMemoizer.initialized) {
+            entries.forEach((value: NamedObjectWithMedia, key: string) => {
+                ModifierScopeSourceMediaMemoizer.effectGroupMediaMap.set(key, value);
+            });
+        } else {
+            entries.forEach((value: NamedObjectWithMedia, key: string) => {
+                ModifierScopeSourceMediaMemoizer.effectGroupMediaMapMods.set(key, value);
+            });
+        }
     }
 
     /**
@@ -207,7 +360,54 @@ export class ModifierScopeSourceMediaMemoizer {
     /**
      * Add data provided by mods via API
      */
-    private static addModData() {
-        // Note: a mod must be able to overwrite whatever here. If they add an effect group and know a more fitting icon, let them overwrite what this mod initially chose
+    private static initModData() {
+        // Categories
+        ModifierScopeSourceMediaMemoizer.categoryMediaMapMods.forEach((value: Map<string, NamedObjectWithMedia>, key: string) => {
+            // Try find a map for the scope source in question
+            let map = ModifierScopeSourceMediaMemoizer.categoryMediaMap.get(key) ?? new Map<string, NamedObjectWithMedia>();
+
+            // Now we loop through the entries meant to be added to the scope source
+            value.forEach((innerValue: NamedObjectWithMedia, innerKey: string) => {
+                map!.set(innerKey, innerValue);
+            });
+
+            // Set the updated inner-map as a whole as new value for the scope source
+            ModifierScopeSourceMediaMemoizer.categoryMediaMap.set(key, map);
+        });
+
+        // Subcategories
+        ModifierScopeSourceMediaMemoizer.subcategoryMediaMapMods.forEach((value: Map<string, NamedObjectWithMedia>, key: string) => {
+            // Try find a map for the scope source in question
+            let map = ModifierScopeSourceMediaMemoizer.subcategoryMediaMap.get(key) ?? new Map<string, NamedObjectWithMedia>();
+
+            // Now we loop through the entries meant to be added to the scope source
+            value.forEach((innerValue: NamedObjectWithMedia, innerKey: string) => {
+                map!.set(innerKey, innerValue);
+            });
+
+            // Set the updated inner-map as a whole as new value for the scope source
+            ModifierScopeSourceMediaMemoizer.subcategoryMediaMap.set(key, map);
+        });
+
+        // Actions
+        ModifierScopeSourceMediaMemoizer.actionMediaMapMods.forEach((value: Map<string, NamedObjectWithMedia>, key: string) => {
+            // Try find a map for the scope source in question
+            let map = ModifierScopeSourceMediaMemoizer.actionMediaMap.get(key) ?? new Map<string, NamedObjectWithMedia>();
+
+            // Now we loop through the entries meant to be added to the scope source
+            value.forEach((innerValue: NamedObjectWithMedia, innerKey: string) => {
+                map!.set(innerKey, innerValue);
+            });
+
+            // Set the updated inner-map as a whole as new value for the scope source
+            ModifierScopeSourceMediaMemoizer.actionMediaMap.set(key, map);
+        });
+
+        // (Combat) Effect groups
+        ModifierScopeSourceMediaMemoizer.effectGroupMediaMapMods.forEach((value: NamedObjectWithMedia, key: string) => {
+            if (!ModifierScopeSourceMediaMemoizer.effectGroupMediaMap.has(key)) {
+                ModifierScopeSourceMediaMemoizer.effectGroupMediaMap.set(key, value);
+            }
+        });
     }
 }
