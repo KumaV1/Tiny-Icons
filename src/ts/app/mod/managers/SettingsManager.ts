@@ -20,7 +20,7 @@ export class SettingsManager {
    * Inializes the possible settings
    * @param settings
    */
-  public init(
+  public static init(
     settings: ReturnType<Modding.ModContext['settings']['section']>,
   ) {
     SettingsManager.ctxSettings = settings;
@@ -127,7 +127,7 @@ export class SettingsManager {
   /**
    * Loads the specific character's settings into the static variable
    */
-  public setSettingsFromCharacter() {
+  public static setSettingsFromCharacter() {
     SettingsManager.settings = {
       globalIconsEnabled: SettingsManager.ctxSettings.get('global-icons') as boolean,
       secondaryIconsEnabled: SettingsManager.ctxSettings.get('secondary-icons') as boolean,
@@ -139,7 +139,7 @@ export class SettingsManager {
     };
   }
 
-  private updateButton() {
+  private static updateButton() {
     const btn = document.getElementById('tinyIcons:save-reload');
     if (btn && btn.classList.contains('btn-primary'))
       btn.classList.replace('btn-primary', 'btn-danger');

@@ -1,0 +1,1 @@
+export type IconTagSources = { [key: string]: string };

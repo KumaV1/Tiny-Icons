@@ -1,20 +1,26 @@
-import { SettingsManager } from './mod/SettingsManager';
-import { ModifierManagerInit } from './mod/ModifierManager';
-import { TranslationManager } from './mod/TranslationManager';
+import { PublicApi } from './mod/PublicApi';
+import { TagManager } from './mod/managers/TagManager';
+import { ModifierScopeSourceMediaMemoizer } from './mod/ModifierScopeSourceMediaMemoizer';
+import { PatchManager } from './mod/managers/PatchManager';
+import { TranslationManager } from './mod/managers/TranslationManager';
+import { SettingsManager } from './mod/managers/SettingsManager';
 
 export class Main {
   public init(ctx: Modding.ModContext) {
+    // Initialize various managers and other stuff
     TranslationManager.register();
-    const settingsManager = new SettingsManager();
-    settingsManager.init(ctx.settings.section('Tiny Icons'));
+    PatchManager.patch(ctx);
+    TagManager.init(ctx);
+    ModifierScopeSourceMediaMemoizer.init(ctx);
+    SettingsManager.init(ctx.settings.section('Tiny Icons'));
+    PublicApi.init(ctx);
+
+    // Hook-in settings and some recomputations
     ctx.onCharacterLoaded(function() {
-      settingsManager.setSettingsFromCharacter();
+      SettingsManager.setSettingsFromCharacter();
 
       enforceRecomputations(ctx);
     });
-
-    const modifierManager = ModifierManagerInit.create(ctx);
-    modifierManager.init();
   }
 }
 

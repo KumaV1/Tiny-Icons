@@ -1,4 +1,5 @@
-import { ModModifierIconTag, StaticModifierIconTag } from "../ModifierIcons";
+import { ModModifierIconTag } from "../types/modModifierIconTag";
+import { StaticModifierIconTag } from "../types/staticModifierIconTag";
 
 /**
  * Describes key attributes by which the icon tags to use can be computed
