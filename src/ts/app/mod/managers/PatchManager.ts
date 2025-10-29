@@ -85,38 +85,11 @@ export class PatchManager {
      * Main patching for adding icons to modifier descriptions
      */
     private static patchModifierDescription() {
-        PatchManager.ctx.patch(ModifierValue, 'getDescription').after(function (returnValue: {
-              description: string;
-              isNegative: boolean;
-        }, negMult?: number, posMult?: number, precision?: number) {
-            const printIcons = SettingsManager.settings.globalIconsEnabled
-                || PatchManager.modifierCtx.isRelevantLocation();
-            if (!printIcons) {
-                return returnValue;
-            }
-
-            const iconHtml = IconManager.getIconHTML(this, !returnValue.isNegative, true);
-
-            // Set either original description with tiny icons either replaced by placeholders, or set directly
-            let iconizedDescription = PatchManager.modifierCtx.isDescriptionModificationContext()
-                ? PatchManager.modifierCtx.addDescriptionModificationsTinyIconsPlaceholders(returnValue.description, iconHtml)
-                : iconHtml + returnValue.description;
-
-            // Possibly adjust formatting of description further
-            switch (PatchManager.modifierCtx.getCustomLocationContext()) {
-                case 'prayerButtonTooltip':
-                    // Wrap description in a span, so the icon and text are placed horizontal, not vertical (as in, wrap them into single child for container)
-                    iconizedDescription = `<span class="tiny-icons-prayer-bonus-wrapper-element">${iconizedDescription}</span>`;
-                    break;
-                default:
-                    break; // No adjustments needed
-            }
-
-            // Finalize
-            return {
-                description: iconizedDescription,
-                isNegative: returnValue.isNegative
-            };
+        PatchManager.ctx.patch(ModifierValue, 'print').after(function(returnValue: StatDescription, negMult?: number, posMult?: number, precision?: number) {
+            return PatchManager.modifyModifierValueDescription(returnValue, this);
+        });
+        PatchManager.ctx.patch(ModifierValue, 'printEnemy').after(function(returnValue: StatDescription, negMult?: number, posMult?: number, precision?: number) {
+            return PatchManager.modifyModifierValueDescription(returnValue, this);
         });
     }
 
@@ -143,20 +116,20 @@ export class PatchManager {
 
         // Reset context and finish up
         PatchManager.modifierCtx.resetdescriptionModificationContext();
-        return desc;
+            return desc;
         });
 
         PatchManager.ctx.patch(Item, 'modifiedDescription').get(function(o: () => string) {
-        return PatchManager.getModifiedDescription(this, o, PatchManager.modifierCtx);
+            return PatchManager.getModifiedItemDescription(this, o, PatchManager.modifierCtx);
         });
         PatchManager.ctx.patch(FoodItem, 'modifiedDescription').get(function(o: () => string) {
-        return PatchManager.getModifiedDescription(this, o, PatchManager.modifierCtx);
+            return PatchManager.getModifiedItemDescription(this, o, PatchManager.modifierCtx);
         });
         PatchManager.ctx.patch(EquipmentItem, 'modifiedDescription').get(function(o: () => string) {
-        return PatchManager.getModifiedDescription(this, o, PatchManager.modifierCtx);
+            return PatchManager.getModifiedItemDescription(this, o, PatchManager.modifierCtx);
         });
         PatchManager.ctx.patch(PotionItem, 'modifiedDescription').get(function(o: () => string) {
-        return PatchManager.getModifiedDescription(this, o, PatchManager.modifierCtx);
+            return PatchManager.getModifiedItemDescription(this, o, PatchManager.modifierCtx);
         });
 
         PatchManager.ctx.patch(CombatPassive, 'modifiedDescription').get(function(o: () => string) {
@@ -181,13 +154,54 @@ export class PatchManager {
     }
 
     /**
+     * Helper method around modifier value print logic, to possibly add icons to it
+     * @param statDescription
+     * @param modifierValue
+     * @param invertNegativeInterpretation whether "statDescription.isNegative" should be inverted
+     * @returns
+     */
+    private static modifyModifierValueDescription(statDescription: StatDescription, modifierValue: ModifierValue): StatDescription {
+        const printIcons = SettingsManager.settings.globalIconsEnabled
+                || PatchManager.modifierCtx.isRelevantLocation();
+        if (!printIcons) {
+            return statDescription;
+        }
+
+        // NOTE: We use the modifier value's interpretation of whether the value is considered bad/good. This should be consistent unlike the stat description
+        // ^ For example, "-5% damage resistance ON THE ENEMY", when on the player, should be shown as positive, but still show the icon for "REDUCED damage resistance"
+        const iconHtml = IconManager.getIconHTML(modifierValue, !modifierValue.isNegative, true);
+
+        // Set either original description with tiny icons either replaced by placeholders, or set directly
+        let iconizedText = PatchManager.modifierCtx.isDescriptionModificationContext()
+            ? PatchManager.modifierCtx.addDescriptionModificationsTinyIconsPlaceholders(statDescription.text, iconHtml)
+            : iconHtml + statDescription.text;
+
+        // Possibly adjust formatting of description further
+        switch (PatchManager.modifierCtx.getCustomLocationContext()) {
+            case 'prayerButtonTooltip':
+                // Wrap description in a span, so the icon and text are placed horizontal, not vertical (as in, wrap them into single child for container)
+                iconizedText = `<span class="tiny-icons-prayer-bonus-wrapper-element">${iconizedText}</span>`;
+                break;
+            default:
+                break; // No adjustments needed
+        }
+
+        // Finalize
+        return {
+            text: iconizedText,
+            isNegative: statDescription.isNegative,
+            isDisabled: statDescription.isDisabled
+        };
+    }
+
+    /**
      * Logic run in item patches (classes had to be patched separately, as the respective logics implementation specifically had to be patched)
      * @param item
      * @param origGetter
      * @param ctx
      * @returns
      */
-    private static getModifiedDescription(item: Item, origGetter: () => string, ctx: ModifierIconContext): string {
+    private static getModifiedItemDescription(item: Item, origGetter: () => string, ctx: ModifierIconContext): string {
         if (item._modifiedDescription) {
             // if description has already been computed, then avoid running custom logic again
             return origGetter();
