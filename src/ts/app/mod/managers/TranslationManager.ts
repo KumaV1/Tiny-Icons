@@ -1,5 +1,5 @@
-import { Constants } from '../constants';
-import { languages } from './languages';
+import { Constants } from "../../constants";
+import { languages } from "../languages";
 
 /**
  * Patches a couple name/description getters, so they access our integrated localization

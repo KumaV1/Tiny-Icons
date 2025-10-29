@@ -1,11 +1,12 @@
 import { IconManager } from "./managers/IconManager";
 import { SettingsManager } from "./managers/SettingsManager";
 import { TagManager } from "./managers/TagManager";
-import { ModifierTagMapEntryAttributes } from "./models/ModifierTagMapEntryAttributes";
-import { ModifierScopeSourceMediaMemoizer } from "./ModifierScopeSourceMediaMemoizer";
-import { modifierTagMap } from "./tagging/modifierTagMap";
-import { ModModifierIconTag } from "./types/modModifierIconTag";
-import { NamedObjectWithMedia } from "./types/namedObjectWithMedia";
+import { ModifierTagMapEntryAttributes } from './models/ModifierTagMapEntryAttributes';
+import { ModifierScopeSourceMediaMemoizer } from './ModifierScopeSourceMediaMemoizer';
+import { modifierTagMap } from './tagging/modifierTagMap';
+import { ModModifierIconTag } from './types/modModifierIconTag';
+import { NamedObjectWithMedia } from './types/namedObjectWithMedia';
+import { PathType } from "./types/pathType";
 import { StaticModifierIconTag } from "./types/staticModifierIconTag";
 import { TinyIconsModSettings } from "./types/tinyIconsModSettings";
 
@@ -19,28 +20,94 @@ export class PublicApi {
             /**
              * Adds an object of custom tags and their sources to the list of icons available to Tiny Icons.
              * @param customTags An object of custom string tags and their string sources.
+             * @deprecated
              */
             //addTagSources: (customTags: { [key: string]: string }) => {
-            //    console.log('addTagSources', customTags);
-            //    for (const tag in customTags) {
-            //        if (this.paths.srcForTag[tag]) {
-            //            console.warn(`[Tiny Icons] Tag "${tag}" already exists.`);
-            //            continue;
-            //        }
-
-            //        this.paths.srcForTag[tag] = customTags[tag];
-            //    }
+            //  console.warn('[Tiny Icons] addTagSources is deprecated. Use addTagSourceMap instead.');
             //},
+
+            /**
+             *
+             * @param tags Map of tags to add. Already existing tags will be skipped
+             */
+            addTagSourceMap: (tags: Map<ModModifierIconTag, string>): void => {
+              tags.forEach((value: string, key: ModModifierIconTag) => {
+                if (TagManager.tagSrcs.has(key)) {
+                  console.warn(`[Tiny Icons] Tag '${key}' already exists.`);
+                } else {
+                  TagManager.tagSrcs.set(key, value);
+                }
+              });
+            },
 
             /**
              * Adds an object of custom modifiers and their tags to the list of modifiers recognized by Tiny Icons.
              * @param customModifiers An object of custom modifiers and their tags.
+             * @deprecated
              */
-            addCustomModifiers: (customModifiers: {
-                modifier: string;
-                tag: [string, string?];
-            }) => {
-                console.warn('MOD REFACTOR IN PROGRESS. ADDING MODIFIERS IS CURRENTLY DISABLED!');
+            //addCustomModifiers: (customModifiers: {
+            //    modifier: string;
+            //    tag: [string, string?];
+            //}) => {
+            //    console.warn('[Tiny Icons] addCustomModifiers has been deprecated. Use addCustomModifier instead.');
+            //},
+
+            /**
+             *
+             * @param modifierId - Full id of the modifier
+             * @param primaryTag - Define primary tag(s), either as simple string or as object, depending on whether positive and negative values should use different icons
+             * @param secondaryTag - Optionally also provide a secondary tag
+             */
+            addModifier: (modifierId: string, primaryTag: StaticModifierIconTag | ModModifierIconTag | { positive: StaticModifierIconTag | ModModifierIconTag, negative: StaticModifierIconTag | ModModifierIconTag }, secondaryTag?: StaticModifierIconTag | ModModifierIconTag | { positive: StaticModifierIconTag | ModModifierIconTag, negative: StaticModifierIconTag | ModModifierIconTag }): void => {
+                if (!modifierId) {
+                  console.warn('[Tiny Icons] No/Falsey modifier id provided');
+                  return;
+                }
+
+                const modifier = game.modifierRegistry.getObjectByID(modifierId);
+                if (!modifier) {
+                  console.warn(`[Tiny Icons] Could not find modifier with id ${modifierId} in game.modifierRegistry.`);
+                  return;
+                }
+
+                modifierTagMap.set(modifierId, new ModifierTagMapEntryAttributes(primaryTag, secondaryTag));
+            },
+
+            /**
+             * Add media sources for category scopes that do not come with their own media inherintly
+             * @param scopeSourceId Id of the scope source (for example, the Thieving skill)
+             * @param entries The entries that should be added for the scope source (for example, adding npc media for thieving areas)
+             */
+            addCategoryScopeMedia: (scopeSourceId: string, entries: Map<string, NamedObjectWithMedia>): void => {
+              ModifierScopeSourceMediaMemoizer.registerCategoryScopeMedia(scopeSourceId, entries);
+            },
+
+            /**
+             * Add media sources for subcategory scopes that do not come with their own media inherintly
+             * @param scopeSourceId Id of the scope source (for example, the Cooking skill)
+             * @param entries The entries that should be added for the scope source (for example, adding some media for Cooking subcategories)
+             */
+            addSubcategoryScopeMedia: (scopeSourceId: string, entries: Map<string, NamedObjectWithMedia>): void => {
+              ModifierScopeSourceMediaMemoizer.registerSubcategoryScopeMedia(scopeSourceId, entries);
+            },
+
+            /**
+             * Add media sources for action scopes that do not come with their own media inherintly
+             * NOTE: Actions should generally already have media, making this redundant. The only exceptions may be passive actions, as those would not need media to display on your character save slot
+             * @param scopeSourceId Id of the scope source
+             * @param entries The entries that should be added for the scope source
+             */
+            addActionScopeMedia: (scopeSourceId: string, entries: Map<string, NamedObjectWithMedia>): void => {
+              ModifierScopeSourceMediaMemoizer.registerActionScopeMedia(scopeSourceId, entries);
+            },
+
+            /**
+             * Add media sources for (combat) effect group scopes.
+             * NOTE: Combat effect groups generally do NOT come with their own media inherintly
+             * @param entries
+             */
+            addEffectGroupScopeMedia: (entries: Map<string, NamedObjectWithMedia>): void => {
+              ModifierScopeSourceMediaMemoizer.registerEffectGroupScopeMedia(entries)
             },
 
             /**
@@ -48,11 +115,12 @@ export class PublicApi {
              * The first tag is the primary icon and the second tag is the secondary icon if any.
              * @param {string} modifier The name of the modifier.
              * @returns {string[]} The icon tags defined for the modifier in array of up to 2 string elements.
+             * @deprecated
              */
-            getIconTagsForModifier: (modifier: string): (StaticModifierIconTag | ModModifierIconTag)[] => {
-                console.warn('[Tiny Icons] getIconTagsForModifier has been deprecated, due to new structure. Use getIconTagMapForModifier instead')
-                return [];
-            },
+            //getIconTagsForModifier: (modifier: string): (StaticModifierIconTag | ModModifierIconTag)[] => {
+            //    console.warn('[Tiny Icons] getIconTagsForModifier has been deprecated. Use getIconTagMapForModifier instead.')
+            //    return [];
+            //},
 
             /**
              * Returns tag attributes object for given modifier, if one is set up for that modifier
@@ -74,7 +142,7 @@ export class PublicApi {
             getIconHTMLForModifier: (
                 modifierValue: ModifierValue,
                 positive: boolean,
-                secondary: boolean,
+                secondary?: boolean,
                 size?: string,
             ): string => IconManager.getIconHTML(modifierValue, positive, secondary, size),
 
@@ -86,6 +154,7 @@ export class PublicApi {
              * @param {string | undefined} [specific] - Specific file name if name is a subtype.
              * @param {string} [ext='svg']  - The file extension.
              *
+             * @deprecated
              * @example
              *  - getIconResourcePath("skills", "mining") // returns "assets/media/skills/mining/mining.svg"
              *  - getIconResourcePath("skills", "mining", "rock_iron") // returns "assets/media/skills/mining/rock_iron.svg"
@@ -95,7 +164,10 @@ export class PublicApi {
             //    name: string,
             //    specific?: string | undefined,
             //    ext?: string,
-            //): string => this.paths.iconPath(type, name, specific, ext),
+            //): string => {
+            //  console.warn('[Tiny Icons] getIconResourcePath has been deprecated.');
+            //  return '';
+            //},
 
             /**
              * An array of all available icon tags with an associated icon.
@@ -115,8 +187,11 @@ export class PublicApi {
 
             /**
              * SweetAlert popup with all game modifiers and their tagged icons.
+             * @param exampleObjects Optionally privde specific scope objects you want to be utilized for the view (e.g. using your own custom skill)
+             * @param namespaceFilter Optionally limit the output to a certain namespace (e.g. if you only want to see your own modifiers)
+             * @param forceIconEnablement Optionally able to set this to true, to set all icon-related settings to true. Otherwise, the view will adhere to the character's mod settings (which will only be available inside a character)
              */
-            viewAllModifiers: (): void => this.viewAllPassivesOnClick(),
+            viewAllModifiers: (exampleObjects?: Partial<IModifierScope>, namespaceFilter?: string, forceIconEnablement?: boolean): void => this.viewAllPassivesOnClick(exampleObjects, namespaceFilter, forceIconEnablement),
 
             /**
              * The {@link ModifierScopeSourceMediaMemoizer} data
@@ -207,32 +282,56 @@ export class PublicApi {
 
   /**
    * SweetAlert popup with all game modifiers.
+   * @param exampleObjects Optionally privde specific scope objects you want to be utilized for the view (e.g. using your own custom skill)
+   * @param namespaceFilter Optionally limit the output to a certain namespace (e.g. if you only want to see your own modifiers)
+   * @param forceIconEnablement Optionally able to set this to true, to set all icon-related settings to true. Otherwise, the view will adhere to the character's mod settings (which will only be available inside a character)
    */
-  private static viewAllPassivesOnClick() {
+  private static viewAllPassivesOnClick(exampleObjects?: Partial<IModifierScope>, namespaceFilter?: string, forceIconEnablement?: boolean) {
+    const originalModSettings = SettingsManager.settings;
+    if (forceIconEnablement) {
+      SettingsManager.settings = {
+        globalIconsEnabled: true,
+        secondaryIconsEnabled: true,
+        placeholderIconEnabled: true,
+        scopeIcons: {
+          skill: true,
+          damageType: true,
+          realm: true,
+          currency: true,
+          category: true,
+          action: true,
+          subcategory: true,
+          item: true,
+          effectGroup: true,
+        }
+      };
+    }
+
     // Explicitly using cooking for scope objects, as that skill makes use of all scope sources
     // Of course, some modifiers do not actually make sense with such scopes (e.g. combat identifiers), but that's not the point of these test entries after all
     const scopeExampleObjects: Required<IModifierScope> = {
-      skill: game.cooking,
-      damageType: game.damageTypes.getObjectByID('melvorD:Normal')!,
-      realm: game.realms.getObjectByID('melvorD:Melvor')!,
-      currency: game.raidCoins, // visually more distinguishable than gp
-      category: game.cooking.categories.getObjectByID('melvorD:Fire')!,
-      action: game.cooking.actions.getObjectByID('melvorD:Shrimp')!,
-      subcategory: game.cooking.subcategories.getObjectByID('melvorD:Fish')!,
-      item: game.items.getObjectByID('melvorD:Basic_Soup')!,
-      effectGroup: game.combatEffectGroups.getObjectByID('melvorD:Stun')! // Fallback to generic icon, but give known groups a specific tag?
+      skill: exampleObjects?.skill ?? game.cooking,
+      damageType: exampleObjects?.damageType ?? game.damageTypes.getObjectByID('melvorD:Normal')!,
+      realm: exampleObjects?.realm ?? game.realms.getObjectByID('melvorD:Melvor')!,
+      currency: exampleObjects?.currency ?? game.raidCoins, // visually more distinguishable than gp
+      category: exampleObjects?.category ?? game.cooking.categories.getObjectByID('melvorD:Fire')!,
+      action: exampleObjects?.action ?? game.cooking.actions.getObjectByID('melvorD:Shrimp')!,
+      subcategory: exampleObjects?.subcategory ?? game.cooking.subcategories.getObjectByID('melvorD:Fish')!,
+      item: exampleObjects?.item ?? game.items.getObjectByID('melvorD:Basic_Soup')!,
+      effectGroup: exampleObjects?.effectGroup ?? game.combatEffectGroups.getObjectByID('melvorD:Stun')! // Fallback to generic icon, but give known groups a specific tag?
     };
 
     let html = `<h4 class="font-w600 font-size-sm mb-1 text-combat-smoke">All Game Modifiers</h5><h5 class="font-w600 font-size-sm mb-3 text-warning"><small>(Visual Only)</small></h5>`;
-
-    html += '<p class="font-w600">MOD REFACTOR IN PROGRESS</p>';
 
     const totalModifierCount = game.modifierRegistry.registeredObjects.size;
     let currentModifierIndex = 0;
 
     for (const mod of game.modifierRegistry.registeredObjects) {
       currentModifierIndex++;
-      const modifier = mod[1];
+      const modifier: Modifier = mod[1];
+      if (namespaceFilter && modifier.namespace !== namespaceFilter) {
+        continue;
+      }
 
       html += `<hr><div><h5 class="font-w400 font-size-sm mb-1 text-primary">${modifier.id} (${currentModifierIndex} / ${totalModifierCount})</h5></div>`;
 
@@ -300,6 +399,9 @@ export class PublicApi {
         currentScopeIndex++;
       });
     }
+
+    // Reset settings back to what they were before this method was called
+    SettingsManager.settings = originalModSettings;
 
     SwalLocale.fire({ html: html });
   }

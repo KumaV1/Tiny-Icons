@@ -1,4 +1,5 @@
 import { CustomLocationContext } from "../types/customLocationContext";
+import { TinyIconsModSettings } from '../types/tinyIconsModSettings';
 import { IconManager } from "./IconManager";
 import { SettingsManager } from "./SettingsManager";
 
