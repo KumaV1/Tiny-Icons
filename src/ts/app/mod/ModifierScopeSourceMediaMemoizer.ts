@@ -1,4 +1,4 @@
-import { IconTag } from "./ModifierIcons";
+import { NamedObjectWithMedia } from "./types/namedObjectWithMedia";
 
 /**
  * A class for managing (and preserving, for efficiency) icons for various scope sources, 
@@ -7,85 +7,52 @@ import { IconTag } from "./ModifierIcons";
  * Most tag maps are two-layered, as they are layered to "main source" (e.g. "melvorD:Fletching") and then corresponding entry (e.g. subcategory entry "melvorF:Arrows")
  */
 export class ModifierScopeSourceMediaMemoizer {
-    private ctx: Modding.ModContext;
-
-    //private modData: {
-    //    /**
-    //     * A map of tags for {@link IModifierScope.category} entries that do not inherintly have their own media
-    //     */
-    //    categoryTagMap: Map<string, Map<string, IconTag>>,
-//
-    //    /**
-    //     * A map of tags for {@link IModifierScope.subcategory} entries that do not inherintly have their own media
-    //     */
-    //    subcategoryTagMap: Map<string, Map<string, IconTag>>,
-//
-    //    /**
-    //     * A map of tags for {@link IModifierScope.action} entries that do not inherintly have their own media
-    //     */
-    //    actionTagMap: Map<string, Map<string, IconTag>>,
-//
-    //    /**
-    //     * A map of tags for {@link IModifierScope.effectGroup} entries that do not inherintly have their own media
-    //     */
-    //    effectGroupTagMap: Map<string, IconTag>
-    //}
-
     /**
      * A map of objects for {@link IModifierScope.category} entries that do not inherintly have their own media
      */
-    categoryMediaMap: Map<string, Map<string, NamedObjectWithMedia>>;
+    public static categoryMediaMap: Map<string, Map<string, NamedObjectWithMedia>>;
 
     /**
      * A map of objects for {@link IModifierScope.subcategory} entries that do not inherintly have their own media
      */
-    subcategoryMediaMap: Map<string, Map<string, NamedObjectWithMedia>>;
+    public static subcategoryMediaMap: Map<string, Map<string, NamedObjectWithMedia>>;
 
     /**
      * A map of objects for {@link IModifierScope.action} entries that do not inherintly have their own media
      */
-    actionMediaMap: Map<string, Map<string, NamedObjectWithMedia>>;
+    public static actionMediaMap: Map<string, Map<string, NamedObjectWithMedia>>;
 
     /**
      * A map of objects for {@link IModifierScope.effectGroup} entries that do not inherintly have their own media
      */
-    effectGroupMediaMap: Map<string, NamedObjectWithMedia>;
+    public static effectGroupMediaMap: Map<string, NamedObjectWithMedia>;
 
-    constructor(ctx: Modding.ModContext) {
-        this.ctx = ctx;
-        //this.modData = new {
-        //    categoryTagMap: new Map(),
-        //    subcategoryTagMap: new Map(),
-        //    actionTagMap: new Map(),
-        //    effectGroupTagMap: new Map(),
-        //};
+    /**
+     * Initialize the memoizer and set some game data
+     * @param ctx
+     */
+    public static init(ctx: Modding.ModContext) {
+        ModifierScopeSourceMediaMemoizer.categoryMediaMap = new Map();
+        ModifierScopeSourceMediaMemoizer.subcategoryMediaMap = new Map();
+        ModifierScopeSourceMediaMemoizer.actionMediaMap = new Map();
+        ModifierScopeSourceMediaMemoizer.effectGroupMediaMap = new Map();
 
-        this.categoryMediaMap = new Map();
-        this.subcategoryMediaMap = new Map();
-        this.actionMediaMap = new Map();
-        this.effectGroupMediaMap = new Map();
-
-        this.init();
-    }
-
-    private init() {
-        const that = this;
-        this.ctx.onCharacterSelectionLoaded(function() {
+        ctx.onCharacterSelectionLoaded(function() {
             // Init tagging for base game (and expansions)
-            that.initCategoryMediaMap();
-            that.initSubcategoryMediaMap();
-            that.initActionMediaMap();
-            that.initEffectGroupMediaMap();
+            ModifierScopeSourceMediaMemoizer.initCategoryMediaMap();
+            ModifierScopeSourceMediaMemoizer.initSubcategoryMediaMap();
+            ModifierScopeSourceMediaMemoizer.initActionMediaMap();
+            ModifierScopeSourceMediaMemoizer.initEffectGroupMediaMap();
 
             // Init tag for modded stuff
-            that.addModData();
+            ModifierScopeSourceMediaMemoizer.addModData();
         });
     }
 
     /**
      * Register data of mods
      */
-    public registerModData() { // TODO: alternative name this "preserve/stup/preparation" or something
+    public static registerModData() {// TODO: alternative name this "preserve/stup/preparation" or something
         // IMPORTANT: To support mod data for existing stuff inherintly (e.g. additional fletching category added by a mod),
         // it is important that the tag maps are only initialized after all mods loaded (e.g. during character select hook).
         // Therefore, this should write the content into a private property that is then later actually added to tag maps via "addModData"
@@ -94,7 +61,7 @@ export class ModifierScopeSourceMediaMemoizer {
     /**
      * Initialize category tag map with data
      */
-    private initCategoryMediaMap() {
+    private static initCategoryMediaMap() {
         // Fishing
         let fishingCategoryMediaMap: Map<string, NamedObjectWithMedia> = new Map();
         game.fishing.areas.forEach((area: FishingArea) => {
@@ -121,7 +88,7 @@ export class ModifierScopeSourceMediaMemoizer {
     /**
      * Initialize subcategory tag map with data
      */
-    private initSubcategoryMediaMap() {
+    private static initSubcategoryMediaMap() {
         // TODO: Probably do this similarly to combat effect groups, looping through the actions, rather than the subcategory type
         // ^ On that note, if fishing or thieving had also been here, could have been worth to merge the methods
 
@@ -213,14 +180,14 @@ export class ModifierScopeSourceMediaMemoizer {
     /**
      * Initialize action tag map with data
      */
-    private initActionMediaMap() {
+    private static initActionMediaMap() {
         // None
     }
 
     /**
      * Initialize (combat) effect group tag map with data
      */
-    private initEffectGroupMediaMap() {
+    private static initEffectGroupMediaMap() {
         // Not layered
 
         // We try to set icons via combat effect, so why not just go through the effects itself,
@@ -240,12 +207,7 @@ export class ModifierScopeSourceMediaMemoizer {
     /**
      * Add data provided by mods via API
      */
-    private addModData() {
-
+    private static addModData() {
+        // Note: a mod must be able to overwrite whatever here. If they add an effect group and know a more fitting icon, let them overwrite what this mod initially chose
     }
 }
-
-/**
- * Type to define basic data of objects that have unique identifiers, a name, but also media
- */
-export type NamedObjectWithMedia = NamedObject & { media: string };
