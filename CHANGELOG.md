@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+### [3.2.0] (2025-10-30)
+
+#### Features
+* Updated Mod API (officially re-instating it)
+
+#### Bug Fixes
+* Fixed issue where "Gives the Enemy:" text appeared before the icons
+
+
 ### [3.1.0] (2025-10-02)
 
 #### Features
