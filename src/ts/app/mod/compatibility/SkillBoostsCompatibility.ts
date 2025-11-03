@@ -17,40 +17,34 @@ export class SkillBostsCompatibility extends ModCompatbility {
             const sbModContext = mod.getContext(this._namespace);
             const sbClass = mod.api.Skill_Boosts.SkillBoosts;
 
-            // Patch wrappers that can be used to signify a context that will call "applyDescriptionModifications" at least once inside of it
+            // == Patch certain methods that will lead to "applyDescriptionModifications" being called
 
             // @ts-ignore - No type definition for the "SkillBoosts" class
             sbModContext.patch(sbClass, 'getConstellationModifierSpans').before(function(_) {
-                // Set context
                 ModifierIconContext.setIsDescriptionModificationContext();
             });
             // @ts-ignore - No type definition for the "SkillBoosts" class
             sbModContext.patch(sbClass, 'getConstellationModifierSpans').after(function(returnValue: unknown, _) {
-                // Set context
                 ModifierIconContext.resetDescriptionModificationContext();
             });
             // @ts-ignore - No type definition for the "SkillBoosts" class
             sbModContext.patch(sbClass, 'createModifierTooltip').before(function(_) {
-                // Set context
                 ModifierIconContext.setIsDescriptionModificationContext();
             });
             // @ts-ignore - No type definition for the "SkillBoosts" class
             sbModContext.patch(sbClass, 'createModifierTooltip').after(function(returnValue: unknown, _) {
-                // Set context
                 ModifierIconContext.resetDescriptionModificationContext();
             });
             // @ts-ignore - No type definition for the "SkillBoosts" class
             sbModContext.patch(sbClass, 'createEquipmentTooltip').before(function(_) {
-                // Set context
                 ModifierIconContext.setIsDescriptionModificationContext();
             });
             // @ts-ignore - No type definition for the "SkillBoosts" class
             sbModContext.patch(sbClass, 'createEquipmentTooltip').after(function(returnValue: unknown, _) {
-                // Set context
                 ModifierIconContext.resetDescriptionModificationContext();
             });
 
-            // Patch actual class that should replace tiny icon placeholders with the actual icons
+            // == Patch location of "applyDescriptionModifications" call, after which placeholders should be replaced
 
             // @ts-ignore - No type definition for the "SkillBoosts" class
             sbModContext.patch(sbClass, 'createModifierNode').after(function(returnValue: HTMLHeadingElement, obj: Object) {
