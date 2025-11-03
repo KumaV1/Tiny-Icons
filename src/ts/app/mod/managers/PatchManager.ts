@@ -100,22 +100,22 @@ export class PatchManager {
      */
     private static patchApplyDescriptionModifications() {
         PatchManager.ctx.patch(SpecialAttack, 'modifiedDescription').get(function(o: () => string) {
-        if (this._modifiedDescription) {
-            // if description has already been computed, then avoid running custom logic again
-            return o();
-        }
+            if (this._modifiedDescription) {
+                // if description has already been computed, then avoid running custom logic again
+                return o();
+            }
 
-        // Set context
-        PatchManager.modifierCtx.setIsDescriptionModificationContext();
+            // Set context
+            PatchManager.modifierCtx.setIsDescriptionModificationContext();
 
-        // Run original logic
-        let desc = o();
+            // Run original logic
+            let desc = o();
 
-        // Belatedly modify description with tiny icons
-        desc = PatchManager.modifierCtx.applyTinyIconsPlaceholderReplacement(desc);
+            // Belatedly modify description with tiny icons
+            desc = PatchManager.modifierCtx.applyTinyIconsPlaceholderReplacement(desc);
 
-        // Reset context and finish up
-        PatchManager.modifierCtx.resetdescriptionModificationContext();
+            // Reset context and finish up
+            PatchManager.modifierCtx.resetdescriptionModificationContext();
             return desc;
         });
 
@@ -133,23 +133,23 @@ export class PatchManager {
         });
 
         PatchManager.ctx.patch(CombatPassive, 'modifiedDescription').get(function(o: () => string) {
-        if (this._modifiedDescription) {
-            // if description has already been computed, then avoid running custom logic again
-            return o();
-        }
+            if (this._modifiedDescription) {
+                // if description has already been computed, then avoid running custom logic again
+                return o();
+            }
 
-        // Set context
-        PatchManager.modifierCtx.setIsDescriptionModificationContext();
+            // Set context
+            PatchManager.modifierCtx.setIsDescriptionModificationContext();
 
-        // Run original logic
-        let desc = o();
+            // Run original logic
+            let desc = o();
 
-        // Belatedly modify description with tiny icons
-        desc = PatchManager.modifierCtx.applyTinyIconsPlaceholderReplacement(desc);
+            // Belatedly modify description with tiny icons
+            desc = PatchManager.modifierCtx.applyTinyIconsPlaceholderReplacement(desc);
 
-        // Reset context and finish up
-        PatchManager.modifierCtx.resetdescriptionModificationContext();
-        return desc;
+            // Reset context and finish up
+            PatchManager.modifierCtx.resetdescriptionModificationContext();
+            return desc;
         });
     }
 
