@@ -17,7 +17,7 @@ export class PatchManager {
         PatchManager.patchApplyDescriptionModifications();
     }
 
-    
+
     /**
      * A series of context-aware patches for various game methods. This method utilizes
      * `patchWithContext` to ensure `printPlayerModifier` is called with the correct context.
@@ -112,7 +112,7 @@ export class PatchManager {
             desc = ModifierIconContext.applyTinyIconsPlaceholderReplacement(desc);
 
             // Reset context and finish up
-            ModifierIconContext.resetdescriptionModificationContext();
+            ModifierIconContext.resetDescriptionModificationContext();
             return desc;
         });
 
@@ -145,7 +145,7 @@ export class PatchManager {
             desc = ModifierIconContext.applyTinyIconsPlaceholderReplacement(desc);
 
             // Reset context and finish up
-            ModifierIconContext.resetdescriptionModificationContext();
+            ModifierIconContext.resetDescriptionModificationContext();
             return desc;
         });
     }
@@ -213,7 +213,7 @@ export class PatchManager {
         desc = ModifierIconContext.applyTinyIconsPlaceholderReplacement(desc);
 
         // Reset context and finish up
-        ModifierIconContext.resetdescriptionModificationContext();
+        ModifierIconContext.resetDescriptionModificationContext();
         item._modifiedDescription = desc; // otherwise it would contain the placeholders instead of the actual icons
         return desc;
     }

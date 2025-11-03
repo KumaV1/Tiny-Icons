@@ -72,7 +72,6 @@ export class ModifierIconContext {
    * @param description
    */
   static applyTinyIconsPlaceholderReplacement(description: string) {
-    console.log('ModifierIconContext.applyTinyIconsPlaceholderReplacement', description, this.snippetMap);
     this.snippetMap.forEach((value: string, key: number) => {
       const placeholder = this.createSnippetPlaceholder(key);
       description = description.replace(placeholder, value);
@@ -85,7 +84,7 @@ export class ModifierIconContext {
    * Reset everything related to dealing with a call to this function
    * @param value
    */
-  static resetdescriptionModificationContext() {
+  static resetDescriptionModificationContext() {
     this.isApplyDescriptionModificationContext = false;
     this.currentSnippetCount = 0;
     this.snippetMap.clear();

@@ -27,7 +27,7 @@ export class SkillBostsCompatibility extends ModCompatbility {
             // @ts-ignore - No type definition for the "SkillBoosts" class
             sbModContext.patch(sbClass, 'getConstellationModifierSpans').after(function(returnValue: unknown, _) {
                 // Set context
-                ModifierIconContext.setIsDescriptionModificationContext();
+                ModifierIconContext.resetDescriptionModificationContext();
             });
             // @ts-ignore - No type definition for the "SkillBoosts" class
             sbModContext.patch(sbClass, 'createModifierTooltip').before(function(_) {
@@ -37,7 +37,7 @@ export class SkillBostsCompatibility extends ModCompatbility {
             // @ts-ignore - No type definition for the "SkillBoosts" class
             sbModContext.patch(sbClass, 'createModifierTooltip').after(function(returnValue: unknown, _) {
                 // Set context
-                ModifierIconContext.setIsDescriptionModificationContext();
+                ModifierIconContext.resetDescriptionModificationContext();
             });
             // @ts-ignore - No type definition for the "SkillBoosts" class
             sbModContext.patch(sbClass, 'createEquipmentTooltip').before(function(_) {
@@ -47,15 +47,13 @@ export class SkillBostsCompatibility extends ModCompatbility {
             // @ts-ignore - No type definition for the "SkillBoosts" class
             sbModContext.patch(sbClass, 'createEquipmentTooltip').after(function(returnValue: unknown, _) {
                 // Set context
-                ModifierIconContext.setIsDescriptionModificationContext();
+                ModifierIconContext.resetDescriptionModificationContext();
             });
 
             // Patch actual class that should replace tiny icon placeholders with the actual icons
 
             // @ts-ignore - No type definition for the "SkillBoosts" class
             sbModContext.patch(sbClass, 'createModifierNode').after(function(returnValue: HTMLHeadingElement, obj: Object) {
-                console.log('sbClass.createModifierNode.after', returnValue, obj);
-
                 // Belatedly modify description with tiny icons
                 returnValue.innerHTML = ModifierIconContext.applyTinyIconsPlaceholderReplacement(returnValue.innerHTML);
 
