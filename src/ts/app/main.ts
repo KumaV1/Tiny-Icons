@@ -4,6 +4,7 @@ import { ModifierScopeSourceMediaMemoizer } from './mod/ModifierScopeSourceMedia
 import { PatchManager } from './mod/managers/PatchManager';
 import { TranslationManager } from './mod/managers/TranslationManager';
 import { SettingsManager } from './mod/managers/SettingsManager';
+import { SkillBoostsCompatibility } from './mod/compatibility/SkillBoostsCompatibility';
 
 export class Main {
   public init(ctx: Modding.ModContext) {
@@ -14,6 +15,9 @@ export class Main {
     ModifierScopeSourceMediaMemoizer.init(ctx);
     SettingsManager.init(ctx.settings.section('Tiny Icons'));
     PublicApi.init(ctx);
+
+    // Initialize compatiblity with other mods
+    SkillBoostsCompatibility.init(ctx);
 
     // Hook-in settings and some recomputations
     ctx.onCharacterLoaded(function() {
