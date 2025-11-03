@@ -110,6 +110,7 @@ export class PatchManager {
 
             // Belatedly modify description with tiny icons
             desc = ModifierIconContext.applyTinyIconsPlaceholderReplacement(desc);
+            this._modifiedDescription = desc;
 
             // Reset context and finish up
             ModifierIconContext.resetDescriptionModificationContext();
@@ -143,6 +144,7 @@ export class PatchManager {
 
             // Belatedly modify description with tiny icons
             desc = ModifierIconContext.applyTinyIconsPlaceholderReplacement(desc);
+            this._modifiedDescription = desc;
 
             // Reset context and finish up
             ModifierIconContext.resetDescriptionModificationContext();
@@ -211,10 +213,10 @@ export class PatchManager {
 
         // Belatedly modify description with tiny icons
         desc = ModifierIconContext.applyTinyIconsPlaceholderReplacement(desc);
+        item._modifiedDescription = desc;
 
         // Reset context and finish up
         ModifierIconContext.resetDescriptionModificationContext();
-        item._modifiedDescription = desc; // otherwise it would contain the placeholders instead of the actual icons
         return desc;
     }
 
