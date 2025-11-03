@@ -2,6 +2,7 @@ import { IconManager } from "./managers/IconManager";
 import { SettingsManager } from "./managers/SettingsManager";
 import { TagManager } from "./managers/TagManager";
 import { ModifierTagMapEntryAttributes } from './models/ModifierTagMapEntryAttributes';
+import { ModifierIconContext } from "./ModifierIconContext";
 import { ModifierScopeSourceMediaMemoizer } from './ModifierScopeSourceMediaMemoizer';
 import { modifierTagMap } from './tagging/modifierTagMap';
 import { ModModifierIconTag } from './types/modModifierIconTag';
@@ -13,6 +14,15 @@ import { TinyIconsModSettings } from "./types/tinyIconsModSettings";
 export class PublicApi {
     public static init(ctx: Modding.ModContext): void {
         ctx.api({
+            /**
+             * Wrapper object around functions that deal with "applyDescriptionModifications"
+             */
+            applyDescriptionModificationsSupport: {
+              applyTinyIconsPlaceholderReplacement: (description: string): string => ModifierIconContext.applyTinyIconsPlaceholderReplacement(description),
+              setIsDescriptionModificationContext: (): void => ModifierIconContext.setIsDescriptionModificationContext(),
+              resetDescriptionModificationContext: (): void => ModifierIconContext.resetDescriptionModificationContext(),
+            },
+
             /**
              * Get currently active mod settings
              * @returns Mod settings

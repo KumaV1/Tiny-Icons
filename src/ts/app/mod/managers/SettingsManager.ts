@@ -10,9 +10,9 @@ export class SettingsManager {
    * Depending on when this is called, it may still be in a default state, rather than the actual settings (only available after loading a character)
    */
   static settings: TinyIconsModSettings = {
-    globalIconsEnabled: false,
+    globalIconsEnabled: true,
     secondaryIconsEnabled: false,
-    placeholderIconEnabled: false,
+    placeholderIconEnabled: true,
     scopeIcons: {}
   };
 
