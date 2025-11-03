@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+### [3.2.1] (2025-11-03)
+
+#### Bug Fixes
+* Fixed issue where Combat effect icons broke when viewed via "Skill Boosts" mod
+* Fixed issue where passives and special attacks would preserve the description without placeholders replaced
+
 ### [3.2.0] (2025-10-30)
 
 #### Features
