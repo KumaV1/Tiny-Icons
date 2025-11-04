@@ -21,7 +21,7 @@ export class IconManager {
       return '';
     }
 
-    return sourceURL.includes('fa-')
+    return sourceURL.includes(' fa-') // whitespace is important, so a blob url is not accidentally caught by this
       ? `<i class="fa ${sourceURL} tiny-icon mb-1 mr-1 text-warning font-size-${size}"></i>`
       : `<img class="skill-icon-${size} tiny-icon mb-1 mr-1" src="${sourceURL}">`;
   };
