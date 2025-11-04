@@ -1,6 +1,7 @@
 import { ModifierTagMapEntryAttributes } from "../models/ModifierTagMapEntryAttributes";
 import { ModifierScopeSourceMediaMemoizer } from "../ModifierScopeSourceMediaMemoizer";
 import { modifierTagMap } from "../tagging/modifierTagMap";
+import { NamedObjectWithMedia } from "../types/namedObjectWithMedia";
 import { SettingsManager } from "./SettingsManager";
 import { TagManager } from "./TagManager";
 
@@ -178,6 +179,10 @@ export class IconManager {
    * @returns
    */
   private static getIconSrcForRealmScope(realm: Realm): string {
+    if (game.realms.size === 1) {
+      return ''; // Remove any realm specification, if there is only one to begin with (which can happen without certain mods and expansions)
+    }
+
     return realm.media;
   }
 
@@ -196,7 +201,7 @@ export class IconManager {
    * @param category
    * @returns
    */
-  private static getIconSrcForCategoryScope(modValue: ModifierValue, category: NamedObject | NamedObject & { media: string }): string | undefined {
+  private static getIconSrcForCategoryScope(modValue: ModifierValue, category: NamedObject | NamedObjectWithMedia): string | undefined {
     /** @ts-ignore - unknown property, as unknown whether scope source has media */
     if (category.media) {
       /** @ts-ignore - unknown property, as unknown whether scope source has media */
@@ -227,7 +232,7 @@ export class IconManager {
    * @param action
    * @returns
    */
-  private static getIconSrcForActionScope(modValue: ModifierValue, action: NamedObject | NamedObject & { media: string }): string | undefined {
+  private static getIconSrcForActionScope(modValue: ModifierValue, action: NamedObject | NamedObjectWithMedia): string | undefined {
     /** @ts-ignore - unknown property, as unknown whether scope source has media */
     if (action.media) {
       /** @ts-ignore - unknown property, as unknown whether scope source has media */
@@ -258,7 +263,7 @@ export class IconManager {
    * @param subcategory
    * @returns
    */
-  private static getIconSrcForSubcagetoryScope(modValue: ModifierValue, subcategory: NamedObject | NamedObject & { media: string }): string | undefined {
+  private static getIconSrcForSubcagetoryScope(modValue: ModifierValue, subcategory: NamedObject | NamedObjectWithMedia): string | undefined {
     /** @ts-ignore - unknown property, as unknown whether scope source has media */
     if (subcategory.media) {
       /** @ts-ignore - unknown property, as unknown whether scope source has media */
