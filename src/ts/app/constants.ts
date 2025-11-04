@@ -1,5 +1,8 @@
 export class Constants {
-    static readonly MOD_NAMESPACE = "tinyIcons";
+    static readonly DEV_MODE = true;
+    static readonly FRIENDLY_NAME = 'Tiny Icons';
+    static readonly UNIQUE_CONSOLE_TEXT_COLOR = '#64b5f6'; // Code courtesy of Vladulenta (alternatively, what about 1976d2?)
+    static readonly MOD_NAMESPACE = 'tinyIcons';
 
     static readonly TRANSLATION_KEYS = {
         // TODO: May be retrievable through game base translations

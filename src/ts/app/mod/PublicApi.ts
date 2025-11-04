@@ -1,3 +1,4 @@
+import { Logger } from "./Logger";
 import { IconManager } from "./managers/IconManager";
 import { SettingsManager } from "./managers/SettingsManager";
 import { TagManager } from "./managers/TagManager";
@@ -38,7 +39,7 @@ export class PublicApi {
             addTagSourceMap: (tags: Map<ModModifierIconTag, string>): void => {
               tags.forEach((value: string, key: ModModifierIconTag) => {
                 if (TagManager.tagSrcs.has(key)) {
-                  console.warn(`[Tiny Icons] Tag '${key}' already exists.`);
+                  Logger.warn(`Tag '${key}' already exists.`);
                 } else {
                   TagManager.tagSrcs.set(key, value);
                 }
@@ -53,13 +54,13 @@ export class PublicApi {
              */
             addModifier: (modifierId: string, primaryTag: StaticModifierIconTag | ModModifierIconTag | { positive: StaticModifierIconTag | ModModifierIconTag, negative: StaticModifierIconTag | ModModifierIconTag }, secondaryTag?: StaticModifierIconTag | ModModifierIconTag | { positive: StaticModifierIconTag | ModModifierIconTag, negative: StaticModifierIconTag | ModModifierIconTag }): void => {
                 if (!modifierId) {
-                  console.warn('[Tiny Icons] No/Falsey modifier id provided');
+                  Logger.warn('No/Falsey modifier id provided');
                   return;
                 }
 
                 const modifier = game.modifierRegistry.getObjectByID(modifierId);
                 if (!modifier) {
-                  console.warn(`[Tiny Icons] Could not find modifier with id ${modifierId} in game.modifierRegistry.`);
+                  Logger.warn(`Could not find modifier with id ${modifierId} in game.modifierRegistry.`);
                   return;
                 }
 
