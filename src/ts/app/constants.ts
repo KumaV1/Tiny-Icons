@@ -1,5 +1,5 @@
 export class Constants {
-    static readonly DEV_MODE = true;
+    static readonly DEV_MODE = false;
     static readonly FRIENDLY_NAME = 'Tiny Icons';
     static readonly UNIQUE_CONSOLE_TEXT_COLOR = '#64b5f6'; // Code courtesy of Vladulenta (alternatively, what about 1976d2?)
     static readonly MOD_NAMESPACE = 'tinyIcons';
