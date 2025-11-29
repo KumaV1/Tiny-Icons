@@ -7,6 +7,7 @@ export class TagManager {
    * NOTE: This is NOT the actual tag storage that will be used during runtime!
    * NOTE2: Only public so the "StaticModifierIconTag" type could be created
    * NOTE3: Properties are set as functions, so the call can be delayed to AFTER the mod context is set up
+   * NOTE4: Some of the paths can only be interpreted with certain expansions. The paths are set accordingly based on the assumption that said tags are only used on modifiers used with those expansions (e.g. barrier only being used with AoD, laceration only being used with ItA)
    */
   public static staticTagsByCategories = {
     /* Todo
@@ -18,6 +19,7 @@ export class TagManager {
     */
     itemIcons: {
       air_rune: () => TagManager.iconPath('bank', 'rune_air'),
+      bones: () => TagManager.iconPath('bank', 'bones'),
       ash: () => TagManager.iconPath('bank', 'ashes'),
       bird_nest: () => TagManager.iconPath('bank', 'bird_nest'),
       clothing: () => TagManager.iconPath('bank', 'armour_leather_body'),
@@ -91,8 +93,10 @@ export class TagManager {
       stronghold: () => TagManager.iconPath('skills', 'combat', 'strongholds'),
       equip_set: () => TagManager.iconPath('shop', 'equipment_set'),
       equip_swap: () => TagManager.iconPath('shop', 'equipment_swap'),
+      special_attack: () => TagManager.iconPath('main', 'special_attack'),
       golbin: () => TagManager.iconPath('pets', 'golden_golbin'),
       currency: () => TagManager.iconPath('ti', 'currency_generic', 'flaticon', 'png'),
+      //food: () => TagManager.iconPath('bank', 'crate_of_food', undefined, 'png'),
       gp: () => TagManager.iconPath('main', 'coins'),
       interval: () => TagManager.iconPath('main', 'timer'),
       item_alchemy: () => TagManager.iconPath('skills', 'magic', 'item_alchemy'),
@@ -107,9 +111,17 @@ export class TagManager {
       shop: () => TagManager.iconPath('main', 'shop_header'),
       slayer_coins: () => TagManager.iconPath('main', 'slayer_coins'),
       unholy: () => TagManager.iconPath('skills', 'prayer', 'unholy_prayer'),
-      xp: () => TagManager.iconPath('main', 'xp')
+      xp: () => TagManager.iconPath('main', 'xp'),
+      accuracy: () => TagManager.iconPath('ti', 'accuracy', 'flaticon', 'png'),
+      immunity: () => TagManager.iconPath('ti', 'immunity', 'flaticon', 'png'),
+      crit: () => TagManager.iconPath('ti', 'critical', 'flaticon', 'png'),
+      reflect: () => TagManager.iconPath('ti', 'shield_reflect', 'flaticon'),
     },
     effectMedia: {
+      nulled: () => TagManager.iconPath('status', 'null', undefined, 'png'),
+      revive: () => TagManager.iconPath('ti', 'revive', 'flaticon', 'png'),
+      regen: () => TagManager.iconPath('skills', 'magic', 'fervor_ii', 'png'),
+      lifesteal: () => TagManager.iconPath('ti', 'fang', 'flaticon', 'png'),//TagManager.iconPath('skills', 'hitpoints'), // TODO: Find/Create a better icon
       afflicted: () => TagManager.iconPath('misc', 'afflicted'),
       crystal_sanction: () => TagManager.iconPath('status', 'crystal_sanction'),
       crystallize: () => TagManager.iconPath('status', 'crystallized'),
@@ -130,17 +142,23 @@ export class TagManager {
       stun_immunity: () => TagManager.iconPath('status', 'stun_immunity'),
       stun: () => TagManager.iconPath('status', 'stunned'),
       torment: () => TagManager.iconPath('bank', 'Mask_of_Torment'),
+      voidburst: () => TagManager.iconPath('status', 'voidburst', undefined, 'png')
     },
     dotMedia: {
       barrier_bleed: () => TagManager.iconPath('misc', 'blood'),
       barrier_burn: () => TagManager.iconPath('main', 'burn'),
+      barrier_regen: () => TagManager.iconPath('skills', 'combat', 'barrier'), // TODO: Find/Create a better icon
       bleed: () => TagManager.iconPath('misc', 'blood'),
       burn: () => TagManager.iconPath('main', 'burn'),
+      ablaze: () => TagManager.iconPath('main', 'burn'),
       deadly_poison: () => TagManager.iconPath('status', 'poison'),
       poison: () => TagManager.iconPath('status', 'poison'),
-      regen: () => TagManager.iconPath('status', 'regen_increase'),
+      toxin: () => TagManager.iconPath('status', 'poison'),
+      laceration: () => TagManager.iconPath('status', 'laceration', undefined, 'png'),
+      //regen: () => TagManager.iconPath('status', 'regen_increase'),
     },
     skillMedia: {
+      redemption: () => TagManager.iconPath('skills', 'prayer', 'redemption', 'png'),
       air_strike: () => TagManager.iconPath('skills', 'magic', 'wind_strike'),
       water_strike: () => TagManager.iconPath('skills', 'magic', 'water_strike'),
       earth_strike: () => TagManager.iconPath('skills', 'magic', 'earth_strike'),
@@ -149,6 +167,7 @@ export class TagManager {
       air_blast: () => TagManager.iconPath('skills', 'magic', 'wind_blast'),
       air_wave: () => TagManager.iconPath('skills', 'magic', 'wind_wave'),
       air_surge: () => TagManager.iconPath('skills', 'magic', 'wind_surge'),
+      meteor_shower: () => TagManager.iconPath('skills', 'magic', 'meteor_shower', 'png'),
       arch_brush: () => TagManager.iconPath('skills', 'archaeology', 'brush'),
       arch_shovel: () => TagManager.iconPath('skills', 'archaeology', 'shovel'),
       arch_sieve: () => TagManager.iconPath('skills', 'archaeology', 'sieve'),
@@ -224,6 +243,7 @@ export class TagManager {
         'nightfall',
         'png',
       ),
+      ts_season_eternal_darkness: () => TagManager.iconPath('skills', 'township', 'EternalDarkness', 'png'),
       ts_stone: () => TagManager.iconPath('skills', 'township', 'stone'),
       ts_storage: () => TagManager.iconPath('skills', 'township', 'storage'),
       ts_trader: () => TagManager.iconPath('skills', 'township', 'menu_trader'),
@@ -259,6 +279,8 @@ export class TagManager {
       thieving: () => TagManager.iconPath('skills', 'thieving'),
       township: () => TagManager.iconPath('skills', 'township'),
       woodcutting: () => TagManager.iconPath('skills', 'woodcutting'),
+      harvesting: () => TagManager.iconPath('skills', 'harvesting', undefined, 'png'),
+      corruption: () => TagManager.iconPath('skills', 'corruption', 'corruption', 'png'),
     },
   };
 

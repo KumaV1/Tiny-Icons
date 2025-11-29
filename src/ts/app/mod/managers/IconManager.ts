@@ -1,3 +1,4 @@
+import { Logger } from "../Logger";
 import { ModifierTagMapEntryAttributes } from "../models/ModifierTagMapEntryAttributes";
 import { ModifierScopeSourceMediaMemoizer } from "../ModifierScopeSourceMediaMemoizer";
 import { modifierTagMap } from "../tagging/modifierTagMap";
@@ -49,9 +50,6 @@ export class IconManager {
       this.getIconForModifier(modifierValue, positive),
       size,
     );
-    if (!primaryIcon) {
-      return '';
-    }
 
     if (!SettingsManager.settings.secondaryIconsEnabled || secondary === false) {
       return scopeIcons
@@ -87,34 +85,59 @@ export class IconManager {
     positive: boolean,
     secondary?: boolean,
   ): string {
+    // Determine static tag attributes | TODO: Doing this twice (for primary and secondary tag separetely) is imperformant and should be changed
     const modTagAttributes: ModifierTagMapEntryAttributes | undefined = modifierTagMap.get(modifierValue.modifier.id);
     if (!modTagAttributes) {
-      console.warn(`[Tiny Icons] No tags found for modifier ${modifierValue.modifier.id}`);
+      Logger.warn(`No tags found for modifier ${modifierValue.modifier.id}`);
       return SettingsManager.settings.placeholderIconEnabled
         ? TagManager.tagSrcs.get('placeholder') ?? ''
         : '';
     }
 
-    const tag = secondary
-      ? positive
-        ? modTagAttributes.secondaryTag?.positive
-        : modTagAttributes.secondaryTag?.negative
-      : positive
-        ? modTagAttributes.primaryTag.positive
-        : modTagAttributes.primaryTag.negative;
-
-    if (!tag) {
+    // Determine static tag definition
+    const tagDefinition = secondary
+      ? modTagAttributes.secondaryTag
+      : modTagAttributes.primaryTag;
+    if (!tagDefinition) {
+      // If no tag available, but we tried to get secondary, then just assume no secondary icon exists in the first place
       if (secondary) {
         return '';
       }
 
-      console.warn(`[Tiny Icons] No tag could be determined for modifier ${modifierValue.modifier.id}, positive value ${positive} and secondary value ${secondary}`);
+      // Otherwise, if a modifier does not have even a primary tag defined, then we need to treat it like it was not intended
+      Logger.warn(`No primary tag definition could be determined for modifier ${modifierValue.modifier.id}`);
       return SettingsManager.settings.placeholderIconEnabled
         ? TagManager.tagSrcs.get('placeholder') ?? ''
         : '';
     }
 
-    return TagManager.tagSrcs.get(tag) ?? '';
+    // If the tag should be ignored when a skill scope is available, and said scope is available, then we do not need to return a value
+    if (tagDefinition.ignoreIfSkillScope && modifierValue.skill) {
+      Logger.log(`Modifier ${modifierValue.modifier.id} has "ignoreIfSkillScope" set to true and modifierValue.skill is set to ${modifierValue.skill.name}:`)
+      return '';
+    }
+
+    // Determine tag to use
+    const tag = positive
+      ? tagDefinition.positive
+      : tagDefinition.negative;
+    if (!tag) {
+      // If no tag available, but we tried to get secondary, then just assume no secondary icon exists in the first place
+      if (secondary) {
+        return '';
+      }
+
+      // Otherwise, if a modifier does not have even a primary tag defined, then we need to treat it like it was not intended
+      Logger.warn(`No primary tag could be determined for modifier ${modifierValue.modifier.id} and positive flag ${positive}`);
+      return SettingsManager.settings.placeholderIconEnabled
+        ? TagManager.tagSrcs.get('placeholder') ?? ''
+        : '';
+    }
+
+    // With a tag available, try retrieving the media source to use
+    return TagManager.tagSrcs.get(tag) ?? /*SettingsManager.settings.placeholderIconEnabled
+        ? TagManager.tagSrcs.get('placeholder') ?? ''
+        :*/ '';
   }
 
   /**
