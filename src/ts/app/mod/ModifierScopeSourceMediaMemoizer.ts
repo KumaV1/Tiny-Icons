@@ -243,6 +243,15 @@ export class ModifierScopeSourceMediaMemoizer {
             }
         });
         this.categoryMediaMap.set(SkillIDs.Thieving, thievingCategoryMediaMap);
+
+        // Mining
+        let miningCategoryMediaMap: Map<string, NamedObjectWithMedia> = new Map();
+        game.mining.actions.forEach((miningNode: MiningRock) => {
+            if (miningNode.category && !miningCategoryMediaMap.has(miningNode.category.id)) {
+                miningCategoryMediaMap.set(miningNode.category.id, miningNode);
+            }
+        });
+        this.categoryMediaMap.set(SkillIDs.Mining, miningCategoryMediaMap);
     }
 
     /**
