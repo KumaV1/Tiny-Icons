@@ -1,6 +1,6 @@
 {
   "name": "tiny-icons-kuma",
-  "version": "3.2.1",
+  "version": "3.3.0",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "pack": "webpack",

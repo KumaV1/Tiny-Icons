@@ -1,6 +1,15 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
+### [3.3.0] (2025-11-29)
+
+#### Features
+* Realm icon will now only be shown, if more than one realm exists
+* Added some new tags and updated the static tagging to (primarily) follow a "Specification of buff before specification of restrictions" approach
+
+#### Bug Fixes
+* Fixed Mining categories not having an icon associated with them
+* Fixed issue that could lead to wrongfully use `<i>` element due to certain strings in blob media ids
 
 ### [3.2.1] (2025-11-03)
 
