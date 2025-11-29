@@ -1,3 +1,4 @@
+import { Logger } from "./Logger";
 import { IconManager } from "./managers/IconManager";
 import { SettingsManager } from "./managers/SettingsManager";
 import { TagManager } from "./managers/TagManager";
@@ -38,7 +39,7 @@ export class PublicApi {
             addTagSourceMap: (tags: Map<ModModifierIconTag, string>): void => {
               tags.forEach((value: string, key: ModModifierIconTag) => {
                 if (TagManager.tagSrcs.has(key)) {
-                  console.warn(`[Tiny Icons] Tag '${key}' already exists.`);
+                  Logger.warn(`Tag '${key}' already exists.`);
                 } else {
                   TagManager.tagSrcs.set(key, value);
                 }
@@ -51,15 +52,17 @@ export class PublicApi {
              * @param primaryTag - Define primary tag(s), either as simple string or as object, depending on whether positive and negative values should use different icons
              * @param secondaryTag - Optionally also provide a secondary tag
              */
-            addModifier: (modifierId: string, primaryTag: StaticModifierIconTag | ModModifierIconTag | { positive: StaticModifierIconTag | ModModifierIconTag, negative: StaticModifierIconTag | ModModifierIconTag }, secondaryTag?: StaticModifierIconTag | ModModifierIconTag | { positive: StaticModifierIconTag | ModModifierIconTag, negative: StaticModifierIconTag | ModModifierIconTag }): void => {
+            addModifier: (modifierId: string,
+              primaryTag: StaticModifierIconTag | ModModifierIconTag | { positive: StaticModifierIconTag | ModModifierIconTag, negative: StaticModifierIconTag | ModModifierIconTag, ignoreIfSkillScope?: boolean },
+              secondaryTag?: StaticModifierIconTag | ModModifierIconTag | { positive: StaticModifierIconTag | ModModifierIconTag, negative: StaticModifierIconTag | ModModifierIconTag, ignoreIfSkillScope?: boolean }): void => {
                 if (!modifierId) {
-                  console.warn('[Tiny Icons] No/Falsey modifier id provided');
+                  Logger.warn('No/Falsey modifier id provided');
                   return;
                 }
 
                 const modifier = game.modifierRegistry.getObjectByID(modifierId);
                 if (!modifier) {
-                  console.warn(`[Tiny Icons] Could not find modifier with id ${modifierId} in game.modifierRegistry.`);
+                  Logger.warn(`Could not find modifier with id ${modifierId} in game.modifierRegistry.`);
                   return;
                 }
 
@@ -153,7 +156,7 @@ export class PublicApi {
             /**
              * SweetAlert popup with all game tags and their icons
              */
-            viewAvailableTagsWithImages: (): void => this.viewAvailableTagsWithImages(),
+            viewAvailableTagsWithImages: (alphabetically?: boolean): void => this.viewAvailableTagsWithImages(alphabetically),
 
             /**
              * SweetAlert popup with all game modifiers and their tagged icons.
@@ -230,13 +233,25 @@ export class PublicApi {
 
     /**
    * SweetAlert popup with all game tags and their icons
+   * @param alphabetically - Optionally specify whether to order entries alphabetically. Default is false.
    */
-  private static viewAvailableTagsWithImages() {
+  private static viewAvailableTagsWithImages(alphabetically?: boolean) {
     let html = '';
 
-    TagManager.tagSrcs.forEach((value: string, key: string) => {
+    if (alphabetically)  {
+      // Order alphabetically if desired
+      const sortedArray = [...TagManager.tagSrcs].sort();
+      const sortedMap = new Map(sortedArray);
+
+      sortedMap.forEach((value: string, key: string) => {
         html += `<h5 class="font-w400 font-size-sm mb-1">${key}: ${IconManager.imgSource(value)}</h5>`;
-    });
+      });
+    } else {
+      // Otherwise use default order, which is basically in order of properties (and their sub-properties), so somewhat thematically grouped
+      TagManager.tagSrcs.forEach((value: string, key: string) => {
+        html += `<h5 class="font-w400 font-size-sm mb-1">${key}: ${IconManager.imgSource(value)}</h5>`;
+      });
+    }
 
     SwalLocale.fire({ html });
   }

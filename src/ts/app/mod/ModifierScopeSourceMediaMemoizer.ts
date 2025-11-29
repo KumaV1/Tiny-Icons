@@ -1,7 +1,9 @@
+import { Constants } from '../constants';
+import { Logger } from './Logger';
 import { NamedObjectWithMedia } from './types/namedObjectWithMedia';
 
 /**
- * A class for managing (and preserving, for efficiency) icons for various scope sources, 
+ * A class for managing (and preserving, for efficiency) icons for various scope sources,
  * which do not inherintly possess their own media (e.g. a "combat effect group" like `melvorD:Stun` does not have media associated with it).
  *
  * Most tag maps are two-layered, as they are layered to "main source" (e.g. "melvorD:Fletching") and then corresponding entry (e.g. subcategory entry "melvorF:Arrows")
@@ -51,6 +53,7 @@ export class ModifierScopeSourceMediaMemoizer {
         ModifierScopeSourceMediaMemoizer.effectGroupMediaMap = new Map();
 
         ctx.onCharacterSelectionLoaded(function() {
+            const t0: number = performance.now();
             // Init tagging for base game (and expansions)
             ModifierScopeSourceMediaMemoizer.initCategoryMediaMap();
             ModifierScopeSourceMediaMemoizer.initSubcategoryMediaMap();
@@ -66,6 +69,10 @@ export class ModifierScopeSourceMediaMemoizer {
             ModifierScopeSourceMediaMemoizer.subcategoryMediaMapMods.clear();
             ModifierScopeSourceMediaMemoizer.actionMediaMapMods.clear();
             ModifierScopeSourceMediaMemoizer.effectGroupMediaMapMods.clear();
+            const t1: number = performance.now();
+            if (Constants.DEV_MODE) {
+                Logger.log(`Memoizing media maps took ${Math.floor(t1 - t0)}ms`);
+            }
         });
     }
 
@@ -76,7 +83,7 @@ export class ModifierScopeSourceMediaMemoizer {
      */
     public static registerCategoryScopeMedia(scopeSourceId: string, entries: Map<string, NamedObjectWithMedia>): void {
         if (!game.modifierScopeSources.registeredObjects.has(scopeSourceId)) {
-            console.warn(`[Tiny Icons] Scope source id '${scopeSourceId}' is not a valid scope source (according to game.modifierScopeSources) and will therefore be skipped.`);
+            Logger.warn(`Scope source id '${scopeSourceId}' is not a valid scope source (according to game.modifierScopeSources) and will therefore be skipped.`);
             return;
         }
 
@@ -85,7 +92,7 @@ export class ModifierScopeSourceMediaMemoizer {
             if (value.media) {
                 filteredEntries.set(key, value);
             } else {
-                console.warn(`[Tiny Icons] Category '${value.id}' for scope source '${key}' does not have media and will therefore be skipped.`);
+                Logger.warn(`Category '${value.id}' for scope source '${key}' does not have media and will therefore be skipped.`);
             }
         });
 
@@ -115,7 +122,7 @@ export class ModifierScopeSourceMediaMemoizer {
      */
     public static registerSubcategoryScopeMedia(scopeSourceId: string, entries: Map<string, NamedObjectWithMedia>): void {
         if (!game.modifierScopeSources.registeredObjects.has(scopeSourceId)) {
-            console.warn(`[Tiny Icons] Scope source id '${scopeSourceId}' is not a valid scope source (according to game.modifierScopeSources) and will therefore be skipped.`);
+            Logger.warn(`Scope source id '${scopeSourceId}' is not a valid scope source (according to game.modifierScopeSources) and will therefore be skipped.`);
             return;
         }
 
@@ -124,7 +131,7 @@ export class ModifierScopeSourceMediaMemoizer {
             if (value.media) {
                 filteredEntries.set(key, value);
             } else {
-                console.warn(`[Tiny Icons] Subcategory '${value.id}' for scope source '${key}' does not have media and will therefore be skipped.`);
+                Logger.warn(`Subcategory '${value.id}' for scope source '${key}' does not have media and will therefore be skipped.`);
             }
         });
 
@@ -154,7 +161,7 @@ export class ModifierScopeSourceMediaMemoizer {
      */
     public static registerActionScopeMedia(scopeSourceId: string, entries: Map<string, NamedObjectWithMedia>): void {
         if (!game.modifierScopeSources.registeredObjects.has(scopeSourceId)) {
-            console.warn(`[Tiny Icons] Scope source id '${scopeSourceId}' is not a valid scope source (according to game.modifierScopeSources) and will therefore be skipped.`);
+            Logger.warn(`Scope source id '${scopeSourceId}' is not a valid scope source (according to game.modifierScopeSources) and will therefore be skipped.`);
             return;
         }
 
@@ -163,7 +170,7 @@ export class ModifierScopeSourceMediaMemoizer {
             if (value.media) {
                 filteredEntries.set(key, value);
             } else {
-                console.warn(`[Tiny Icons] Action '${value.id}' for scope source '${key}' does not have media and will therefore be skipped.`);
+                Logger.warn(`Action '${value.id}' for scope source '${key}' does not have media and will therefore be skipped.`);
             }
         });
 
@@ -219,7 +226,7 @@ export class ModifierScopeSourceMediaMemoizer {
         let fishingCategoryMediaMap: Map<string, NamedObjectWithMedia> = new Map();
         game.fishing.areas.forEach((area: FishingArea) => {
             if (!area.fish || area.fish.length < 1) {
-                console.warn(`[Tiny Icons] Unable to find any fish in fishing area ${area.id}`);
+                Logger.warn(`Unable to find any fish in fishing area ${area.id}`);
             } else {
                 fishingCategoryMediaMap.set(area.id, area.fish[0]);
             }
@@ -230,7 +237,7 @@ export class ModifierScopeSourceMediaMemoizer {
         let thievingCategoryMediaMap: Map<string, NamedObjectWithMedia> = new Map();
         game.thieving.areas.forEach((area: ThievingArea) => {
             if (!area.npcs || area.npcs.length < 1) {
-                console.warn(`[Tiny Icons] Unable to find any npcs in thieving area ${area.id}`);
+                Logger.warn(`Unable to find any npcs in thieving area ${area.id}`);
             } else {
                 thievingCategoryMediaMap.set(area.id, area.npcs[0]);
             }

@@ -1,6 +1,9 @@
+import { Constants } from "../../constants";
+import { Logger } from "../Logger";
 import { ModifierTagMapEntryAttributes } from "../models/ModifierTagMapEntryAttributes";
 import { ModifierScopeSourceMediaMemoizer } from "../ModifierScopeSourceMediaMemoizer";
 import { modifierTagMap } from "../tagging/modifierTagMap";
+import { NamedObjectWithMedia } from "../types/namedObjectWithMedia";
 import { SettingsManager } from "./SettingsManager";
 import { TagManager } from "./TagManager";
 
@@ -20,7 +23,7 @@ export class IconManager {
       return '';
     }
 
-    return sourceURL.includes('fa-')
+    return sourceURL.includes(' fa-') // whitespace is important, so a blob url is not accidentally caught by this
       ? `<i class="fa ${sourceURL} tiny-icon mb-1 mr-1 text-warning font-size-${size}"></i>`
       : `<img class="skill-icon-${size} tiny-icon mb-1 mr-1" src="${sourceURL}">`;
   };
@@ -48,9 +51,6 @@ export class IconManager {
       this.getIconForModifier(modifierValue, positive),
       size,
     );
-    if (!primaryIcon) {
-      return '';
-    }
 
     if (!SettingsManager.settings.secondaryIconsEnabled || secondary === false) {
       return scopeIcons
@@ -86,34 +86,61 @@ export class IconManager {
     positive: boolean,
     secondary?: boolean,
   ): string {
+    // Determine static tag attributes | TODO: Doing this twice (for primary and secondary tag separetely) is imperformant and should be changed
     const modTagAttributes: ModifierTagMapEntryAttributes | undefined = modifierTagMap.get(modifierValue.modifier.id);
     if (!modTagAttributes) {
-      console.warn(`[Tiny Icons] No tags found for modifier ${modifierValue.modifier.id}`);
+      Logger.warn(`No tags found for modifier ${modifierValue.modifier.id}`);
       return SettingsManager.settings.placeholderIconEnabled
         ? TagManager.tagSrcs.get('placeholder') ?? ''
         : '';
     }
 
-    const tag = secondary
-      ? positive
-        ? modTagAttributes.secondaryTag?.positive
-        : modTagAttributes.secondaryTag?.negative
-      : positive
-        ? modTagAttributes.primaryTag.positive
-        : modTagAttributes.primaryTag.negative;
-
-    if (!tag) {
+    // Determine static tag definition
+    const tagDefinition = secondary
+      ? modTagAttributes.secondaryTag
+      : modTagAttributes.primaryTag;
+    if (!tagDefinition) {
+      // If no tag available, but we tried to get secondary, then just assume no secondary icon exists in the first place
       if (secondary) {
         return '';
       }
 
-      console.warn(`[Tiny Icons] No tag could be determined for modifier ${modifierValue.modifier.id}, positive value ${positive} and secondary value ${secondary}`);
+      // Otherwise, if a modifier does not have even a primary tag defined, then we need to treat it like it was not intended
+      Logger.warn(`No primary tag definition could be determined for modifier ${modifierValue.modifier.id}`);
       return SettingsManager.settings.placeholderIconEnabled
         ? TagManager.tagSrcs.get('placeholder') ?? ''
         : '';
     }
 
-    return TagManager.tagSrcs.get(tag) ?? '';
+    // If the tag should be ignored when a skill scope is available, and said scope is available, then we do not need to return a value
+    if (tagDefinition.ignoreIfSkillScope && modifierValue.skill) {
+      if (Constants.DEV_MODE) {
+        Logger.log(`Modifier ${modifierValue.modifier.id} has "ignoreIfSkillScope" set to true and modifierValue.skill is set to ${modifierValue.skill.name}:`)
+      }
+      return '';
+    }
+
+    // Determine tag to use
+    const tag = positive
+      ? tagDefinition.positive
+      : tagDefinition.negative;
+    if (!tag) {
+      // If no tag available, but we tried to get secondary, then just assume no secondary icon exists in the first place
+      if (secondary) {
+        return '';
+      }
+
+      // Otherwise, if a modifier does not have even a primary tag defined, then we need to treat it like it was not intended
+      Logger.warn(`No primary tag could be determined for modifier ${modifierValue.modifier.id} and positive flag ${positive}`);
+      return SettingsManager.settings.placeholderIconEnabled
+        ? TagManager.tagSrcs.get('placeholder') ?? ''
+        : '';
+    }
+
+    // With a tag available, try retrieving the media source to use
+    return TagManager.tagSrcs.get(tag) ?? /*SettingsManager.settings.placeholderIconEnabled
+        ? TagManager.tagSrcs.get('placeholder') ?? ''
+        :*/ '';
   }
 
   /**
@@ -178,6 +205,10 @@ export class IconManager {
    * @returns
    */
   private static getIconSrcForRealmScope(realm: Realm): string {
+    if (game.realms.size === 1) {
+      return ''; // Remove any realm specification, if there is only one to begin with (which can happen without certain mods and expansions)
+    }
+
     return realm.media;
   }
 
@@ -196,7 +227,7 @@ export class IconManager {
    * @param category
    * @returns
    */
-  private static getIconSrcForCategoryScope(modValue: ModifierValue, category: NamedObject | NamedObject & { media: string }): string | undefined {
+  private static getIconSrcForCategoryScope(modValue: ModifierValue, category: NamedObject | NamedObjectWithMedia): string | undefined {
     /** @ts-ignore - unknown property, as unknown whether scope source has media */
     if (category.media) {
       /** @ts-ignore - unknown property, as unknown whether scope source has media */
@@ -227,7 +258,7 @@ export class IconManager {
    * @param action
    * @returns
    */
-  private static getIconSrcForActionScope(modValue: ModifierValue, action: NamedObject | NamedObject & { media: string }): string | undefined {
+  private static getIconSrcForActionScope(modValue: ModifierValue, action: NamedObject | NamedObjectWithMedia): string | undefined {
     /** @ts-ignore - unknown property, as unknown whether scope source has media */
     if (action.media) {
       /** @ts-ignore - unknown property, as unknown whether scope source has media */
@@ -258,7 +289,7 @@ export class IconManager {
    * @param subcategory
    * @returns
    */
-  private static getIconSrcForSubcagetoryScope(modValue: ModifierValue, subcategory: NamedObject | NamedObject & { media: string }): string | undefined {
+  private static getIconSrcForSubcagetoryScope(modValue: ModifierValue, subcategory: NamedObject | NamedObjectWithMedia): string | undefined {
     /** @ts-ignore - unknown property, as unknown whether scope source has media */
     if (subcategory.media) {
       /** @ts-ignore - unknown property, as unknown whether scope source has media */

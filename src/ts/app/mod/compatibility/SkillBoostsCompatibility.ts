@@ -1,3 +1,4 @@
+import { Logger } from "../Logger";
 import { ModifierIconContext } from "../ModifierIconContext";
 
 export class SkillBoostsCompatibility {
@@ -19,7 +20,7 @@ export class SkillBoostsCompatibility {
             const sbModContext = mod.getContext(this.namespace);
             const sbClass = mod.api.Skill_Boosts.SkillBoosts;
             if (!sbModContext || !sbClass) {
-                console.warn('[Tiny Icons] Identified loading of "Skill Boosts" mod, but was unable to retrieve mod context or class definition.');
+                Logger.warn('Identified loading of "Skill Boosts" mod, but was unable to retrieve mod context or class definition.');
                 return;
             }
 
