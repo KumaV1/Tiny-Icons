@@ -28,31 +28,21 @@ export class ModifierTagMapEntryAttributes {
         secondaryTag?: ModifierIconTag | { positive: ModifierIconTag, negative: ModifierIconTag, ignoreIfSkillScope?: boolean }) {
         if (typeof primaryTag == 'string') {
             this.primaryTag = new StaticModifierTagDefinition(primaryTag, primaryTag, false);
-            //{
-            //    positive: primaryTag,
-            //    negative: primaryTag
-            //};
         } else {
-            this.primaryTag = new StaticModifierTagDefinition(primaryTag.positive, primaryTag.negative ?? primaryTag.positive, primaryTag.ignoreIfSkillScope ?? false);
-            //{
-            //    positive: primaryTag.positive,
-            //    negative: primaryTag.negative
-            //};
+            this.primaryTag = new StaticModifierTagDefinition(
+                primaryTag.positive,
+                primaryTag.negative ?? primaryTag.positive,
+                primaryTag.ignoreIfSkillScope ?? false);
         }
 
         if (secondaryTag) {
             if (typeof secondaryTag == 'string') {
                 this.secondaryTag = new StaticModifierTagDefinition(secondaryTag, secondaryTag, false);
-                //{
-                //    positive: secondaryTag,
-                //    negative: secondaryTag
-                //};
             } else {
-                this.secondaryTag = new StaticModifierTagDefinition(secondaryTag.positive, secondaryTag.negative ?? secondaryTag.positive, secondaryTag.ignoreIfSkillScope ?? false);
-                //{
-                //    positive: secondaryTag.positive,
-                //    negative: secondaryTag.negative
-                //};
+                this.secondaryTag = new StaticModifierTagDefinition(
+                    secondaryTag.positive,
+                    secondaryTag.negative ?? secondaryTag.positive,
+                    secondaryTag.ignoreIfSkillScope ?? false);
             }
         }
     }

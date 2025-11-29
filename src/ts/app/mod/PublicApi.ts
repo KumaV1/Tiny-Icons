@@ -52,7 +52,9 @@ export class PublicApi {
              * @param primaryTag - Define primary tag(s), either as simple string or as object, depending on whether positive and negative values should use different icons
              * @param secondaryTag - Optionally also provide a secondary tag
              */
-            addModifier: (modifierId: string, primaryTag: StaticModifierIconTag | ModModifierIconTag | { positive: StaticModifierIconTag | ModModifierIconTag, negative: StaticModifierIconTag | ModModifierIconTag }, secondaryTag?: StaticModifierIconTag | ModModifierIconTag | { positive: StaticModifierIconTag | ModModifierIconTag, negative: StaticModifierIconTag | ModModifierIconTag }): void => {
+            addModifier: (modifierId: string,
+              primaryTag: StaticModifierIconTag | ModModifierIconTag | { positive: StaticModifierIconTag | ModModifierIconTag, negative: StaticModifierIconTag | ModModifierIconTag, ignoreIfSkillScope?: boolean },
+              secondaryTag?: StaticModifierIconTag | ModModifierIconTag | { positive: StaticModifierIconTag | ModModifierIconTag, negative: StaticModifierIconTag | ModModifierIconTag, ignoreIfSkillScope?: boolean }): void => {
                 if (!modifierId) {
                   Logger.warn('No/Falsey modifier id provided');
                   return;
