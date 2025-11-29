@@ -1,3 +1,4 @@
+import { Constants } from "../../constants";
 import { Logger } from "../Logger";
 import { ModifierTagMapEntryAttributes } from "../models/ModifierTagMapEntryAttributes";
 import { ModifierScopeSourceMediaMemoizer } from "../ModifierScopeSourceMediaMemoizer";
@@ -113,7 +114,9 @@ export class IconManager {
 
     // If the tag should be ignored when a skill scope is available, and said scope is available, then we do not need to return a value
     if (tagDefinition.ignoreIfSkillScope && modifierValue.skill) {
-      Logger.log(`Modifier ${modifierValue.modifier.id} has "ignoreIfSkillScope" set to true and modifierValue.skill is set to ${modifierValue.skill.name}:`)
+      if (Constants.DEV_MODE) {
+        Logger.log(`Modifier ${modifierValue.modifier.id} has "ignoreIfSkillScope" set to true and modifierValue.skill is set to ${modifierValue.skill.name}:`)
+      }
       return '';
     }
 
