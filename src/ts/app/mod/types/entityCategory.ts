@@ -2,6 +2,12 @@
 // ^ For example, an "ActivePrayer" holds a stat object, but does not come with a description property. Instead "PrayerTooltipElement" explicitly calls the "StatObject" format logic for the stats of a given prayer!
 
 
+// TODO: Some special cases (THEREFORE NOT YET IMPLEMENTED!)
+// * Item- and Summoning Synergies do not have an id
+// * Astrology context has to be set per "constellation BONUS" (the 6 unlockable ones), so needs some sub-info on the index of the bonus to process
+// * Cartography world map bonuses do not use a "namespace:local_id" id, so can collide with others. Looks like they need to be combined with the WorldMap id they reside in!
+// * NEVERMIND, it is a single stat object of a single POI :)
+
 /**
  * A clarity type for documenting explicitly hard-defined categories
  * TODO: WHICH ONES REQUIRE "applyDescriptionModification" support? Check where the function is called

@@ -37,6 +37,7 @@ export class EntityContext {
 
 /**
  * Manages context from where and when to print modifier icons with printPlayerModifier.
+ * TODO: RENAME TO JUST "Context", or "IconContext" or whatever!
  */
 export class ModifierIconContext {
   /**

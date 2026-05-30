@@ -15,8 +15,17 @@ export class PatchManager {
     public static patch(ctx: Modding.ModContext) {
         PatchManager.ctx = ctx;
 
+        // Patch in location awareness
+        PatchManager.patchForLocationContexts();
+
+        // Patch in html resolving in some cases
         PatchManager.patchForHtmlParsing();
-        PatchManager.patchModifierDescription(); // includes conditional modifiers here, I assume?
+
+        // Patch print-out of modifiers (including conditional ones)
+        PatchManager.patchModifierDescription();
+
+        // Patch support regarding global func (redundant?)
+        // YES, this one is redundant, due to the ones further below
         PatchManager.patchApplyDescriptionModifications();
 
         // The following will be patched for one or more of the following reasons:
@@ -25,7 +34,14 @@ export class PatchManager {
         // * Support icons for "conditional modifiers" (which is to say, not generated from stats)
 
         // TODO: Hmm... do "StatObject" always need to support modified dscriptions? No, right?
-        PatchManager.patchForContexts();
+        //PatchManager.patchAncientRelics();
+        //PatchManager.patchAstrology();
+        //PatchManager.patchCombat(); // include summoning (synergy) and prayer here?
+        //PatchManager.patchCartography();
+        //PatchManager.patchItems(); // include item synergies here?
+        //PatchManager.patchPets();
+        //PatchManager.patchShop();
+        //PatchManager.patchSkillTrees();
     }
 
 
@@ -37,7 +53,7 @@ export class PatchManager {
      * - Patches for different game abilities and menus to capture context when and if to prepend icons to modifier text.
      * - Special handling for the "Show Locked Astrology Modifiers" mod.
      */
-    private static patchForContexts() {
+    private static patchForLocationContexts() {
         // If the character does not have global icons enabled, then we need to patch certain methods to set a custom context for enabling the icons at specific locations
         PatchManager.ctx.onCharacterLoaded(() => {
             if (!SettingsManager.settings.globalIconsEnabled) {
@@ -156,6 +172,125 @@ export class PatchManager {
         });
     }
 
+
+    /*
+    PatchManager.ctx.patch(AstrologyModifierDisplayElement, 'setModifier').before(function(astroMod: AstrologyModifier, mult: number): void {
+                    ModifierIconContext.setCustomLocationContext('astrology');
+                });
+
+                PatchManager.ctx.patch(AstrologyModifierDisplayElement, 'setModifier').after(function(returnValue: void, astroMod: AstrologyModifier, mult: number) {
+                    ModifierIconContext.resetCustomLocationContext();
+                });*/
+
+    /** Patch ancient relic element, so its printing of the stat description is aware it is printing for a certain relic */
+    private static patchAncientRelics() {
+        PatchManager.ctx.patch(AncientRelicElement, 'setRelic').before(function (relic: AncientRelic): void {
+            ModifierIconContext.pushEntityContext('AncientRelic', relic.id);
+        });
+        PatchManager.ctx.patch(AncientRelicElement, 'setRelic').after(function (returnValue: void, relic: AncientRelic): void {
+            ModifierIconContext.popEntityContext('AncientRelic', relic.id);
+        });
+    }
+
+    /** TODO: Explain */
+    private static patchAstrology() {
+
+    }
+
+    /** TODO: Explain */
+    private static patchCombat() {
+
+    }
+
+    /** TODO: Explain */
+    private static patchCartography() {
+        // World map mastery bonus
+
+        // TODO: bonus.id is not enough, also needs the overlying WorldMap's id!
+        // ^ This may be a use-case for the entity context STACK... although the retriever would need to be aware of having to extract two entries, rather than one...
+        PatchManager.ctx.patch(MapMasteryBonusElement, 'setBonus').before(function (bonus: WorldMapMasteryBonus): void {
+            ModifierIconContext.pushEntityContext('CartographyWorldMapMasteryBonus', bonus.id);
+        });
+        PatchManager.ctx.patch(MapMasteryBonusElement, 'setBonus').after(function (returnValue: void, bonus: WorldMapMasteryBonus): void {
+            ModifierIconContext.popEntityContext('CartographyWorldMapMasteryBonus', bonus.id);
+        });
+
+        // POI
+        PatchManager.ctx.patch(PoiSearchResultElement, 'setPoi').before(function (poi: PointOfInterest, cartography: Cartography): void {
+            ModifierIconContext.pushEntityContext('CartographyPOI', poi.id);
+        });
+        PatchManager.ctx.patch(PoiSearchResultElement, 'setPoi').after(function (returnValue: void, poi: PointOfInterest, cartography: Cartography): void {
+            ModifierIconContext.popEntityContext('CartographyPOI', poi.id);
+        });
+
+        PatchManager.ctx.patch(HexOverviewElement, 'showPoiInfo').before(function (poi: PointOfInterest, cartography: Cartography): void {
+            ModifierIconContext.pushEntityContext('CartographyPOI', poi.id);
+        });
+        PatchManager.ctx.patch(HexOverviewElement, 'showPoiInfo').after(function (returnValue: void, poi: PointOfInterest, cartography: Cartography): void {
+            ModifierIconContext.popEntityContext('CartographyPOI', poi.id);
+        });
+
+        // TODO: May need to patch "PointOfInterest.searchText" as well? Hmm, probably not, it's about such after all?
+    }
+
+    /** TODO: Explain */
+    private static patchItems() {
+        //PatchManager.ctx.patch(Item, 'modifiedDescription').get(function (o: () => string) {
+        //    // Mhm? Why did I patch the base class? because of "super" calls on the derived classes?
+        //    // ^ A generic icon should not createtiny icons, so should not need patching?
+        //    // Unless if one were to add them now, I guess. But really, mods should only want to set icons on below ones, right?
+        //    return PatchManager.getModifiedItemDescription(this, 'Item', o);
+        //});
+        PatchManager.ctx.patch(FoodItem, 'modifiedDescription').get(function (o: () => string) {
+            return PatchManager.getModifiedItemDescription(this, 'FoodItem', o);
+        });
+        PatchManager.ctx.patch(EquipmentItem, 'modifiedDescription').get(function (o: () => string) {
+            return PatchManager.getModifiedItemDescription(this, 'EquipmentItem', o);
+        });
+        PatchManager.ctx.patch(PotionItem, 'modifiedDescription').get(function (o: () => string) {
+            return PatchManager.getModifiedItemDescription(this, 'PotionItem', o);
+        });
+        PatchManager.ctx.patch(TokenItem, 'modifiedDescription').get(function (o: () => string) {
+            return PatchManager.getModifiedItemDescription(this, 'TokenItem', o);
+        });
+        PatchManager.ctx.patch(FiremakingOilItem, 'modifiedDescription').get(function (o: () => string) {
+            return PatchManager.getModifiedItemDescription(this, 'FiremakingOilItem', o);
+        });
+    }
+
+    /** TODO: Explain */
+    private static patchPets() {
+        PatchManager.ctx.patch(Pet, 'description').get(function (o: () => string) {
+            ModifierIconContext.pushEntityContext('Pet', this.id);
+            const desc = o();
+            ModifierIconContext.popEntityContext('Pet', this.id);
+
+            return desc;
+        });
+    }
+
+    /** TODO: Explain */
+    private static patchShop() {
+        // Only patches in conditional-modifiers-auto-generation support, NOT custom descriptions!
+        PatchManager.ctx.patch(ShopPurchase, 'description').get(function (o: () => string) {
+            ModifierIconContext.pushEntityContext('ShopPurchase', this.id);
+            const desc = o();
+            ModifierIconContext.popEntityContext('ShopPurchase', this.id);
+
+            return desc;
+        });
+    }
+
+    /** TODO: Explain */
+    private static patchSkillTrees() {
+        PatchManager.ctx.patch(SkillTreeNodeInfoElement, 'setNode').before(function (tree: SkillTree, node: SkillTreeNode): void {
+            ModifierIconContext.pushEntityContext('CartographyPOI', `${tree.id}_${node.id}`);
+        });
+        PatchManager.ctx.patch(SkillTreeNodeInfoElement, 'setNode').after(function (returnValue: void, tree: SkillTree, node: SkillTreeNode): void {
+            ModifierIconContext.popEntityContext('CartographyPOI', `${tree.id}_${node.id}`);
+        });
+    }
+
     /**
      * Patch for various locations that modify the generated description to include formatting like changing color or adding icons to certain keywords (primarily, but not exclusively, combat status effects).
      * Sets a context to delay and belatedly apply the tiny icons, as doing so as usual ({@link ModifierValue}) would break tiny icons, if the icon path contains said keywords.
@@ -184,22 +319,7 @@ export class PatchManager {
             ModifierIconContext.popEntityContext('SpecialAttack', this.id);
 
             return desc;
-        });
-
-        PatchManager.ctx.patch(Item, 'modifiedDescription').get(function(o: () => string) {
-            // Mhm? Why did I patch the base class? because of "super" calls on the derived classes?
-            // ^ A generic icon should not createtiny icons, so should not need patching?
-            return PatchManager.getModifiedItemDescription(this, 'Item', o);
-        });
-        PatchManager.ctx.patch(FoodItem, 'modifiedDescription').get(function(o: () => string) {
-            return PatchManager.getModifiedItemDescription(this, 'FoodItem', o);
-        });
-        PatchManager.ctx.patch(EquipmentItem, 'modifiedDescription').get(function(o: () => string) {
-            return PatchManager.getModifiedItemDescription(this, 'EquipmentItem', o);
-        });
-        PatchManager.ctx.patch(PotionItem, 'modifiedDescription').get(function(o: () => string) {
-            return PatchManager.getModifiedItemDescription(this, 'PotionItem', o);
-        });
+        });        
 
         PatchManager.ctx.patch(CombatPassive, 'modifiedDescription').get(function(o: () => string) {
             if (this._modifiedDescription) {
