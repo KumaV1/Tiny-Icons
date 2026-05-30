@@ -1,18 +1,18 @@
-import { Constants } from "../constants";
+﻿import { Constants } from "../constants";
 
 /**
  * A wrapper around console calls only containing a simple message, standardizing some output format
  */
 export class Logger {
-    static log(message: string): void {
-        console.log(`%c[${Constants.FRIENDLY_NAME}]`, `color: ${Constants.UNIQUE_CONSOLE_TEXT_COLOR};`, `${message}`);
+    static log(...args: any[]): void {
+        console.log(`%c[${Constants.FRIENDLY_NAME}]`, `color: ${Constants.UNIQUE_CONSOLE_TEXT_COLOR};`, ...args);
     }
 
-    static warn(message: string): void {
-        console.warn(`%c[${Constants.FRIENDLY_NAME}]`, `color: ${Constants.UNIQUE_CONSOLE_TEXT_COLOR};`, `${message}`);
+    static warn(...args: any[]): void {
+        console.warn(`%c[${Constants.FRIENDLY_NAME}]`, `color: ${Constants.UNIQUE_CONSOLE_TEXT_COLOR};`, ...args);
     }
 
-    static error(message: string): void {
-        console.error(`%c[${Constants.FRIENDLY_NAME}]`, `color: ${Constants.UNIQUE_CONSOLE_TEXT_COLOR};`, `${message}`);
+    static error(...args: any[]): void {
+        console.error(`%c[${Constants.FRIENDLY_NAME}]`, `color: ${Constants.UNIQUE_CONSOLE_TEXT_COLOR};`, ...args);
     }
 }

@@ -1,0 +1,16 @@
+﻿{
+  "$schema": "https://melvoridle.com/assets/schema/gameData.json",
+  "namespace": "tinyIcons",
+  "dependentData": [
+    {
+      "namespace": "melvorTotH",
+      "modifications": {
+        "tinyIcons": {
+          "staticTagAllocations": [
+
+          ]
+        }
+      }
+    }
+  ]
+}

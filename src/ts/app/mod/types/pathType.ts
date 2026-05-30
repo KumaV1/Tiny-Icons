@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Different types of paths for media, to make creation of media paths for the static tags easier
  */
 export type PathType =
@@ -11,5 +11,4 @@ export type PathType =
   | 'ti'
   | 'mods'
   | 'pets'
-  | 'shop'
-  | 'fa';
+  | 'shop';

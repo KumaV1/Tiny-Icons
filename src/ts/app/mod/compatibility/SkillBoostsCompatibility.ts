@@ -1,4 +1,4 @@
-import { Logger } from "../Logger";
+﻿import { Logger } from "../Logger";
 import { ModifierIconContext } from "../ModifierIconContext";
 
 export class SkillBoostsCompatibility {
@@ -23,6 +23,8 @@ export class SkillBoostsCompatibility {
                 Logger.warn('Identified loading of "Skill Boosts" mod, but was unable to retrieve mod context or class definition.');
                 return;
             }
+
+            // TODO: The following could possibly be a single call to "PatchManager.getDescWithTinyIconsLogic"
 
             // == Patch certain methods that will lead to "applyDescriptionModifications" being called
             // @ts-ignore - No type definition for the "SkillBoosts" class

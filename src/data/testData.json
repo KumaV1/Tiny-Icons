@@ -1,0 +1,1113 @@
+﻿{
+  "$schema": "https://melvoridle.com/assets/schema/gameData.json",
+  "namespace": "tinyIcons",
+  "data": {
+    "attackStyles": [
+      {
+        "id": "Test",
+        "name": "Test Attack Style",
+        "modifiers": {
+          "flatHiddenSkillLevel": [
+            {
+              "skillID": "melvorD:Attack",
+              "value": 6
+            }
+          ]
+        },
+        "conditionalModifiers": [
+          {
+            "condition": {
+              "type": "Hitpoints",
+              "character": "Player",
+              "operator": "==",
+              "value": 100
+            },
+            "modifiers": {
+              "flatResistance": [
+                {
+                  "damageTypeID": "melvorD:Normal",
+                  "value": 4
+                }
+              ]
+            },
+            "description": "Description for Conditional Modifier 1"
+          },
+          {
+            "condition": {
+              "type": "Hitpoints",
+              "character": "Player",
+              "operator": "<",
+              "value": 50
+            },
+            "modifiers": {
+              "flatResistance": [
+                {
+                  "damageTypeID": "melvorD:Normal",
+                  "value": 14
+                }
+              ]
+            },
+            "description": "Description for Conditional Modifier 2"
+          }
+        ],
+        "experienceGain": [
+          {
+            "skillID": "melvorD:Attack",
+            "ratio": 4
+          }
+        ],
+        "attackType": "melee"
+      }
+    ],
+    "auroraSpells": [
+      {
+        "id": "Test",
+        "name": "Test Spell",
+        "media": "melvor:assets/media/main/question.png",
+        "level": 35,
+        "runesRequired": [
+          {
+            "id": "melvorD:Air_Rune",
+            "quantity": 3
+          },
+          {
+            "id": "melvorD:Light_Rune",
+            "quantity": 1
+          }
+        ],
+        "modifiers": {
+          "maxHitpoints": 5
+        },
+        "conditionalModifiers": [
+          {
+            "condition": {
+              "type": "Hitpoints",
+              "character": "Player",
+              "operator": "==",
+              "value": 100
+            },
+            "modifiers": {
+              "flatResistance": [
+                {
+                  "damageTypeID": "melvorD:Normal",
+                  "value": 4
+                }
+              ]
+            },
+            "description": "Description for Conditional Modifier 1"
+          },
+          {
+            "condition": {
+              "type": "Hitpoints",
+              "character": "Player",
+              "operator": "<",
+              "value": 50
+            },
+            "modifiers": {
+              "flatResistance": [
+                {
+                  "damageTypeID": "melvorD:Normal",
+                  "value": 14
+                }
+              ]
+            },
+            "description": "Description for Conditional Modifier 2"
+          }
+        ]
+      }
+    ],
+    "monsters": [
+      {
+        "id": "Test",
+        "name": "Test Monster",
+        "media": "melvor:assets/media/main/question.png",
+        "levels": {
+          "Hitpoints": 99999,
+          "Attack": 1,
+          "Strength": 1,
+          "Defence": 1,
+          "Ranged": 1,
+          "Magic": 1
+        },
+        "equipmentStats": [
+          {
+            "key": "attackSpeed",
+            "value": 45000
+          },
+          {
+            "key": "stabAttackBonus",
+            "value": 1
+          },
+          {
+            "key": "meleeStrengthBonus",
+            "value": 1
+          }
+        ],
+        "ignoreCompletion": true,
+        "attackType": "melee",
+        "specialAttacks": [ "melvorD:LifeLeech" ],
+        "passives": [ "melvorD:BigBoi", "melvorTotH:WeaknessFinder" ],
+        "lootChance": 100,
+        "lootTable": [
+          {
+            "itemID": "melvorD:Iron_Arrows",
+            "minQuantity": 1,
+            "maxQuantity": 15,
+            "weight": 100
+          }
+        ],
+        "canSlayer": false,
+        "isBoss": false,
+        "selectedSpell": "melvorD:WindStrike",
+        "bones": {
+          "itemID": "melvorD:Big_Bones",
+          "quantity": 1
+        },
+        "currencyDrops": [
+          {
+            "currencyID": "melvorD:GP",
+            "min": 8,
+            "max": 24
+          }
+        ]
+      }
+    ],
+    "combatAreas": [
+      {
+        "id": "Test",
+        "name": "Test Area",
+        "media": "melvor:assets/media/main/question.png",
+        "monsterIDs": [ "tinyIcons:Test" ],
+        "difficulty": [ 0 ],
+        "entryRequirements": []
+      }
+    ],
+    "pets": [
+      {
+        "id": "Test",
+        "name": "Test Pet",
+        "media": "melvor:assets/media/main/question.png",
+        "ignoreCompletion": true,
+        "modifiers": {
+          "maxHitpoints": 5
+        },
+        "conditionalModifiers": [
+          {
+            "condition": {
+              "type": "Hitpoints",
+              "character": "Player",
+              "operator": "==",
+              "value": 100
+            },
+            "modifiers": {
+              "flatResistance": [
+                {
+                  "damageTypeID": "melvorD:Normal",
+                  "value": 4
+                }
+              ]
+            },
+            "description": "Description for Conditional Modifier 1"
+          },
+          {
+            "condition": {
+              "type": "Hitpoints",
+              "character": "Player",
+              "operator": "<",
+              "value": 50
+            },
+            "modifiers": {
+              "flatResistance": [
+                {
+                  "damageTypeID": "melvorD:Normal",
+                  "value": 14
+                }
+              ]
+            },
+            "description": "Description for Conditional Modifier 2"
+          }
+        ],
+        "activeInRaid": false,
+        "scaleChanceWithMasteryPool": false,
+        "skillID": "melvorD:Fishing"
+      },
+      {
+        "id": "Test2",
+        "name": "Test Pet 2",
+        "media": "melvor:assets/media/main/question.png",
+        "ignoreCompletion": true,
+        "conditionalModifiers": [
+          {
+            "condition": {
+              "type": "Hitpoints",
+              "character": "Player",
+              "operator": "==",
+              "value": 100
+            },
+            "modifiers": {
+              "flatResistance": [
+                {
+                  "damageTypeID": "melvorD:Normal",
+                  "value": 4
+                }
+              ]
+            },
+            "description": "Description for Conditional Modifier 1."
+          },
+          {
+            "condition": {
+              "type": "Hitpoints",
+              "character": "Player",
+              "operator": "<",
+              "value": 50
+            },
+            "modifiers": {
+              "flatResistance": [
+                {
+                  "damageTypeID": "melvorD:Normal",
+                  "value": 14
+                }
+              ]
+            },
+            "description": "Description for Conditional Modifier 2."
+          }
+        ],
+        "activeInRaid": false,
+        "scaleChanceWithMasteryPool": false,
+        "skillID": "melvorD:Fishing"
+      }
+    ],
+    "prayers": [
+      {
+        "id": "Test",
+        "level": 1,
+        "name": "Test Prayer",
+        "media": "melvor:assets/media/main/question.png",
+        "pointsPerPlayer": 3,
+        "pointsPerEnemy": 1,
+        "pointsPerRegen": 0,
+        "modifiers": {
+          "maxHitpoints": 5
+        },
+        "conditionalModifiers": [
+          {
+            "condition": {
+              "type": "Hitpoints",
+              "character": "Player",
+              "operator": "==",
+              "value": 100
+            },
+            "modifiers": {
+              "flatResistance": [
+                {
+                  "damageTypeID": "melvorD:Normal",
+                  "value": 4
+                }
+              ]
+            },
+            "description": "Description for Conditional Modifier 1."
+          },
+          {
+            "condition": {
+              "type": "Hitpoints",
+              "character": "Player",
+              "operator": "<",
+              "value": 50
+            },
+            "modifiers": {
+              "flatResistance": [
+                {
+                  "damageTypeID": "melvorD:Normal",
+                  "value": 14
+                }
+              ]
+            },
+            "description": "Description for Conditional Modifier 2."
+          }
+        ]
+      }
+    ],
+    "items": [
+      {
+        "itemType": "Equipment",
+        "id": "Summoning_Familiar_Test",
+        "name": "Summoning Familiar Test",
+        "category": "Summoning",
+        "type": "Familiar",
+        "media": "melvor:assets/media/main/question.png",
+        "ignoreCompletion": true,
+        "obtainFromItemLog": false,
+        "golbinRaidExclusive": false,
+        "sellsFor": 12,
+        "validSlots": [ "Summon1", "Summon2" ],
+        "occupiesSlots": [],
+        "equipRequirements": [],
+        "equipmentStats": [],
+        "modifiers": {
+          "additionalPrimaryProductChance": [
+            {
+              "skillID": "melvorD:Fishing",
+              "value": 1
+            }
+          ]
+        },
+        "consumesOn": [ { "type": "FishingAction" } ]
+      },
+      {
+        "itemType": "Equipment",
+        "id": "Test1",
+        "name": "Test Item 1",
+        "category": "Test",
+        "type": "Test",
+        "media": "melvor:assets/media/main/question.png",
+        "ignoreCompletion": true,
+        "obtainFromItemLog": false,
+        "golbinRaidExclusive": false,
+        "sellsFor": 24,
+        "validSlots": [ "Boots" ],
+        "occupiesSlots": [],
+        "equipRequirements": [],
+        "equipmentStats": [
+          {
+            "key": "stabAttackBonus",
+            "value": 1
+          }
+        ],
+        "modifiers": {
+          "maxHitpoints": 5
+        },
+        "conditionalModifiers": [
+          {
+            "condition": {
+              "type": "Hitpoints",
+              "character": "Player",
+              "operator": "==",
+              "value": 100
+            },
+            "modifiers": {
+              "flatResistance": [
+                {
+                  "damageTypeID": "melvorD:Normal",
+                  "value": 4
+                }
+              ]
+            }
+          },
+          {
+            "condition": {
+              "type": "Hitpoints",
+              "character": "Player",
+              "operator": "<",
+              "value": 50
+            },
+            "modifiers": {
+              "flatResistance": [
+                {
+                  "damageTypeID": "melvorD:Normal",
+                  "value": 14
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "itemType": "Equipment",
+        "id": "Test2",
+        "name": "Test Item 2",
+        "category": "Test",
+        "type": "Test",
+        "media": "melvor:assets/media/main/question.png",
+        "ignoreCompletion": true,
+        "obtainFromItemLog": false,
+        "golbinRaidExclusive": false,
+        "sellsFor": 48,
+        "validSlots": [ "Boots" ],
+        "occupiesSlots": [],
+        "equipRequirements": [],
+        "equipmentStats": [
+          {
+            "key": "slashAttackBonus",
+            "value": 1
+          }
+        ],
+        "customDescription": "I have a custom description, instead of auto-generated one",
+        "modifiers": {
+          "maxHitpoints": 5
+        },
+        "conditionalModifiers": [
+          {
+            "condition": {
+              "type": "Hitpoints",
+              "character": "Player",
+              "operator": "==",
+              "value": 100
+            },
+            "modifiers": {
+              "flatResistance": [
+                {
+                  "damageTypeID": "melvorD:Normal",
+                  "value": 4
+                }
+              ]
+            }
+          },
+          {
+            "condition": {
+              "type": "Hitpoints",
+              "character": "Player",
+              "operator": "<",
+              "value": 50
+            },
+            "modifiers": {
+              "flatResistance": [
+                {
+                  "damageTypeID": "melvorD:Normal",
+                  "value": 14
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "itemType": "Equipment",
+        "id": "Test3",
+        "name": "Test Item 3",
+        "category": "Test",
+        "type": "Test",
+        "media": "melvor:assets/media/main/question.png",
+        "ignoreCompletion": true,
+        "obtainFromItemLog": false,
+        "golbinRaidExclusive": false,
+        "sellsFor": 96,
+        "validSlots": [ "Boots" ],
+        "occupiesSlots": [],
+        "equipRequirements": [],
+        "equipmentStats": [
+          {
+            "key": "blockAttackBonus",
+            "value": 1
+          }
+        ],
+        "customDescription": "I have a custom description, which also describes item synergies. <span class='text-warning'><span tiny-icons-index='0'>Synergy 1 Desc would be here.</span> <span tiny-icons-index='1'>Synergy 2 Desc would be here.</span></span>",
+        "modifiers": {
+          "maxHitpoints": 5
+        },
+        "conditionalModifiers": [
+          {
+            "condition": {
+              "type": "Hitpoints",
+              "character": "Player",
+              "operator": "==",
+              "value": 100
+            },
+            "modifiers": {
+              "flatResistance": [
+                {
+                  "damageTypeID": "melvorD:Normal",
+                  "value": 4
+                }
+              ]
+            }
+          },
+          {
+            "condition": {
+              "type": "Hitpoints",
+              "character": "Player",
+              "operator": "<",
+              "value": 50
+            },
+            "modifiers": {
+              "flatResistance": [
+                {
+                  "damageTypeID": "melvorD:Normal",
+                  "value": 14
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "itemSynergies": [
+      {
+        "itemIDs": [ "tinyIcons:Test1", "tinyIcons:Test2" ],
+        "playerModifiers": {
+          "compostPreservationChance": 25
+        },
+        "conditionalModifiers": [
+          {
+            "condition": {
+              "type": "Hitpoints",
+              "character": "Player",
+              "operator": "==",
+              "value": 100
+            },
+            "modifiers": {
+              "flatResistance": [
+                {
+                  "damageTypeID": "melvorD:Normal",
+                  "value": 4
+                }
+              ]
+            }
+          },
+          {
+            "condition": {
+              "type": "Hitpoints",
+              "character": "Player",
+              "operator": "<",
+              "value": 50
+            },
+            "modifiers": {
+              "flatResistance": [
+                {
+                  "damageTypeID": "melvorD:Normal",
+                  "value": 14
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "itemIDs": [ "tinyIcons:Test2", "tinyIcons:Test3" ],
+        "playerModifiers": {
+          "compostPreservationChance": 25
+        },
+        "conditionalModifiers": [
+          {
+            "condition": {
+              "type": "Hitpoints",
+              "character": "Player",
+              "operator": "==",
+              "value": 100
+            },
+            "modifiers": {
+              "flatResistance": [
+                {
+                  "damageTypeID": "melvorD:Normal",
+                  "value": 24
+                }
+              ]
+            }
+          },
+          {
+            "condition": {
+              "type": "Hitpoints",
+              "character": "Player",
+              "operator": "<",
+              "value": 50
+            },
+            "modifiers": {
+              "flatResistance": [
+                {
+                  "damageTypeID": "melvorD:Normal",
+                  "value": 34
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "skillData": [
+      {
+        "skillID": "melvorD:Astrology",
+        "data": {
+          "recipes": [
+            {
+              "id": "Test",
+              "baseExperience": 75,
+              "level": 92,
+              "name": "Test Recipe",
+              "media": "melvor:assets/media/main/question.png",
+              "skillIDs": [ "melvorD:Summoning" ],
+              "standardModifiers": [
+                {
+                  "modifiers": {
+                    "skillXP": [
+                      {
+                        "value": 1,
+                        "skillID": "melvorD:Summoning"
+                      }
+                    ]
+                  },
+                  "conditionalModifiers": [
+                    {
+                      "condition": {
+                        "type": "Hitpoints",
+                        "character": "Player",
+                        "operator": "==",
+                        "value": 100
+                      },
+                      "modifiers": {
+                        "flatResistance": [
+                          {
+                            "damageTypeID": "melvorD:Normal",
+                            "value": 4
+                          }
+                        ]
+                      },
+                      "description": "Description for Conditional Modifier 1"
+                    },
+                    {
+                      "condition": {
+                        "type": "Hitpoints",
+                        "character": "Player",
+                        "operator": "<",
+                        "value": 50
+                      },
+                      "modifiers": {
+                        "flatResistance": [
+                          {
+                            "damageTypeID": "melvorD:Normal",
+                            "value": 14
+                          }
+                        ]
+                      },
+                      "description": "Description for Conditional Modifier 2"
+                    }
+                  ],
+                  "maxCount": 8,
+                  "costs": [ 50, 100, 200, 400, 800, 1600, 3200, 6400 ],
+                  "unlockRequirements": [
+                    {
+                      "type": "MasteryLevel",
+                      "skillID": "melvorD:Astrology",
+                      "actionID": "tinyIcons:Test",
+                      "level": 1
+                    }
+                  ]
+                },
+                {
+                  "modifiers": {
+                    "skillXP": [
+                      {
+                        "value": 1,
+                        "skillID": "melvorD:Summoning"
+                      }
+                    ]
+                  },
+                  "maxCount": 8,
+                  "costs": [ 50, 100, 200, 400, 800, 1600, 3200, 6400 ],
+                  "unlockRequirements": [
+                    {
+                      "type": "MasteryLevel",
+                      "skillID": "melvorD:Astrology",
+                      "actionID": "tinyIcons:Test",
+                      "level": 40
+                    }
+                  ]
+                },
+                {
+                  "modifiers": {
+                    "skillXP": [
+                      {
+                        "value": 1,
+                        "skillID": "melvorD:Summoning"
+                      }
+                    ]
+                  },
+                  "maxCount": 8,
+                  "costs": [ 50, 100, 200, 400, 800, 1600, 3200, 6400 ],
+                  "unlockRequirements": [
+                    {
+                      "type": "MasteryLevel",
+                      "skillID": "melvorD:Astrology",
+                      "actionID": "tinyIcons:Test",
+                      "level": 80
+                    }
+                  ]
+                }
+              ],
+              "uniqueModifiers": [
+                {
+                  "modifiers": {
+                    "skillXP": [
+                      {
+                        "value": 1,
+                        "skillID": "melvorD:Summoning"
+                      }
+                    ]
+                  },
+                  "conditionalModifiers": [
+                    {
+                      "condition": {
+                        "type": "Hitpoints",
+                        "character": "Player",
+                        "operator": "==",
+                        "value": 100
+                      },
+                      "modifiers": {
+                        "flatResistance": [
+                          {
+                            "damageTypeID": "melvorD:Normal",
+                            "value": 4
+                          }
+                        ]
+                      },
+                      "description": "Description for Conditional Modifier 1"
+                    },
+                    {
+                      "condition": {
+                        "type": "Hitpoints",
+                        "character": "Player",
+                        "operator": "<",
+                        "value": 50
+                      },
+                      "modifiers": {
+                        "flatResistance": [
+                          {
+                            "damageTypeID": "melvorD:Normal",
+                            "value": 14
+                          }
+                        ]
+                      },
+                      "description": "Description for Conditional Modifier 2"
+                    }
+                  ],
+                  "maxCount": 8,
+                  "costs": [ 50, 100, 200, 400, 800, 1600, 3200, 6400 ],
+                  "unlockRequirements": [
+                    {
+                      "type": "MasteryLevel",
+                      "skillID": "melvorD:Astrology",
+                      "actionID": "tinyIcons:Test",
+                      "level": 20
+                    }
+                  ]
+                },
+                {
+                  "modifiers": {
+                    "skillXP": [
+                      {
+                        "value": 1,
+                        "skillID": "melvorD:Summoning"
+                      }
+                    ]
+                  },
+                  "maxCount": 8,
+                  "costs": [ 50, 100, 200, 400, 800, 1600, 3200, 6400 ],
+                  "unlockRequirements": [
+                    {
+                      "type": "MasteryLevel",
+                      "skillID": "melvorD:Astrology",
+                      "actionID": "tinyIcons:Test",
+                      "level": 60
+                    }
+                  ]
+                },
+                {
+                  "modifiers": {
+                    "skillXP": [
+                      {
+                        "value": 1,
+                        "skillID": "melvorD:Summoning"
+                      }
+                    ]
+                  },
+                  "maxCount": 8,
+                  "costs": [ 50, 100, 200, 400, 800, 1600, 3200, 6400 ],
+                  "unlockRequirements": [
+                    {
+                      "type": "MasteryLevel",
+                      "skillID": "melvorD:Astrology",
+                      "actionID": "tinyIcons:Test",
+                      "level": 99
+                    }
+                  ]
+                }
+              ],
+              "masteryXPModifier": "skillMasteryXPPerQimican"
+            }
+          ]
+        }
+      },
+      {
+        "skillID": "melvorD:Summoning",
+        "data": {
+          "recipes": [
+            {
+              "id": "Summoning_Familiar_Test",
+              "level": 1,
+              "productID": "tinyIcons:Summoning_Familiar_Test",
+              "baseQuantity": 25,
+              "baseExperience": 7,
+              "categoryID": "melvorD:TabletsFamiliars",
+              "itemCosts": [
+                {
+                  "id": "melvorF:Summoning_Shard_Red",
+                  "quantity": 99
+                }
+              ],
+              "markMedia": "melvor:assets/media/main/question.png",
+              "nonShardItemCosts": [ "melvorD:Bronze_Dagger" ],
+              "tier": 1,
+              "skillIDs": [ "melvorD:Fishing" ],
+              "currencyCosts": []
+            }
+          ],
+          "synergies": [
+            {
+              "summonIDs": [ "melvorF:GolbinThief", "tinyIcons:Summoning_Familiar_Test" ],
+              "modifiers": {
+                "additionalPrimaryProductChance": [
+                  {
+                    "skillID": "melvorD:Fishing",
+                    "value": 1
+                  }
+                ]
+              },
+              "conditionalModifiers": [
+                {
+                  "condition": {
+                    "type": "DamageType",
+                    "character": "Player",
+                    "damageType": "melvorD:Normal"
+                  },
+                  "modifiers": {
+                    "magicLifesteal": 1
+                  },
+                  "descriptionLang": "COND_MODIFIER_magicLifestealDamageType"
+                }
+              ],
+              "consumesOn": [ { "type": "FishingAction" } ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "modifications": {
+    "combatAreaCategories": [
+      {
+        "id": "melvorD:CombatAreas",
+        "areas": {
+          "add": [
+            {
+              "insertAt": "Start",
+              "ids": ["tinyIcons:Test"]
+            }
+          ]
+        }
+      }
+    ],
+    "tinyIcons": {
+      "staticTagAllocations": [
+        {
+          "context": {
+            "category": "AttackStyle",
+            "id": "tinyIcons:Test"
+          },
+          "data": {
+            "conditionalModifierIconTags": [
+              [ "interval", "attack" ],
+              [ "hitpoints" ]
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "AstrologyRecipe",
+            "id": "tinyIcons:Test",
+            "modifierType": "Standard",
+            "modifierIndex": 0
+          },
+          "data": {
+            "conditionalModifierIconTags": [
+              [ "interval", "attack" ],
+              [ "hitpoints" ]
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "AstrologyRecipe",
+            "id": "tinyIcons:Test",
+            "modifierType": "Unique",
+            "modifierIndex": 0
+          },
+          "data": {
+            "conditionalModifierIconTags": [
+              [ "interval", "attack" ],
+              [ "hitpoints" ]
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "CombatSpell",
+            "spellType": "Aurora",
+            "id": "tinyIcons:Test"
+          },
+          "data": {
+            "conditionalModifierIconTags": [
+              [ "interval", "attack" ],
+              [ "hitpoints" ]
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "ShopPurchase",
+            "id": "melvorD:Extra_Bank_Slot"
+          },
+          "data": {
+            "descriptionIconTags": [ "bank" ]
+          }
+        },
+        {
+          "context": {
+            "category": "Pet",
+            "id": "tinyIcons:Test2"
+          },
+          "data": {
+            "conditionalModifierIconTags": [
+              [ "interval", "attack" ],
+              [ "hitpoints" ]
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "Prayer",
+            "id": "tinyIcons:Test"
+          },
+          "data": {
+            "conditionalModifierIconTags": [
+              [ "interval", "hitpoints" ],
+              [ "attack" ]
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "tinyIcons:Test1"
+          },
+          "data": {
+            "conditionalModifierIconTags": [
+              [ "interval", "attack" ]
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "tinyIcons:Test2"
+          },
+          "data": {
+            "descriptionIconTags": [ "magic", "air_rune" ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "tinyIcons:Test3"
+          },
+          "data": {
+            "descriptionIconTags": [ "hitpoints" ]
+          }
+        },
+        {
+          "context": {
+            "category": "ItemSynergy",
+            "itemIDs": [ "tinyIcons:Test1", "tinyIcons:Test2" ]
+          },
+          "data": {
+            "descriptionIconTags": [ "interval", "attack" ],
+            "conditionalModifierIconTags": [
+              [ "hitpoints" ]
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "ItemSynergy",
+            "itemIDs": [ "tinyIcons:Test2", "tinyIcons:Test3" ]
+          },
+          "data": {
+            "descriptionIconTags": [ "magic", "air_rune" ],
+            "conditionalModifierIconTags": [
+              [ "interval", "attack" ],
+              [ "hitpoints" ]
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "SummoningSynergy",
+            "summonIDs": [ "melvorF:GolbinThief", "tinyIcons:Summoning_Familiar_Test" ]
+          },
+          "data": {
+            "conditionalModifierIconTags": [
+              [ "magic", "hitpoints" ]
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "dependentData": [
+    {
+      "namespace": "melvorTotH",
+      "data": {
+        "skillData": [
+          {
+            "skillID": "melvorD:Summoning",
+            "data": {
+              "synergies": [
+                {
+                  "summonIDs": [ "melvorTotH:LightningSpirit", "tinyIcons:Summoning_Familiar_Test" ],
+                  "customDescription": "This synergy uses a custom description for the synergy overall, rather than a language key on each conditional modifier",
+                  "modifiers": {
+
+                  },
+                  "conditionalModifiers": [
+                    {
+                      "condition": {
+                        "type": "DamageType",
+                        "character": "Player",
+                        "damageType": "melvorD:Normal"
+                      },
+                      "modifiers": {
+                        "magicLifesteal": 3
+                      }
+                    }
+                  ],
+                  "consumesOn": [ { "type": "FishingAction" } ]
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "modifications": {
+        "tinyIcons": {
+          "staticTagAllocations": [
+            {
+              "context": {
+                "category": "EquipmentItem",
+                "id": "melvorTotH:Superior_Thieving_Skillcape"
+              },
+              "data": {
+                "descriptionIconTags": [ "hitpoints" ]
+              }
+            },
+            {
+              "context": {
+                "category": "SummoningSynergy",
+                "summonIDs": [ "melvorTotH:LightningSpirit", "tinyIcons:Summoning_Familiar_Test" ]
+              },
+              "data": {
+                "descriptionIconTags": [ "magic" ]
+              }
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

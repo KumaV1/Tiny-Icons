@@ -1,0 +1,21 @@
+﻿{
+  "$schema": "https://melvoridle.com/assets/schema/gameData.json",
+  "namespace": "tinyIcons",
+  "modifications": {
+    "tinyIcons": {
+      "staticTagAllocations": [
+        {
+          "context": {
+            "category": "TownshipSeason",
+            "id": "melvorF:SolarEclipse"
+          },
+          "data": {
+            "conditionalModifierIconTags": [
+              [ "ti_attack_interval", "normal_damage" ]
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

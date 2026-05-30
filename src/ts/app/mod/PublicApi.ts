@@ -1,21 +1,32 @@
-﻿import { Logger } from "./Logger";
+﻿import { Constants } from "../constants";
+import { Logger } from "./Logger";
 import { IconManager } from "./managers/IconManager";
 import { SettingsManager } from "./managers/SettingsManager";
 import { TagManager } from "./managers/TagManager";
 import { ModifierTagMapEntryAttributes } from './models/ModifierTagMapEntryAttributes';
 import { ModifierIconContext } from "./ModifierIconContext";
 import { ModifierScopeSourceMediaMemoizer } from './ModifierScopeSourceMediaMemoizer';
+import { EntityModificationDataPropagator } from "./propagators/data/entityModificationDataPropagator";
 import { TagAllocationMemoizer } from './TagAllocationMemoizer';
+import { PropagatorBaseContextData } from "./types/data/propagatorBaseContextData";
+import { PropagatorBaseDataData } from "./types/data/propagatorBaseDataData";
+import { PropagatorNamespacedObjectContextData } from "./types/data/propagatorNamespacedObjectContextData";
+import { EntityCategory } from "./types/entityCategory";
 import { ModModifierIconTag } from './types/modModifierIconTag';
 import { NamedObjectWithMedia } from './types/namedObjectWithMedia';
 import { PathType } from "./types/pathType";
 import { StaticModifierIconTag } from "./types/staticModifierIconTag";
 import { TinyIconsModSettings } from "./types/tinyIconsModSettings";
+import collect from "./utils/collectModificationSuggestions";
 
 export class PublicApi {
     private static conditionalModifiersProvider: ((category: string, id: string, index: number) => string[] | undefined) | undefined;
     public static init(ctx: Modding.ModContext): void {
         ctx.api({
+            classes: {
+                EntityModificationDataPropagator
+            },
+
             /**
              * Wrapper object around functions that deal with "applyDescriptionModifications"
              */
@@ -56,18 +67,7 @@ export class PublicApi {
             addModifier: (modifierId: string,
               primaryTag: StaticModifierIconTag | ModModifierIconTag | { positive: StaticModifierIconTag | ModModifierIconTag, negative: StaticModifierIconTag | ModModifierIconTag, ignoreIfSkillScope?: boolean },
               secondaryTag?: StaticModifierIconTag | ModModifierIconTag | { positive: StaticModifierIconTag | ModModifierIconTag, negative: StaticModifierIconTag | ModModifierIconTag, ignoreIfSkillScope?: boolean }): void => {
-                if (!modifierId) {
-                  Logger.warn('No/Falsey modifier id provided');
-                  return;
-                }
-
-                const modifier = game.modifierRegistry.getObjectByID(modifierId);
-                if (!modifier) {
-                  Logger.warn(`Could not find modifier with id ${modifierId} in game.modifierRegistry.`);
-                  return;
-                }
-
-                TagAllocationMemoizer.modifierTagMap.set(modifierId, new ModifierTagMapEntryAttributes(primaryTag, secondaryTag));
+                TagAllocationMemoizer.addTaggingForModifier(modifierId, primaryTag, secondaryTag);
             },
 
             /**
@@ -111,8 +111,19 @@ export class PublicApi {
              * Returns tag attributes object for given modifier, if one is set up for that modifier
              * @param modifier The name of the modifier.
              * @returns {ModifierTagMapEntryAttributes | undefined} An object of modifier tag attributes
+             * @deprecated
              */
             getIconTagMapForModifier: (modifier: string): ModifierTagMapEntryAttributes | undefined => {
+                Logger.warn('getIconTagMapForModifier is deprecated. Use getTagDataForModifier instead');
+                return TagAllocationMemoizer.modifierTagMap.get(modifier);
+            },
+
+            /**
+             * Returns tag attributes object for given modifier, if one is set up for that modifier
+             * @param modifier The name of the modifier.
+             * @returns {ModifierTagMapEntryAttributes | undefined} An object of modifier tag attributes
+             */
+            getTagDataForModifier: (modifier: string): ModifierTagMapEntryAttributes | undefined => {
                 return TagAllocationMemoizer.modifierTagMap.get(modifier);
             },
 
@@ -148,7 +159,7 @@ export class PublicApi {
             getTagAllocationMemoizer: () => {
                 return {
                     modifierTagMap: TagAllocationMemoizer.modifierTagMap,
-                    entityContextTagMaps: TagAllocationMemoizer.entityContextTagMaps,
+                    propagators: TagAllocationMemoizer.propagators
                 };
             },
 
@@ -182,6 +193,20 @@ export class PublicApi {
              */
             viewModifierScopeSourceMemoizer: (): void => this.viewModifierScopeSourceMemoizer(),
 
+            /**
+             * Suggest data package data for one or all categories. Only intended for devs. Before namespace support, only a tiny icons endpoint
+             * @param category
+             * @returns
+             */
+            collectModificationSuggestions: (category: EntityCategory | undefined = undefined): Object | undefined  => {
+                if (!Constants.DEV_MODE) {
+                    Logger.log('This endpoint is currently only available for the mod itself. With namespace specifications, it may become available for other mod developers in the future');
+                    return undefined;
+                }
+
+                return collect(category);
+            }
+
             // === DEPRECATED ===
 
             /**
@@ -190,7 +215,7 @@ export class PublicApi {
              * @deprecated
              */
             //addTagSources: (customTags: { [key: string]: string }) => {
-            //  console.warn('[Tiny Icons] addTagSources is deprecated. Use addTagSourceMap instead.');
+            //  Logger.warn('[Tiny Icons] addTagSources is deprecated. Use addTagSourceMap instead.');
             //},
 
             /**
@@ -202,7 +227,7 @@ export class PublicApi {
             //    modifier: string;
             //    tag: [string, string?];
             //}) => {
-            //    console.warn('[Tiny Icons] addCustomModifiers has been deprecated. Use addCustomModifier instead.');
+            //    Logger.warn('[Tiny Icons] addCustomModifiers has been deprecated. Use addCustomModifier instead.');
             //},
 
             /**
@@ -213,7 +238,7 @@ export class PublicApi {
              * @deprecated
              */
             //getIconTagsForModifier: (modifier: string): (StaticModifierIconTag | ModModifierIconTag)[] => {
-            //    console.warn('[Tiny Icons] getIconTagsForModifier has been deprecated. Use getIconTagMapForModifier instead.')
+            //    Logger.warn('[Tiny Icons] getIconTagsForModifier has been deprecated. Use getIconTagMapForModifier instead.')
             //    return [];
             //},
 
@@ -236,7 +261,7 @@ export class PublicApi {
             //    specific?: string | undefined,
             //    ext?: string,
             //): string => {
-            //  console.warn('[Tiny Icons] getIconResourcePath has been deprecated.');
+            //  Logger.warn('[Tiny Icons] getIconResourcePath has been deprecated.');
             //  return '';
             //},
         });

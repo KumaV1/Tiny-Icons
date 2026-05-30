@@ -1,0 +1,433 @@
+﻿{
+  "$schema": "https://melvoridle.com/assets/schema/gameData.json",
+  "namespace": "tinyIcons",
+  "modifications": {
+    "tinyIcons": {
+      "staticTagAllocations": [
+        {
+          "context": {
+            "category": "SummoningSynergy",
+            "summonIDs": [
+              "melvorF:GolbinThief",
+              "melvorF:Dragon"
+            ]
+          },
+          "data": {
+            "conditionalModifierIconTags": [
+              [
+                "currency",
+                "combat"
+              ]
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "SummoningSynergy",
+            "summonIDs": [
+              "melvorF:Occultist",
+              "melvorF:Wolf"
+            ]
+          },
+          "data": {
+            "descriptionIconTags": [
+              "evasion_up",
+              "accuracy",
+              "hitpoints"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "SummoningSynergy",
+            "summonIDs": [
+              "melvorF:Occultist",
+              "melvorF:Minotaur"
+            ]
+          },
+          "data": {
+            "descriptionIconTags": [
+              "offense_up"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "SummoningSynergy",
+            "summonIDs": [
+              "melvorF:Occultist",
+              "melvorF:Centaur"
+            ]
+          },
+          "data": {
+            "descriptionIconTags": [
+              "ti_combat_up"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "SummoningSynergy",
+            "summonIDs": [
+              "melvorF:Occultist",
+              "melvorF:Cyclops"
+            ]
+          },
+          "data": {
+            "conditionalModifierIconTags": [
+              [
+                "evasion_up"
+              ]
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "SummoningSynergy",
+            "summonIDs": [
+              "melvorF:Occultist",
+              "melvorF:Dragon"
+            ]
+          },
+          "data": {
+            "descriptionIconTags": [
+              "defence",
+              "burn"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "SummoningSynergy",
+            "summonIDs": [
+              "melvorF:Ent",
+              "melvorF:Leprechaun"
+            ]
+          },
+          "data": {
+            "descriptionIconTags": [
+              "bird_nest",
+              "thieving"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "SummoningSynergy",
+            "summonIDs": [
+              "melvorF:Ent",
+              "melvorF:Salamander"
+            ]
+          },
+          "data": {
+            "descriptionIconTags": [
+              "skill"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "SummoningSynergy",
+            "summonIDs": [
+              "melvorF:Ent",
+              "melvorF:Bear"
+            ]
+          },
+          "data": {
+            "descriptionIconTags": [
+              "bird_nest",
+              "woodcutting"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "SummoningSynergy",
+            "summonIDs": [
+              "melvorF:Mole",
+              "melvorF:Octopus"
+            ]
+          },
+          "data": {
+            "descriptionIconTags": [
+              "mining",
+              "fishing"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "SummoningSynergy",
+            "summonIDs": [
+              "melvorF:Mole",
+              "melvorF:Pig"
+            ]
+          },
+          "data": {
+            "descriptionIconTags": [
+              "cooking",
+              "coal"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "SummoningSynergy",
+            "summonIDs": [
+              "melvorF:Mole",
+              "melvorF:Leprechaun"
+            ]
+          },
+          "data": {
+            "descriptionIconTags": [
+              "gem",
+              "skill"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "SummoningSynergy",
+            "summonIDs": [
+              "melvorF:Mole",
+              "melvorF:Bear"
+            ]
+          },
+          "data": {
+            "descriptionIconTags": [
+              "mining",
+              "hitpoints"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "SummoningSynergy",
+            "summonIDs": [
+              "melvorF:Octopus",
+              "melvorF:Leprechaun"
+            ]
+          },
+          "data": {
+            "descriptionIconTags": [
+              "thieving"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "SummoningSynergy",
+            "summonIDs": [
+              "melvorF:Minotaur",
+              "melvorF:Centaur"
+            ]
+          },
+          "data": {
+            "descriptionIconTags": [
+              "offense_up",
+              "attack",
+              "ranged"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "SummoningSynergy",
+            "summonIDs": [
+              "melvorF:Minotaur",
+              "melvorF:Unicorn"
+            ]
+          },
+          "data": {
+            "descriptionIconTags": [
+              "regen",
+              "attack"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "SummoningSynergy",
+            "summonIDs": [
+              "melvorF:Minotaur",
+              "melvorF:Dragon"
+            ]
+          },
+          "data": {
+            "descriptionIconTags": [
+              "ti_strength_up",
+              "accuracy",
+              "burn"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "SummoningSynergy",
+            "summonIDs": [
+              "melvorF:Centaur",
+              "melvorF:Witch"
+            ]
+          },
+          "data": {
+            "descriptionIconTags": [
+              "ti_ranged_up",
+              "accuracy",
+              "magic"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "SummoningSynergy",
+            "summonIDs": [
+              "melvorF:Witch",
+              "melvorF:Dragon"
+            ]
+          },
+          "data": {
+            "descriptionIconTags": [
+              "ti_combat_up",
+              "magic"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "SummoningSynergy",
+            "summonIDs": [
+              "melvorF:Pig",
+              "melvorF:Devil"
+            ]
+          },
+          "data": {
+            "descriptionIconTags": [
+              "mastery",
+              "preservation",
+              "skill"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "SummoningSynergy",
+            "summonIDs": [
+              "melvorF:Crow",
+              "melvorF:Salamander"
+            ]
+          },
+          "data": {
+            "descriptionIconTags": [
+              "preservation",
+              "skill"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "SummoningSynergy",
+            "summonIDs": [
+              "melvorF:Crow",
+              "melvorF:Bear"
+            ]
+          },
+          "data": {
+            "descriptionIconTags": [
+              "runecrafting"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "SummoningSynergy",
+            "summonIDs": [
+              "melvorF:Leprechaun",
+              "melvorF:Devil"
+            ]
+          },
+          "data": {
+            "descriptionIconTags": [
+              "thieving"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "SummoningSynergy",
+            "summonIDs": [
+              "melvorF:Yak",
+              "melvorF:Unicorn"
+            ]
+          },
+          "data": {
+            "descriptionIconTags": [
+              "regen",
+              "hitpoints"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "SummoningSynergy",
+            "summonIDs": [
+              "melvorF:Yak",
+              "melvorF:Dragon"
+            ]
+          },
+          "data": {
+            "descriptionIconTags": [
+              "combat"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "SummoningSynergy",
+            "summonIDs": [
+              "melvorF:Salamander",
+              "melvorF:Bear"
+            ]
+          },
+          "data": {
+            "descriptionIconTags": [
+              "silver_bar",
+              "gold_bar",
+              "smithing"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "SummoningSynergy",
+            "summonIDs": [
+              "melvorF:Salamander",
+              "melvorF:Devil"
+            ]
+          },
+          "data": {
+            "descriptionIconTags": [
+              "coal",
+              "smithing"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "SummoningSynergy",
+            "summonIDs": [
+              "melvorF:Bear",
+              "melvorF:Devil"
+            ]
+          },
+          "data": {
+            "descriptionIconTags": [
+              "interval",
+              "xp",
+              "firemaking"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

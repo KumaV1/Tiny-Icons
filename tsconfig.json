@@ -1,4 +1,4 @@
-{
+﻿{
   "compilerOptions": {
     /* Visit https://aka.ms/tsconfig to read more about this file */
 
@@ -104,5 +104,6 @@
   "include": [
     "src/**/*",
     "node_modules/melvor-types",
+    "_definitions/**/*"
   ]
 }

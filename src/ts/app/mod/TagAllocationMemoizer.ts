@@ -1,26 +1,33 @@
 ﻿import { Constants } from '../constants';
 import { Logger } from './Logger';
 import { ModifierTagMapEntryAttributes } from './models/ModifierTagMapEntryAttributes';
-
-export interface TagDataObject {
-    /** Tags to place at the beginning of the given description */
-    tags?: string[];
-
-    /** Tags to place at the start of a respective {@link ConditionalModifier}'description */
-    conditionalModifierTags?: string[][];
-
-    /**
-     * Whether the tags should append to or replace potential icons from modifiers. Should default to false(y)
-     */
-    appendTags?: boolean;
-}
+import { AncientRelicDataPropagator } from './propagators/data/ancientRelicDataPropagator';
+import { AstrologyRecipeDataPropagator } from './propagators/data/astrologyRecipeDataPropagator';
+import { AttackStyleDataPropagator } from './propagators/data/attackStyleDataPropagator';
+import { BaseAgilityObjectDataPropagator } from './propagators/data/baseAgilityObjectDataPropagator';
+import { CartographyPOIDataPropagator } from './propagators/data/cartographyPOIDataPropagator';
+import { CartographyWorldMapMasteryBonusDataPropagator } from './propagators/data/cartographyWorldMapMasteryBonusDataPropagator';
+import { CombatPassiveDataPropagator } from './propagators/data/combatPassiveDataPropagator';
+import { CombatSpellDataPropagator } from './propagators/data/combatSpellDataPropagator';
+import { ItemDataPropagator } from './propagators/data/itemDataPropagator';
+import { ItemSynergyDataPropagator } from './propagators/data/itemSynergyDataPropagator';
+import { PetDataPropagator } from './propagators/data/petDataPropagator';
+import { PrayerDataPropagator } from './propagators/data/prayerDataPropagator';
+import { ShopPurchaseDataPropagator } from './propagators/data/shopPurchaseDataPropagator';
+import { SkillTreeNodeDataPropagator } from './propagators/data/skilltreeNodeDataPropagator';
+import { SummoningSynergyDataPropagator } from './propagators/data/summoningSynergyDataPropagator';
+import { TownshipSeasonDataPropagator } from './propagators/data/townshipSeasonDataPropagator';
+import { EntityCategory } from './types/entityCategory';
+import { EntityModificationDataPropagator } from './propagators/data/entityModificationDataPropagator';
+import { ModModifierIconTag } from './types/modModifierIconTag';
+import { StaticModifierIconTag } from './types/staticModifierIconTag';
 
 export class TagAllocationMemoizer {
-  // Keep backward-compatible modifierTagMap, backed by the current modifierTagMap file
-  public static modifierTagMap: Map<string, ModifierTagMapEntryAttributes>;
+    // @ts-ignore TODO: Make a "AnyPropagator" type to avoid typing issue
+    public static propagators: Map<EntityCategory, EntityModificationDataPropagator>;
 
-  // Map of category -> (id -> TagDataObject)
-    public static entityContextTagMaps: Map<string, Map<string, TagDataObject>>;
+    // Keep backward-compatible modifierTagMap, backed by the current modifierTagMap file
+    public static modifierTagMap: Map<string, ModifierTagMapEntryAttributes>;
 
     /**
      * Initialize the memoizer and set some game data
@@ -28,67 +35,71 @@ export class TagAllocationMemoizer {
      */
     public static init(ctx: Modding.ModContext) {
         TagAllocationMemoizer.modifierTagMap = new Map();
-        TagAllocationMemoizer.entityContextTagMaps = new Map();
+        TagAllocationMemoizer.propagators = new Map();
 
-        ctx.onCharacterSelectionLoaded(function () {
-            const t0: number = performance.now();
-            // Init tagging for base game (and expansions)
-            TagAllocationMemoizer.initModifierTagMap();
-            TagAllocationMemoizer.initEntityContextTagMaps();
-
-            // Init tagging for modded stuff
-            TagAllocationMemoizer.initModData();
-
-            // Preserve info that initialization is done and clear now not necessary collections (clearing up very minor memory, but still)
-            //TagAllocationMemoizer.actionMediaMapMods.clear();
-            //TagAllocationMemoizer.effectGroupMediaMapMods.clear();
-            const t1: number = performance.now();
-            if (Constants.DEV_MODE) {
-                Logger.log(`Memoizing media maps took ${Math.floor(t1 - t0)}ms`);
-            }
-        });
+        const t0: number = performance.now();
+        TagAllocationMemoizer.registerStandardPropagators();
+        TagAllocationMemoizer.initModifierTagMap();
+        const t1: number = performance.now();
+        if (Constants.DEV_MODE) {
+            Logger.log(`Initializing TagAllocationMemoizer with default propagators and modifier tag allocations took ${Math.floor(t1 - t0)}ms`);
+        }
     }
 
-  /**
-   * 
-   * @param category
-   * @param id
-   * @param data
-   */
-  static registerEntityContextTags(category: string, id: string, data: TagDataObject): void {
-      let inner = this.entityContextTagMaps.get(category);
-    if (!inner) {
-      inner = new Map<string, TagDataObject>();
-        this.entityContextTagMaps.set(category, inner);
-    }
-    inner.set(id, data);
-  }
+    public static addTaggingForModifier(modifierId: string,
+        primaryTag: StaticModifierIconTag | ModModifierIconTag | { positive: StaticModifierIconTag | ModModifierIconTag, negative: StaticModifierIconTag | ModModifierIconTag, ignoreIfSkillScope?: boolean },
+        secondaryTag?: StaticModifierIconTag | ModModifierIconTag | { positive: StaticModifierIconTag | ModModifierIconTag, negative: StaticModifierIconTag | ModModifierIconTag, ignoreIfSkillScope?: boolean }): void {
+        if (!modifierId) {
+            Logger.warn('No/Falsey modifier id provided', modifierId);
+            return;
+        }
 
-  /**
-   * 
-   * @param category
-   * @param id
-   * @returns
-   */
-  static unregisterEntityContextTags(category: string, id: string): void {
-      const inner = this.entityContextTagMaps.get(category);
-    if (!inner) return;
-    inner.delete(id);
-      if (inner.size === 0) this.entityContextTagMaps.delete(category);
-  }
+        const modifier = game.modifierRegistry.getObjectByID(modifierId);
+        if (!modifier) {
+            Logger.warn(`Could not find modifier with id ${modifierId} in game.modifierRegistry.`);
+            return;
+        }
 
-  /**
-   * 
-   * @param category
-   * @param id
-   * @returns
-   */
-  static getEntityContextTags(category: string, id: string): TagDataObject | undefined {
-      const inner = this.entityContextTagMaps.get(category);
-      return inner?.get(id);
+        TagAllocationMemoizer.modifierTagMap.set(modifierId, new ModifierTagMapEntryAttributes(primaryTag, secondaryTag));
     }
 
+    /** Register propagators for categories always supported */
+    static registerStandardPropagators() {
+        const itemPropagator = new ItemDataPropagator();
+        this.propagators.set('TokenItem', itemPropagator);
+        this.propagators.set('PotionItem', itemPropagator);
+        this.propagators.set('EquipmentItem', itemPropagator);
+        this.propagators.set('WeaponItem', itemPropagator);
+        this.propagators.set('FiremakingOilItem', itemPropagator);
+        this.propagators.set('FoodItem', itemPropagator);
 
+        this.propagators.set('AncientRelic', new AncientRelicDataPropagator());
+        this.propagators.set('AstrologyRecipe', new AstrologyRecipeDataPropagator());
+        this.propagators.set('AttackStyle', new AttackStyleDataPropagator());
+        this.propagators.set('BaseAgilityObject', new BaseAgilityObjectDataPropagator());
+        this.propagators.set('CartographyPOI', new CartographyPOIDataPropagator());
+        this.propagators.set('CartographyWorldMapMasteryBonus', new CartographyWorldMapMasteryBonusDataPropagator());
+        this.propagators.set('CombatPassive', new CombatPassiveDataPropagator());
+        this.propagators.set('CombatSpell', new CombatSpellDataPropagator());
+        this.propagators.set('ItemSynergy', new ItemSynergyDataPropagator());
+        this.propagators.set('Pet', new PetDataPropagator());
+        this.propagators.set('Prayer', new PrayerDataPropagator());
+        this.propagators.set('SkillTreeNode', new SkillTreeNodeDataPropagator());
+        this.propagators.set('ShopPurchase', new ShopPurchaseDataPropagator());
+        this.propagators.set('SummoningSynergy', new SummoningSynergyDataPropagator());
+        this.propagators.set('TownshipSeason', new TownshipSeasonDataPropagator());
+
+        // NOTE regarding combat effects: "game.combatEffects" is NOT "CombatEffectApplicator"!
+        // That said, e.g. an "EquipmentItem"'s combat effects are applicator objects.
+        // And the "data" for it is apparently "TriggeredCombatEffectApplicatorData"
+        // (which is AnyCombatEffectApplicatorData & CombatEffectApplicatorTriggerData)
+        // The first of which is either "TableCombatEffectApplicatorData" or "SingleCombatEffectApplicator"
+        // Both of which lead to corresponding objects which are both based on "CombatEffectApplicator", the description (pre placeholder replacement)
+        // seems to always be a hard-defined text, rather than generated, be it "_descriptionLang", "_customDescription", or a "getLangString(`EFFECT_APPLICATOR_${this.appliesWhen}`)" fallback";
+        // ^ In short, combat effects may be just about doing the same "propogation" stuff like with conditional modifiers.
+        //   ^ Although, having some standardized stuff (e.g. burn effects automatically including said Burn)
+        //     ^ Basically, using the "combatEffect" behind the applicator in order to possibly add icons even if not overriden for that specific applicator
+    }
 
     /**
      * Add data provided by mods via API
@@ -221,7 +232,7 @@ export class TagAllocationMemoizer {
             ['melvorD:bypassRunePreservationChance', new ModifierTagMapEntryAttributes('preservation', 'magic')],
             ['melvorD:halveAttackInterval', new ModifierTagMapEntryAttributes('ti_attack_interval')],
             ['melvorD:lifestealDamageBasedOnCurrentHitpoints', new ModifierTagMapEntryAttributes('lifesteal', 'hitpoints')],
-            ['melvorD:damageBasedOnCurrentHitpoints', new ModifierTagMapEntryAttributes({ positive: 'ti_combat_up', negative: 'ti_combat_dn' }, 'hitpoints')],
+            ['melvorD:damageBasedOnCurrentHitpoints', new ModifierTagMapEntryAttributes({ positive: 'ti_combat_up', negative: 'ti_combat_dn' }, 'hitpoints')], // TODO: "hitpoints_up" and "hitpoints_dn" tags would be nice
             ['melvorD:damageBasedOnMaxHitpoints', new ModifierTagMapEntryAttributes({ positive: 'ti_combat_up', negative: 'ti_combat_dn' }, 'hitpoints')],
             ['melvorD:healingWhenHit', new ModifierTagMapEntryAttributes('hitpoints')],
             ['melvorD:damageDealtWith2Effects', new ModifierTagMapEntryAttributes({ positive: 'ti_combat_up', negative: 'ti_combat_dn' })], // TODO: Add tag for "effect"
@@ -276,7 +287,7 @@ export class TagAllocationMemoizer {
             ['melvorD:flatPrayerPointCost', new ModifierTagMapEntryAttributes('prayer')],
             ['melvorD:ammoPreservationChance', new ModifierTagMapEntryAttributes('preservation', 'ranged')],
             ['melvorD:runePreservationChance', new ModifierTagMapEntryAttributes('preservation', 'magic')],
-            ['melvorD:flatMonsterRespawnInterval', new ModifierTagMapEntryAttributes('interval')], // TODO: Add tag for "respawn" or "monster"
+            ['melvorD:flatMonsterRespawnInterval', new ModifierTagMapEntryAttributes('interval', 'normal_damage')], // TODO: Add tag for "respawn" or "monster"
             ['melvorD:bankSpace', new ModifierTagMapEntryAttributes('bank')],
             ['melvorD:potionChargePreservationChance', new ModifierTagMapEntryAttributes('preservation', 'potion')],
             ['melvorD:masteryXP', new ModifierTagMapEntryAttributes('mastery')],
@@ -675,21 +686,5 @@ export class TagAllocationMemoizer {
             ['melvorAoD:artefactValue', new ModifierTagMapEntryAttributes('archaeology')],
             ['melvorIta:maxHarvestingIntensity', new ModifierTagMapEntryAttributes('harvesting')]
         ]);
-    }
-
-    // TODO: WOULD BE NEATER, IF I COULD JUST TELL THE MODIFIER AND WHETHER POSITIVE/NEGATIVE; though more unique modifiers with scope sources would fall flat
-
-    /** */
-    private static initEntityContextTagMaps() {
-        this.registerEntityContextTags('EquipmentItem', ItemIDs.Air_Battlestaff, {
-            tags: ['air_rune']
-        });
-
-
-        this.registerEntityContextTags('EquipmentItem', ItemIDs.Sand_Treaders, {
-            conditionalModifierTags: [
-                ['interval', 'attack']
-            ]
-        });
     }
 }

@@ -1,3 +1,4 @@
+﻿import { Logger } from "../Logger";
 import { PathType } from "../types/pathType";
 
 export class TagManager {
@@ -34,6 +35,8 @@ export class TagManager {
       herb: () => TagManager.iconPath('bank', 'herb_garum'),
       holy_dust: () => TagManager.iconPath('bank', 'holy_dust'),
       iron_bar: () => TagManager.iconPath('bank', 'iron_bar'),
+      silver_bar: () => TagManager.iconPath('bank', 'silver_bar', undefined, 'png'),
+      gold_bar: () => TagManager.iconPath('bank', 'gold_bar', undefined, 'png'),
       leather: () => TagManager.iconPath('bank', 'leather'),
       loot: () => TagManager.iconPath('bank', 'alchemists_bag'),
       madness: () => TagManager.iconPath('bank', 'Mask_of_Madness'),
@@ -103,6 +106,7 @@ export class TagManager {
       lemon: () => 'assets/april/images/lemon.jpg',
       map: () => TagManager.iconPath('skills', 'archaeology', 'map_colour'),
       mastery: () => TagManager.iconPath('main', 'mastery_header'),
+      mastery_pool: () => TagManager.iconPath('main', 'mastery_pool', undefined, 'png'),
       placeholder: () => TagManager.iconPath('mods', 'placeholder_icon', undefined, 'png'),
       mods: () => TagManager.iconPath('mods', 'placeholder_icon', undefined, 'png'),
       pet: () => TagManager.iconPath('pets', 'bandit_base'),
@@ -116,6 +120,7 @@ export class TagManager {
       immunity: () => TagManager.iconPath('ti', 'immunity', 'flaticon', 'png'),
       crit: () => TagManager.iconPath('ti', 'critical', 'flaticon', 'png'),
       reflect: () => TagManager.iconPath('ti', 'shield_reflect', 'flaticon'),
+      normal_damage: () => TagManager.iconPath('skills', 'combat', 'normal_damage', 'png')
     },
     effectMedia: {
       nulled: () => TagManager.iconPath('status', 'null', undefined, 'png'),
@@ -234,7 +239,7 @@ export class TagManager {
       ts_planks: () => TagManager.iconPath('skills', 'township', 'planks'),
       ts_population: () => TagManager.iconPath('skills', 'township', 'population'),
       ts_potion: () => TagManager.iconPath('skills', 'township', 'potion'),
-      ts_repair: () => TagManager.iconPath('fa', 'hammer'),
+      ts_repair: () => TagManager.iconPath('ti', 'hammer', 'flaticon', 'png'),
       ts_rune: () => TagManager.iconPath('bank', 'rune_essence'),
       ts_season_eclipse: () => TagManager.iconPath('skills', 'township', 'eclipse', 'png'),
       ts_season_nightfall: () => TagManager.iconPath(
@@ -296,16 +301,47 @@ export class TagManager {
     TagManager.tagSrcs = new Map();
 
     const staticTags: { [key: string]: () => string } = Object.values(TagManager.staticTagsByCategories).reduce(
-      (acc, category) => {
+        (acc, category) => {
         return { ...acc, ...category };
-      },
-      {},
+        },
+        {},
     );
 
     for (const [k, v] of Object.entries(staticTags)) {
-      TagManager.tagSrcs.set(k, v());
+        TagManager.tagSrcs.set(k, v());
     }
   }
+
+    /**
+     * Add tag with already computed src path
+     * @param tag
+     * @param src
+     */
+    public static addTag(tag: string, src: string): void {
+        if (TagManager.tagSrcs.has(tag)) {
+            Logger.warn(`Tag '${tag}' already exists.`);
+        } else {
+            TagManager.tagSrcs.set(key, src);
+        }
+    }
+
+    /**
+     * Add tag defined via mod data package, which means "media" still has to be computed to actual src
+     * @param namespace
+     * @param tag
+     * @param media
+     */
+    public static addTagsFromModData(namespace: string, data: { name: string, media: string }[]): void {
+        const modContext = mod.getContext(namespace);
+        data.forEach((d) => {
+            try {
+                TagManager.addTag(d.name, modContext.getResourceUrl(d.media));
+            } catch (e) {
+                Logger.error(`An error occurred while trying to determine resource for namespace ${namespace}, for tag name ${d.name} using media ${d.media}`, e);
+                TagManager.addTag(d.name, assets.getURI("assets/media/main/missing_artwork.png"));
+            }
+        });        
+    }
 
   /**
    * Provides an asset path be insert to src attributes.
@@ -361,8 +397,6 @@ export class TagManager {
       case 'pets':
       case 'status':
         return TagManager.basePath(type, name, ext);
-      case 'fa':
-        return `fa-${name}`;
       default:
         if (type && name)
           throw new Error(

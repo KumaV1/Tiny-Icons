@@ -158,6 +158,33 @@ export class IconManager {
         return this.imgSource(src);
     }
 
+    /**
+     * Get ready-to-go icon html for multiple tags
+     * @param tag
+     * @returns
+     */
+    public static getIconHTMLForTags(tags: string[]): string {
+        return tags.map(t => IconManager.getIconHTMLForTag(t)).join('');
+    }
+
+    /**
+     * Get ready-to-go icon html for a certain skill
+     * @param tag
+     * @returns
+     */
+    public static getIconHTMLForSkill(skill: AnySkill) {
+        return this.imgSource(this.getIconSrcForSkillScope(skill));
+    }
+
+    /**
+     * Get ready-to-go icon html for a certain real
+     * @param tag
+     * @returns
+     */
+    public static getIconHTMLForRealm(realm: Realm) {
+        return this.imgSource(this.getIconSrcForRealmScope(realm));
+    }
+
   /**
    * Determines the appropriate icons for the active scopes
    * @param modValue data on mod value, which among other things includes active scoping (may have none)
@@ -165,6 +192,9 @@ export class IconManager {
   private static getIconsForScopes(modValue: ModifierValue): string {
     let html = '';
 
+    if (modValue.currency && SettingsManager.settings.scopeIcons.currency) {
+      html += this.imgSource(this.getIconSrcForCurrencyScope(modValue.currency));
+    }
     if (modValue.skill && SettingsManager.settings.scopeIcons.skill) {
       html += this.imgSource(this.getIconSrcForSkillScope(modValue.skill));
     }
@@ -173,9 +203,6 @@ export class IconManager {
     }
     if (modValue.realm && SettingsManager.settings.scopeIcons.realm) {
       html += this.imgSource(this.getIconSrcForRealmScope(modValue.realm));
-    }
-    if (modValue.currency && SettingsManager.settings.scopeIcons.currency) {
-      html += this.imgSource(this.getIconSrcForCurrencyScope(modValue.currency));
     }
     if (modValue.category && SettingsManager.settings.scopeIcons.category) {
       html += this.imgSource(this.getIconSrcForCategoryScope(modValue, modValue.category) ?? '');
