@@ -1,6 +1,7 @@
-import { Constants } from '../constants';
+﻿import { Constants } from '../constants';
 import { Logger } from './Logger';
 import { NamedObjectWithMedia } from './types/namedObjectWithMedia';
+import { EntityContext } from './ModifierIconContext';
 
 /**
  * A class for managing (and preserving, for efficiency) icons for various scope sources,

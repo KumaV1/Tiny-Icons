@@ -1,6 +1,10 @@
-import { ModifierIconContext } from "../ModifierIconContext";
+﻿import { ModifierIconContext } from "../ModifierIconContext";
 import { IconManager } from "./IconManager";
 import { SettingsManager } from "./SettingsManager";
+import { TagManager } from "./TagManager";
+import { TagAllocationMemoizer } from "../TagAllocationMemoizer";
+import { Logger } from "../Logger";
+import { EntityCategory } from "../types/entityCategory";
 
 /**
  * Main class taking care of patching the original game logic, to involve our custom logic
@@ -11,10 +15,17 @@ export class PatchManager {
     public static patch(ctx: Modding.ModContext) {
         PatchManager.ctx = ctx;
 
-        PatchManager.patchForContexts();
         PatchManager.patchForHtmlParsing();
-        PatchManager.patchModifierDescription();
+        PatchManager.patchModifierDescription(); // includes conditional modifiers here, I assume?
         PatchManager.patchApplyDescriptionModifications();
+
+        // The following will be patched for one or more of the following reasons:
+        // * Prevent tiny icon html from being broken due to the global "applyDescriptionModification" function of the base game
+        // * Support icons for "custom descriptions" (which is to say, not generated from stats)
+        // * Support icons for "conditional modifiers" (which is to say, not generated from stats)
+
+        // TODO: Hmm... do "StatObject" always need to support modified dscriptions? No, right?
+        PatchManager.patchForContexts();
     }
 
 
@@ -88,6 +99,61 @@ export class PatchManager {
         PatchManager.ctx.patch(ModifierValue, 'printEnemy').after(function(returnValue: StatDescription, negMult?: number, posMult?: number, precision?: number) {
             return PatchManager.modifyModifierValueDescription(returnValue, this);
         });
+
+        // Patch ConditionalModifier printing so it can make use of the current entityContext.
+        // The context manager only provides category/id and a consumable index — actual data
+        // must be retrieved by a memoizer/provider (registered via PublicApi).
+        PatchManager.ctx.patch(ConditionalModifier, 'getDescription').after(function(returnValue: StatDescription | undefined, negMult?: number, posMult?: number) {
+            if (!returnValue) {
+                return returnValue;
+            }
+
+            const ctx = ModifierIconContext.peekEntityContext();
+            if (!ctx) {
+                return returnValue;
+            }
+
+            const index = ModifierIconContext.consumeConditionalIndex();
+            if (index === undefined) {
+                return returnValue;
+            }
+
+            // Resolve tags via the TagAllocationMemoizer directly. The memoizer
+            // is expected to accept an EntityContext-like object (category/id) and an index.
+            const tagData = TagAllocationMemoizer.getEntityContextTags(ctx.category, ctx.id);
+            if (!tagData || !tagData.conditionalModifierTags || tagData.conditionalModifierTags.length <= index) {
+                return returnValue;
+            }
+
+            if (ctx.id === 'melvorF:Sand_Treaders' || ctx.id === 'melvorD:Air_Battlestaff') {
+                Logger.log(`Custom tags for item ${ctx.id}`);
+                console.log(tagData);
+            }
+
+            // TODO: If entity context has entry, add tiny icons for them
+            //const customTags = TagAllocationMemoizer.getEntityContextTags('EquipmentItem', itemId);
+            //if (customTags && customTags.tags) {
+            //    const iconHtml = customTags.tags.map(t => IconManager.getIconHTMLForTag(t)).join('');
+            //    let iconizedDesc = ModifierIconContext.isDescriptionModificationContext()
+            //        ? ModifierIconContext.addDescriptionModificationsTinyIconsPlaceholders(desc, iconHtml)
+            //        : iconHtml + desc;
+            //    desc = iconizedDesc;
+            //}
+
+            const iconHtml = tagData.conditionalModifierTags[index]
+                .map((t: string) => IconManager.getIconHTMLForTag(t))
+                .join('');
+            if (!iconHtml) {
+                return returnValue;
+            }
+
+            const text = iconHtml + returnValue.text;
+            return {
+                text: text,
+                isNegative: returnValue.isNegative,
+                isDisabled: returnValue.isDisabled,
+            };
+        });
     }
 
     /**
@@ -102,7 +168,8 @@ export class PatchManager {
                 return o();
             }
 
-            // Set context
+            // Set description modification context
+            ModifierIconContext.pushEntityContext('SpecialAttack', this.id);
             ModifierIconContext.setIsDescriptionModificationContext();
 
             // Run original logic
@@ -114,20 +181,24 @@ export class PatchManager {
 
             // Reset context and finish up
             ModifierIconContext.resetDescriptionModificationContext();
+            ModifierIconContext.popEntityContext('SpecialAttack', this.id);
+
             return desc;
         });
 
         PatchManager.ctx.patch(Item, 'modifiedDescription').get(function(o: () => string) {
-            return PatchManager.getModifiedItemDescription(this, o);
+            // Mhm? Why did I patch the base class? because of "super" calls on the derived classes?
+            // ^ A generic icon should not createtiny icons, so should not need patching?
+            return PatchManager.getModifiedItemDescription(this, 'Item', o);
         });
         PatchManager.ctx.patch(FoodItem, 'modifiedDescription').get(function(o: () => string) {
-            return PatchManager.getModifiedItemDescription(this, o);
+            return PatchManager.getModifiedItemDescription(this, 'FoodItem', o);
         });
         PatchManager.ctx.patch(EquipmentItem, 'modifiedDescription').get(function(o: () => string) {
-            return PatchManager.getModifiedItemDescription(this, o);
+            return PatchManager.getModifiedItemDescription(this, 'EquipmentItem', o);
         });
         PatchManager.ctx.patch(PotionItem, 'modifiedDescription').get(function(o: () => string) {
-            return PatchManager.getModifiedItemDescription(this, o);
+            return PatchManager.getModifiedItemDescription(this, 'PotionItem', o);
         });
 
         PatchManager.ctx.patch(CombatPassive, 'modifiedDescription').get(function(o: () => string) {
@@ -137,6 +208,7 @@ export class PatchManager {
             }
 
             // Set context
+            ModifierIconContext.pushEntityContext('CombatPassive', this.id);
             ModifierIconContext.setIsDescriptionModificationContext();
 
             // Run original logic
@@ -148,6 +220,8 @@ export class PatchManager {
 
             // Reset context and finish up
             ModifierIconContext.resetDescriptionModificationContext();
+            ModifierIconContext.popEntityContext('CombatPassive', this.id);
+
             return desc;
         });
     }
@@ -194,30 +268,112 @@ export class PatchManager {
     }
 
     /**
-     * Logic run in item patches (classes had to be patched separately, as the respective logics implementation specifically had to be patched)
-     * @param item
-     * @param origGetter
+     * Wraps the originalDescriptionFunc with logic to allow for adding tiny icons to its result
+     * @param obj - The object for which a description is being generated
+     * @param originalDescriptionFunc - The original description function (may include setting a caching property)
+     * @param cachingPropertyName - Possibly name of a property used to preserve the computed description, so expensive operations can be avoided on subsequent calls
+     * @param entityCategory - Category of the entity for which the description is being created
+     * @param entityId - Id of the entity for which the description is being created
+     * @param handleApplyDescriptionModification - Whether the function being wrapped is dealing with the global, unpatchable "applyDescriptionModification" function, requiring temporarily using placeholders in the description until belated replacement can be applied
      * @returns
      */
-    private static getModifiedItemDescription(item: Item, origGetter: () => string): string {
-        if (item._modifiedDescription) {
+    private static getDescWithTinyIconsLogic(obj: Object, originalDescriptionFunc: () => string, cachingPropertyName: string | undefined, entityCategory: EntityCategory, entityId: string, handleApplyDescriptionModification = true): string {
+        // @ts-ignore - We are dealing with building a description, the property ought to be a string
+        if (cachingPropertyName && obj[cachingPropertyName] !== undefined) {
             // if description has already been computed, then avoid running custom logic again
-            return origGetter();
+            return originalDescriptionFunc();
         }
 
         // Set context
-        ModifierIconContext.setIsDescriptionModificationContext();
+        ModifierIconContext.pushEntityContext(entityCategory, entityId);
+        if (handleApplyDescriptionModification) {
+            ModifierIconContext.setIsDescriptionModificationContext();
+        }
 
         // Run original logic
-        let desc = origGetter();
+        let desc = originalDescriptionFunc();
 
-        // Belatedly modify description with tiny icons
-        desc = ModifierIconContext.applyTinyIconsPlaceholderReplacement(desc);
-        item._modifiedDescription = desc;
+        // Add custom tags to the start of the description, if configured for the entity
+        const customTags = TagAllocationMemoizer.getEntityContextTags(entityCategory, entityId);
+        if (customTags && customTags.tags) {
+            const iconHtml = customTags.tags.map(t => IconManager.getIconHTMLForTag(t)).join('');
+            const iconizedDesc = ModifierIconContext.isDescriptionModificationContext()
+                ? ModifierIconContext.addDescriptionModificationsTinyIconsPlaceholders(desc, iconHtml)
+                : iconHtml + desc;
+            desc = iconizedDesc;
+        }
 
-        // Reset context and finish up
-        ModifierIconContext.resetDescriptionModificationContext();
+        // If dealing with the "applyDescriptionModification" function, now belatedly modify description, changing the placeholders to the actual icons
+        if (handleApplyDescriptionModification) {
+            desc = ModifierIconContext.applyTinyIconsPlaceholderReplacement(desc);
+        }
+        if (cachingPropertyName) {
+            // @ts-ignore - We are dealing with building a description, the property ought to be a string
+            obj[cachingPropertyName] = desc;
+        }
+
+        // Reset context
+        if (handleApplyDescriptionModification) {
+            ModifierIconContext.resetDescriptionModificationContext();
+        }
+        ModifierIconContext.popEntityContext(entityCategory, entityId);
+
+        // Return result
         return desc;
+    }
+
+    /**
+     * Logic run in item patches (classes had to be patched separately, as the respective logics implementation specifically had to be patched)
+     * @param item
+     * @param itemCategory
+     * @param origGetter
+     * @returns
+     */
+    private static getModifiedItemDescription(item: Item, itemCategory: EntityCategory, origGetter: () => string): string {
+        return this.getDescWithTinyIconsLogic(item, origGetter, '_modifiedDescription', itemCategory, item.id, true);
+
+        //return;
+        //if (item._modifiedDescription) {
+        //    // if description has already been computed, then avoid running custom logic again
+        //    return origGetter();
+        //}
+        //
+        //// Push a lightweight entity context reference; ModifierIconContext will resolve details
+        //const itemId = item.id;
+        //ModifierIconContext.pushEntityContext('EquipmentItem', itemId);
+        //
+        //// Set context
+        //ModifierIconContext.setIsDescriptionModificationContext();
+        //
+        //// Run original logic
+        //let desc = origGetter();
+        //
+        //// TODO: Obviously, not do type check like this, probably
+        //if (item instanceof EquipmentItem) {
+        //    // TODO: If entity context has entry, add tiny icons for them
+        //    const customTags = TagAllocationMemoizer.getEntityContextTags('EquipmentItem', itemId);
+        //    if (itemId === 'melvorF:Sand_Treaders' || itemId === 'melvorD:Air_Battlestaff') {
+        //        Logger.log(`Custom tags for item ${item.name}`);
+        //        console.log(customTags);
+        //    }
+        //    if (customTags && customTags.tags) {
+        //        const iconHtml = customTags.tags.map(t => IconManager.getIconHTMLForTag(t)).join('');
+        //        let iconizedDesc = ModifierIconContext.isDescriptionModificationContext()
+        //            ? ModifierIconContext.addDescriptionModificationsTinyIconsPlaceholders(desc, iconHtml)
+        //            : iconHtml + desc;
+        //        desc = iconizedDesc;
+        //    }
+        //} 
+        //
+        //// Belatedly modify description with tiny icons
+        //desc = ModifierIconContext.applyTinyIconsPlaceholderReplacement(desc);
+        //item._modifiedDescription = desc;
+        //
+        //// Reset context and finish up
+        //ModifierIconContext.resetDescriptionModificationContext();
+        //ModifierIconContext.popEntityContext('EquipmentItem', itemId);
+        //
+        //return desc;
     }
 
     /**

@@ -1,11 +1,11 @@
-import { Logger } from "./Logger";
+﻿import { Logger } from "./Logger";
 import { IconManager } from "./managers/IconManager";
 import { SettingsManager } from "./managers/SettingsManager";
 import { TagManager } from "./managers/TagManager";
 import { ModifierTagMapEntryAttributes } from './models/ModifierTagMapEntryAttributes';
 import { ModifierIconContext } from "./ModifierIconContext";
 import { ModifierScopeSourceMediaMemoizer } from './ModifierScopeSourceMediaMemoizer';
-import { modifierTagMap } from './tagging/modifierTagMap';
+import { TagAllocationMemoizer } from './TagAllocationMemoizer';
 import { ModModifierIconTag } from './types/modModifierIconTag';
 import { NamedObjectWithMedia } from './types/namedObjectWithMedia';
 import { PathType } from "./types/pathType";
@@ -13,6 +13,7 @@ import { StaticModifierIconTag } from "./types/staticModifierIconTag";
 import { TinyIconsModSettings } from "./types/tinyIconsModSettings";
 
 export class PublicApi {
+    private static conditionalModifiersProvider: ((category: string, id: string, index: number) => string[] | undefined) | undefined;
     public static init(ctx: Modding.ModContext): void {
         ctx.api({
             /**
@@ -66,7 +67,7 @@ export class PublicApi {
                   return;
                 }
 
-                modifierTagMap.set(modifierId, new ModifierTagMapEntryAttributes(primaryTag, secondaryTag));
+                TagAllocationMemoizer.modifierTagMap.set(modifierId, new ModifierTagMapEntryAttributes(primaryTag, secondaryTag));
             },
 
             /**
@@ -112,7 +113,7 @@ export class PublicApi {
              * @returns {ModifierTagMapEntryAttributes | undefined} An object of modifier tag attributes
              */
             getIconTagMapForModifier: (modifier: string): ModifierTagMapEntryAttributes | undefined => {
-                return modifierTagMap.get(modifier);
+                return TagAllocationMemoizer.modifierTagMap.get(modifier);
             },
 
             /**
@@ -142,14 +143,24 @@ export class PublicApi {
             getAvailableTagsWithSources: (): Map<string, string> => TagManager.tagSrcs,
 
             /**
+             * The {@link TagAllocationMemoizer} data
+             */
+            getTagAllocationMemoizer: () => {
+                return {
+                    modifierTagMap: TagAllocationMemoizer.modifierTagMap,
+                    entityContextTagMaps: TagAllocationMemoizer.entityContextTagMaps,
+                };
+            },
+
+            /**
              * The {@link ModifierScopeSourceMediaMemoizer} data
              */
             getModifierScopeSourceMediaMemoizer: () => {
                 return {
-                  categoryMediaMap: ModifierScopeSourceMediaMemoizer.categoryMediaMap,
-                  subcategoryMediaMap: ModifierScopeSourceMediaMemoizer.subcategoryMediaMap,
-                  actionMediaMap: ModifierScopeSourceMediaMemoizer.actionMediaMap,
-                  effectGroupMediaMap: ModifierScopeSourceMediaMemoizer.effectGroupMediaMap
+                    categoryMediaMap: ModifierScopeSourceMediaMemoizer.categoryMediaMap,
+                    subcategoryMediaMap: ModifierScopeSourceMediaMemoizer.subcategoryMediaMap,
+                    actionMediaMap: ModifierScopeSourceMediaMemoizer.actionMediaMap,
+                    effectGroupMediaMap: ModifierScopeSourceMediaMemoizer.effectGroupMediaMap
                 };
             },
 

@@ -1,4 +1,39 @@
-import { CustomLocationContext } from "./types/customLocationContext";
+﻿import { CustomLocationContext } from "./types/customLocationContext";
+
+// IDea: Context = "EquipmentItem_something:something" -> try get  "conditionalModifiers"-Iconset, or a "at start of description" icvonset, as there are e.g. items with full _customDescriptions and those where autp-generated modifier-descs are combined with the hard-written conditional modifiers
+// What about effects? Preferably setable on Templates for bettert inherent mod support? How to avoid too many icons?
+import { Logger } from './Logger';
+
+/**
+ * Represents a pushed entity context entry (category + id + conditional index cursor).
+ */
+export class EntityContext {
+  category: string;
+  id: string;
+  private _conditionalIndex: number = 0;
+
+  constructor(category: string, id: string) {
+    this.category = category;
+    this.id = id;
+    this._conditionalIndex = 0;
+  }
+
+  /**
+   * Get current conditional index without advancing.
+   */
+  getConditionalIndex(): number {
+    return this._conditionalIndex;
+  }
+
+  /**
+   * Consume and advance the conditional index, returning the index used.
+   */
+  consumeConditionalIndex(): number {
+    const idx = this._conditionalIndex;
+    this._conditionalIndex++;
+    return idx;
+  }
+}
 
 /**
  * Manages context from where and when to print modifier icons with printPlayerModifier.
@@ -21,6 +56,12 @@ export class ModifierIconContext {
    * Map the placeholder snippet index with the corresponding html snippet to replace them with later
    */
   private static snippetMap: Map<number, string> = new Map();
+
+  /**
+   * Stack of entity contexts. Each entry may be pushed before generating an entity's
+   * description and popped afterwards. LIFO semantics.
+   */
+  private static entityContextStack: EntityContext[] = [];
 
   /**
    * A custom location context, used to in some cases be able to tell where modifier description creation is rendered,
@@ -51,6 +92,94 @@ export class ModifierIconContext {
    */
   static isDescriptionModificationContext(): boolean {
     return this.isApplyDescriptionModificationContext;
+  }
+
+
+  // TODO: HANDLING WRAPPED ACTUALLY NEEDS TESTING
+
+  /**
+   * Push an entity context onto the stack.
+   * Examples:
+   *  pushEntityContext('SpecialAttack', 'special_attack_id')
+   *  pushEntityContext('EquipmentItem', 'special_attack_id')
+   */
+  /**
+   * Push an entity context reference onto the stack.
+   * Always accepts a category and id. Actual icon data is resolved from the registry.
+   */
+  static pushEntityContext(category: string, id: string): void {
+    this.entityContextStack.push(new EntityContext(category, id));
+  }
+
+  /**
+   * Pop the top-most entity context. If category and id are provided, pop until a matching
+   * context is removed (warn if mismatches are encountered).
+   */
+  static popEntityContext(category: string, id: string): void {
+    if (!category || !id) {
+      throw new Error('ModifierIconContext.popEntityContext requires non-empty category and id');
+    }
+
+    // Pop until matching category+id is found
+    while (this.entityContextStack.length) {
+      const top = this.entityContextStack[this.entityContextStack.length - 1];
+      if (top.category === category && top.id === id) {
+        this.entityContextStack.pop();
+        return;
+      }
+
+      // Mismatch: remove top and continue searching
+      // eslint-disable-next-line no-console
+      Logger.warn(`ModifierIconContext.popEntityContext: popping mismatched context (expected ${category}/${id}, found ${top.category}/${top.id})`);
+      this.entityContextStack.pop();
+      }
+
+    // If we exhausted the stack without finding a match, warn
+    Logger.warn(`ModifierIconContext.popEntityContext: no matching context found for ${category}/${id}`);
+  }
+
+  /**
+   * Peek the top-most entity context without removing it.
+   */
+  /**
+   * Peek the top-most entity context entry (category + id + cursor).
+   */
+  static peekEntityContext(): EntityContext | undefined {
+    return this.entityContextStack[this.entityContextStack.length - 1];
+  }
+
+  /**
+   * Clears all entity contexts.
+   */
+  static resetEntityContexts(): void {
+    this.entityContextStack = [];
+  }
+
+  /**
+   * Get the iconTags for the current (top-most) entity context.
+   */
+  /**
+   * Get the top-most entity context (category + id + cursor) if any.
+   */
+  static getCurrentEntityContext(): EntityContext | undefined {
+    return this.peekEntityContext();
+  }
+
+  /**
+   * Returns the next conditional modifiers icon-tag-array for the current entity context
+   * and advances the internal index. Returns undefined when none available.
+   */
+  /**
+   * Consume and return the next conditional index for the current (top) context.
+   * This does not resolve any data; it only advances and returns the numeric index.
+   */
+  static consumeConditionalIndex(): number | undefined {
+    const top = this.entityContextStack[this.entityContextStack.length - 1];
+    if (!top) {
+      return undefined;
+    }
+
+    return top.consumeConditionalIndex();
   }
 
   /**

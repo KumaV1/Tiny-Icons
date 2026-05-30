@@ -1,8 +1,9 @@
-import { Constants } from "../../constants";
+﻿import { Constants } from "../../constants";
 import { Logger } from "../Logger";
+import { TagAllocationMemoizer } from "../TagAllocationMemoizer";
 import { ModifierTagMapEntryAttributes } from "../models/ModifierTagMapEntryAttributes";
 import { ModifierScopeSourceMediaMemoizer } from "../ModifierScopeSourceMediaMemoizer";
-import { modifierTagMap } from "../tagging/modifierTagMap";
+//import { modifierTagMap } from "../tagging/modifierTagMap";
 import { NamedObjectWithMedia } from "../types/namedObjectWithMedia";
 import { SettingsManager } from "./SettingsManager";
 import { TagManager } from "./TagManager";
@@ -86,8 +87,8 @@ export class IconManager {
     positive: boolean,
     secondary?: boolean,
   ): string {
-    // Determine static tag attributes | TODO: Doing this twice (for primary and secondary tag separetely) is imperformant and should be changed
-    const modTagAttributes: ModifierTagMapEntryAttributes | undefined = modifierTagMap.get(modifierValue.modifier.id);
+      // Determine static tag attributes | TODO: Doing this twice (for primary and secondary tag separetely) is imperformant and should be changed
+      const modTagAttributes: ModifierTagMapEntryAttributes | undefined = TagAllocationMemoizer.modifierTagMap.get(modifierValue.modifier.id);
     if (!modTagAttributes) {
       Logger.warn(`No tags found for modifier ${modifierValue.modifier.id}`);
       return SettingsManager.settings.placeholderIconEnabled
@@ -141,7 +142,21 @@ export class IconManager {
     return TagManager.tagSrcs.get(tag) ?? /*SettingsManager.settings.placeholderIconEnabled
         ? TagManager.tagSrcs.get('placeholder') ?? ''
         :*/ '';
-  }
+    }
+
+    /**
+     * Get ready-to-go icon html for a single tag
+     * @param tag
+     * @returns
+     */
+    public static getIconHTMLForTag(tag: string): string {
+        const src = TagManager.tagSrcs.get(tag);
+        if (!src) {
+            return '';
+        }
+
+        return this.imgSource(src);
+    }
 
   /**
    * Determines the appropriate icons for the active scopes
