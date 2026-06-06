@@ -1,0 +1,397 @@
+﻿{
+  "$schema": "https://melvoridle.com/assets/schema/gameData.json",
+  "namespace": "tinyIcons",
+  "dependentData": [
+    {
+      "namespace": "melvorItA",
+      "modifications": {
+        "tinyIcons": {
+          "staticTagAllocations": [
+            {
+              "context": {
+                "category": "AncientRelic",
+                "id": "melvorItA:AbyssalAttackRelic2"
+              },
+              "data": {
+                "conditionalModifierIconTags": [
+                  [
+                    "accuracy",
+                    "attack"
+                  ]
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "AncientRelic",
+                "id": "melvorItA:AbyssalAttackRelic3"
+              },
+              "data": {
+                "conditionalModifierIconTags": [
+                  [
+                    "crit",
+                    "attack"
+                  ]
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "AncientRelic",
+                "id": "melvorItA:AbyssalAttackRelic5"
+              },
+              "data": {
+                "conditionalModifierIconTags": [
+                  [
+                    "ti_combat_up"
+                  ]
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "AncientRelic",
+                "id": "melvorItA:AbyssalDefenceRelic1"
+              },
+              "data": {
+                "conditionalModifierIconTags": [
+                  [
+                    "reflect"
+                  ]
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "AncientRelic",
+                "id": "melvorItA:AbyssalDefenceRelic2"
+              },
+              "data": {
+                "conditionalModifierIconTags": [
+                  [
+                    "evasion_up"
+                  ]
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "AncientRelic",
+                "id": "melvorItA:AbyssalDefenceRelic3"
+              },
+              "data": {
+                "conditionalModifierIconTags": [
+                  [
+                    "combat"
+                  ]
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "AncientRelic",
+                "id": "melvorItA:AbyssalDefenceRelic4"
+              },
+              "data": {
+                "conditionalModifierIconTags": [
+                  [
+                    "evasion_up"
+                  ]
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "AncientRelic",
+                "id": "melvorItA:AbyssalFletchingMasterRelic"
+              },
+              "data": {
+                "conditionalModifierIconTags": [
+                  [
+                    "preservation",
+                    "ranged"
+                  ]
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "AncientRelic",
+                "id": "melvorItA:AbyssalHitpointsRelic1"
+              },
+              "data": {
+                "conditionalModifierIconTags": [
+                  [
+                    "regen",
+                    "hitpoints"
+                  ]
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "AncientRelic",
+                "id": "melvorItA:AbyssalHitpointsRelic2"
+              },
+              "data": {
+                "conditionalModifierIconTags": [
+                  [
+                    "combat"
+                  ]
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "AncientRelic",
+                "id": "melvorItA:AbyssalHitpointsRelic4"
+              },
+              "data": {
+                "conditionalModifierIconTags": [
+                  [
+                    "autoeat"
+                  ]
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "AncientRelic",
+                "id": "melvorItA:AbyssalMagicRelic4"
+              },
+              "data": {
+                "conditionalModifierIconTags": [
+                  [
+                    "ti_magic_up",
+                    "defence"
+                  ]
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "AncientRelic",
+                "id": "melvorItA:AbyssalRangedRelic1"
+              },
+              "data": {
+                "conditionalModifierIconTags": [
+                  [
+                    "interval",
+                    "ranged"
+                  ]
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "AncientRelic",
+                "id": "melvorItA:AbyssalRangedRelic2"
+              },
+              "data": {
+                "conditionalModifierIconTags": [
+                  [
+                    "accuracy",
+                    "ranged"
+                  ]
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "AncientRelic",
+                "id": "melvorItA:AbyssalRangedRelic3"
+              },
+              "data": {
+                "conditionalModifierIconTags": [
+                  [
+                    "ti_dr_up",
+                    "ranged"
+                  ]
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "AncientRelic",
+                "id": "melvorItA:AbyssalRangedRelic5"
+              },
+              "data": {
+                "conditionalModifierIconTags": [
+                  [
+                    "crit",
+                    "ranged"
+                  ]
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "AncientRelic",
+                "id": "melvorItA:AbyssalRangedMasterRelic"
+              },
+              "data": {
+                "conditionalModifierIconTags": [
+                  [
+                    "crit"
+                  ]
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "AncientRelic",
+                "id": "melvorItA:AbyssalRunecraftingRelic1"
+              },
+              "data": {
+                "conditionalModifierIconTags": [
+                  [
+                    "ti_magic_up"
+                  ]
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "AncientRelic",
+                "id": "melvorItA:AbyssalSlayerRelic4"
+              },
+              "data": {
+                "conditionalModifierIconTags": [
+                  [
+                    "currency",
+                    "lifesteal"
+                  ]
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "AncientRelic",
+                "id": "melvorItA:AbyssalSlayerRelic5"
+              },
+              "data": {
+                "conditionalModifierIconTags": [
+                  [
+                    "currency",
+                    "slayer"
+                  ]
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "AncientRelic",
+                "id": "melvorItA:AbyssalStrengthRelic2"
+              },
+              "data": {
+                "conditionalModifierIconTags": [
+                  [
+                    "ti_strength_up"
+                  ]
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "AncientRelic",
+                "id": "melvorItA:AbyssalStrengthRelic5"
+              },
+              "data": {
+                "conditionalModifierIconTags": [
+                  [
+                    "ti_combat_up"
+                  ]
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "AncientRelic",
+                "id": "melvorItA:AbyssalSummoningRelic2"
+              },
+              "data": {
+                "conditionalModifierIconTags": [
+                  [
+                    "interval",
+                    "summoning"
+                  ]
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "AncientRelic",
+                "id": "melvorItA:AbyssalSummoningRelic4"
+              },
+              "data": {
+                "conditionalModifierIconTags": [
+                  [
+                    "ti_combat_up",
+                    "summoning"
+                  ]
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "AncientRelic",
+                "id": "melvorItA:AbyssalSummoningMasterRelic"
+              },
+              "data": {
+                "conditionalModifierIconTags": [
+                  [
+                    "preservation",
+                    "summoning"
+                  ]
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "AncientRelic",
+                "id": "melvorItA:CorruptionRelic2"
+              },
+              "data": {
+                "conditionalModifierIconTags": [
+                  [
+                    "ti_combat_up",
+                    "accuracy",
+                    "evasion_up"
+                  ]
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "AncientRelic",
+                "id": "melvorItA:CorruptionRelic3"
+              },
+              "data": {
+                "conditionalModifierIconTags": [
+                  [
+                    "currency",
+                    "slayer"
+                  ]
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "AncientRelic",
+                "id": "melvorItA:CorruptionMasterRelic"
+              },
+              "data": {
+                "conditionalModifierIconTags": [
+                  [
+                    "xp",
+                    "combat"
+                  ]
+                ]
+              }
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

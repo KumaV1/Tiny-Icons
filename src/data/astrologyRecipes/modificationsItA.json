@@ -1,0 +1,31 @@
+﻿{
+  "$schema": "https://melvoridle.com/assets/schema/gameData.json",
+  "namespace": "tinyIcons",
+  "dependentData": [
+    {
+      "namespace": "melvorItA",
+      "modifications": {
+        "tinyIcons": {
+          "staticTagAllocations": [
+            {
+              "context": {
+                "category": "AstrologyRecipe",
+                "id": "melvorItA:Harvesting",
+                "modifierType": "Abyssal",
+                "modifierIndex": 2
+              },
+              "data": {
+                "conditionalModifierIconTags": [
+                  [
+                    "xp",
+                    "combat"
+                  ]
+                ]
+              }
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

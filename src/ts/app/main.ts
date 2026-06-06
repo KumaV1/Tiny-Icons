@@ -12,14 +12,23 @@ import { Logger } from './mod/Logger';
 // Game data
 //import '../../../src/data/testData.json'; Various other, ACTUAL data tfiles
 import TestData from '../../../src/data/testData.json';
+import AncientRelicItAData from '../../../src/data/ancientRelics/modificationsItA.json';
+import AstrologyRecipeItAData from '../../../src/data/astrologyRecipes/modificationsItA.json';
 import ItemModificationData from '../../../src/data/items/modifications.json';
 import ItemTotHModificationData from '../../../src/data/items/modificationsTotH.json';
+import ItemAoDModificationData from '../../../src/data/items/modificationsAoD.json';
+import ItemItAModificationData from '../../../src/data/items/modificationsItA.json';
 import SummoningSynergyModificationData from '../../../src/data/summoningSynergies/modifications.json';
 import CombatPassiveModificationData from '../../../src/data/combatPassives/modifications.json';
 import CombatPassiveTotHModificationData from '../../../src/data/combatPassives/modificationsTotH.json';
+import PrayersAoDModificationData from '../../../src/data/prayers/modificationsAoD.json';
+import ShopPurchasesModificationData from '../../../src/data/shopPurchases/modifications.json';
+import ShopPurchasesTotHModificationData from '../../../src/data/shopPurchases/modificationsTotH.json';
 import ShopPurchasesItAModificationData from '../../../src/data/shopPurchases/modificationsItA.json';
 import SummoningSynergiesModificationData from '../../../src/data/summoningSynergies/modifications.json';
 import SummoningSynergiesTotHModificationData from '../../../src/data/summoningSynergies/modificationsTotH.json';
+import SummoningSynergiesAoDModificationData from '../../../src/data/summoningSynergies/modificationsAoD.json';
+import SummoningSynergiesItAModificationData from '../../../src/data/summoningSynergies/modificationsItA.json';
 import TownshipSeasonModificationData from '../../../src/data/townshipSeasons/modifications.json';
 // TODO: Add "_definitions" file for resolvers, api and extended base game classes (where tinyIcons properties were added)
 
@@ -60,7 +69,12 @@ export class Main {
         ctx.onCharacterLoaded(function () {
             SettingsManager.setSettingsFromCharacter();
 
-            enforceRecomputations();
+            enforceCharacterLoadRecomputations();
+        });
+        ctx.onInterfaceReady(function () {
+            SettingsManager.setSettingsFromCharacter();
+
+            enforceInterfaceReadyRecomputations();
         });
 
         // Load in data packages
@@ -84,12 +98,39 @@ export class Main {
 }
 
 /**
+ * Some recomputations can only happen after full ui initialization
+ */
+function enforceInterfaceReadyRecomputations() {
+    const t0: number = performance.now();
+
+    // Force shop description re-computations
+    try {
+        shopMenu.tabs.forEach((tab) => {
+            tab.menu.items.forEach((item) => {
+                // We only re-compute auto-generated ones, as those are affected by (character-specific) mod settings
+                if (item.item.purchase.contains?.stats !== undefined) {
+                    item.item.description.innerHTML = item.item.purchase.getTemplatedDescription(game.shop);
+                }
+            });
+        });
+    } catch (e) {
+        Logger.warn('An error occurred while trying to re-compute shop purchase descriptions. The UI may be in an unexpected state', e);
+    }
+
+    const t1: number = performance.now();
+
+    if (Constants.DEV_MODE) {
+        Logger.log(`Enforcing (NOT necessarily running) interface-ready re-computation took ${Math.floor(t1 - t0)}ms`);
+    }
+}
+
+/**
  * Upon entering the character, thereby the mod settings becoming active (differing from their default values),
  * there will be various locations that need to be enforced to re-compute their descriptions in order to reflect the settings
  * DEV NOTE: This is not just in relation to modifications of resolvers. Automated texts (e.g. stat object printing) can also be affected.
  * @param ctx
  */
-function enforceRecomputations() {
+function enforceCharacterLoadRecomputations() {
     const t0: number = performance.now();
     game.items.forEach((item) => {
         item._modifiedDescription = undefined;
@@ -104,7 +145,8 @@ function enforceRecomputations() {
     game.combatPassives.forEach((combatPassive) => {
         combatPassive._modifiedDescription = undefined;
     });
-    game.prayer.renderQueue.prayerMenu = true;
+    game.prayer.renderQueue.prayerMenu = true;    
+
     try {
         // Seems like equipment is actually rendered pre character load hook
         // The following enforces the grids of all equipment sets to be re-rendered
@@ -134,7 +176,7 @@ function enforceRecomputations() {
     const t1: number = performance.now();
 
     if (Constants.DEV_MODE) {
-        Logger.log(`Enforcing (NOT running) re-computation took ${Math.floor(t1 - t0)}ms`);
+        Logger.log(`Enforcing (NOT necessarily running) character-load re-computation took ${Math.floor(t1 - t0)}ms`);
     }
 }
 
@@ -149,9 +191,17 @@ async function loadTestData(ctx: Modding.ModContext) {
 async function loadModifications(ctx: Modding.ModContext) {
     // Normal
     // @ts-ignore: Supposed non-matching type (e.g. Tiny Icons custom stuff, I guess)
+    await ctx.gameData.addPackage(AncientRelicItAData);
+    // @ts-ignore: Supposed non-matching type (e.g. Tiny Icons custom stuff, I guess)
+    await ctx.gameData.addPackage(AstrologyRecipeItAData);
+    // @ts-ignore: Supposed non-matching type (e.g. Tiny Icons custom stuff, I guess)
     await ctx.gameData.addPackage(ItemModificationData);
     // @ts-ignore: Supposed non-matching type (e.g. Tiny Icons custom stuff, I guess)
     await ctx.gameData.addPackage(ItemTotHModificationData);
+    // @ts-ignore: Supposed non-matching type (e.g. Tiny Icons custom stuff, I guess)
+    await ctx.gameData.addPackage(ItemAoDModificationData);
+    // @ts-ignore: Supposed non-matching type (e.g. Tiny Icons custom stuff, I guess)
+    await ctx.gameData.addPackage(ItemItAModificationData);
     // @ts-ignore: Supposed non-matching type (e.g. Tiny Icons custom stuff, I guess)
     await ctx.gameData.addPackage(SummoningSynergyModificationData);
     // @ts-ignore: Supposed non-matching type (e.g. Tiny Icons custom stuff, I guess)
@@ -159,11 +209,21 @@ async function loadModifications(ctx: Modding.ModContext) {
     // @ts-ignore: Supposed non-matching type (e.g. Tiny Icons custom stuff, I guess)
     await ctx.gameData.addPackage(CombatPassiveTotHModificationData);
     // @ts-ignore: Supposed non-matching type (e.g. Tiny Icons custom stuff, I guess)
+    await ctx.gameData.addPackage(PrayersAoDModificationData);
+    // @ts-ignore: Supposed non-matching type (e.g. Tiny Icons custom stuff, I guess)
+    await ctx.gameData.addPackage(ShopPurchasesModificationData);
+    // @ts-ignore: Supposed non-matching type (e.g. Tiny Icons custom stuff, I guess)
+    await ctx.gameData.addPackage(ShopPurchasesTotHModificationData);
+    // @ts-ignore: Supposed non-matching type (e.g. Tiny Icons custom stuff, I guess)
     await ctx.gameData.addPackage(ShopPurchasesItAModificationData);
     // @ts-ignore: Supposed non-matching type (e.g. Tiny Icons custom stuff, I guess)
     await ctx.gameData.addPackage(SummoningSynergiesModificationData);
     // @ts-ignore: Supposed non-matching type (e.g. Tiny Icons custom stuff, I guess)
     await ctx.gameData.addPackage(SummoningSynergiesTotHModificationData);
+    // @ts-ignore: Supposed non-matching type (e.g. Tiny Icons custom stuff, I guess)
+    await ctx.gameData.addPackage(SummoningSynergiesAoDModificationData);
+    // @ts-ignore: Supposed non-matching type (e.g. Tiny Icons custom stuff, I guess)
+    await ctx.gameData.addPackage(SummoningSynergiesItAModificationData);
     // @ts-ignore: Supposed non-matching type (e.g. Tiny Icons custom stuff, I guess)
     await ctx.gameData.addPackage(TownshipSeasonModificationData);
     // Could possibly create a custom schema and reference that in the json, rather than the melvor one
@@ -245,6 +305,12 @@ function addTestStuff(ctx: Modding.ModContext) {
         game.thieving.addXP(exp.levelToXP(120) + 1);
         game.hitpoints.addXP(exp.levelToXP(120) + 1);
         game.township.addXP(exp.levelToXP(120) + 1);
+        game.woodcutting.addXP(exp.levelToXP(80) + 1);
+        game.fishing.addXP(exp.levelToXP(80) + 1);
+        game.mining.addXP(exp.levelToXP(80) + 1);
+        game.cooking.addXP(exp.levelToXP(80) + 1);
+        game.smithing.addXP(exp.levelToXP(80) + 1);
+        game.firemaking.addXP(exp.levelToXP(80) + 1);
 
         // Skill progress (Astrology Mastery)
         const tiAction = game.astrology.actions.getObjectSafe('tinyIcons:Test');
@@ -309,5 +375,22 @@ function addTestStuff(ctx: Modding.ModContext) {
                 game.bank.addItemByID(entry.context.id, 10, false, false, false);
             }
         });
+
+        // Add items for shop purchases
+        game.bank.addItemByID(ItemIDs.Normal_Logs, 5000, false, false, false);
+        game.bank.addItemByID(ItemIDs.Oak_Logs, 5000, false, false, false);
+        game.bank.addItemByID(ItemIDs.Willow_Logs, 5000, false, false, false);
+        game.bank.addItemByID(ItemIDs.Teak_Logs, 5000, false, false, false);
+        game.bank.addItemByID(ItemIDs.Maple_Logs, 5000, false, false, false);
+        game.bank.addItemByID(ItemIDs.Mahogany_Logs, 5000, false, false, false);
+        game.bank.addItemByID(ItemIDs.Yew_Logs, 5000, false, false, false);
+        game.bank.addItemByID(ItemIDs.Magic_Logs, 5000, false, false, false);
+        game.bank.addItemByID(ItemIDs.Redwood_Logs, 5000, false, false, false);
+        game.bank.addItemByID(ItemIDs.Bronze_Bar, 5000, false, false, false);
+        game.bank.addItemByID(ItemIDs.Iron_Bar, 5000, false, false, false);
+        game.bank.addItemByID(ItemIDs.Steel_Bar, 5000, false, false, false);
+        game.bank.addItemByID(ItemIDs.Mithril_Bar, 5000, false, false, false);
+        game.bank.addItemByID(ItemIDs.Adamantite_Bar, 5000, false, false, false);
+        game.bank.addItemByID(ItemIDs.Runite_Bar, 5000, false, false, false);
     });
 }

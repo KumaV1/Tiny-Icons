@@ -3,99 +3,105 @@
   "namespace": "tinyIcons",
   "dependentData": [
     {
-      "namespace": "melvorItA",
+      "namespace": "melvorAoD",
       "modifications": {
         "tinyIcons": {
           "staticTagAllocations": [
             {
               "context": {
-                "category": "ShopPurchase",
-                "id": "melvorItA:Extra_Equipment_Set_I"
-              },
-              "data": {
-                "descriptionIconTags": [
-                  "equip_set"
-                ]
-              }
-            },
-            {
-              "context": {
-                "category": "ShopPurchase",
-                "id": "melvorItA:Extra_Equipment_Set_II"
-              },
-              "data": {
-                "descriptionIconTags": [
-                  "equip_set"
-                ]
-              }
-            },
-            {
-              "context": {
-                "category": "ShopPurchase",
-                "id": "melvorItA:Extra_Equipment_Set_III"
-              },
-              "data": {
-                "descriptionIconTags": [
-                  "equip_set"
-                ]
-              }
-            },
-            {
-              "context": {
-                "category": "ShopPurchase",
-                "id": "melvorItA:Extra_Bank_Slot"
-              },
-              "data": {
-                "descriptionIconTags": [
-                  "bank"
-                ]
-              }
-            },
-            {
-              "context": {
-                "category": "ShopPurchase",
-                "id": "melvorItA:Echoes_of_Woe"
+                "category": "EquipmentItem",
+                "id": "melvorAoD:Malevolent_Ward_Shield"
               },
               "data": {
                 "conditionalModifierIconTags": [
                   [
-                    "ti_combat_up"
+                    "ti_combat_up",
+                    "accuracy",
+                    "evasion_up"
                   ]
                 ]
               }
             },
             {
               "context": {
-                "category": "ShopPurchase",
-                "id": "melvorItA:Embracer_of_Fear"
+                "category": "EquipmentItem",
+                "id": "melvorAoD:Elemental_Scroll"
               },
               "data": {
-                "conditionalModifierIconTags": [
-                  [
-                    "ti_combat_up"
-                  ]
+                "descriptionIconTags": [
+                  "ti_magic_up",
+                  "air_rune",
+                  "water_rune",
+                  "earth_rune",
+                  "fire_rune"
                 ]
               }
             },
             {
               "context": {
-                "category": "ShopPurchase",
-                "id": "melvorItA:Fortitude_Under_Rubble"
+                "category": "EquipmentItem",
+                "id": "melvorAoD:Dividers"
               },
               "data": {
-                "conditionalModifierIconTags": [
-                  [
-                    "hitpoints",
-                    "evasion_up",
-                    "accuracy"
-                  ]
+                "descriptionIconTags": [
+                  "map",
+                  "cartography"
                 ]
               }
             },
             {
               "context": {
-                "category": "ShopPurchase",
-                "id": "melvorItA:The_Unyielding_Conqueror"
+                "category": "EquipmentItem",
+                "id": "melvorAoD:Old_Scripture"
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "archaeology"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "EquipmentItem",
+                "id": "melvorAoD:Water_Shield"
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "evasion_up"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "EquipmentItem",
+                "id": "melvorAoD:Merman_Pendant"
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "ti_attack_interval",
+                  "offense_up",
+                  "accuracy",
+                  "ti_dr_dn",
+                  "nulled",
+                  "special_attack"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "EquipmentItem",
+                "id": "melvorAoD:Darksteel_Shield"
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "bleed"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "EquipmentItem",
+                "id": "melvorAoD:Pirate_Hook"
               },
               "data": {
                 "conditionalModifierIconTags": [
@@ -108,227 +114,233 @@
             },
             {
               "context": {
-                "category": "ShopPurchase",
-                "id": "melvorItA:Abyssium_Harvester"
+                "category": "EquipmentItem",
+                "id": "melvorAoD:Eradicating_Gloves"
               },
               "data": {
                 "descriptionIconTags": [
-                  "harvesting"
+                  "unholy",
+                  "prayer",
+                  "combat"
                 ]
               }
             },
             {
               "context": {
-                "category": "ShopPurchase",
-                "id": "melvorItA:Brumite_Harvester"
+                "category": "EquipmentItem",
+                "id": "melvorAoD:Ring_of_Malice"
               },
               "data": {
                 "descriptionIconTags": [
-                  "harvesting"
+                  "unholy",
+                  "prayer",
+                  "combat"
                 ]
               }
             },
             {
               "context": {
-                "category": "ShopPurchase",
-                "id": "melvorItA:Gloomite_Harvester"
+                "category": "EquipmentItem",
+                "id": "melvorAoD:Grudge_Amulet"
               },
               "data": {
                 "descriptionIconTags": [
-                  "harvesting"
+                  "unholy",
+                  "prayer",
+                  "combat"
                 ]
               }
             },
             {
               "context": {
-                "category": "ShopPurchase",
-                "id": "melvorItA:Witherite_Harvester"
+                "category": "EquipmentItem",
+                "id": "melvorAoD:Consuming_Shield"
               },
               "data": {
                 "descriptionIconTags": [
-                  "harvesting"
+                  "unholy",
+                  "prayer",
+                  "combat"
                 ]
               }
             },
             {
               "context": {
-                "category": "ShopPurchase",
-                "id": "melvorItA:Netherite_Harvester"
+                "category": "EquipmentItem",
+                "id": "melvorAoD:Helmet_of_Spite"
               },
               "data": {
                 "descriptionIconTags": [
-                  "harvesting"
+                  "unholy",
+                  "prayer",
+                  "combat"
                 ]
               }
             },
             {
               "context": {
-                "category": "ShopPurchase",
-                "id": "melvorItA:Abyssium_Axe_Coating"
+                "category": "EquipmentItem",
+                "id": "melvorAoD:Shield_of_Martyr"
               },
               "data": {
                 "descriptionIconTags": [
-                  "xp",
-                  "woodcutting"
+                  "unholy",
+                  "prayer",
+                  "combat"
                 ]
               }
             },
             {
               "context": {
-                "category": "ShopPurchase",
-                "id": "melvorItA:Brumite_Axe_Coating"
+                "category": "EquipmentItem",
+                "id": "melvorAoD:Summoners_Blessed_Ring"
               },
               "data": {
                 "descriptionIconTags": [
-                  "woodcutting"
+                  "interval",
+                  "summoning"
                 ]
               }
             },
             {
               "context": {
-                "category": "ShopPurchase",
-                "id": "melvorItA:Gloomite_Axe_Coating"
+                "category": "EquipmentItem",
+                "id": "melvorAoD:Unholy_Gem"
               },
               "data": {
                 "descriptionIconTags": [
-                  "woodcutting"
+                  "unholy",
+                  "prayer",
+                  "combat"
                 ]
               }
             },
             {
               "context": {
-                "category": "ShopPurchase",
-                "id": "melvorItA:Witherite_Axe_Coating"
+                "category": "EquipmentItem",
+                "id": "melvorAoD:Archaeologist_Hat"
               },
               "data": {
                 "descriptionIconTags": [
-                  "woodcutting"
+                  "xp"
                 ]
               }
             },
             {
               "context": {
-                "category": "ShopPurchase",
-                "id": "melvorItA:Netherite_Axe_Coating"
+                "category": "EquipmentItem",
+                "id": "melvorAoD:Archaeologist_Body"
               },
               "data": {
                 "descriptionIconTags": [
-                  "woodcutting"
+                  "xp"
                 ]
               }
             },
             {
               "context": {
-                "category": "ShopPurchase",
-                "id": "melvorItA:Abyssium_Fishing_Rod_Coating"
+                "category": "EquipmentItem",
+                "id": "melvorAoD:Archaeologist_Leggings"
               },
               "data": {
                 "descriptionIconTags": [
-                  "xp",
-                  "fishing"
+                  "xp"
                 ]
               }
             },
             {
               "context": {
-                "category": "ShopPurchase",
-                "id": "melvorItA:Brumite_Fishing_Rod_Coating"
+                "category": "EquipmentItem",
+                "id": "melvorAoD:Archaeologist_Boots"
               },
               "data": {
                 "descriptionIconTags": [
-                  "fishing"
+                  "xp"
                 ]
               }
             },
             {
               "context": {
-                "category": "ShopPurchase",
-                "id": "melvorItA:Gloomite_Fishing_Rod_Coating"
+                "category": "EquipmentItem",
+                "id": "melvorAoD:Archaeologist_Gloves"
               },
               "data": {
                 "descriptionIconTags": [
-                  "fishing",
-                  "cooking"
+                  "xp"
                 ]
               }
             },
             {
               "context": {
-                "category": "ShopPurchase",
-                "id": "melvorItA:Witherite_Fishing_Rod_Coating"
+                "category": "EquipmentItem",
+                "id": "melvorAoD:Summoners_Blessing"
               },
               "data": {
                 "descriptionIconTags": [
-                  "fishing",
-                  "cooking"
+                  "interval",
+                  "summoning"
                 ]
               }
             },
             {
               "context": {
-                "category": "ShopPurchase",
-                "id": "melvorItA:Netherite_Fishing_Rod_Coating"
+                "category": "EquipmentItem",
+                "id": "melvorAoD:Summoners_Defender"
               },
               "data": {
                 "descriptionIconTags": [
-                  "fishing"
+                  "interval",
+                  "summoning"
                 ]
               }
             },
             {
               "context": {
-                "category": "ShopPurchase",
-                "id": "melvorItA:Abyssium_Pickaxe_Coating"
+                "category": "EquipmentItem",
+                "id": "melvorAoD:Knights_Summoning_Defender"
               },
               "data": {
                 "descriptionIconTags": [
-                  "xp",
-                  "mining"
+                  "interval",
+                  "ti_combat_up",
+                  "summoning",
+                  "ti_dr_dn"
                 ]
               }
             },
             {
               "context": {
-                "category": "ShopPurchase",
-                "id": "melvorItA:Brumite_Pickaxe_Coating"
+                "category": "WeaponItem",
+                "id": "melvorAoD:Water_Sceptre"
               },
               "data": {
                 "descriptionIconTags": [
-                  "mining"
+                  "ti_magic_up",
+                  "water_rune"
                 ]
               }
             },
             {
               "context": {
-                "category": "ShopPurchase",
-                "id": "melvorItA:Gloomite_Pickaxe_Coating"
+                "category": "WeaponItem",
+                "id": "melvorAoD:Mystic_Pure_Crystal_Staff"
               },
               "data": {
                 "descriptionIconTags": [
-                  "mining"
+                  "ti_magic_up",
+                  "air_rune"
                 ]
               }
             },
             {
               "context": {
-                "category": "ShopPurchase",
-                "id": "melvorItA:Witherite_Pickaxe_Coating"
+                "category": "WeaponItem",
+                "id": "melvorAoD:Water_Pulse_Staff"
               },
               "data": {
                 "descriptionIconTags": [
-                  "gem",
-                  "mining"
-                ]
-              }
-            },
-            {
-              "context": {
-                "category": "ShopPurchase",
-                "id": "melvorItA:Netherite_Pickaxe_Coating"
-              },
-              "data": {
-                "descriptionIconTags": [
-                  "mining"
+                  "ti_magic_up",
+                  "water_rune"
                 ]
               }
             }

@@ -121,7 +121,8 @@
           },
           "data": {
             "descriptionIconTags": [
-              "skill"
+              "woodcutting",
+              "smithing"
             ]
           }
         },
@@ -181,7 +182,7 @@
           "data": {
             "descriptionIconTags": [
               "gem",
-              "skill"
+              "thieving"
             ]
           }
         },
@@ -304,7 +305,8 @@
             "descriptionIconTags": [
               "mastery",
               "preservation",
-              "skill"
+              "firemaking",
+              "cooking"
             ]
           }
         },
@@ -319,7 +321,8 @@
           "data": {
             "descriptionIconTags": [
               "preservation",
-              "skill"
+              "smithing",
+              "runecrafting"
             ]
           }
         },

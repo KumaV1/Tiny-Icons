@@ -3,7 +3,7 @@
   "namespace": "tinyIcons",
   "dependentData": [
     {
-      "namespace": "melvorTotH",
+      "namespace": "melvorItA",
       "modifications": {
         "tinyIcons": {
           "staticTagAllocations": [
@@ -11,14 +11,14 @@
               "context": {
                 "category": "SummoningSynergy",
                 "summonIDs": [
-                  "melvorF:Devil",
-                  "melvorTotH:Owl"
+                  "melvorItA:Abyssal_Mole",
+                  "melvorItA:Abyssal_Pig"
                 ]
               },
               "data": {
                 "descriptionIconTags": [
-                  "astrology",
-                  "golden_stardust"
+                  "cooking",
+                  "coal"
                 ]
               }
             },
@@ -26,15 +26,16 @@
               "context": {
                 "category": "SummoningSynergy",
                 "summonIDs": [
-                  "melvorF:GolbinThief",
-                  "melvorTotH:LightningSpirit"
+                  "melvorItA:Abyssal_Pig",
+                  "melvorItA:Abyssal_Devil"
                 ]
               },
               "data": {
                 "descriptionIconTags": [
-                  "currency",
-                  "combat",
-                  "stun"
+                  "mastery",
+                  "preservation",
+                  "firemaking",
+                  "cooking"
                 ]
               }
             },
@@ -42,15 +43,27 @@
               "context": {
                 "category": "SummoningSynergy",
                 "summonIDs": [
-                  "melvorF:GolbinThief",
-                  "melvorTotH:Siren"
+                  "melvorItA:Abyssal_Crow",
+                  "melvorItA:Abyssal_Bear"
+                ]
+              },
+              "data": {
+                "descriptionIconTags": [ "runecrafting" ]
+              }
+            },
+            {
+              "context": {
+                "category": "SummoningSynergy",
+                "summonIDs": [
+                  "melvorItA:Abyssal_Salamander",
+                  "melvorItA:Abyssal_Bear"
                 ]
               },
               "data": {
                 "descriptionIconTags": [
-                  "currency",
-                  "combat",
-                  "sleep"
+                  "azurian_bar",
+                  "obsidian_bar",
+                  "smithing"
                 ]
               }
             },
@@ -58,15 +71,16 @@
               "context": {
                 "category": "SummoningSynergy",
                 "summonIDs": [
-                  "melvorF:GolbinThief",
-                  "melvorTotH:Spider"
+                  "melvorItA:Abyssal_Golbin_Thief",
+                  "melvorItA:Abyssal_Dragon"
                 ]
               },
               "data": {
-                "descriptionIconTags": [
-                  "currency",
-                  "combat",
-                  "stun"
+                "conditionalModifierIconTags": [
+                  [
+                    "currency",
+                    "combat"
+                  ]
                 ]
               }
             },
@@ -74,14 +88,16 @@
               "context": {
                 "category": "SummoningSynergy",
                 "summonIDs": [
-                  "melvorF:Wolf",
-                  "melvorTotH:LightningSpirit"
+                  "melvorItA:Abyssal_Wolf",
+                  "melvorItA:Abyssal_Witch"
                 ]
               },
               "data": {
-                "descriptionIconTags": [
-                  "lifesteal",
-                  "stun"
+                "conditionalModifierIconTags": [
+                  [
+                    "lifesteal",
+                    "magic"
+                  ]
                 ]
               }
             },
@@ -89,14 +105,16 @@
               "context": {
                 "category": "SummoningSynergy",
                 "summonIDs": [
-                  "melvorF:Wolf",
-                  "melvorTotH:Siren"
+                  "melvorItA:Abyssal_Wolf",
+                  "melvorItA:Abyssal_Minotaur"
                 ]
               },
               "data": {
-                "descriptionIconTags": [
-                  "lifesteal",
-                  "sleep"
+                "conditionalModifierIconTags": [
+                  [
+                    "lifesteal",
+                    "attack"
+                  ]
                 ]
               }
             },
@@ -104,14 +122,49 @@
               "context": {
                 "category": "SummoningSynergy",
                 "summonIDs": [
-                  "melvorF:Witch",
-                  "melvorTotH:LightningSpirit"
+                  "melvorItA:Abyssal_Wolf",
+                  "melvorItA:Abyssal_Centaur"
+                ]
+              },
+              "data": {
+                "conditionalModifierIconTags": [
+                  [
+                    "lifesteal",
+                    "ranged"
+                  ]
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "SummoningSynergy",
+                "summonIDs": [
+                  "melvorItA:Abyssal_Occultist",
+                  "melvorItA:Abyssal_Wolf"
                 ]
               },
               "data": {
                 "descriptionIconTags": [
+                  "evasion_up",
+                  "accuracy",
+                  "hitpoints"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "SummoningSynergy",
+                "summonIDs": [
+                  "melvorItA:Abyssal_Minotaur",
+                  "melvorItA:Abyssal_Witch"
+                ]
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "ti_strength_up",
+                  "accuracy",
                   "ti_magic_up",
-                  "stun"
+                  "slayer"
                 ]
               }
             },
@@ -119,13 +172,14 @@
               "context": {
                 "category": "SummoningSynergy",
                 "summonIDs": [
-                  "melvorF:Witch",
-                  "melvorTotH:Spectre"
+                  "melvorItA:Abyssal_Centaur",
+                  "melvorItA:Abyssal_Witch"
                 ]
               },
               "data": {
                 "descriptionIconTags": [
-                  "ti_dr_up",
+                  "ranged",
+                  "ti_combat_up",
                   "magic"
                 ]
               }
@@ -134,14 +188,15 @@
               "context": {
                 "category": "SummoningSynergy",
                 "summonIDs": [
-                  "melvorF:Minotaur",
-                  "melvorTotH:LightningSpirit"
+                  "melvorItA:Abyssal_Minotaur",
+                  "melvorItA:Abyssal_Centaur"
                 ]
               },
               "data": {
                 "descriptionIconTags": [
-                  "ti_strength_up",
-                  "stun"
+                  "ranged",
+                  "ti_combat_up",
+                  "magic"
                 ]
               }
             },
@@ -149,13 +204,27 @@
               "context": {
                 "category": "SummoningSynergy",
                 "summonIDs": [
-                  "melvorF:Minotaur",
-                  "melvorTotH:Spectre"
+                  "melvorItA:Abyssal_Occultist",
+                  "melvorItA:Abyssal_Minotaur"
                 ]
               },
               "data": {
                 "descriptionIconTags": [
-                  "ti_dr_up",
+                  "offense_up"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "SummoningSynergy",
+                "summonIDs": [
+                  "melvorItA:Abyssal_Minotaur",
+                  "melvorItA:Abyssal_Unicorn"
+                ]
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "regen",
                   "attack"
                 ]
               }
@@ -164,13 +233,61 @@
               "context": {
                 "category": "SummoningSynergy",
                 "summonIDs": [
-                  "melvorF:Centaur",
-                  "melvorTotH:LightningSpirit"
+                  "melvorItA:Abyssal_Minotaur",
+                  "melvorItA:Abyssal_Dragon"
                 ]
               },
               "data": {
                 "descriptionIconTags": [
-                  "ti_ranged_up",
+                  "attack",
+                  "ti_strength_up",
+                  "accuracy",
+                  "ablaze"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "SummoningSynergy",
+                "summonIDs": [
+                  "melvorItA:Abyssal_Occultist",
+                  "melvorItA:Abyssal_Centaur"
+                ]
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "ti_combat_up"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "SummoningSynergy",
+                "summonIDs": [
+                  "melvorItA:Abyssal_Occultist",
+                  "melvorItA:Abyssal_Cyclops"
+                ]
+              },
+              "data": {
+                "conditionalModifierIconTags": [
+                  [
+                    "evasion_up"
+                  ]
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "SummoningSynergy",
+                "summonIDs": [
+                  "melvorItA:Abyssal_Occultist",
+                  "melvorItA:Abyssal_Yak"
+                ]
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "defence",
+                  "attack",
                   "ranged"
                 ]
               }
@@ -179,14 +296,14 @@
               "context": {
                 "category": "SummoningSynergy",
                 "summonIDs": [
-                  "melvorF:Centaur",
-                  "melvorTotH:Spectre"
+                  "melvorItA:Abyssal_Occultist",
+                  "melvorItA:Abyssal_Dragon"
                 ]
               },
               "data": {
                 "descriptionIconTags": [
                   "ti_dr_up",
-                  "ranged"
+                  "ablaze"
                 ]
               }
             },
@@ -194,15 +311,14 @@
               "context": {
                 "category": "SummoningSynergy",
                 "summonIDs": [
-                  "melvorF:Cyclops",
-                  "melvorTotH:LightningSpirit"
+                  "melvorItA:Abyssal_Yak",
+                  "melvorItA:Abyssal_Unicorn"
                 ]
               },
               "data": {
                 "descriptionIconTags": [
-                  "slayer_coins",
-                  "combat",
-                  "stun"
+                  "regen",
+                  "hitpoints"
                 ]
               }
             },
@@ -210,15 +326,31 @@
               "context": {
                 "category": "SummoningSynergy",
                 "summonIDs": [
-                  "melvorF:Cyclops",
-                  "melvorTotH:Siren"
+                  "melvorItA:Imp",
+                  "melvorItA:Abyssal_Wolf"
+                ]
+              },
+              "data": {
+                "conditionalModifierIconTags": [
+                  [
+                    "currency",
+                    "lifesteal"
+                  ]
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "SummoningSynergy",
+                "summonIDs": [
+                  "melvorItA:Imp",
+                  "melvorItA:Abyssal_Witch"
                 ]
               },
               "data": {
                 "descriptionIconTags": [
-                  "slayer_coins",
-                  "combat",
-                  "sleep"
+                  "ti_magic_up",
+                  "corruption"
                 ]
               }
             },
@@ -226,147 +358,14 @@
               "context": {
                 "category": "SummoningSynergy",
                 "summonIDs": [
-                  "melvorF:Occultist",
-                  "melvorTotH:Spider"
-                ]
-              },
-              "data": {
-                "descriptionIconTags": [
-                  "slayer_coins",
-                  "combat",
-                  "poison"
-                ]
-              }
-            },
-            {
-              "context": {
-                "category": "SummoningSynergy",
-                "summonIDs": [
-                  "melvorF:Occultist",
-                  "melvorTotH:Spectre"
-                ]
-              },
-              "data": {
-                "descriptionIconTags": [
-                  "evasion_up"
-                ]
-              }
-            },
-            {
-              "context": {
-                "category": "SummoningSynergy",
-                "summonIDs": [
-                  "melvorF:Yak",
-                  "melvorTotH:LightningSpirit"
-                ]
-              },
-              "data": {
-                "descriptionIconTags": [
-                  "ti_dr_up",
-                  "sleep"
-                ]
-              }
-            },
-            {
-              "context": {
-                "category": "SummoningSynergy",
-                "summonIDs": [
-                  "melvorF:Yak",
-                  "melvorTotH:Siren"
-                ]
-              },
-              "data": {
-                "descriptionIconTags": [
-                  "ti_dr_up",
-                  "stun"
-                ]
-              }
-            },
-            {
-              "context": {
-                "category": "SummoningSynergy",
-                "summonIDs": [
-                  "melvorF:Yak",
-                  "melvorTotH:Spider"
-                ]
-              },
-              "data": {
-                "descriptionIconTags": [
-                  "ti_dr_up",
-                  "poison"
-                ]
-              }
-            },
-            {
-              "context": {
-                "category": "SummoningSynergy",
-                "summonIDs": [
-                  "melvorF:Yak",
-                  "melvorTotH:Spectre"
-                ]
-              },
-              "data": {
-                "descriptionIconTags": [ "ti_dr_up" ]
-              }
-            },
-            {
-              "context": {
-                "category": "SummoningSynergy",
-                "summonIDs": [
-                  "melvorF:Unicorn",
-                  "melvorTotH:Spider"
-                ]
-              },
-              "data": {
-                "descriptionIconTags": [
-                  "combat"
-                ]
-              }
-            },
-            {
-              "context": {
-                "category": "SummoningSynergy",
-                "summonIDs": [
-                  "melvorF:Dragon",
-                  "melvorTotH:Spider"
-                ]
-              },
-              "data": {
-                "descriptionIconTags": [
-                  "burn",
-                  "poison"
-                ]
-              }
-            },
-            {
-              "context": {
-                "category": "SummoningSynergy",
-                "summonIDs": [
-                  "melvorF:Dragon",
-                  "melvorTotH:Spectre"
-                ]
-              },
-              "data": {
-                "descriptionIconTags": [
-                  "ti_dr_dn",
-                  "burn"
-                ]
-              }
-            },
-            {
-              "context": {
-                "category": "SummoningSynergy",
-                "summonIDs": [
-                  "melvorTotH:LightningSpirit",
-                  "melvorTotH:Spider"
+                  "melvorItA:Imp",
+                  "melvorItA:Abyssal_Minotaur"
                 ]
               },
               "data": {
                 "descriptionIconTags": [
                   "ti_combat_up",
-                  "slow",
-                  "poison",
-                  "burn"
+                  "corruption"
                 ]
               }
             },
@@ -374,14 +373,14 @@
               "context": {
                 "category": "SummoningSynergy",
                 "summonIDs": [
-                  "melvorTotH:LightningSpirit",
-                  "melvorTotH:Spectre"
+                  "melvorItA:Imp",
+                  "melvorItA:Abyssal_Centaur"
                 ]
               },
               "data": {
                 "descriptionIconTags": [
-                  "ti_dr_dn",
-                  "stun"
+                  "ti_ranged_up",
+                  "corruption"
                 ]
               }
             },
@@ -389,14 +388,14 @@
               "context": {
                 "category": "SummoningSynergy",
                 "summonIDs": [
-                  "melvorTotH:Siren",
-                  "melvorTotH:Spectre"
+                  "melvorItA:Imp",
+                  "melvorItA:Abyssal_Cyclops"
                 ]
               },
               "data": {
                 "descriptionIconTags": [
-                  "ti_dr_dn",
-                  "sleep"
+                  "slayer_coins",
+                  "corruption"
                 ]
               }
             },
@@ -404,13 +403,14 @@
               "context": {
                 "category": "SummoningSynergy",
                 "summonIDs": [
-                  "melvorF:Occultist",
-                  "melvorTotH:Fox"
+                  "melvorItA:Imp",
+                  "melvorItA:Abyssal_Occultist"
                 ]
               },
               "data": {
                 "descriptionIconTags": [
-                  "evasion_up"
+                  "evasion_up",
+                  "corruption"
                 ]
               }
             },
@@ -418,13 +418,27 @@
               "context": {
                 "category": "SummoningSynergy",
                 "summonIDs": [
-                  "melvorF:Yak",
-                  "melvorTotH:Fox"
+                  "melvorItA:Imp",
+                  "melvorItA:Abyssal_Yak"
                 ]
               },
               "data": {
                 "descriptionIconTags": [
                   "ti_dr_up",
+                  "corruption"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "SummoningSynergy",
+                "summonIDs": [
+                  "melvorItA:Imp",
+                  "melvorItA:Abyssal_Unicorn"
+                ]
+              },
+              "data": {
+                "descriptionIconTags": [
                   "hitpoints"
                 ]
               }
@@ -433,14 +447,106 @@
               "context": {
                 "category": "SummoningSynergy",
                 "summonIDs": [
-                  "melvorTotH:Fox",
-                  "melvorTotH:Spectre"
+                  "melvorItA:Imp",
+                  "melvorItA:Abyssal_Dragon"
                 ]
               },
               "data": {
                 "descriptionIconTags": [
-                  "ti_dr_up",
-                  "hitpoints"
+                  "ablaze",
+                  "corruption"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "SummoningSynergy",
+                "summonIDs": [
+                  "melvorItA:Abyssal_Wolf",
+                  "melvorItA:Eldritch_Eyeball"
+                ]
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "ti_dr_dn",
+                  "autoeat",
+                  "lifesteal"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "SummoningSynergy",
+                "summonIDs": [
+                  "melvorItA:Abyssal_Witch",
+                  "melvorItA:Eldritch_Eyeball"
+                ]
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "ti_combat_up",
+                  "magic"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "SummoningSynergy",
+                "summonIDs": [
+                  "melvorItA:Abyssal_Minotaur",
+                  "melvorItA:Eldritch_Eyeball"
+                ]
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "ti_combat_up",
+                  "attack"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "SummoningSynergy",
+                "summonIDs": [
+                  "melvorItA:Abyssal_Centaur",
+                  "melvorItA:Eldritch_Eyeball"
+                ]
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "ti_combat_up",
+                  "ranged"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "SummoningSynergy",
+                "summonIDs": [
+                  "melvorItA:Abyssal_Occultist",
+                  "melvorItA:Eldritch_Eyeball"
+                ]
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "accuracy",
+                  "curse"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "SummoningSynergy",
+                "summonIDs": [
+                  "melvorItA:Abyssal_Dragon",
+                  "melvorItA:Eldritch_Eyeball"
+                ]
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "accuracy",
+                  "burn",
+                  "curse"
                 ]
               }
             }

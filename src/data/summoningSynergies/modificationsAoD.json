@@ -1,0 +1,60 @@
+﻿{
+  "$schema": "https://melvoridle.com/assets/schema/gameData.json",
+  "namespace": "tinyIcons",
+  "dependentData": [
+    {
+      "namespace": "melvorAoD",
+      "modifications": {
+        "tinyIcons": {
+          "staticTagAllocations": [
+            {
+              "context": {
+                "category": "SummoningSynergy",
+                "summonIDs": [
+                  "melvorF:Occultist",
+                  "melvorAoD:Barrier"
+                ]
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "evasion_up"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "SummoningSynergy",
+                "summonIDs": [
+                  "melvorF:Yak",
+                  "melvorAoD:Barrier"
+                ]
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "ti_dr_up",
+                  "barrier"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "SummoningSynergy",
+                "summonIDs": [
+                  "melvorF:Unicorn",
+                  "melvorAoD:Barrier"
+                ]
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "barrier",
+                  "summoning",
+                  "hitpoints"
+                ]
+              }
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

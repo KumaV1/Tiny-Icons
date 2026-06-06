@@ -378,7 +378,7 @@ export class TagAllocationMemoizer {
             ['melvorD:autoEquipFoodUnlocked', new ModifierTagMapEntryAttributes('cooking')],
             ['melvorD:autoSwapFoodUnlocked', new ModifierTagMapEntryAttributes('cooking', 'combat')],
             ['melvorD:successfulCookChance', new ModifierTagMapEntryAttributes('cooking')],
-            ['melvorD:perfectCookChance', new ModifierTagMapEntryAttributes('cooking')],
+            ['melvorD:perfectCookChance', new ModifierTagMapEntryAttributes('cooking')], // Add tag like "cooking icon with the perfect star"
             ['melvorD:thievingStealth', new ModifierTagMapEntryAttributes('thieving')],
             ['melvorD:altMagicRunePreservationChance', new ModifierTagMapEntryAttributes('preservation', 'magic')],
             ['melvorD:fishingSpecialChance', new ModifierTagMapEntryAttributes('fishing')],
