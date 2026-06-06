@@ -1,20 +1,27 @@
 ﻿export function collectCartography() {
     const out: Array<{ context: any, entity: any }> = [];
-    const g: any = (window as any).game;
-    if (!g || !g.cartography) return out;
+    if (!game.cartography) {
+        // AoD skills are not initialized, if not at all registered
+        return out;
+    }
 
-    const worldMaps = g.cartography.worldMaps?.allObjects || g.cartography.worldMaps?.getAllObjects?.() || [];
+    const worldMaps = game.cartography.worldMaps.allObjects;
     for (const wm of worldMaps) {
-        if (!wm) continue;
-        const pois = wm.pointsOfInterest?.allObjects || wm.pointsOfInterest?.getAllObjects?.() || [];
+        const pois = wm.pointsOfInterest.allObjects;
         for (const poi of pois) {
-            if (!poi || !poi.id) continue;
+            if (!poi || !poi.id) {
+                continue;
+            }
+
             out.push({ context: { worldMapId: wm.id, pointOfInterestId: poi.id }, entity: poi });
         }
 
-        const mastery = wm.masteryBonuses?.allObjects || wm.masteryBonuses?.getAllObjects?.() || [];
+        const mastery = wm.masteryBonuses?.allObjects;
         for (const m of mastery) {
-            if (!m || !m.id) continue;
+            if (!m || !m.id) {
+                continue;
+            }
+
             out.push({ context: { worldMapId: wm.id, masteryBonusId: m.id }, entity: m });
         }
     }

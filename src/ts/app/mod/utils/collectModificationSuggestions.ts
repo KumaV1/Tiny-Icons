@@ -214,7 +214,7 @@ export function collect(cat: EntityCategory | undefined = undefined) {
             }
 
             // Get conditional modifiers from the entity
-            const cms = entity.conditionalModifiers || entity.stats?.conditionalModifiers || entity.activeStats?.conditionalModifiers;
+            const cms = entity.conditionalModifiers || entity.stats?.conditionalModifiers || entity.activeStats?.conditionalModifiers || entity.contains?.stats?.conditionalModifiers;
 
             // Check if conditional modifiers have descriptions or descriptionLang (meaning they generate custom descriptions)
             const cmsWithDescriptions = cms && Array.isArray(cms) 
@@ -259,7 +259,10 @@ export function collect(cat: EntityCategory | undefined = undefined) {
                                                         (entity.stats.conditionalModifiers && entity.stats.conditionalModifiers.length > 0))) ||
                                         (entity.activeStats && ((entity.activeStats.modifiers && entity.activeStats.modifiers.length > 0) ||
                                                         (entity.activeStats.enemyModifiers && entity.activeStats.enemyModifiers.length > 0) ||
-                                                        (entity.activeStats.conditionalModifiers && entity.activeStats.conditionalModifiers.length > 0)));
+                                                        (entity.activeStats.conditionalModifiers && entity.activeStats.conditionalModifiers.length > 0))) ||
+                                        (entity.contains?.stats && ((entity.contains.stats.modifiers && entity.contains.stats.modifiers.length > 0) ||
+                                                        (entity.contains.stats.enemyModifiers && entity.contains.stats.enemyModifiers.length > 0) ||
+                                                        (entity.contains.stats.conditionalModifiers && entity.contains.stats.conditionalModifiers.length > 0)));
 
                 if (hasCustomDescription && hasAnyModifiers) {
                     const allMods: any[] = [];
@@ -283,6 +286,14 @@ export function collect(cat: EntityCategory | undefined = undefined) {
                         }
                         if (entity.activeStats.enemyModifiers) {
                             allMods.push(...entity.activeStats.enemyModifiers);
+                        }
+                    }
+                    if (entity.contains?.stats) {
+                        if (entity.contains.stats.modifiers) {
+                            allMods.push(...entity.contains.stats.modifiers);
+                        }
+                        if (entity.contains.stats.enemyModifiers) {
+                            allMods.push(...entity.contains.stats.enemyModifiers);
                         }
                     }
 

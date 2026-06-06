@@ -16,6 +16,10 @@ export class ShopPurchaseDataPropagator extends EntityModificationDataPropagator
         return game.shop.purchases.getObjectSafe(context.id);
     }
 
+    getConditionalModifiersFromEntity(entity: ShopPurchase) {
+        return entity.contains?.stats?.conditionalModifiers;
+    }
+
     /**
      * 
      * @param entity

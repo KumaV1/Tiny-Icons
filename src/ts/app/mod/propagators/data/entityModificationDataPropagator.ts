@@ -71,7 +71,6 @@ export abstract class EntityModificationDataPropagator<TEntity, TContextData ext
         }
         if (data.conditionalModifierIconTags && data.conditionalModifierIconTags.length > 0) {
             try {
-                // Do stuff; wait, this one is not consistent, unless a function "getConditionalModifiersFromEntity" is added!
                 const cms = this.getConditionalModifiersFromEntity(entity);
                 if (!cms) {
                     Logger.warn('Failed to retrieve conditional modifiers on entity!', entity);
