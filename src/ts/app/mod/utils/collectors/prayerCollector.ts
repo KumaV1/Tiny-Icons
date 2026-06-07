@@ -1,11 +1,14 @@
 ﻿export function collectPrayers() {
-    const out: Array<{ context: any, entity: any }> = [];
+  const out: Array<{ context: any, entity: any }> = [];
 
-    const objs = game.prayers.allObjects;
-    for (const obj of objs) {
-        if (!obj || !obj.id) continue;
-        out.push({ context: { id: obj.id }, entity: obj });
+  const objs = game.prayers.allObjects;
+  for (const obj of objs) {
+    if (!obj || !obj.id) {
+      continue;
     }
 
-    return out;
+    out.push({ context: { id: obj.id }, entity: obj });
+  }
+
+  return out;
 }

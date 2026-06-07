@@ -4,23 +4,14 @@ import { PropagatorNamespacedObjectContextData } from "../../types/data/propagat
 import { EntityModificationDataPropagator } from "./entityModificationDataPropagator";
 
 export class PetDataPropagator extends EntityModificationDataPropagator<Pet, PropagatorNamespacedObjectContextData, PropagatorBaseDataData> {
-    description = "Propagates the conditional modifier objects to be provided with tiny icon data. As the description always uses stat formatting, description tags are a noop";
+  description = "Propagates the conditional modifier objects to be provided with tiny icon data. As the description always uses stat formatting, description tags are a noop";
 
-    /**
-     * 
-     * @param context
-     * @returns
-     */
-    getEntity(context: PropagatorNamespacedObjectContextData): Pet {
-        return game.pets.getObjectSafe(context.id);
-    }
-
-    /**
-     * 
-     * @param entity
-     * @param tags
-     */
-    //propagateForDescriptionOfEntity(entity: Pet, tags: string[]) {
-    //    Logger.warn('PetDataPropagator.propagateForDescriptionOfEntity is basically a noop');
-    //}
+  /**
+   * 
+   * @param context
+   * @returns
+   */
+  getEntity(context: PropagatorNamespacedObjectContextData): Pet {
+    return game.pets.getObjectSafe(context.id);
+  }
 }

@@ -308,47 +308,47 @@ export class TagManager {
     TagManager.tagSrcs = new Map();
 
     const staticTags: { [key: string]: () => string } = Object.values(TagManager.staticTagsByCategories).reduce(
-        (acc, category) => {
+      (acc, category) => {
         return { ...acc, ...category };
-        },
-        {},
+      },
+      {},
     );
 
     for (const [k, v] of Object.entries(staticTags)) {
-        TagManager.tagSrcs.set(k, v());
+      TagManager.tagSrcs.set(k, v());
     }
   }
 
-    /**
-     * Add tag with already computed src path
-     * @param tag
-     * @param src
-     */
-    public static addTag(tag: string, src: string): void {
-        if (TagManager.tagSrcs.has(tag)) {
-            Logger.warn(`Tag '${tag}' already exists.`);
-        } else {
-            TagManager.tagSrcs.set(key, src);
-        }
+  /**
+   * Add tag with already computed src path
+   * @param tag
+   * @param src
+   */
+  public static addTag(tag: string, src: string): void {
+    if (TagManager.tagSrcs.has(tag)) {
+      Logger.warn(`Tag '${tag}' already exists.`);
+    } else {
+      TagManager.tagSrcs.set(key, src);
     }
+  }
 
-    /**
-     * Add tag defined via mod data package, which means "media" still has to be computed to actual src
-     * @param namespace
-     * @param tag
-     * @param media
-     */
-    public static addTagsFromModData(namespace: string, data: { name: string, media: string }[]): void {
-        const modContext = mod.getContext(namespace);
-        data.forEach((d) => {
-            try {
-                TagManager.addTag(d.name, modContext.getResourceUrl(d.media));
-            } catch (e) {
-                Logger.error(`An error occurred while trying to determine resource for namespace ${namespace}, for tag name ${d.name} using media ${d.media}`, e);
-                TagManager.addTag(d.name, assets.getURI("assets/media/main/missing_artwork.png"));
-            }
-        });        
-    }
+  /**
+   * Add tag defined via mod data package, which means "media" still has to be computed to actual src
+   * @param namespace
+   * @param tag
+   * @param media
+   */
+  public static addTagsFromModData(namespace: string, data: { name: string, media: string }[]): void {
+    const modContext = mod.getContext(namespace);
+    data.forEach((d) => {
+      try {
+        TagManager.addTag(d.name, modContext.getResourceUrl(d.media));
+      } catch (e) {
+        Logger.error(`An error occurred while trying to determine resource for namespace ${namespace}, for tag name ${d.name} using media ${d.media}`, e);
+        TagManager.addTag(d.name, assets.getURI("assets/media/main/missing_artwork.png"));
+      }
+    });
+  }
 
   /**
    * Provides an asset path be insert to src attributes.
@@ -357,7 +357,7 @@ export class TagManager {
    * @param ext - The file extension (default is 'svg').
    * @returns A string representing the base path.
    */
-  private static basePath (
+  private static basePath(
     type: PathType,
     path: string,
     ext: string = 'svg'

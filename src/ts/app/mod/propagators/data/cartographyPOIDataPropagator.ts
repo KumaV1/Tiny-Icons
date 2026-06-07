@@ -4,45 +4,34 @@ import { PropagatorNamespacedObjectContextData } from "../../types/data/propagat
 import { EntityModificationDataPropagator } from "./entityModificationDataPropagator";
 
 interface CartographyPOIPropagatorContextData extends PropagatorNamespacedObjectContextData {
-    worldMapId: string
-    pointOfInterestId: string;
+  worldMapId: string
+  pointOfInterestId: string;
 }
 
-// Example where more than just "category" and "id" are necessary!
 export class CartographyPOIDataPropagator extends EntityModificationDataPropagator<PointOfInterest,
-    CartographyPOIPropagatorContextData,
-    PropagatorBaseDataData> {
+  CartographyPOIPropagatorContextData,
+  PropagatorBaseDataData> {
 
-    description = "Propagates the conditional modifier objects to be provided with tiny icon data. As the description always uses stat formatting, description tags are a noop";
+  description = "Propagates the conditional modifier objects to be provided with tiny icon data. As the description always uses stat formatting, description tags are a noop";
 
-    /**
-     * 
-     * @param context
-     * @returns
-     */
-    getEntity(context: CartographyPOIPropagatorContextData): PointOfInterest {
-        // @ts-ignore Propagator should only trigger when AoD is loaded, so "game.cartography" should always be available
-        const worldMap = game.cartography.worldMaps.getObjectSafe(context.worldMapId);
+  /**
+   * 
+   * @param context
+   * @returns
+   */
+  getEntity(context: CartographyPOIPropagatorContextData): PointOfInterest {
+    // @ts-ignore Propagator should only trigger when AoD is loaded, so "game.cartography" should always be available
+    const worldMap = game.cartography.worldMaps.getObjectSafe(context.worldMapId);
 
-        return worldMap.pointsOfInterest.getObjectSafe(context.pointOfInterestId);
-    }
+    return worldMap.pointsOfInterest.getObjectSafe(context.pointOfInterestId);
+  }
 
-    /**
-     * 
-     * @param entity
-     * @param tags
-     */
-    //propagateForDescriptionOfEntity(entity: PointOfInterest, tags: string[]) {
-    //    super.propagateForDescriptionOfEntity(entity, tags);
-    //    Logger.warn('CartographyPOIDataPropagator.propagateForDescriptionOfEntity is basically a noop');
-    //}
-
-    /**
-     * 
-     * @param entity
-     * @returns
-     */
-    getConditionalModifiersFromEntity(entity: PointOfInterest): ConditionalModifier[] | undefined {
-        return entity.activeStats?.conditionalModifiers;
-    }
+  /**
+   * 
+   * @param entity
+   * @returns
+   */
+  getConditionalModifiersFromEntity(entity: PointOfInterest): ConditionalModifier[] | undefined {
+    return entity.activeStats?.conditionalModifiers;
+  }
 }

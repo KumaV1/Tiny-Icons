@@ -1,4 +1,4 @@
-import { Constants } from "../../constants";
+﻿import { Constants } from "../../constants";
 import { CheckboxGroupFixedConfig } from "../models/CheckboxGroupFixedConfig";
 import { TinyIconsModSettings } from "../types/tinyIconsModSettings";
 
@@ -99,13 +99,13 @@ export class SettingsManager {
 
           const label = <HTMLElement>document.querySelector('label[for="tinyIcons:scope-icons"]');
           if (!label) {
-              return;
+            return;
           }
 
           let hint = label?.querySelector(`small`);
           if (!hint) {
-              createElement('span', { classList: ['ms__force-wrap'], parent: label })
-              hint = createElement('small', { classList: ['d-block'], parent: label });
+            createElement('span', { classList: ['ms__force-wrap'], parent: label })
+            hint = createElement('small', { classList: ['d-block'], parent: label });
           }
 
           hint.textContent = getLangString(Constants.TRANSLATION_KEYS.SETTINGS.RELOAD_REQUIRED)

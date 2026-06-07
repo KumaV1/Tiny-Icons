@@ -95,9 +95,6 @@ export class ModifierIconContext {
     return this.isApplyDescriptionModificationContext;
   }
 
-
-  // TODO: HANDLING WRAPPED ACTUALLY NEEDS TESTING
-
   /**
    * Push an entity context onto the stack.
    * Examples:
@@ -133,7 +130,7 @@ export class ModifierIconContext {
       // eslint-disable-next-line no-console
       Logger.warn(`ModifierIconContext.popEntityContext: popping mismatched context (expected ${category}/${id}, found ${top.category}/${top.id})`);
       this.entityContextStack.pop();
-      }
+    }
 
     // If we exhausted the stack without finding a match, warn
     Logger.warn(`ModifierIconContext.popEntityContext: no matching context found for ${category}/${id}`);
