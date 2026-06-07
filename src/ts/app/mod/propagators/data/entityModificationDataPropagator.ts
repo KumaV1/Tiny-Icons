@@ -78,7 +78,12 @@ export abstract class EntityModificationDataPropagator<TEntity, TContextData ext
     // @ts-ignore: Missing type declaration
     entity.tinyIcons = entity.tinyIcons ?? {};
     // @ts-ignore: Missing type declaration
-    entity.tinyIcons.descriptionTags = tags;
+    if (!entity.tinyIcons.descriptionTags) {
+      // @ts-ignore: Missing type declaration
+      entity.tinyIcons.descriptionTags = tags;
+    } else {
+      Logger.warn('This entity has already been set up with description tags by TI itself or another mod.', entity);
+    }
   }
 
   /**
@@ -111,9 +116,13 @@ export abstract class EntityModificationDataPropagator<TEntity, TContextData ext
   propagateToConditionalModifiersOnEntity(entity: TEntity, conditionalModifiers: ConditionalModifier[], tagGroups: string[][]) {
     // @ts-ignore: No type definition
     conditionalModifiers.forEach((modifier, index) => {
-      modifier.tinyIcons = {
-        descriptionTags: tagGroups[index]
-      };
+      if (!modifier.tinyIcons) {
+        modifier.tinyIcons = {
+          descriptionTags: tagGroups[index]
+        };
+      } else {
+        Logger.warn(`This entity has already been set up with conditional modifier tags for this specific index (${index}), either by TI itself or another mod.`, entity);
+      }
     });
   }
 }
