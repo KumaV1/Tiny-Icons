@@ -36,6 +36,7 @@ type StaticEntityCategory = 'BaseAgilityObject' // obstacles and pillars; does n
     | 'Prayer' // Supports conditional modifiers
     | 'ShopPurchase' // Supports custom descriptions. Supports conditional modifiers
     | 'SkillTreeNode' // Supports conditional modifiers
+    | 'TownshipBuilding' // Supports conditional modifiers
     | 'TownshipSeason'; // Supports conditional modifiers
 // ^ Really, attack style? Apparently yes, giving hidden skill levels depending on attack style (like slash vs. stab -> strength vs attack)
 

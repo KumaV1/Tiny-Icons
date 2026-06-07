@@ -16,6 +16,7 @@ import { PrayerDataPropagator } from './propagators/data/prayerDataPropagator';
 import { ShopPurchaseDataPropagator } from './propagators/data/shopPurchaseDataPropagator';
 import { SkillTreeNodeDataPropagator } from './propagators/data/skilltreeNodeDataPropagator';
 import { SummoningSynergyDataPropagator } from './propagators/data/summoningSynergyDataPropagator';
+import { TownshipBuildingDataPropagator } from './propagators/data/townshipBuildingDataPropagator';
 import { TownshipSeasonDataPropagator } from './propagators/data/townshipSeasonDataPropagator';
 import { EntityCategory } from './types/entityCategory';
 import { EntityModificationDataPropagator } from './propagators/data/entityModificationDataPropagator';
@@ -87,6 +88,7 @@ export class TagAllocationMemoizer {
         this.propagators.set('SkillTreeNode', new SkillTreeNodeDataPropagator());
         this.propagators.set('ShopPurchase', new ShopPurchaseDataPropagator());
         this.propagators.set('SummoningSynergy', new SummoningSynergyDataPropagator());
+        this.propagators.set('TownshipBuilding', new TownshipBuildingDataPropagator());
         this.propagators.set('TownshipSeason', new TownshipSeasonDataPropagator());
 
         // NOTE regarding combat effects: "game.combatEffects" is NOT "CombatEffectApplicator"!

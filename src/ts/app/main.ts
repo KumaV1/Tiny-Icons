@@ -29,7 +29,8 @@ import SummoningSynergiesModificationData from '../../../src/data/summoningSyner
 import SummoningSynergiesTotHModificationData from '../../../src/data/summoningSynergies/modificationsTotH.json';
 import SummoningSynergiesAoDModificationData from '../../../src/data/summoningSynergies/modificationsAoD.json';
 import SummoningSynergiesItAModificationData from '../../../src/data/summoningSynergies/modificationsItA.json';
-import TownshipSeasonModificationData from '../../../src/data/townshipSeasons/modifications.json';
+import TownshipModificationData from '../../../src/data/township/modifications.json';
+import TownshipItAModificationData from '../../../src/data/township/modificationsItA.json';
 // TODO: Add "_definitions" file for resolvers, api and extended base game classes (where tinyIcons properties were added)
 
 // TODO: Add setting context to Map<category, identifier> (e.g. <EquipmentItem, melvorD:Bronze_Boots>), which can override trying to get icons via modifiers
@@ -225,7 +226,9 @@ async function loadModifications(ctx: Modding.ModContext) {
     // @ts-ignore: Supposed non-matching type (e.g. Tiny Icons custom stuff, I guess)
     await ctx.gameData.addPackage(SummoningSynergiesItAModificationData);
     // @ts-ignore: Supposed non-matching type (e.g. Tiny Icons custom stuff, I guess)
-    await ctx.gameData.addPackage(TownshipSeasonModificationData);
+    await ctx.gameData.addPackage(TownshipModificationData);
+    // @ts-ignore: Supposed non-matching type (e.g. Tiny Icons custom stuff, I guess)
+    await ctx.gameData.addPackage(TownshipItAModificationData);
     // Could possibly create a custom schema and reference that in the json, rather than the melvor one
 
     // Expansions

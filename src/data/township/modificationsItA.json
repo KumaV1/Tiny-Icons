@@ -1,0 +1,37 @@
+﻿{
+  "$schema": "https://melvoridle.com/assets/schema/gameData.json",
+  "namespace": "tinyIcons",
+  "dependentData": [
+    {
+      "namespace": "melvorItA",
+      "modifications": {
+        "tinyIcons": {
+          "staticTagAllocations": [
+            {
+              "context": {
+                "category": "TownshipBuilding",
+                "id": "melvorItA:Abyssal_Combat_Lab"
+              },
+              "data": {
+                "conditionalModifierIconTags": [
+                  [ "ti_combat_up" ]
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "TownshipBuilding",
+                "id": "melvorItA:Slayer_Research_Lab"
+              },
+              "data": {
+                "conditionalModifierIconTags": [
+                  [ "abyssal_slayer_coins", "combat" ]
+                ]
+              }
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -103,6 +103,8 @@ export class TagManager {
       currency: () => TagManager.iconPath('ti', 'currency_generic', 'flaticon', 'png'),
       //food: () => TagManager.iconPath('bank', 'crate_of_food', undefined, 'png'),
       gp: () => TagManager.iconPath('main', 'coins'),
+      abyssal_pieces: () => TagManager.iconPath('main', 'abyssal_pieces', undefined, 'png'),
+      abyssal_slayer_coins: () => TagManager.iconPath('main', 'abyssal_slayer_coins', undefined, 'png'),
       interval: () => TagManager.iconPath('main', 'timer'),
       item_alchemy: () => TagManager.iconPath('skills', 'magic', 'item_alchemy'),
       lemon: () => 'assets/april/images/lemon.jpg',
@@ -122,7 +124,8 @@ export class TagManager {
       immunity: () => TagManager.iconPath('ti', 'immunity', 'flaticon', 'png'),
       crit: () => TagManager.iconPath('ti', 'critical', 'flaticon', 'png'),
       reflect: () => TagManager.iconPath('ti', 'shield_reflect', 'flaticon'),
-      normal_damage: () => TagManager.iconPath('skills', 'combat', 'normal_damage', 'png')
+      normal_damage: () => TagManager.iconPath('skills', 'combat', 'normal_damage', 'png'),
+      abyssal_damage: () => TagManager.iconPath('skills', 'combat', 'abyssal_damage', 'png')
     },
     effectMedia: {
       nulled: () => TagManager.iconPath('status', 'null', undefined, 'png'),
