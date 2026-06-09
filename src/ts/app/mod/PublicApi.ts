@@ -1,3 +1,4 @@
+﻿import { Constants } from "../constants";
 import { Logger } from "./Logger";
 import { IconManager } from "./managers/IconManager";
 import { SettingsManager } from "./managers/SettingsManager";
@@ -5,240 +6,230 @@ import { TagManager } from "./managers/TagManager";
 import { ModifierTagMapEntryAttributes } from './models/ModifierTagMapEntryAttributes';
 import { ModifierIconContext } from "./ModifierIconContext";
 import { ModifierScopeSourceMediaMemoizer } from './ModifierScopeSourceMediaMemoizer';
-import { modifierTagMap } from './tagging/modifierTagMap';
+import { EntityModificationDataPropagator } from "./propagators/data/entityModificationDataPropagator";
+import { TagAllocationMemoizer } from './TagAllocationMemoizer';
+import { PropagatorBaseContextData } from "./types/data/propagatorBaseContextData";
+import { PropagatorBaseDataData } from "./types/data/propagatorBaseDataData";
+import { PropagatorNamespacedObjectContextData } from "./types/data/propagatorNamespacedObjectContextData";
+import { EntityCategory } from "./types/entityCategory";
 import { ModModifierIconTag } from './types/modModifierIconTag';
 import { NamedObjectWithMedia } from './types/namedObjectWithMedia';
 import { PathType } from "./types/pathType";
 import { StaticModifierIconTag } from "./types/staticModifierIconTag";
 import { TinyIconsModSettings } from "./types/tinyIconsModSettings";
+import collect from "./utils/collectModificationSuggestions";
 
 export class PublicApi {
-    public static init(ctx: Modding.ModContext): void {
-        ctx.api({
-            /**
-             * Wrapper object around functions that deal with "applyDescriptionModifications"
-             */
-            applyDescriptionModificationsSupport: {
-              applyTinyIconsPlaceholderReplacement: (description: string): string => ModifierIconContext.applyTinyIconsPlaceholderReplacement(description),
-              setIsDescriptionModificationContext: (): void => ModifierIconContext.setIsDescriptionModificationContext(),
-              resetDescriptionModificationContext: (): void => ModifierIconContext.resetDescriptionModificationContext(),
-            },
+  public static init(ctx: Modding.ModContext): void {
+    ctx.api({
+      classes: {
+        EntityModificationDataPropagator
+      },
 
-            /**
-             * Get currently active mod settings
-             * @returns Mod settings
-             */
-            settings: (): TinyIconsModSettings => {
-                return SettingsManager.settings;
-            },
+      /**
+       * Wrapper object around functions that deal with "applyDescriptionModifications"
+       */
+      applyDescriptionModificationsSupport: {
+        applyTinyIconsPlaceholderReplacement: (description: string): string => ModifierIconContext.applyTinyIconsPlaceholderReplacement(description),
+        setIsDescriptionModificationContext: (): void => ModifierIconContext.setIsDescriptionModificationContext(),
+        resetDescriptionModificationContext: (): void => ModifierIconContext.resetDescriptionModificationContext(),
+      },
 
-            /**
-             * Add tags you can use for static tags on modifiers
-             * @param tags - Map of tags to add (key is tag, value the media to use for the tag). Already existing tags will be skipped.
-             */
-            addTagSourceMap: (tags: Map<ModModifierIconTag, string>): void => {
-              tags.forEach((value: string, key: ModModifierIconTag) => {
-                if (TagManager.tagSrcs.has(key)) {
-                  Logger.warn(`Tag '${key}' already exists.`);
-                } else {
-                  TagManager.tagSrcs.set(key, value);
-                }
-              });
-            },
+      /**
+       * Get currently active mod settings
+       * @returns Mod settings
+       */
+      settings: (): TinyIconsModSettings => {
+        return SettingsManager.settings;
+      },
 
-            /**
-             * Add static tags to modifiers
-             * @param modifierId - Full id of the modifier
-             * @param primaryTag - Define primary tag(s), either as simple string or as object, depending on whether positive and negative values should use different icons
-             * @param secondaryTag - Optionally also provide a secondary tag
-             */
-            addModifier: (modifierId: string,
-              primaryTag: StaticModifierIconTag | ModModifierIconTag | { positive: StaticModifierIconTag | ModModifierIconTag, negative: StaticModifierIconTag | ModModifierIconTag, ignoreIfSkillScope?: boolean },
-              secondaryTag?: StaticModifierIconTag | ModModifierIconTag | { positive: StaticModifierIconTag | ModModifierIconTag, negative: StaticModifierIconTag | ModModifierIconTag, ignoreIfSkillScope?: boolean }): void => {
-                if (!modifierId) {
-                  Logger.warn('No/Falsey modifier id provided');
-                  return;
-                }
-
-                const modifier = game.modifierRegistry.getObjectByID(modifierId);
-                if (!modifier) {
-                  Logger.warn(`Could not find modifier with id ${modifierId} in game.modifierRegistry.`);
-                  return;
-                }
-
-                modifierTagMap.set(modifierId, new ModifierTagMapEntryAttributes(primaryTag, secondaryTag));
-            },
-
-            /**
-             * Add media sources for category scopes that do not come with their own media inherintly
-             * @param scopeSourceId Id of the scope source (for example, the Thieving skill)
-             * @param entries The entries that should be added for the scope source (for example, adding npc media for thieving areas)
-             */
-            addCategoryScopeMedia: (scopeSourceId: string, entries: Map<string, NamedObjectWithMedia>): void => {
-              ModifierScopeSourceMediaMemoizer.registerCategoryScopeMedia(scopeSourceId, entries);
-            },
-
-            /**
-             * Add media sources for subcategory scopes that do not come with their own media inherintly
-             * @param scopeSourceId - Id of the scope source (for example, the Cooking skill)
-             * @param entries - The entries that should be added for the scope source (for example, adding some media for Cooking subcategories)
-             */
-            addSubcategoryScopeMedia: (scopeSourceId: string, entries: Map<string, NamedObjectWithMedia>): void => {
-              ModifierScopeSourceMediaMemoizer.registerSubcategoryScopeMedia(scopeSourceId, entries);
-            },
-
-            /**
-             * Add media sources for action scopes that do not come with their own media inherintly
-             * NOTE: Actions should generally already have media, making this redundant. The only exceptions may be passive actions, as those would not need media to display on your character save slot
-             * @param scopeSourceId - Id of the scope source
-             * @param entries - The entries that should be added for the scope source
-             */
-            addActionScopeMedia: (scopeSourceId: string, entries: Map<string, NamedObjectWithMedia>): void => {
-              ModifierScopeSourceMediaMemoizer.registerActionScopeMedia(scopeSourceId, entries);
-            },
-
-            /**
-             * Add media sources for (combat) effect group scopes.
-             * NOTE: Combat effect groups generally do NOT come with their own media inherintly
-             * @param entries - The entries that should be added
-             */
-            addEffectGroupScopeMedia: (entries: Map<string, NamedObjectWithMedia>): void => {
-              ModifierScopeSourceMediaMemoizer.registerEffectGroupScopeMedia(entries)
-            },
-
-            /**
-             * Returns tag attributes object for given modifier, if one is set up for that modifier
-             * @param modifier The name of the modifier.
-             * @returns {ModifierTagMapEntryAttributes | undefined} An object of modifier tag attributes
-             */
-            getIconTagMapForModifier: (modifier: string): ModifierTagMapEntryAttributes | undefined => {
-                return modifierTagMap.get(modifier);
-            },
-
-            /**
-             * Returns the HTML for the icon associated with the given modifier and value.
-             * @param {ModifierValue} modifierValue - Data on the modifier boost this gives.
-             * @param {boolean} positive - Whether the value has a positive impact on the entity the modifier is applied on
-             * @param {boolean} [secondary] Whether to get the secondary icon HTML.
-             * @param {string} [size='xxs'] Optional icon size - 'xxs', 'xs', 'sm', 'md'
-             * @returns {string} The HTML for the icon.
-             */
-            getIconHTMLForModifier: (
-                modifierValue: ModifierValue,
-                positive: boolean,
-                secondary?: boolean,
-                size?: string,
-            ): string => IconManager.getIconHTML(modifierValue, positive, secondary, size),
-
-            /**
-             * An array of all available icon tags with an associated icon.
-             * @returns {string[]} The list of available icon tags.
-             */
-            getAvailableTags: (): string[] => Array.from(TagManager.tagSrcs.keys()),
-
-            /**
-             * @returns {TagIconSources} An object of all available tags and their sources.
-             */
-            getAvailableTagsWithSources: (): Map<string, string> => TagManager.tagSrcs,
-
-            /**
-             * The {@link ModifierScopeSourceMediaMemoizer} data
-             */
-            getModifierScopeSourceMediaMemoizer: () => {
-                return {
-                  categoryMediaMap: ModifierScopeSourceMediaMemoizer.categoryMediaMap,
-                  subcategoryMediaMap: ModifierScopeSourceMediaMemoizer.subcategoryMediaMap,
-                  actionMediaMap: ModifierScopeSourceMediaMemoizer.actionMediaMap,
-                  effectGroupMediaMap: ModifierScopeSourceMediaMemoizer.effectGroupMediaMap
-                };
-            },
-
-            /**
-             * SweetAlert popup with all game tags and their icons
-             */
-            viewAvailableTagsWithImages: (alphabetically?: boolean): void => this.viewAvailableTagsWithImages(alphabetically),
-
-            /**
-             * SweetAlert popup with all game modifiers and their tagged icons.
-             * @param exampleObjects Optionally privde specific scope objects you want to be utilized for the view (e.g. using your own custom skill)
-             * @param namespaceFilter Optionally limit the output to a certain namespace (e.g. if you only want to see your own modifiers)
-             * @param forceIconEnablement Optionally able to set this to true, to set all icon-related settings to true. Otherwise, the view will adhere to the character's mod settings (which will only be available inside a character)
-             */
-            viewAllModifiers: (exampleObjects?: Partial<IModifierScope>, namespaceFilter?: string, forceIconEnablement?: boolean): void => this.viewAllPassivesOnClick(exampleObjects, namespaceFilter, forceIconEnablement),
-
-            /**
-             * SweetAlert popup of the {@link ModifierScopeSourceMediaMemoizer} data
-             */
-            viewModifierScopeSourceMemoizer: (): void => this.viewModifierScopeSourceMemoizer(),
-
-            // === DEPRECATED ===
-
-            /**
-             * Adds an object of custom tags and their sources to the list of icons available to Tiny Icons.
-             * @param customTags An object of custom string tags and their string sources.
-             * @deprecated
-             */
-            //addTagSources: (customTags: { [key: string]: string }) => {
-            //  console.warn('[Tiny Icons] addTagSources is deprecated. Use addTagSourceMap instead.');
-            //},
-
-            /**
-             * Adds an object of custom modifiers and their tags to the list of modifiers recognized by Tiny Icons.
-             * @param customModifiers An object of custom modifiers and their tags.
-             * @deprecated
-             */
-            //addCustomModifiers: (customModifiers: {
-            //    modifier: string;
-            //    tag: [string, string?];
-            //}) => {
-            //    console.warn('[Tiny Icons] addCustomModifiers has been deprecated. Use addCustomModifier instead.');
-            //},
-
-            /**
-             * Returns the STATIC icon tags defined for a given modifier.
-             * The first tag is the primary icon and the second tag is the secondary icon if any.
-             * @param {string} modifier The name of the modifier.
-             * @returns {string[]} The icon tags defined for the modifier in array of up to 2 string elements.
-             * @deprecated
-             */
-            //getIconTagsForModifier: (modifier: string): (StaticModifierIconTag | ModModifierIconTag)[] => {
-            //    console.warn('[Tiny Icons] getIconTagsForModifier has been deprecated. Use getIconTagMapForModifier instead.')
-            //    return [];
-            //},
-
-            /**
-             * Gets a melvor icon's asset path based on the given parameters.
-             * Builds a string starting from `assets/media/`
-             * @param {string} type "skills" | "skill" | "bank" | "main" | "status" | "misc" | "ti" | "mods" | "pets" | "shop" | "fa"
-             * @param {string} name The file name of the icon.
-             * @param {string | undefined} [specific] - Specific file name if name is a subtype.
-             * @param {string} [ext='svg']  - The file extension.
-             *
-             * @deprecated
-             * @example
-             *  - getIconResourcePath("skills", "mining") // returns "assets/media/skills/mining/mining.svg"
-             *  - getIconResourcePath("skills", "mining", "rock_iron") // returns "assets/media/skills/mining/rock_iron.svg"
-             */
-            //getIconResourcePath: (
-            //    type: PathType,
-            //    name: string,
-            //    specific?: string | undefined,
-            //    ext?: string,
-            //): string => {
-            //  console.warn('[Tiny Icons] getIconResourcePath has been deprecated.');
-            //  return '';
-            //},
+      /**
+       * Add tags you can use for static tags on modifiers
+       * @param tags - Map of tags to add (key is tag, value the media to use for the tag). Already existing tags will be skipped.
+       */
+      addTagSourceMap: (tags: Map<ModModifierIconTag, string>): void => {
+        tags.forEach((value: string, key: ModModifierIconTag) => {
+          if (TagManager.tagSrcs.has(key)) {
+            Logger.warn(`Tag '${key}' already exists.`);
+          } else {
+            TagManager.tagSrcs.set(key, value);
+          }
         });
-    }
+      },
 
-    /**
-   * SweetAlert popup with all game tags and their icons
-   * @param alphabetically - Optionally specify whether to order entries alphabetically. Default is false.
-   */
+      /**
+       * Add static tags to modifiers
+       * @param modifierId - Full id of the modifier
+       * @param primaryTag - Define primary tag(s), either as simple string or as object, depending on whether positive and negative values should use different icons
+       * @param secondaryTag - Optionally also provide a secondary tag
+       */
+      addModifier: (modifierId: string,
+        primaryTag: StaticModifierIconTag | ModModifierIconTag | { positive: StaticModifierIconTag | ModModifierIconTag, negative: StaticModifierIconTag | ModModifierIconTag, ignoreIfSkillScope?: boolean },
+        secondaryTag?: StaticModifierIconTag | ModModifierIconTag | { positive: StaticModifierIconTag | ModModifierIconTag, negative: StaticModifierIconTag | ModModifierIconTag, ignoreIfSkillScope?: boolean }): void => {
+        TagAllocationMemoizer.addTaggingForModifier(modifierId, primaryTag, secondaryTag);
+      },
+
+      /**
+       * Add media sources for category scopes that do not come with their own media inherintly
+       * @param scopeSourceId Id of the scope source (for example, the Thieving skill)
+       * @param entries The entries that should be added for the scope source (for example, adding npc media for thieving areas)
+       */
+      addCategoryScopeMedia: (scopeSourceId: string, entries: Map<string, NamedObjectWithMedia>): void => {
+        ModifierScopeSourceMediaMemoizer.registerCategoryScopeMedia(scopeSourceId, entries);
+      },
+
+      /**
+       * Add media sources for subcategory scopes that do not come with their own media inherintly
+       * @param scopeSourceId - Id of the scope source (for example, the Cooking skill)
+       * @param entries - The entries that should be added for the scope source (for example, adding some media for Cooking subcategories)
+       */
+      addSubcategoryScopeMedia: (scopeSourceId: string, entries: Map<string, NamedObjectWithMedia>): void => {
+        ModifierScopeSourceMediaMemoizer.registerSubcategoryScopeMedia(scopeSourceId, entries);
+      },
+
+      /**
+       * Add media sources for action scopes that do not come with their own media inherintly
+       * NOTE: Actions should generally already have media, making this redundant. The only exceptions may be passive actions, as those would not need media to display on your character save slot
+       * @param scopeSourceId - Id of the scope source
+       * @param entries - The entries that should be added for the scope source
+       */
+      addActionScopeMedia: (scopeSourceId: string, entries: Map<string, NamedObjectWithMedia>): void => {
+        ModifierScopeSourceMediaMemoizer.registerActionScopeMedia(scopeSourceId, entries);
+      },
+
+      /**
+       * Add media sources for (combat) effect group scopes.
+       * NOTE: Combat effect groups generally do NOT come with their own media inherintly
+       * @param entries - The entries that should be added
+       */
+      addEffectGroupScopeMedia: (entries: Map<string, NamedObjectWithMedia>): void => {
+        ModifierScopeSourceMediaMemoizer.registerEffectGroupScopeMedia(entries)
+      },
+
+      /**
+       * Register a new data propagator. Should happen before loading data packages wanting to use said propagator
+       * @param category
+       * @param propagator
+       */
+      registerPropagator: (category: EntityCategory, propagator: EntityModificationDataPropagator<unknown, PropagatorBaseContextData, PropagatorBaseDataData>): void => {
+        if (TagAllocationMemoizer.propagators.has(category)) {
+          Logger.warn(`A propagator for the category '${category}'' is already registerd. No new one will be registered`);
+          return;
+        } 
+
+        TagAllocationMemoizer.propagators.set(category, propagator);
+      },
+
+      /**
+       * Returns tag attributes object for given modifier, if one is set up for that modifier
+       * @param modifier The name of the modifier.
+       * @returns {ModifierTagMapEntryAttributes | undefined} An object of modifier tag attributes
+       * @deprecated
+       */
+      getIconTagMapForModifier: (modifier: string): ModifierTagMapEntryAttributes | undefined => {
+        Logger.warn('getIconTagMapForModifier is deprecated. Use getTagDataForModifier instead');
+        return TagAllocationMemoizer.modifierTagMap.get(modifier);
+      },
+
+      /**
+       * Returns tag attributes object for given modifier, if one is set up for that modifier
+       * @param modifier The name of the modifier.
+       * @returns {ModifierTagMapEntryAttributes | undefined} An object of modifier tag attributes
+       */
+      getTagDataForModifier: (modifier: string): ModifierTagMapEntryAttributes | undefined => {
+        return TagAllocationMemoizer.modifierTagMap.get(modifier);
+      },
+
+      /**
+       * Returns the HTML for the icon associated with the given modifier and value.
+       * @param {ModifierValue} modifierValue - Data on the modifier boost this gives.
+       * @param {boolean} positive - Whether the value has a positive impact on the entity the modifier is applied on
+       * @param {boolean} [secondary] Whether to get the secondary icon HTML.
+       * @param {string} [size='xxs'] Optional icon size - 'xxs', 'xs', 'sm', 'md'
+       * @returns {string} The HTML for the icon.
+       */
+      getIconHTMLForModifier: (
+        modifierValue: ModifierValue,
+        positive: boolean,
+        secondary?: boolean,
+        size?: string,
+      ): string => IconManager.getIconHTML(modifierValue, positive, secondary, size),
+
+      /**
+       * An array of all available icon tags with an associated icon.
+       * @returns {string[]} The list of available icon tags.
+       */
+      getAvailableTags: (): string[] => Array.from(TagManager.tagSrcs.keys()),
+
+      /**
+       * @returns {TagIconSources} An object of all available tags and their sources.
+       */
+      getAvailableTagsWithSources: (): Map<string, string> => TagManager.tagSrcs,
+
+      /**
+       * The {@link TagAllocationMemoizer} data
+       */
+      getTagAllocationMemoizer: () => {
+        return {
+          modifierTagMap: TagAllocationMemoizer.modifierTagMap,
+          propagators: TagAllocationMemoizer.propagators
+        };
+      },
+
+      /**
+       * The {@link ModifierScopeSourceMediaMemoizer} data
+       */
+      getModifierScopeSourceMediaMemoizer: () => {
+        return {
+          categoryMediaMap: ModifierScopeSourceMediaMemoizer.categoryMediaMap,
+          subcategoryMediaMap: ModifierScopeSourceMediaMemoizer.subcategoryMediaMap,
+          actionMediaMap: ModifierScopeSourceMediaMemoizer.actionMediaMap,
+          effectGroupMediaMap: ModifierScopeSourceMediaMemoizer.effectGroupMediaMap
+        };
+      },
+
+      /**
+       * SweetAlert popup with all game tags and their icons
+       */
+      viewAvailableTagsWithImages: (alphabetically?: boolean): void => this.viewAvailableTagsWithImages(alphabetically),
+
+      /**
+       * SweetAlert popup with all game modifiers and their tagged icons.
+       * @param exampleObjects Optionally privde specific scope objects you want to be utilized for the view (e.g. using your own custom skill)
+       * @param namespaceFilter Optionally limit the output to a certain namespace (e.g. if you only want to see your own modifiers)
+       * @param forceIconEnablement Optionally able to set this to true, to set all icon-related settings to true. Otherwise, the view will adhere to the character's mod settings (which will only be available inside a character)
+       */
+      viewAllModifiers: (exampleObjects?: Partial<IModifierScope>, namespaceFilter?: string, forceIconEnablement?: boolean): void => this.viewAllPassivesOnClick(exampleObjects, namespaceFilter, forceIconEnablement),
+
+      /**
+       * SweetAlert popup of the {@link ModifierScopeSourceMediaMemoizer} data
+       */
+      viewModifierScopeSourceMemoizer: (): void => this.viewModifierScopeSourceMemoizer(),
+
+      /**
+       * Suggest data package data for one or all categories. Only intended for devs. Before namespace support, only a tiny icons endpoint
+       * @param category
+       * @returns
+       */
+      collectModificationSuggestions: (category: EntityCategory | undefined = undefined): Object | undefined => {
+        if (!Constants.DEV_MODE) {
+          Logger.log('This endpoint is currently only available for the mod itself. With namespace specifications, it may become available for other mod developers in the future');
+          return undefined;
+        }
+
+        return collect(category);
+      }
+    });
+  }
+
+  /**
+ * SweetAlert popup with all game tags and their icons
+ * @param alphabetically - Optionally specify whether to order entries alphabetically. Default is false.
+ */
   private static viewAvailableTagsWithImages(alphabetically?: boolean) {
     let html = '';
 
-    if (alphabetically)  {
+    if (alphabetically) {
       // Order alphabetically if desired
       const sortedArray = [...TagManager.tagSrcs].sort();
       const sortedMap = new Map(sortedArray);
@@ -321,6 +312,7 @@ export class PublicApi {
     const originalModSettings = SettingsManager.settings;
     if (forceIconEnablement) {
       SettingsManager.settings = {
+        manualTaggingEnabled: true,
         globalIconsEnabled: true,
         secondaryIconsEnabled: true,
         placeholderIconEnabled: true,

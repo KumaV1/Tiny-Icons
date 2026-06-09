@@ -1,0 +1,19 @@
+﻿{
+  "$schema": "https://melvoridle.com/assets/schema/gameData.json",
+  "namespace": "tinyIcons",
+  "modifications": {
+    "tinyIcons": {
+      "staticTagAllocations": [
+        {
+          "context": {
+            "category": "CombatPassive",
+            "id": "melvorD:BigBoi"
+          },
+          "data": {
+            "descriptionIconTags": [ "hitpoints", "evasion_dn" ]
+          }
+        }
+      ]
+    }
+  }
+}

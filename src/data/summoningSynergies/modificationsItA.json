@@ -1,0 +1,558 @@
+﻿{
+  "$schema": "https://melvoridle.com/assets/schema/gameData.json",
+  "namespace": "tinyIcons",
+  "dependentData": [
+    {
+      "namespace": "melvorItA",
+      "modifications": {
+        "tinyIcons": {
+          "staticTagAllocations": [
+            {
+              "context": {
+                "category": "SummoningSynergy",
+                "summonIDs": [
+                  "melvorItA:Abyssal_Mole",
+                  "melvorItA:Abyssal_Pig"
+                ]
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "cooking",
+                  "coal"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "SummoningSynergy",
+                "summonIDs": [
+                  "melvorItA:Abyssal_Pig",
+                  "melvorItA:Abyssal_Devil"
+                ]
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "mastery",
+                  "preservation",
+                  "firemaking",
+                  "cooking"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "SummoningSynergy",
+                "summonIDs": [
+                  "melvorItA:Abyssal_Crow",
+                  "melvorItA:Abyssal_Bear"
+                ]
+              },
+              "data": {
+                "descriptionIconTags": [ "runecrafting" ]
+              }
+            },
+            {
+              "context": {
+                "category": "SummoningSynergy",
+                "summonIDs": [
+                  "melvorItA:Abyssal_Salamander",
+                  "melvorItA:Abyssal_Bear"
+                ]
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "azurian_bar",
+                  "obsidian_bar",
+                  "smithing"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "SummoningSynergy",
+                "summonIDs": [
+                  "melvorItA:Abyssal_Golbin_Thief",
+                  "melvorItA:Abyssal_Dragon"
+                ]
+              },
+              "data": {
+                "conditionalModifierIconTags": [
+                  [
+                    "currency",
+                    "combat"
+                  ]
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "SummoningSynergy",
+                "summonIDs": [
+                  "melvorItA:Abyssal_Wolf",
+                  "melvorItA:Abyssal_Witch"
+                ]
+              },
+              "data": {
+                "conditionalModifierIconTags": [
+                  [
+                    "lifesteal",
+                    "magic"
+                  ]
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "SummoningSynergy",
+                "summonIDs": [
+                  "melvorItA:Abyssal_Wolf",
+                  "melvorItA:Abyssal_Minotaur"
+                ]
+              },
+              "data": {
+                "conditionalModifierIconTags": [
+                  [
+                    "lifesteal",
+                    "attack"
+                  ]
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "SummoningSynergy",
+                "summonIDs": [
+                  "melvorItA:Abyssal_Wolf",
+                  "melvorItA:Abyssal_Centaur"
+                ]
+              },
+              "data": {
+                "conditionalModifierIconTags": [
+                  [
+                    "lifesteal",
+                    "ranged"
+                  ]
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "SummoningSynergy",
+                "summonIDs": [
+                  "melvorItA:Abyssal_Occultist",
+                  "melvorItA:Abyssal_Wolf"
+                ]
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "evasion_up",
+                  "accuracy",
+                  "hitpoints"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "SummoningSynergy",
+                "summonIDs": [
+                  "melvorItA:Abyssal_Minotaur",
+                  "melvorItA:Abyssal_Witch"
+                ]
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "ti_strength_up",
+                  "accuracy",
+                  "ti_magic_up",
+                  "slayer"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "SummoningSynergy",
+                "summonIDs": [
+                  "melvorItA:Abyssal_Centaur",
+                  "melvorItA:Abyssal_Witch"
+                ]
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "ranged",
+                  "ti_combat_up",
+                  "magic"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "SummoningSynergy",
+                "summonIDs": [
+                  "melvorItA:Abyssal_Minotaur",
+                  "melvorItA:Abyssal_Centaur"
+                ]
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "ranged",
+                  "ti_combat_up",
+                  "magic"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "SummoningSynergy",
+                "summonIDs": [
+                  "melvorItA:Abyssal_Occultist",
+                  "melvorItA:Abyssal_Minotaur"
+                ]
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "offense_up"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "SummoningSynergy",
+                "summonIDs": [
+                  "melvorItA:Abyssal_Minotaur",
+                  "melvorItA:Abyssal_Unicorn"
+                ]
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "regen",
+                  "attack"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "SummoningSynergy",
+                "summonIDs": [
+                  "melvorItA:Abyssal_Minotaur",
+                  "melvorItA:Abyssal_Dragon"
+                ]
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "attack",
+                  "ti_strength_up",
+                  "accuracy",
+                  "ablaze"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "SummoningSynergy",
+                "summonIDs": [
+                  "melvorItA:Abyssal_Occultist",
+                  "melvorItA:Abyssal_Centaur"
+                ]
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "ti_combat_up"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "SummoningSynergy",
+                "summonIDs": [
+                  "melvorItA:Abyssal_Occultist",
+                  "melvorItA:Abyssal_Cyclops"
+                ]
+              },
+              "data": {
+                "conditionalModifierIconTags": [
+                  [
+                    "evasion_up"
+                  ]
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "SummoningSynergy",
+                "summonIDs": [
+                  "melvorItA:Abyssal_Occultist",
+                  "melvorItA:Abyssal_Yak"
+                ]
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "defence",
+                  "attack",
+                  "ranged"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "SummoningSynergy",
+                "summonIDs": [
+                  "melvorItA:Abyssal_Occultist",
+                  "melvorItA:Abyssal_Dragon"
+                ]
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "ti_dr_up",
+                  "ablaze"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "SummoningSynergy",
+                "summonIDs": [
+                  "melvorItA:Abyssal_Yak",
+                  "melvorItA:Abyssal_Unicorn"
+                ]
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "regen",
+                  "hitpoints"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "SummoningSynergy",
+                "summonIDs": [
+                  "melvorItA:Imp",
+                  "melvorItA:Abyssal_Wolf"
+                ]
+              },
+              "data": {
+                "conditionalModifierIconTags": [
+                  [
+                    "currency",
+                    "lifesteal"
+                  ]
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "SummoningSynergy",
+                "summonIDs": [
+                  "melvorItA:Imp",
+                  "melvorItA:Abyssal_Witch"
+                ]
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "ti_magic_up",
+                  "corruption"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "SummoningSynergy",
+                "summonIDs": [
+                  "melvorItA:Imp",
+                  "melvorItA:Abyssal_Minotaur"
+                ]
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "ti_combat_up",
+                  "corruption"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "SummoningSynergy",
+                "summonIDs": [
+                  "melvorItA:Imp",
+                  "melvorItA:Abyssal_Centaur"
+                ]
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "ti_ranged_up",
+                  "corruption"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "SummoningSynergy",
+                "summonIDs": [
+                  "melvorItA:Imp",
+                  "melvorItA:Abyssal_Cyclops"
+                ]
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "slayer_coins",
+                  "corruption"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "SummoningSynergy",
+                "summonIDs": [
+                  "melvorItA:Imp",
+                  "melvorItA:Abyssal_Occultist"
+                ]
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "evasion_up",
+                  "corruption"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "SummoningSynergy",
+                "summonIDs": [
+                  "melvorItA:Imp",
+                  "melvorItA:Abyssal_Yak"
+                ]
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "ti_dr_up",
+                  "corruption"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "SummoningSynergy",
+                "summonIDs": [
+                  "melvorItA:Imp",
+                  "melvorItA:Abyssal_Unicorn"
+                ]
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "hitpoints"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "SummoningSynergy",
+                "summonIDs": [
+                  "melvorItA:Imp",
+                  "melvorItA:Abyssal_Dragon"
+                ]
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "ablaze",
+                  "corruption"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "SummoningSynergy",
+                "summonIDs": [
+                  "melvorItA:Abyssal_Wolf",
+                  "melvorItA:Eldritch_Eyeball"
+                ]
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "ti_dr_dn",
+                  "autoeat",
+                  "lifesteal"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "SummoningSynergy",
+                "summonIDs": [
+                  "melvorItA:Abyssal_Witch",
+                  "melvorItA:Eldritch_Eyeball"
+                ]
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "ti_combat_up",
+                  "magic"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "SummoningSynergy",
+                "summonIDs": [
+                  "melvorItA:Abyssal_Minotaur",
+                  "melvorItA:Eldritch_Eyeball"
+                ]
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "ti_combat_up",
+                  "attack"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "SummoningSynergy",
+                "summonIDs": [
+                  "melvorItA:Abyssal_Centaur",
+                  "melvorItA:Eldritch_Eyeball"
+                ]
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "ti_combat_up",
+                  "ranged"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "SummoningSynergy",
+                "summonIDs": [
+                  "melvorItA:Abyssal_Occultist",
+                  "melvorItA:Eldritch_Eyeball"
+                ]
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "accuracy",
+                  "curse"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "SummoningSynergy",
+                "summonIDs": [
+                  "melvorItA:Abyssal_Dragon",
+                  "melvorItA:Eldritch_Eyeball"
+                ]
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "accuracy",
+                  "burn",
+                  "curse"
+                ]
+              }
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+﻿{
+  "$schema": "https://melvoridle.com/assets/schema/gameData.json",
+  "namespace": "tinyIcons",
+  "dependentData": [
+    {
+      "namespace": "melvorAoD",
+      "modifications": {
+        "tinyIcons": {
+          "staticTagAllocations": [
+            {
+              "context": {
+                "category": "Prayer",
+                "id": "melvorAoD:Defile"
+              },
+              "data": {
+                "conditionalModifierIconTags": [
+                  [
+                    "ti_combat_up",
+                    "evasion_up",
+                    "ti_dr_up"
+                  ]
+                ]
+              }
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

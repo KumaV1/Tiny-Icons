@@ -1,0 +1,352 @@
+﻿{
+  "$schema": "https://melvoridle.com/assets/schema/gameData.json",
+  "namespace": "tinyIcons",
+  "dependentData": [
+    {
+      "namespace": "melvorAoD",
+      "modifications": {
+        "tinyIcons": {
+          "staticTagAllocations": [
+            {
+              "context": {
+                "category": "EquipmentItem",
+                "id": "melvorAoD:Malevolent_Ward_Shield"
+              },
+              "data": {
+                "conditionalModifierIconTags": [
+                  [
+                    "ti_combat_up",
+                    "accuracy",
+                    "evasion_up"
+                  ]
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "EquipmentItem",
+                "id": "melvorAoD:Elemental_Scroll"
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "ti_magic_up",
+                  "air_rune",
+                  "water_rune",
+                  "earth_rune",
+                  "fire_rune"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "EquipmentItem",
+                "id": "melvorAoD:Dividers"
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "map",
+                  "cartography"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "EquipmentItem",
+                "id": "melvorAoD:Old_Scripture"
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "archaeology"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "EquipmentItem",
+                "id": "melvorAoD:Water_Shield"
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "evasion_up"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "EquipmentItem",
+                "id": "melvorAoD:Merman_Pendant"
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "ti_attack_interval",
+                  "offense_up",
+                  "accuracy",
+                  "ti_dr_dn",
+                  "nulled",
+                  "special_attack"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "EquipmentItem",
+                "id": "melvorAoD:Darksteel_Shield"
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "bleed"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "EquipmentItem",
+                "id": "melvorAoD:Pirate_Hook"
+              },
+              "data": {
+                "conditionalModifierIconTags": [
+                  [
+                    "interval",
+                    "ti_combat_up"
+                  ]
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "EquipmentItem",
+                "id": "melvorAoD:Eradicating_Gloves"
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "unholy",
+                  "prayer",
+                  "combat"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "EquipmentItem",
+                "id": "melvorAoD:Ring_of_Malice"
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "unholy",
+                  "prayer",
+                  "combat"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "EquipmentItem",
+                "id": "melvorAoD:Grudge_Amulet"
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "unholy",
+                  "prayer",
+                  "combat"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "EquipmentItem",
+                "id": "melvorAoD:Consuming_Shield"
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "unholy",
+                  "prayer",
+                  "combat"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "EquipmentItem",
+                "id": "melvorAoD:Helmet_of_Spite"
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "unholy",
+                  "prayer",
+                  "combat"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "EquipmentItem",
+                "id": "melvorAoD:Shield_of_Martyr"
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "unholy",
+                  "prayer",
+                  "combat"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "EquipmentItem",
+                "id": "melvorAoD:Summoners_Blessed_Ring"
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "interval",
+                  "summoning"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "EquipmentItem",
+                "id": "melvorAoD:Unholy_Gem"
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "unholy",
+                  "prayer",
+                  "combat"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "EquipmentItem",
+                "id": "melvorAoD:Archaeologist_Hat"
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "xp"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "EquipmentItem",
+                "id": "melvorAoD:Archaeologist_Body"
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "xp"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "EquipmentItem",
+                "id": "melvorAoD:Archaeologist_Leggings"
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "xp"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "EquipmentItem",
+                "id": "melvorAoD:Archaeologist_Boots"
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "xp"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "EquipmentItem",
+                "id": "melvorAoD:Archaeologist_Gloves"
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "xp"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "EquipmentItem",
+                "id": "melvorAoD:Summoners_Blessing"
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "interval",
+                  "summoning"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "EquipmentItem",
+                "id": "melvorAoD:Summoners_Defender"
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "interval",
+                  "summoning"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "EquipmentItem",
+                "id": "melvorAoD:Knights_Summoning_Defender"
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "interval",
+                  "ti_combat_up",
+                  "summoning",
+                  "ti_dr_dn"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "WeaponItem",
+                "id": "melvorAoD:Water_Sceptre"
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "ti_magic_up",
+                  "water_rune"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "WeaponItem",
+                "id": "melvorAoD:Mystic_Pure_Crystal_Staff"
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "ti_magic_up",
+                  "air_rune"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "WeaponItem",
+                "id": "melvorAoD:Water_Pulse_Staff"
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "ti_magic_up",
+                  "water_rune"
+                ]
+              }
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

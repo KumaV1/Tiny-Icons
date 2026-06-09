@@ -1,0 +1,340 @@
+﻿{
+  "$schema": "https://melvoridle.com/assets/schema/gameData.json",
+  "namespace": "tinyIcons",
+  "dependentData": [
+    {
+      "namespace": "melvorItA",
+      "modifications": {
+        "tinyIcons": {
+          "staticTagAllocations": [
+            {
+              "context": {
+                "category": "ShopPurchase",
+                "id": "melvorItA:Extra_Equipment_Set_I"
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "equip_set"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "ShopPurchase",
+                "id": "melvorItA:Extra_Equipment_Set_II"
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "equip_set"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "ShopPurchase",
+                "id": "melvorItA:Extra_Equipment_Set_III"
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "equip_set"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "ShopPurchase",
+                "id": "melvorItA:Extra_Bank_Slot"
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "bank"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "ShopPurchase",
+                "id": "melvorItA:Echoes_of_Woe"
+              },
+              "data": {
+                "conditionalModifierIconTags": [
+                  [
+                    "ti_combat_up"
+                  ]
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "ShopPurchase",
+                "id": "melvorItA:Embracer_of_Fear"
+              },
+              "data": {
+                "conditionalModifierIconTags": [
+                  [
+                    "ti_combat_up"
+                  ]
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "ShopPurchase",
+                "id": "melvorItA:Fortitude_Under_Rubble"
+              },
+              "data": {
+                "conditionalModifierIconTags": [
+                  [
+                    "hitpoints",
+                    "evasion_up",
+                    "accuracy"
+                  ]
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "ShopPurchase",
+                "id": "melvorItA:The_Unyielding_Conqueror"
+              },
+              "data": {
+                "conditionalModifierIconTags": [
+                  [
+                    "interval",
+                    "ti_combat_up"
+                  ]
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "ShopPurchase",
+                "id": "melvorItA:Abyssium_Harvester"
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "harvesting"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "ShopPurchase",
+                "id": "melvorItA:Brumite_Harvester"
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "harvesting"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "ShopPurchase",
+                "id": "melvorItA:Gloomite_Harvester"
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "harvesting"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "ShopPurchase",
+                "id": "melvorItA:Witherite_Harvester"
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "harvesting"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "ShopPurchase",
+                "id": "melvorItA:Netherite_Harvester"
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "harvesting"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "ShopPurchase",
+                "id": "melvorItA:Abyssium_Axe_Coating"
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "xp",
+                  "woodcutting"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "ShopPurchase",
+                "id": "melvorItA:Brumite_Axe_Coating"
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "woodcutting"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "ShopPurchase",
+                "id": "melvorItA:Gloomite_Axe_Coating"
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "woodcutting"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "ShopPurchase",
+                "id": "melvorItA:Witherite_Axe_Coating"
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "woodcutting"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "ShopPurchase",
+                "id": "melvorItA:Netherite_Axe_Coating"
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "woodcutting"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "ShopPurchase",
+                "id": "melvorItA:Abyssium_Fishing_Rod_Coating"
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "xp",
+                  "fishing"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "ShopPurchase",
+                "id": "melvorItA:Brumite_Fishing_Rod_Coating"
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "fishing"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "ShopPurchase",
+                "id": "melvorItA:Gloomite_Fishing_Rod_Coating"
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "fishing",
+                  "cooking"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "ShopPurchase",
+                "id": "melvorItA:Witherite_Fishing_Rod_Coating"
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "fishing",
+                  "cooking"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "ShopPurchase",
+                "id": "melvorItA:Netherite_Fishing_Rod_Coating"
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "fishing"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "ShopPurchase",
+                "id": "melvorItA:Abyssium_Pickaxe_Coating"
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "xp",
+                  "mining"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "ShopPurchase",
+                "id": "melvorItA:Brumite_Pickaxe_Coating"
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "mining"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "ShopPurchase",
+                "id": "melvorItA:Gloomite_Pickaxe_Coating"
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "mining"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "ShopPurchase",
+                "id": "melvorItA:Witherite_Pickaxe_Coating"
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "gem",
+                  "mining"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "ShopPurchase",
+                "id": "melvorItA:Netherite_Pickaxe_Coating"
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "mining"
+                ]
+              }
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

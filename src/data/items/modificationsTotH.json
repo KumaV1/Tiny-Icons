@@ -1,0 +1,295 @@
+﻿{
+  "$schema": "https://melvoridle.com/assets/schema/gameData.json",
+  "namespace": "tinyIcons",
+  "dependentData": [
+    {
+      "namespace": "melvorTotH",
+      "modifications": {
+        "tinyIcons": {
+          "staticTagAllocations": [
+            {
+              "context": {
+                "category": "PotionItem",
+                "id": "melvorTotH:Holy_Bulwark_Potion_I"
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "prayer",
+                  "combat"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "PotionItem",
+                "id": "melvorTotH:Holy_Bulwark_Potion_II"
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "prayer",
+                  "combat"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "PotionItem",
+                "id": "melvorTotH:Holy_Bulwark_Potion_III"
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "prayer",
+                  "combat"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "PotionItem",
+                "id": "melvorTotH:Holy_Bulwark_Potion_IV"
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "prayer",
+                  "combat"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "EquipmentItem",
+                "id": "melvorTotH:Meteorite_Woodcutting_Ring"
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "ash",
+                  "woodcutting"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "EquipmentItem",
+                "id": "melvorTotH:Meteorite_Woodcutting_Amulet"
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "ash",
+                  "woodcutting"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "EquipmentItem",
+                "id": "melvorTotH:Vampiric_Cloak"
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "lifesteal",
+                  "autoeat",
+                  "ti_dr_up"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "EquipmentItem",
+                "id": "melvorTotH:Spirit_Bag"
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "item_alchemy",
+                  "ti_magic_up"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "EquipmentItem",
+                "id": "melvorTotH:Weakness_Exploiter_Cape"
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "ti_dr_up",
+                  "ranged"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "EquipmentItem",
+                "id": "melvorTotH:Toxic_Maker_Gloves"
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "potion",
+                  "herblore"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "EquipmentItem",
+                "id": "melvorTotH:Burning_Embers_Book"
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "ti_magic_up",
+                  "fire_rune"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "EquipmentItem",
+                "id": "melvorTotH:Frostshield_Amulet"
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "hitpoints",
+                  "slow",
+                  "frozen"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "EquipmentItem",
+                "id": "melvorTotH:FrostSpark_Amulet"
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "reflect",
+                  "ti_combat_up"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "EquipmentItem",
+                "id": "melvorTotH:Lightning_Boots"
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "ti_attack_interval",
+                  "stun"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "EquipmentItem",
+                "id": "melvorTotH:Frostspark_Boots"
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "ti_attack_interval",
+                  "stun"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "EquipmentItem",
+                "id": "melvorTotH:Lightning_Aura_Helmet"
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "ti_combat_up",
+                  "stun"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "EquipmentItem",
+                "id": "melvorTotH:Book_of_the_Ancients"
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "ti_magic_up",
+                  "summoning"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "EquipmentItem",
+                "id": "melvorTotH:Blood_Ring"
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "lifesteal",
+                  "bleed"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "EquipmentItem",
+                "id": "melvorTotH:Mortar_and_Pestle"
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "interval",
+                  "mastery",
+                  "cooking"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "WeaponItem",
+                "id": "melvorTotH:Meteorite_Javelin"
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "preservation",
+                  "ranged"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "WeaponItem",
+                "id": "melvorTotH:Despair_Wand"
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "ti_magic_up"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "WeaponItem",
+                "id": "melvorTotH:Royal_Toxins_Spear"
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "ti_attack_interval",
+                  "poison",
+                  "bleed"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "WeaponItem",
+                "id": "melvorTotH:Ethereal_Longbow"
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "preservation",
+                  "ranged",
+                  "ti_dr_up"
+                ]
+              }
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

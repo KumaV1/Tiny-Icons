@@ -1,0 +1,715 @@
+﻿{
+  "$schema": "https://melvoridle.com/assets/schema/gameData.json",
+  "namespace": "tinyIcons",
+  "dependentData": [
+    {
+      "namespace": "melvorItA",
+      "modifications": {
+        "tinyIcons": {
+          "staticTagAllocations": [
+            {
+              "context": {
+                "category": "EquipmentItem",
+                "id": "melvorItA:Obzurian_Melee_Breaker_Ring"
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "offense_up",
+                  "ti_combat_up",
+                  "ti_dr_up"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "EquipmentItem",
+                "id": "melvorItA:Obzurian_Magic_Debilitator_Ring"
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "ti_combat_up",
+                  "offense_up",
+                  "hitpoints",
+                  "interval"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "EquipmentItem",
+                "id": "melvorItA:Azurian_Nightopal_Amulet_I"
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "ti_combat_up",
+                  "ti_dr_up"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "EquipmentItem",
+                "id": "melvorItA:Azurian_Shadowpearl_Amulet_I"
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "xp",
+                  "corruption"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "EquipmentItem",
+                "id": "melvorItA:Azurian_Nightopal_Amulet_II"
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "ti_combat_up",
+                  "ti_dr_up"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "EquipmentItem",
+                "id": "melvorItA:Azurian_Shadowpearl_Amulet_II"
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "xp",
+                  "corruption"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "EquipmentItem",
+                "id": "melvorItA:Thorn_Defender"
+              },
+              "data": {
+                "conditionalModifierIconTags": [
+                  [
+                    "interval",
+                    "ti_combat_up",
+                    "reflect"
+                  ]
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "EquipmentItem",
+                "id": "melvorItA:Thorn_Legs"
+              },
+              "data": {
+                "conditionalModifierIconTags": [
+                  [
+                    "reflect"
+                  ]
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "EquipmentItem",
+                "id": "melvorItA:Thorn_Ward"
+              },
+              "data": {
+                "conditionalModifierIconTags": [
+                  [
+                    "reflect"
+                  ]
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "EquipmentItem",
+                "id": "melvorItA:Blighted_Heart_Amulet"
+              },
+              "data": {
+                "conditionalModifierIconTags": [
+                  [
+                    "lifesteal"
+                  ]
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "EquipmentItem",
+                "id": "melvorItA:Signet_Ring_of_Corrupted_Souls"
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "double",
+                  "currency"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "EquipmentItem",
+                "id": "melvorItA:Soul_Harvester_Gloves"
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "prayer",
+                  "combat"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "EquipmentItem",
+                "id": "melvorItA:Soul_Harvester_Amulet"
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "preservation",
+                  "prayer",
+                  "combat"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "EquipmentItem",
+                "id": "melvorItA:Petrifying_Shield"
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "combat"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "EquipmentItem",
+                "id": "melvorItA:Petrifying_Ring"
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "ti_combat_up",
+                  "fear"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "EquipmentItem",
+                "id": "melvorItA:Summoning_Familiar_Abyssal_Occultist"
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "evasion_up"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "EquipmentItem",
+                "id": "melvorItA:Blighting_Gloves"
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "blight",
+                  "ti_dr_up"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "EquipmentItem",
+                "id": "melvorItA:Fear_Helmet"
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "ti_dr_up"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "EquipmentItem",
+                "id": "melvorItA:Netherite_Gloves"
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "hitpoints"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "EquipmentItem",
+                "id": "melvorItA:Deep_Wounds_Consumable_I"
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "lifesteal",
+                  "bleed",
+                  "combat"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "EquipmentItem",
+                "id": "melvorItA:Deep_Wounds_Consumable_II"
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "lifesteal",
+                  "bleed",
+                  "combat"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "EquipmentItem",
+                "id": "melvorItA:Deep_Wounds_Consumable_III"
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "lifesteal",
+                  "bleed",
+                  "combat"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "EquipmentItem",
+                "id": "melvorItA:Blighted_Enhancement_1"
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "laceration"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "EquipmentItem",
+                "id": "melvorItA:Blighted_Enhancement_1_Augmented"
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "laceration"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "EquipmentItem",
+                "id": "melvorItA:Blighted_Enhancement_Superior"
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "food",
+                  "hitpoints",
+                  "laceration"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "EquipmentItem",
+                "id": "melvorItA:Nightmare_Enhancement_3"
+              },
+              "data": {
+                "conditionalModifierIconTags": [
+                  [
+                    "prayer",
+                    "combat"
+                  ]
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "EquipmentItem",
+                "id": "melvorItA:Nightmare_Enhancement_3_Augmented"
+              },
+              "data": {
+                "conditionalModifierIconTags": [
+                  [
+                    "prayer",
+                    "combat"
+                  ]
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "EquipmentItem",
+                "id": "melvorItA:Nightmare_Enhancement_Superior"
+              },
+              "data": {
+                "conditionalModifierIconTags": [
+                  [
+                    "prayer",
+                    "combat"
+                  ]
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "EquipmentItem",
+                "id": "melvorItA:Overlords_Enhancement_2"
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "ti_dr_up"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "EquipmentItem",
+                "id": "melvorItA:Overlords_Enhancement_2_Augmented"
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "ti_dr_up"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "EquipmentItem",
+                "id": "melvorItA:Enhanced_Township_Food_Scroll"
+              },
+              "data": {
+                "conditionalModifierIconTags": [
+                  [
+                    "currency",
+                    "lifesteal"
+                  ],
+                  [
+                    "currency",
+                    "lifesteal"
+                  ],
+                  [
+                    "ti_dr_up"
+                  ]
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "EquipmentItem",
+                "id": "melvorItA:Enhanced_Township_Leather_Scroll"
+              },
+              "data": {
+                "conditionalModifierIconTags": [
+                  [
+                    "evasion_up"
+                  ]
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "EquipmentItem",
+                "id": "melvorItA:Abyssal_XP_Scroll_of_Production"
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "xp",
+                  "skill"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "EquipmentItem",
+                "id": "melvorItA:Abyssal_XP_Scroll_of_Gathering"
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "xp",
+                  "skill"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "EquipmentItem",
+                "id": "melvorItA:Enhanced_Gathering_Scroll"
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "skill"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "EquipmentItem",
+                "id": "melvorItA:Enhanced_Production_Scroll"
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "skill"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "EquipmentItem",
+                "id": "melvorItA:Abyssal_Fletching_Scroll"
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "fletching",
+                  "preservation"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "EquipmentItem",
+                "id": "melvorItA:Abyssal_Mining_Gloves"
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "xp",
+                  "interval",
+                  "mining"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "EquipmentItem",
+                "id": "melvorItA:Abyssal_Smithing_Gloves"
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "xp",
+                  "smithing"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "EquipmentItem",
+                "id": "melvorItA:Abyssal_Firemaking_Gloves"
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "xp",
+                  "firemaking"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "EquipmentItem",
+                "id": "melvorItA:Abyssal_Harvesting_Gloves"
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "xp",
+                  "interval",
+                  "harvesting"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "EquipmentItem",
+                "id": "melvorItA:Abyssal_Fletching_Gloves"
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "xp",
+                  "interval",
+                  "fletching"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "EquipmentItem",
+                "id": "melvorItA:Abyssal_Crafting_Gloves"
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "xp",
+                  "crafting"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "EquipmentItem",
+                "id": "melvorItA:Abyssal_Herblore_Gloves"
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "xp",
+                  "herblore"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "EquipmentItem",
+                "id": "melvorItA:Abyssal_Runecrafting_Gloves"
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "xp",
+                  "interval",
+                  "runecrafting"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "EquipmentItem",
+                "id": "melvorItA:Abyssal_Coin_Contract_I"
+              },
+              "data": {
+                "conditionalModifierIconTags": [
+                  [
+                    "currency",
+                    "combat",
+                    "hitpoints"
+                  ]
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "EquipmentItem",
+                "id": "melvorItA:Abyssal_Coin_Contract_II"
+              },
+              "data": {
+                "conditionalModifierIconTags": [
+                  [
+                    "currency",
+                    "combat",
+                    "hitpoints"
+                  ]
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "EquipmentItem",
+                "id": "melvorItA:Abyssal_Counter_Contract_I"
+              },
+              "data": {
+                "conditionalModifierIconTags": [
+                  [
+                    "hitpoints",
+                    "interval",
+                    "ti_combat_up"
+                  ]
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "EquipmentItem",
+                "id": "melvorItA:Abyssal_Counter_Contract_II"
+              },
+              "data": {
+                "conditionalModifierIconTags": [
+                  [
+                    "hitpoints",
+                    "interval",
+                    "ti_combat_up"
+                  ]
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "EquipmentItem",
+                "id": "melvorItA:Abyssal_Corruption_Contract_I"
+              },
+              "data": {
+                "conditionalModifierIconTags": [
+                  [
+                    "xp",
+                    "corruption"
+                  ]
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "EquipmentItem",
+                "id": "melvorItA:Abyssal_Corruption_Contract_II"
+              },
+              "data": {
+                "conditionalModifierIconTags": [
+                  [
+                    "xp",
+                    "corruption"
+                  ]
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "EquipmentItem",
+                "id": "melvorItA:Bobs_Lost_Gloves"
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "farming"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "WeaponItem",
+                "id": "melvorItA:Blighted_Staff"
+              },
+              "data": {
+                "conditionalModifierIconTags": [
+                  [
+                    "ti_combat_up"
+                  ]
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "WeaponItem",
+                "id": "melvorItA:Fear_Hunter_Whip"
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "ti_combat_up",
+                  "hitpoints"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "WeaponItem",
+                "id": "melvorItA:Bobs_Lost_Rake"
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "preservation",
+                  "farming"
+                ]
+              }
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

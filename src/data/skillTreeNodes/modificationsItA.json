@@ -1,0 +1,125 @@
+﻿{
+  "$schema": "https://melvoridle.com/assets/schema/gameData.json",
+  "namespace": "tinyIcons",
+  "dependentData": [
+    {
+      "namespace": "melvorItA",
+      "modifications": {
+        "tinyIcons": {
+          "staticTagAllocations": [
+            {
+              "context": {
+                "category": "SkillTreeNode",
+                "skillId": "melvorD:Attack",
+                "skillTreeId": "melvorItA:Abyssal",
+                "skillTreeNodeId": "melvorItA:BC7"
+              },
+              "data": {
+                "conditionalModifierIconTags": [
+                  [
+                    "offense_up"
+                  ]
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "SkillTreeNode",
+                "skillId": "melvorD:Strength",
+                "skillTreeId": "melvorItA:Abyssal",
+                "skillTreeNodeId": "melvorItA:BC7"
+              },
+              "data": {
+                "conditionalModifierIconTags": [
+                  [
+                    "ti_strength_up"
+                  ]
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "SkillTreeNode",
+                "skillId": "melvorD:Defence",
+                "skillTreeId": "melvorItA:Abyssal",
+                "skillTreeNodeId": "melvorItA:B8"
+              },
+              "data": {
+                "conditionalModifierIconTags": [
+                  [
+                    "ti_dr_up",
+                    "attack",
+                    "ranged",
+                    "ti_magic_up",
+                    "defence"
+                  ]
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "SkillTreeNode",
+                "skillId": "melvorD:Hitpoints",
+                "skillTreeId": "melvorItA:Abyssal",
+                "skillTreeNodeId": "melvorItA:BC7"
+              },
+              "data": {
+                "conditionalModifierIconTags": [
+                  [
+                    "hitpoints"
+                  ]
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "SkillTreeNode",
+                "skillId": "melvorD:Ranged",
+                "skillTreeId": "melvorItA:Abyssal",
+                "skillTreeNodeId": "melvorItA:BC7"
+              },
+              "data": {
+                "conditionalModifierIconTags": [
+                  [
+                    "ti_ranged_up"
+                  ]
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "SkillTreeNode",
+                "skillId": "melvorD:Magic",
+                "skillTreeId": "melvorItA:Abyssal",
+                "skillTreeNodeId": "melvorItA:BC7"
+              },
+              "data": {
+                "conditionalModifierIconTags": [
+                  [
+                    "ti_magic_up"
+                  ]
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "SkillTreeNode",
+                "skillId": "melvorD:Summoning",
+                "skillTreeId": "melvorItA:Abyssal",
+                "skillTreeNodeId": "melvorItA:NodeABCDE7"
+              },
+              "data": {
+                "conditionalModifierIconTags": [
+                  [
+                    "ti_combat_up",
+                    "summoning"
+                  ]
+                ]
+              }
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

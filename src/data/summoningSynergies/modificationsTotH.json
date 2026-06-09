@@ -1,0 +1,452 @@
+﻿{
+  "$schema": "https://melvoridle.com/assets/schema/gameData.json",
+  "namespace": "tinyIcons",
+  "dependentData": [
+    {
+      "namespace": "melvorTotH",
+      "modifications": {
+        "tinyIcons": {
+          "staticTagAllocations": [
+            {
+              "context": {
+                "category": "SummoningSynergy",
+                "summonIDs": [
+                  "melvorF:Devil",
+                  "melvorTotH:Owl"
+                ]
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "astrology",
+                  "golden_stardust"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "SummoningSynergy",
+                "summonIDs": [
+                  "melvorF:GolbinThief",
+                  "melvorTotH:LightningSpirit"
+                ]
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "currency",
+                  "combat",
+                  "stun"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "SummoningSynergy",
+                "summonIDs": [
+                  "melvorF:GolbinThief",
+                  "melvorTotH:Siren"
+                ]
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "currency",
+                  "combat",
+                  "sleep"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "SummoningSynergy",
+                "summonIDs": [
+                  "melvorF:GolbinThief",
+                  "melvorTotH:Spider"
+                ]
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "currency",
+                  "combat",
+                  "stun"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "SummoningSynergy",
+                "summonIDs": [
+                  "melvorF:Wolf",
+                  "melvorTotH:LightningSpirit"
+                ]
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "lifesteal",
+                  "stun"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "SummoningSynergy",
+                "summonIDs": [
+                  "melvorF:Wolf",
+                  "melvorTotH:Siren"
+                ]
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "lifesteal",
+                  "sleep"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "SummoningSynergy",
+                "summonIDs": [
+                  "melvorF:Witch",
+                  "melvorTotH:LightningSpirit"
+                ]
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "ti_magic_up",
+                  "stun"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "SummoningSynergy",
+                "summonIDs": [
+                  "melvorF:Witch",
+                  "melvorTotH:Spectre"
+                ]
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "ti_dr_up",
+                  "magic"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "SummoningSynergy",
+                "summonIDs": [
+                  "melvorF:Minotaur",
+                  "melvorTotH:LightningSpirit"
+                ]
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "ti_strength_up",
+                  "stun"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "SummoningSynergy",
+                "summonIDs": [
+                  "melvorF:Minotaur",
+                  "melvorTotH:Spectre"
+                ]
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "ti_dr_up",
+                  "attack"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "SummoningSynergy",
+                "summonIDs": [
+                  "melvorF:Centaur",
+                  "melvorTotH:LightningSpirit"
+                ]
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "ti_ranged_up",
+                  "ranged"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "SummoningSynergy",
+                "summonIDs": [
+                  "melvorF:Centaur",
+                  "melvorTotH:Spectre"
+                ]
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "ti_dr_up",
+                  "ranged"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "SummoningSynergy",
+                "summonIDs": [
+                  "melvorF:Cyclops",
+                  "melvorTotH:LightningSpirit"
+                ]
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "slayer_coins",
+                  "combat",
+                  "stun"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "SummoningSynergy",
+                "summonIDs": [
+                  "melvorF:Cyclops",
+                  "melvorTotH:Siren"
+                ]
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "slayer_coins",
+                  "combat",
+                  "sleep"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "SummoningSynergy",
+                "summonIDs": [
+                  "melvorF:Occultist",
+                  "melvorTotH:Spider"
+                ]
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "slayer_coins",
+                  "combat",
+                  "poison"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "SummoningSynergy",
+                "summonIDs": [
+                  "melvorF:Occultist",
+                  "melvorTotH:Spectre"
+                ]
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "evasion_up"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "SummoningSynergy",
+                "summonIDs": [
+                  "melvorF:Yak",
+                  "melvorTotH:LightningSpirit"
+                ]
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "ti_dr_up",
+                  "sleep"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "SummoningSynergy",
+                "summonIDs": [
+                  "melvorF:Yak",
+                  "melvorTotH:Siren"
+                ]
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "ti_dr_up",
+                  "stun"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "SummoningSynergy",
+                "summonIDs": [
+                  "melvorF:Yak",
+                  "melvorTotH:Spider"
+                ]
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "ti_dr_up",
+                  "poison"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "SummoningSynergy",
+                "summonIDs": [
+                  "melvorF:Yak",
+                  "melvorTotH:Spectre"
+                ]
+              },
+              "data": {
+                "descriptionIconTags": [ "ti_dr_up" ]
+              }
+            },
+            {
+              "context": {
+                "category": "SummoningSynergy",
+                "summonIDs": [
+                  "melvorF:Unicorn",
+                  "melvorTotH:Spider"
+                ]
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "combat"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "SummoningSynergy",
+                "summonIDs": [
+                  "melvorF:Dragon",
+                  "melvorTotH:Spider"
+                ]
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "burn",
+                  "poison"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "SummoningSynergy",
+                "summonIDs": [
+                  "melvorF:Dragon",
+                  "melvorTotH:Spectre"
+                ]
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "ti_dr_dn",
+                  "burn"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "SummoningSynergy",
+                "summonIDs": [
+                  "melvorTotH:LightningSpirit",
+                  "melvorTotH:Spider"
+                ]
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "ti_combat_up",
+                  "slow",
+                  "poison",
+                  "burn"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "SummoningSynergy",
+                "summonIDs": [
+                  "melvorTotH:LightningSpirit",
+                  "melvorTotH:Spectre"
+                ]
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "ti_dr_dn",
+                  "stun"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "SummoningSynergy",
+                "summonIDs": [
+                  "melvorTotH:Siren",
+                  "melvorTotH:Spectre"
+                ]
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "ti_dr_dn",
+                  "sleep"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "SummoningSynergy",
+                "summonIDs": [
+                  "melvorF:Occultist",
+                  "melvorTotH:Fox"
+                ]
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "evasion_up"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "SummoningSynergy",
+                "summonIDs": [
+                  "melvorF:Yak",
+                  "melvorTotH:Fox"
+                ]
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "ti_dr_up",
+                  "hitpoints"
+                ]
+              }
+            },
+            {
+              "context": {
+                "category": "SummoningSynergy",
+                "summonIDs": [
+                  "melvorTotH:Fox",
+                  "melvorTotH:Spectre"
+                ]
+              },
+              "data": {
+                "descriptionIconTags": [
+                  "ti_dr_up",
+                  "hitpoints"
+                ]
+              }
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -1,4 +1,4 @@
-// Import of the folder will, by default, run this file, which in turn groups together all language files
+﻿// Import of the folder will, by default, run this file, which in turn groups together all language files
 
 import { zhCN } from './chinese-simplified';
 import { zhTW } from './chinese-traditional';
@@ -15,17 +15,17 @@ import { es } from './spanish';
 import { tr } from './turkish';
 
 export const languages = {
-    'zh-CN': zhCN,
-    'zh-TW': zhTW,
-    de,
-    en,
-    fr,
-    it,
-    ja,
-    ko,
-    'pt-br': ptBR,
-    pt,
-    ru,
-    es,
-    tr
+  'zh-CN': zhCN,
+  'zh-TW': zhTW,
+  de,
+  en,
+  fr,
+  it,
+  ja,
+  ko,
+  'pt-br': ptBR,
+  pt,
+  ru,
+  es,
+  tr
 };

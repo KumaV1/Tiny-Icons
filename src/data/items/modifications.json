@@ -1,0 +1,2574 @@
+﻿{
+  "$schema": "https://melvoridle.com/assets/schema/gameData.json",
+  "namespace": "tinyIcons",
+  "modifications": {
+    "tinyIcons": {
+      "staticTagAllocations": [
+        {
+          "context": {
+            "category": "TokenItem",
+            "id": "melvorF:Bank_Slot_Token"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "bank"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "PotionItem",
+            "id": "melvorF:Controlled_Heat_Potion_I"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "firemaking"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "PotionItem",
+            "id": "melvorF:Controlled_Heat_Potion_II"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "firemaking"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "PotionItem",
+            "id": "melvorF:Controlled_Heat_Potion_III"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "firemaking"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "PotionItem",
+            "id": "melvorF:Controlled_Heat_Potion_IV"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "firemaking"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "PotionItem",
+            "id": "melvorF:Elemental_Potion_I"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "runecrafting"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "PotionItem",
+            "id": "melvorF:Elemental_Potion_II"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "runecrafting"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "PotionItem",
+            "id": "melvorF:Elemental_Potion_III"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "runecrafting"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "PotionItem",
+            "id": "melvorF:Elemental_Potion_IV"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "runecrafting"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "PotionItem",
+            "id": "melvorF:Diamond_Luck_Potion_I"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "ti_combat_up",
+              "accuracy"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "PotionItem",
+            "id": "melvorF:Diamond_Luck_Potion_II"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "ti_combat_up",
+              "accuracy"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "PotionItem",
+            "id": "melvorF:Diamond_Luck_Potion_III"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "ti_combat_up",
+              "accuracy"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "PotionItem",
+            "id": "melvorF:Diamond_Luck_Potion_IV"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "ti_combat_up",
+              "accuracy"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorD:Cooking_Gloves"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "cooking"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorD:Mining_Gloves"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "double",
+              "mining"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorD:Smithing_Gloves"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "xp",
+              "smithing"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorD:Gem_Gloves"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "gem",
+              "mining"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorD:Amulet_of_Looting"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "loot",
+              "combat"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorD:Book_of_Eli"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "ti_magic_up"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorD:Ancient_Wizard_Hat"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "ti_combat_up",
+              "magic",
+              "accuracy"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorD:Ancient_Wizard_Robes"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "ti_combat_up",
+              "magic",
+              "accuracy"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorD:Ancient_Wizard_Bottoms"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "ti_combat_up",
+              "magic",
+              "accuracy"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorD:Ancient_Wizard_Boots"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "ti_combat_up",
+              "magic",
+              "accuracy"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorD:Aorpheats_Signet_Ring"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "loot",
+              "combat",
+              "double",
+              "currency",
+              "book"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorD:Ancient_Ring_Of_Skills"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "xp",
+              "skill"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorD:Clue_Chasers_Insignia"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "loot"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorD:Bone_Necklace"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "prayer",
+              "combat"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorD:Dragonfire_Shield"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "hitpoints",
+              "ti_combat_up"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorD:Crown_of_Rhaelyx"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "preservation",
+              "skill"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorD:Christmas_Coal"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "coal",
+              "dungeon"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Gold_Sapphire_Ring"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "reflect"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Gold_Emerald_Ring"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "xp",
+              "magic"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Gold_Diamond_Ring"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "protect_item"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Gold_Sapphire_Necklace"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "ti_dr_up",
+              "attack",
+              "ranged"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Gold_Emerald_Necklace"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "ti_dr_up",
+              "ranged",
+              "magic"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Gold_Diamond_Necklace"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "ti_dr_up",
+              "magic",
+              "attack"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Thieving_Gloves"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "thieving"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Chapeau_Noir"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "loot",
+              "combat",
+              "double",
+              "skill"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Glacia_God_Helmet"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "ti_combat_up",
+              "magic"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Glacia_God_Platelegs"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "ti_combat_up",
+              "magic"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Glacia_God_Platebody"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "ti_combat_up",
+              "magic"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Glacia_God_Boots"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "ti_combat_up",
+              "magic"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Glacia_God_Gloves"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "ti_combat_up",
+              "magic"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Deadeye_Amulet"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "crit",
+              "ranged"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Guardian_Amulet"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "ti_dr_up",
+              "ti_attack_interval",
+              "ti_combat_up"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Skull_Cape"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "preservation",
+              "magic"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Air_Acolyte_Wizard_Hat"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "ti_magic_up",
+              "air_rune"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Air_Acolyte_Wizard_Robes"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "ti_magic_up",
+              "air_rune"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Air_Acolyte_Wizard_Bottoms"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "ti_magic_up",
+              "air_rune"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Air_Acolyte_Wizard_Boots"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "ti_magic_up",
+              "air_rune"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Water_Acolyte_Wizard_Hat"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "ti_magic_up",
+              "water_rune"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Water_Acolyte_Wizard_Robes"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "ti_magic_up",
+              "water_rune"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Water_Acolyte_Wizard_Bottoms"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "ti_magic_up",
+              "water_rune"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Water_Acolyte_Wizard_Boots"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "ti_magic_up",
+              "water_rune"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Earth_Acolyte_Wizard_Hat"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "ti_magic_up",
+              "earth_rune"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Earth_Acolyte_Wizard_Robes"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "ti_magic_up",
+              "earth_rune"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Earth_Acolyte_Wizard_Bottoms"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "ti_magic_up",
+              "earth_rune"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Earth_Acolyte_Wizard_Boots"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "ti_magic_up",
+              "earth_rune"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Fire_Acolyte_Wizard_Hat"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "ti_magic_up",
+              "fire_rune"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Fire_Acolyte_Wizard_Robes"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "ti_magic_up",
+              "fire_rune"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Fire_Acolyte_Wizard_Bottoms"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "ti_magic_up",
+              "fire_rune"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Fire_Acolyte_Wizard_Boots"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "ti_magic_up",
+              "fire_rune"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Air_Adept_Wizard_Hat"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "ti_magic_up",
+              "air_rune"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Air_Adept_Wizard_Robes"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "ti_magic_up",
+              "air_rune"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Air_Adept_Wizard_Bottoms"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "ti_magic_up",
+              "air_rune"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Air_Adept_Wizard_Boots"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "ti_magic_up",
+              "air_rune"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Water_Adept_Wizard_Hat"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "ti_magic_up",
+              "water_rune"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Water_Adept_Wizard_Robes"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "ti_magic_up",
+              "water_rune"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Water_Adept_Wizard_Bottoms"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "ti_magic_up",
+              "water_rune"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Water_Adept_Wizard_Boots"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "ti_magic_up",
+              "water_rune"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Earth_Adept_Wizard_Hat"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "ti_magic_up",
+              "earth_rune"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Earth_Adept_Wizard_Robes"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "ti_magic_up",
+              "earth_rune"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Earth_Adept_Wizard_Bottoms"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "ti_magic_up",
+              "earth_rune"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Earth_Adept_Wizard_Boots"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "ti_magic_up",
+              "earth_rune"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Fire_Adept_Wizard_Hat"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "ti_magic_up",
+              "fire_rune"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Fire_Adept_Wizard_Robes"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "ti_magic_up",
+              "fire_rune"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Fire_Adept_Wizard_Bottoms"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "ti_magic_up",
+              "fire_rune"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Fire_Adept_Wizard_Boots"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "ti_magic_up",
+              "fire_rune"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Air_Expert_Wizard_Hat"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "ti_magic_up",
+              "air_rune"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Air_Expert_Wizard_Robes"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "ti_magic_up",
+              "air_rune"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Air_Expert_Wizard_Bottoms"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "ti_magic_up",
+              "air_rune"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Air_Expert_Wizard_Boots"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "ti_magic_up",
+              "air_rune"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Water_Expert_Wizard_Hat"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "ti_magic_up",
+              "water_rune"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Water_Expert_Wizard_Robes"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "ti_magic_up",
+              "water_rune"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Water_Expert_Wizard_Bottoms"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "ti_magic_up",
+              "water_rune"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Water_Expert_Wizard_Boots"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "ti_magic_up",
+              "water_rune"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Earth_Expert_Wizard_Hat"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "ti_magic_up",
+              "earth_rune"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Earth_Expert_Wizard_Robes"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "ti_magic_up",
+              "earth_rune"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Earth_Expert_Wizard_Bottoms"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "ti_magic_up",
+              "earth_rune"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Earth_Expert_Wizard_Boots"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "ti_magic_up",
+              "earth_rune"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Fire_Expert_Wizard_Hat"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "ti_magic_up",
+              "fire_rune"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Fire_Expert_Wizard_Robes"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "ti_magic_up",
+              "fire_rune"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Fire_Expert_Wizard_Bottoms"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "ti_magic_up",
+              "fire_rune"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Fire_Expert_Wizard_Boots"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "ti_magic_up",
+              "fire_rune"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Shaman_Ring"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "ti_magic_up",
+              "regen"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Book_of_Occults"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "ti_magic_up",
+              "summoning"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Sand_Treaders"
+          },
+          "data": {
+            "conditionalModifierIconTags": [
+              [
+                "ti_attack_interval"
+              ]
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Elder_Crown"
+          },
+          "data": {
+            "conditionalModifierIconTags": [
+              [
+                "lifesteal",
+                "bleed",
+                "ti_attack_interval",
+                "ti_combat_up"
+              ]
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Recoil_Shield"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "reflect"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Summoning_Familiar_Occultist"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "evasion_up"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Summoning_Familiar_Cyclops"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "currency"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Necromancer_Hat"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "xp",
+              "summoning"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Necromancer_Robes"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "xp",
+              "summoning"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Necromancer_Bottoms"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "xp",
+              "summoning"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Necromancer_Boots"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "xp",
+              "summoning"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Fishing_Hook"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "double",
+              "fishing"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Whetstone"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "accuracy",
+              "attack",
+              "ti_strength_up"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Wizards_Scroll"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "preservation",
+              "magic"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Prayer_Scroll"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "prayer",
+              "preservation"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Training_Shield"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "xp",
+              "ti_combat_up",
+              "magic"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Knights_Defender"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "ti_dr_up",
+              "ti_attack_interval",
+              "ti_dr_dn",
+              "attack"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Bobs_Gloves"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "farming"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Jesters_Hat"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "thieving"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Amulet_Of_Incantation"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "interval",
+              "preservation",
+              "magic"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Thiefs_Moneysack"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "currency",
+              "thieving"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Seed_Pouch"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "farming"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Runecrafting_Pouch"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "preservation",
+              "runecrafting"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Alchemists_Bag"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "preservation",
+              "potion"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Shield_Of_Melee_Power"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "ti_strength_up",
+              "ti_dr_up"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Shield_Of_Ranged_Power"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "ti_combat_up",
+              "crit",
+              "ranged",
+              "ti_dr_up"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Shield_Of_Magic_Power"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "ti_combat_up",
+              "ti_dr_dn"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Ring_Of_Power"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "ti_combat_up",
+              "ti_dr_dn"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Natures_Blessing_Ring"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "regen"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Poison_Virulence_Ring"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "hitpoints",
+              "poison"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Poison_Virulence_Gloves"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "ti_combat_up"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Burning_Madness_Ring"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "accuracy",
+              "ti_magic_dn"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Burning_Madness_Gloves"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "combat"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Spiked_Shell_Ring"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "ti_attack_interval"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Spiked_Shell_Gloves"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "ti_combat_up"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Relentless_Fury_Ring"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "stun",
+              "evasion_dn"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Relentless_Fury_Gloves"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "ti_combat_up"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Woodcutters_Hat"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "xp",
+              "woodcutting"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Woodcutters_Body"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "xp",
+              "woodcutting"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Woodcutters_Leggings"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "xp",
+              "woodcutting"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Woodcutters_Boots"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "xp",
+              "woodcutting"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Burning_Mans_Hat"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "xp",
+              "firemaking"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Burning_Mans_Body"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "xp",
+              "firemaking"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Burning_Mans_Leggings"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "xp",
+              "firemaking"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Burning_Mans_Boots"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "xp",
+              "firemaking"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Fishermans_Hat"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "xp",
+              "fishing"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Fishermans_Body"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "xp",
+              "fishing"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Fishermans_Leggings"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "xp",
+              "fishing"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Fishermans_Boots"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "xp",
+              "fishing"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Miners_Hat"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "xp",
+              "mining"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Miners_Body"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "xp",
+              "mining"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Miners_Leggings"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "xp",
+              "mining"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Miners_Boots"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "xp",
+              "mining"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Blacksmiths_Hat"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "xp",
+              "smithing"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Blacksmiths_Body"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "xp",
+              "smithing"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Blacksmiths_Leggings"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "xp",
+              "smithing"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Blacksmiths_Boots"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "xp",
+              "smithing"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Fletchers_Hat"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "xp",
+              "fletching"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Fletchers_Body"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "xp",
+              "fletching"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Fletchers_Leggings"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "xp",
+              "fletching"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Fletchers_Boots"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "xp",
+              "fletching"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Crafters_Hat"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "xp",
+              "crafting"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Crafters_Body"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "xp",
+              "crafting"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Crafters_Leggings"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "xp",
+              "crafting"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Crafters_Boots"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "xp",
+              "crafting"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Runecrafters_Hat"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "xp",
+              "runecrafting"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Runecrafters_Body"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "xp",
+              "runecrafting"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Runecrafters_Leggings"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "xp",
+              "runecrafting"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Runecrafters_Boots"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "xp",
+              "runecrafting"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Potion_Makers_Hat"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "xp",
+              "herblore"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Potion_Makers_Body"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "xp",
+              "herblore"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Potion_Makers_Leggings"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "xp",
+              "herblore"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Potion_Makers_Boots"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "xp",
+              "herblore"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Performance_Enhancing_Hat"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "xp",
+              "agility"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Performance_Enhancing_Body"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "xp",
+              "agility"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Performance_Enhancing_Leggings"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "xp",
+              "agility"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Performance_Enhancing_Boots"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "xp",
+              "agility"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Star_Gazing_Hat"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "xp",
+              "astrology"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Star_Gazing_Body"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "xp",
+              "astrology"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Star_Gazing_Leggings"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "xp",
+              "astrology"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Star_Gazing_Boots"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "xp",
+              "astrology"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Skillers_Hat"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "xp",
+              "skill"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Skillers_Body"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "xp",
+              "skill"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Skillers_Leggings"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "xp",
+              "skill"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Skillers_Boots"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "xp",
+              "skill"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Pirate_Captain_Hat"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "xp",
+              "township"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Looter_Pouch"
+          },
+          "data": {
+            "descriptionIconTags": [ "loot", "combat" ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Monster_Hunter_Scroll"
+          },
+          "data": {
+            "conditionalModifierIconTags": [
+              [
+                "ti_attack_interval",
+                "normal_damage"
+              ]
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Thiefs_Moneysack_II"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "currency",
+              "thieving"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Wizards_Scroll_II"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "preservation",
+              "magic"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Seed_Pouch_II"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "farming"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Alchemists_Bag_II"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "preservation",
+              "potion"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Mastery_Magnet"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "mastery"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Slayer_Harvest_Scroll"
+          },
+          "data": {
+            "conditionalModifierIconTags": [
+              [
+                "slayer_coins",
+                "lifesteal"
+              ]
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Slayer_Binding_Scroll"
+          },
+          "data": {
+            "conditionalModifierIconTags": [
+              [
+                "accuracy",
+                "slayer"
+              ]
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Ranged_Hinder_Scroll"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "evasion_dn",
+              "ranged"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Magic_Hinder_Scroll"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "evasion_dn",
+              "magic"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Melee_Hinder_Scroll"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "evasion_dn",
+              "attack"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "EquipmentItem",
+            "id": "melvorF:Fervor_Scroll"
+          },
+          "data": {
+            "descriptionIconTags": [ "ti_dr_dn" ]
+          }
+        },
+        {
+          "context": {
+            "category": "WeaponItem",
+            "id": "melvorD:Air_Battlestaff"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "ti_magic_up",
+              "air_rune"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "WeaponItem",
+            "id": "melvorD:Water_Battlestaff"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "ti_magic_up",
+              "water_rune"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "WeaponItem",
+            "id": "melvorD:Earth_Battlestaff"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "ti_magic_up",
+              "earth_rune"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "WeaponItem",
+            "id": "melvorD:Fire_Battlestaff"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "ti_magic_up",
+              "fire_rune"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "WeaponItem",
+            "id": "melvorD:Mystic_Air_Staff"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "ti_magic_up",
+              "air_rune"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "WeaponItem",
+            "id": "melvorD:Bobs_Rake"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "preservation",
+              "farming"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "WeaponItem",
+            "id": "melvorF:Staff_of_Air"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "ti_magic_up",
+              "air_rune"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "WeaponItem",
+            "id": "melvorF:Staff_of_Water"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "ti_magic_up",
+              "water_rune"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "WeaponItem",
+            "id": "melvorF:Staff_of_Earth"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "ti_magic_up",
+              "earth_rune"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "WeaponItem",
+            "id": "melvorF:Staff_of_Fire"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "ti_magic_up",
+              "fire_rune"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "WeaponItem",
+            "id": "melvorF:Mystic_Water_Staff"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "ti_magic_up",
+              "water_rune"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "WeaponItem",
+            "id": "melvorF:Mystic_Earth_Staff"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "ti_magic_up",
+              "earth_rune"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "WeaponItem",
+            "id": "melvorF:Mystic_Fire_Staff"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "ti_magic_up",
+              "fire_rune"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "WeaponItem",
+            "id": "melvorF:Big_Ron"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "loot",
+              "combat"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "WeaponItem",
+            "id": "melvorF:Confetti_Crossbow"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "currency",
+              "combat"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "WeaponItem",
+            "id": "melvorF:Cloudburst_Staff"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "ti_magic_up",
+              "water_rune"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "WeaponItem",
+            "id": "melvorF:Air_Imbued_Wand"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "ti_magic_up",
+              "air_rune"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "WeaponItem",
+            "id": "melvorF:Water_Imbued_Wand"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "ti_magic_up",
+              "water_rune"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "WeaponItem",
+            "id": "melvorF:Earth_Imbued_Wand"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "ti_magic_up",
+              "earth_rune"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "WeaponItem",
+            "id": "melvorF:Fire_Imbued_Wand"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "ti_magic_up",
+              "fire_rune"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "WeaponItem",
+            "id": "melvorF:Ocean_Song"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "ti_magic_up",
+              "water_rune"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

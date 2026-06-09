@@ -1,8 +1,9 @@
-import { Constants } from "../../constants";
+﻿import { Constants } from "../../constants";
 import { Logger } from "../Logger";
+import { TagAllocationMemoizer } from "../TagAllocationMemoizer";
 import { ModifierTagMapEntryAttributes } from "../models/ModifierTagMapEntryAttributes";
 import { ModifierScopeSourceMediaMemoizer } from "../ModifierScopeSourceMediaMemoizer";
-import { modifierTagMap } from "../tagging/modifierTagMap";
+//import { modifierTagMap } from "../tagging/modifierTagMap";
 import { NamedObjectWithMedia } from "../types/namedObjectWithMedia";
 import { SettingsManager } from "./SettingsManager";
 import { TagManager } from "./TagManager";
@@ -18,7 +19,7 @@ export class IconManager {
    * @param {string} [size='xxs'] - The size classification of the icon.
    * @returns {string} - The HTML representation of the image.
    */
-  public static  imgSource = (sourceURL: string, size: string = 'xxs'): string => {
+  public static imgSource = (sourceURL: string, size: string = 'xxs'): string => {
     if (!sourceURL) {
       return '';
     }
@@ -87,7 +88,7 @@ export class IconManager {
     secondary?: boolean,
   ): string {
     // Determine static tag attributes | TODO: Doing this twice (for primary and secondary tag separetely) is imperformant and should be changed
-    const modTagAttributes: ModifierTagMapEntryAttributes | undefined = modifierTagMap.get(modifierValue.modifier.id);
+    const modTagAttributes: ModifierTagMapEntryAttributes | undefined = TagAllocationMemoizer.modifierTagMap.get(modifierValue.modifier.id);
     if (!modTagAttributes) {
       Logger.warn(`No tags found for modifier ${modifierValue.modifier.id}`);
       return SettingsManager.settings.placeholderIconEnabled
@@ -144,12 +145,56 @@ export class IconManager {
   }
 
   /**
+   * Get ready-to-go icon html for a single tag
+   * @param tag
+   * @returns
+   */
+  public static getIconHTMLForTag(tag: string): string {
+    const src = TagManager.tagSrcs.get(tag);
+    if (!src) {
+      return '';
+    }
+
+    return this.imgSource(src);
+  }
+
+  /**
+   * Get ready-to-go icon html for multiple tags
+   * @param tag
+   * @returns
+   */
+  public static getIconHTMLForTags(tags: string[]): string {
+    return tags.map(t => IconManager.getIconHTMLForTag(t)).join('');
+  }
+
+  /**
+   * Get ready-to-go icon html for a certain skill
+   * @param tag
+   * @returns
+   */
+  public static getIconHTMLForSkill(skill: AnySkill) {
+    return this.imgSource(this.getIconSrcForSkillScope(skill));
+  }
+
+  /**
+   * Get ready-to-go icon html for a certain real
+   * @param tag
+   * @returns
+   */
+  public static getIconHTMLForRealm(realm: Realm) {
+    return this.imgSource(this.getIconSrcForRealmScope(realm));
+  }
+
+  /**
    * Determines the appropriate icons for the active scopes
    * @param modValue data on mod value, which among other things includes active scoping (may have none)
    */
   private static getIconsForScopes(modValue: ModifierValue): string {
     let html = '';
 
+    if (modValue.currency && SettingsManager.settings.scopeIcons.currency) {
+      html += this.imgSource(this.getIconSrcForCurrencyScope(modValue.currency));
+    }
     if (modValue.skill && SettingsManager.settings.scopeIcons.skill) {
       html += this.imgSource(this.getIconSrcForSkillScope(modValue.skill));
     }
@@ -158,9 +203,6 @@ export class IconManager {
     }
     if (modValue.realm && SettingsManager.settings.scopeIcons.realm) {
       html += this.imgSource(this.getIconSrcForRealmScope(modValue.realm));
-    }
-    if (modValue.currency && SettingsManager.settings.scopeIcons.currency) {
-      html += this.imgSource(this.getIconSrcForCurrencyScope(modValue.currency));
     }
     if (modValue.category && SettingsManager.settings.scopeIcons.category) {
       html += this.imgSource(this.getIconSrcForCategoryScope(modValue, modValue.category) ?? '');
@@ -355,23 +397,23 @@ export class IconManager {
    * @returns
    */
   private static tryGetModifierScopeSource(modValue: ModifierValue): IModifierScopeSource | undefined {
-      const scopeKey: number = Modifier.getScopeKey(modValue);
-      const scoping: ModifierScoping | undefined = modValue.modifier.scopeMap.get(scopeKey);
-      if (!scoping) {
-        return undefined;
-      }
-
-      // If scope source exist, just return that one
-      if (scoping.scopeSource) {
-        return scoping.scopeSource;
-      }
-
-      // If no scope source exists, try falling back to skill scope, if available (mirrors behaviour from base game)
-      if (scoping.scopes.skill) {
-        return modValue.skill;
-      }
-
-      // Nothing could be found
+    const scopeKey: number = Modifier.getScopeKey(modValue);
+    const scoping: ModifierScoping | undefined = modValue.modifier.scopeMap.get(scopeKey);
+    if (!scoping) {
       return undefined;
+    }
+
+    // If scope source exist, just return that one
+    if (scoping.scopeSource) {
+      return scoping.scopeSource;
+    }
+
+    // If no scope source exists, try falling back to skill scope, if available (mirrors behaviour from base game)
+    if (scoping.scopes.skill) {
+      return modValue.skill;
+    }
+
+    // Nothing could be found
+    return undefined;
   }
 }

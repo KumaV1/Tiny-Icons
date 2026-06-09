@@ -1,0 +1,756 @@
+﻿{
+  "$schema": "https://melvoridle.com/assets/schema/gameData.json",
+  "namespace": "tinyIcons",
+  "modifications": {
+    "tinyIcons": {
+      "staticTagAllocations": [
+        {
+          "context": {
+            "category": "ShopPurchase",
+            "id": "melvorD:SkipCostReduction"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "golbin"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "ShopPurchase",
+            "id": "melvorD:FoodBonus"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "golbin",
+              "food"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "ShopPurchase",
+            "id": "melvorD:AmmoBonus"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "golbin",
+              "ranged"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "ShopPurchase",
+            "id": "melvorD:RuneBonus"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "golbin",
+              "magic"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "ShopPurchase",
+            "id": "melvorD:PrayerUnlock"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "golbin",
+              "prayer"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "ShopPurchase",
+            "id": "melvorD:PrayerLevel"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "golbin",
+              "prayer"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "ShopPurchase",
+            "id": "melvorD:WaveCompletionPrayerPoints"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "golbin",
+              "prayer"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "ShopPurchase",
+            "id": "melvorD:StartingPrayerPoints"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "golbin",
+              "prayer"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "ShopPurchase",
+            "id": "melvorD:PassiveUnlock"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "golbin",
+              "combat"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "ShopPurchase",
+            "id": "melvorD:FasterSpawns"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "interval",
+              "normal_damage"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "ShopPurchase",
+            "id": "melvorD:Dungeon_Equipment_Swapping"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "equip_swap",
+              "dungeon"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "ShopPurchase",
+            "id": "melvorF:Stronghold_Equipment_Swapping"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "equip_swap",
+              "stronghold"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "ShopPurchase",
+            "id": "melvorD:Extra_Equipment_Set_I"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "equip_set"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "ShopPurchase",
+            "id": "melvorF:Extra_Equipment_Set_II"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "equip_set"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "ShopPurchase",
+            "id": "melvorF:Extra_Equipment_Set_III"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "equip_set"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "ShopPurchase",
+            "id": "melvorF:LootContainerStacking"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "loot"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "ShopPurchase",
+            "id": "melvorF:Auto_Slayer"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "auto_slayer"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "ShopPurchase",
+            "id": "melvorD:Cooking"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "cooking"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "ShopPurchase",
+            "id": "melvorD:Mining"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "double",
+              "mining"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "ShopPurchase",
+            "id": "melvorD:Gem"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "gem",
+              "mining"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "ShopPurchase",
+            "id": "melvorD:Smithing"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "xp",
+              "smithing"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "ShopPurchase",
+            "id": "melvorF:Thieving"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "thieving"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "ShopPurchase",
+            "id": "melvorD:Iron_Axe"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "interval",
+              "woodcutting"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "ShopPurchase",
+            "id": "melvorD:Steel_Axe"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "interval",
+              "woodcutting"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "ShopPurchase",
+            "id": "melvorD:Black_Axe"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "interval",
+              "woodcutting"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "ShopPurchase",
+            "id": "melvorD:Mithril_Axe"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "interval",
+              "woodcutting"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "ShopPurchase",
+            "id": "melvorD:Adamant_Axe"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "interval",
+              "woodcutting"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "ShopPurchase",
+            "id": "melvorD:Rune_Axe"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "interval",
+              "woodcutting"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "ShopPurchase",
+            "id": "melvorD:Dragon_Axe"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "interval",
+              "woodcutting"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "ShopPurchase",
+            "id": "melvorD:Iron_Fishing_Rod"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "interval",
+              "fishing"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "ShopPurchase",
+            "id": "melvorD:Steel_Fishing_Rod"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "interval",
+              "fishing"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "ShopPurchase",
+            "id": "melvorD:Black_Fishing_Rod"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "interval",
+              "fishing"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "ShopPurchase",
+            "id": "melvorD:Mithril_Fishing_Rod"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "interval",
+              "fishing"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "ShopPurchase",
+            "id": "melvorD:Adamant_Fishing_Rod"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "interval",
+              "fishing"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "ShopPurchase",
+            "id": "melvorD:Rune_Fishing_Rod"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "interval",
+              "fishing"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "ShopPurchase",
+            "id": "melvorD:Dragon_Fishing_Rod"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "interval",
+              "fishing"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "ShopPurchase",
+            "id": "melvorD:Iron_Pickaxe"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "interval",
+              "double",
+              "mining"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "ShopPurchase",
+            "id": "melvorD:Steel_Pickaxe"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "interval",
+              "double",
+              "mining"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "ShopPurchase",
+            "id": "melvorD:Black_Pickaxe"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "interval",
+              "double",
+              "mining"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "ShopPurchase",
+            "id": "melvorD:Mithril_Pickaxe"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "interval",
+              "double",
+              "mining"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "ShopPurchase",
+            "id": "melvorD:Adamant_Pickaxe"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "interval",
+              "double",
+              "mining"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "ShopPurchase",
+            "id": "melvorD:Rune_Pickaxe"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "interval",
+              "double",
+              "mining"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "ShopPurchase",
+            "id": "melvorD:Dragon_Pickaxe"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "interval",
+              "double",
+              "mining"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "ShopPurchase",
+            "id": "melvorD:Normal_Cooking_Fire"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "xp",
+              "cooking"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "ShopPurchase",
+            "id": "melvorD:Oak_Cooking_Fire"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "xp",
+              "cooking"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "ShopPurchase",
+            "id": "melvorD:Willow_Cooking_Fire"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "xp",
+              "cooking"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "ShopPurchase",
+            "id": "melvorD:Teak_Cooking_Fire"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "xp",
+              "cooking"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "ShopPurchase",
+            "id": "melvorD:Maple_Cooking_Fire"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "xp",
+              "cooking"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "ShopPurchase",
+            "id": "melvorD:Mahogany_Cooking_Fire"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "xp",
+              "cooking"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "ShopPurchase",
+            "id": "melvorD:Yew_Cooking_Fire"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "xp",
+              "cooking"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "ShopPurchase",
+            "id": "melvorD:Magic_Cooking_Fire"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "xp",
+              "cooking"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "ShopPurchase",
+            "id": "melvorD:Redwood_Cooking_Fire"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "xp",
+              "cooking"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "ShopPurchase",
+            "id": "melvorD:Basic_Furnace"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "cooking"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "ShopPurchase",
+            "id": "melvorD:Strong_Furnace"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "cooking",
+              "double"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "ShopPurchase",
+            "id": "melvorD:Magic_Furnace"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "cooking",
+              "double"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "ShopPurchase",
+            "id": "melvorD:Basic_Pot"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "cooking"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "ShopPurchase",
+            "id": "melvorD:Strong_Pot"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "cooking",
+              "double"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "ShopPurchase",
+            "id": "melvorD:Magic_Pot"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "cooking",
+              "double"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "ShopPurchase",
+            "id": "melvorF:Perpetual_Haste"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "interval",
+              "crafting",
+              "fletching"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "ShopPurchase",
+            "id": "melvorF:Expanded_Knowledge"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "interval",
+              "runecrafting",
+              "herblore"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "ShopPurchase",
+            "id": "melvorF:Master_of_Nature"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "interval",
+              "woodcutting",
+              "mining"
+            ]
+          }
+        },
+        {
+          "context": {
+            "category": "ShopPurchase",
+            "id": "melvorF:Art_of_Control"
+          },
+          "data": {
+            "descriptionIconTags": [
+              "interval",
+              "cooking",
+              "firemaking",
+              "smithing"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

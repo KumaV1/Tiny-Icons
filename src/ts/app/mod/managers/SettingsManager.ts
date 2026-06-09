@@ -1,4 +1,4 @@
-import { Constants } from "../../constants";
+﻿import { Constants } from "../../constants";
 import { CheckboxGroupFixedConfig } from "../models/CheckboxGroupFixedConfig";
 import { TinyIconsModSettings } from "../types/tinyIconsModSettings";
 
@@ -10,9 +10,15 @@ export class SettingsManager {
    * Depending on when this is called, it may still be in a default state, rather than the actual settings (only available after loading a character)
    */
   static settings: TinyIconsModSettings = {
+    /** Whether manual tagging of various entities is enabled */
+    manualTaggingEnabled: true,
+
     globalIconsEnabled: true,
+
     secondaryIconsEnabled: false,
+
     placeholderIconEnabled: true,
+
     scopeIcons: {}
   };
 
@@ -27,6 +33,24 @@ export class SettingsManager {
 
     // Add settings
     settings.add([
+      {
+        type: 'switch',
+        name: 'manual-tagging',
+        label: getLangString(Constants.TRANSLATION_KEYS.SETTINGS.MANUAL_TAGGING.LABEL),
+        hint: getLangString(Constants.TRANSLATION_KEYS.SETTINGS.MANUAL_TAGGING.HINT),
+        default: true,
+        onChange: () => {
+          const hint = document
+            .getElementById(`tinyIcons:manual-tagging`)
+            ?.nextElementSibling?.querySelector('small');
+
+          if (hint) {
+            hint.textContent = getLangString(Constants.TRANSLATION_KEYS.SETTINGS.RELOAD_REQUIRED);
+            hint.classList.add('text-warning');
+          }
+          this.updateButton();
+        },
+      } as unknown as Modding.Settings.SwitchConfig,
       {
         type: 'switch',
         name: 'global-icons',
@@ -99,13 +123,13 @@ export class SettingsManager {
 
           const label = <HTMLElement>document.querySelector('label[for="tinyIcons:scope-icons"]');
           if (!label) {
-              return;
+            return;
           }
 
           let hint = label?.querySelector(`small`);
           if (!hint) {
-              createElement('span', { classList: ['ms__force-wrap'], parent: label })
-              hint = createElement('small', { classList: ['d-block'], parent: label });
+            createElement('span', { classList: ['ms__force-wrap'], parent: label })
+            hint = createElement('small', { classList: ['d-block'], parent: label });
           }
 
           hint.textContent = getLangString(Constants.TRANSLATION_KEYS.SETTINGS.RELOAD_REQUIRED)
@@ -129,6 +153,7 @@ export class SettingsManager {
    */
   public static setSettingsFromCharacter() {
     SettingsManager.settings = {
+      manualTaggingEnabled: SettingsManager.ctxSettings.get('manual-tagging') as boolean,
       globalIconsEnabled: SettingsManager.ctxSettings.get('global-icons') as boolean,
       secondaryIconsEnabled: SettingsManager.ctxSettings.get('secondary-icons') as boolean,
       placeholderIconEnabled: SettingsManager.ctxSettings.get('placeholder-icons') as boolean,
@@ -139,6 +164,9 @@ export class SettingsManager {
     };
   }
 
+  /**
+   * Modifies the reload button to indicate the necessity for a reload
+   */
   private static updateButton() {
     const btn = document.getElementById('tinyIcons:save-reload');
     if (btn && btn.classList.contains('btn-primary'))
