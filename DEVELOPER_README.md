@@ -2,11 +2,11 @@
 ## Table of Contents
 
 1. [Intro](#intro)
+   - [About availability](#about-availability)
 2. [Data Packages](#data-packages)
    - [Data package and format](#data-package-and-format)
    - [Code integration example](#code-integration-example)
 3. [API](#api)
-   - [About availability](#about-availability)
    - [applyDescriptionModificationsSupport](#applydescriptionmodificationssupport)
    - [Adding](#adding)
    - [Getting](#getting)
@@ -14,6 +14,14 @@
 
 ## Intro
 Some data ca be added via both API and data packages. Some things can only be registered via API. See the following description on what is possible.
+
+### About availability
+
+Generally, you will need to ensure that anything you do is only called once the `onModsLoaded` hook has been initialized, to ensure this mod's API has actually been initialized by the game.
+
+Due to the game possibly caching values (as in texts which include tiny icons), it is advised to add all your custom data `onCharacterSelectionLoaded` **at the latest** (Tiny Icons may then force the game to re-compute certain texts at `onCharacterLoaded` to ensure the mod settings are adhered to).
+
+As for getting/viewing data, some data may only be available upon `onCharacterSelectionLoaded`. Furthermore, the mod settings are, understandibly, only available upon `onCharacterLoaded`, so icon usage is generally disabled before that due to the "Global Icons" setting being disabled by default. On the note of mod settings, any changes to them are expected to be followed by a reload, so they can be retrieved once and then preserved for whatever you may want to use them.
 
 ## Data Packages
 
@@ -146,14 +154,6 @@ You can check [this file](https://github.com/KumaV1/Tiny-Icons/blob/main/src/ts/
 Generally, you will need to add static tags for custom modifiers by yourself.
 
 As for scope media, this mod may already be able to pick up on it. This mod will generally pick up, if the scope source has a `media` property. This mod will also be able to pick up on data added to existing structures, assuming the data package is loaded in before `onCharacterSelection` (for example, the mod would pick up on an additional Thieving Area being added by a mod).
-
-### About availability
-
-Generally, you will need to ensure that anything you do is only called once the `onModsLoaded` hook has been initialized, to ensure this mod's API has actually been initialized by the game.
-
-Due to the game possibly caching values (as in texts which include tiny icons), it is advised to add all your custom data `onCharacterSelectionLoaded` **at the latest** (Tiny Icons may then force the game to re-compute certain texts at `onCharacterLoaded` to ensure the mod settings are adhered to).
-
-As for getting/viewing data, some data may only be available upon `onCharacterSelectionLoaded`. Furthermore, the mod settings are, understandibly, only available upon `onCharacterLoaded`, so icon usage is generally disabled before that due to the "Global Icons" setting being disabled by default. On the note of mod settings, any changes to them are expected to be followed by a reload, so they can be retrieved once and then preserved for whatever you may want to use them.
 
 ### applyDescriptionModificationsSupport
 
