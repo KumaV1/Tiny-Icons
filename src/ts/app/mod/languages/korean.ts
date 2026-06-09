@@ -12,6 +12,9 @@
   SETTINGS_RELOAD_TEXT: 'Reload required',
   SETTINGS_SAVE_AND_RELOAD_TEXT: 'Save & Reload',
 
+  SETTINGS_SETTING_MANUAL_TAGGING_LABEL: 'Enable manually allocated icons',
+  SETTINGS_SETTING_MANUAL_TAGGING_HINT: 'Enable iconizations that have been explicitly added to certain entities (e.g. manually providing a specific set of icons to a specific equipment item). | NOTE: Does not adhere to settings below. They are basically akin to "static", "global" icons that do not differentiate between "primary" and "secondary". (this may be improved upon in a future update)',
+
   SETTINGS_SETTING_GLOBAL_ICONS_LABEL: 'Enable Global Icons',
   SETTINGS_SETTING_GLOBAL_ICONS_HINT: 'Show icons outside of Astrology and Agility.',
 

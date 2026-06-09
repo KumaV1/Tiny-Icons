@@ -124,6 +124,11 @@ export class PatchManager {
         return returnValue;
       }
 
+      // Opt-put, if support setting was disabled
+      if (!SettingsManager.settings.manualTaggingEnabled) {
+        return returnValue;
+      }
+
       // Opt-out, if object provides no tiny icon context
       if (!this.tinyIcons) {
         return returnValue;
@@ -181,6 +186,12 @@ export class PatchManager {
     // Patch Summoning Synergy
     PatchManager.ctx.patch(SummoningSynergy, 'description').get(function (o: () => string) {
       const baseResult = o();
+
+      // Opt-put, if support setting was disabled
+      if (!SettingsManager.settings.manualTaggingEnabled) {
+        return baseResult;
+      }
+
       if (!this.tinyIcons) {
         return baseResult;
       }
@@ -206,6 +217,12 @@ export class PatchManager {
 
     PatchManager.ctx.patch(ShopPurchase, 'description').get(function (o: () => string) {
       const baseResult = o();
+
+      // Opt-put, if support setting was disabled
+      if (!SettingsManager.settings.manualTaggingEnabled) {
+        return baseResult;
+      }
+
       if (!this.tinyIcons) {
         return baseResult;
       }
@@ -230,6 +247,12 @@ export class PatchManager {
     // Patch combat passive
     PatchManager.ctx.patch(CombatPassive, 'modifiedDescription').get(function (o: () => string) {
       const baseResult = o();
+
+      // Opt-put, if support setting was disabled
+      if (!SettingsManager.settings.manualTaggingEnabled) {
+        return baseResult;
+      }
+
       if (!this.tinyIcons) {
         return baseResult;
       }
@@ -255,6 +278,12 @@ export class PatchManager {
       // @ts-ignore: Some weird espectations of classes sharing certain stuff, even though the only thing we care about is them all sharing having the "modifiedDescription" getter
       PatchManager.ctx.patch(itemClass, 'modifiedDescription').get(function (o: () => string) {
         const baseResult = o();
+
+        // Opt-put, if support setting was disabled
+        if (!SettingsManager.settings.manualTaggingEnabled) {
+          return baseResult;
+        }
+
         if (!this.tinyIcons) {
           return baseResult;
         }

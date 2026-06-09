@@ -298,6 +298,7 @@ export class PublicApi {
     const originalModSettings = SettingsManager.settings;
     if (forceIconEnablement) {
       SettingsManager.settings = {
+        manualTaggingEnabled: true,
         globalIconsEnabled: true,
         secondaryIconsEnabled: true,
         placeholderIconEnabled: true,

@@ -12,6 +12,9 @@
   SETTINGS_RELOAD_TEXT: 'Neuladen erforderlich',
   SETTINGS_SAVE_AND_RELOAD_TEXT: 'Speichern & Neuladen',
 
+  SETTINGS_SETTING_MANUAL_TAGGING_LABEL: 'Manuell zugewiesene Icons aktivieren',
+  SETTINGS_SETTING_MANUAL_TAGGING_HINT: 'Aktiviere Ícons, die bestimmten Entitäten explizit hinzugefügt wurden (z.B. manuelle Zuweisung bestimmter Icons zu einem ganz bestimmten Ausrüstungsgegenstand). | HINWEIS: Diese Einstellung ist komplett unabhängig/separat von den unten aufgeführten Einstellungen. Es handelt sich im Grunde um „statische“, „globale“ Icons, bei denen nicht zwischen „primären“ und „sekundären“ Icons unterschieden wird. (das wird möglicherweise in einem zukünftigen Update verbessert)',
+
   SETTINGS_SETTING_GLOBAL_ICONS_LABEL: 'Globale Icons aktivieren',
   SETTINGS_SETTING_GLOBAL_ICONS_HINT: 'Wenn aktiviert: Icons werden auch außerhalb von Astronomie und Gewandtheit angezeigt',
 

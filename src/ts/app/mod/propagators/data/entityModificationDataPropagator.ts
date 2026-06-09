@@ -82,7 +82,7 @@ export abstract class EntityModificationDataPropagator<TEntity, TContextData ext
       // @ts-ignore: Missing type declaration
       entity.tinyIcons.descriptionTags = tags;
     } else {
-      Logger.warn('This entity has already been set up with description tags by TI itself or another mod.', entity);
+      Logger.warn('This entity has already been set up with description tags by TI itself or another mod.', entity, 'Proposed tags which will not be added:', tags);
     }
   }
 
@@ -121,7 +121,7 @@ export abstract class EntityModificationDataPropagator<TEntity, TContextData ext
           descriptionTags: tagGroups[index]
         };
       } else {
-        Logger.warn(`This entity has already been set up with conditional modifier tags for this specific index (${index}), either by TI itself or another mod.`, entity);
+        Logger.warn(`This entity has already been set up with conditional modifier tags for this specific index (${index}), either by TI itself or another mod.`, entity, 'Proposed tags which will not be added:', tagGroups[index]);
       }
     });
   }
