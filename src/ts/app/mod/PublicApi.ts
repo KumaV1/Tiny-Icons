@@ -107,6 +107,20 @@ export class PublicApi {
       },
 
       /**
+       * Register a new data propagator. Should happen before loading data packages wanting to use said propagator
+       * @param category
+       * @param propagator
+       */
+      registerPropagator: (category: EntityCategory, propagator: EntityModificationDataPropagator<unknown, PropagatorBaseContextData, PropagatorBaseDataData>): void => {
+        if (TagAllocationMemoizer.propagators.has(category)) {
+          Logger.warn(`A propagator for the category '${category}'' is already registerd. No new one will be registered`);
+          return;
+        } 
+
+        TagAllocationMemoizer.propagators.set(category, propagator);
+      },
+
+      /**
        * Returns tag attributes object for given modifier, if one is set up for that modifier
        * @param modifier The name of the modifier.
        * @returns {ModifierTagMapEntryAttributes | undefined} An object of modifier tag attributes

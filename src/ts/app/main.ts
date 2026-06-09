@@ -188,8 +188,6 @@ async function loadModifications(ctx: Modding.ModContext) {
   // @ts-ignore: Supposed non-matching type (e.g. Tiny Icons custom stuff, I guess)
   await ctx.gameData.addPackage(ItemItAModificationData);
   // @ts-ignore: Supposed non-matching type (e.g. Tiny Icons custom stuff, I guess)
-  await ctx.gameData.addPackage(SummoningSynergyModificationData);
-  // @ts-ignore: Supposed non-matching type (e.g. Tiny Icons custom stuff, I guess)
   await ctx.gameData.addPackage(CombatPassiveModificationData);
   // @ts-ignore: Supposed non-matching type (e.g. Tiny Icons custom stuff, I guess)
   await ctx.gameData.addPackage(CombatPassiveTotHModificationData);
