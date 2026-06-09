@@ -13,7 +13,7 @@
    - [Viewing](#viewing)
 
 ## Intro
-This documentation is **still WIP**!
+Some data ca be added via both API and data packages. Some things can only be registered via API. See the following description on what is possible.
 
 ## Data Packages
 
