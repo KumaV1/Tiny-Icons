@@ -1,6 +1,34 @@
-# Changelog
+﻿# Changelog
 
 All notable changes to this project will be documented in this file.
+
+### [3.4.0] (2026-06-09)
+* Features:
+  * Various cases of "Custom Descriptions" and "Conditional Modifiers" now support setting tiny icons (`Items`, `SummoningSynergies` and various others)
+    * Does currently not separate "primary" and "secondary" tagging
+    * Currently item synergies (and according item descriptions) are also explicitly omitted
+    * NOTE: Can be disabled via a new mod setting
+  * The description of `MasteryTokenItem`s now display icons
+  * New tags as well as Static tagging (both for modifiers and for custom descriptions/conditional modifiers) can now be added via data packages
+  * New tags (some are restriced to certain expansions, as media is otherwise missing locally)
+    * `abyssal_pieces`
+    * `abyssal_slayer_coins`
+    * `abyssal_damage`
+    * `mastery_pool`
+    * `normal_damage`,
+    * `fear`,
+    * `blight`
+    * `silver_bar`,
+    * `gold_bar`,
+    * `azurian_bar`
+    * `obsidian_bar`
+* Adjustments:
+  * The `currency` scope is now placed before other scopes in the icon order. For example, a boost to GP gain during Thieving will now first display the currency icon and then the thieving icon
+* Fixes:
+  * Tag `ts_repair` now actually displays an icon
+  * The display of icons on equipment already worn when loading into the character will now properly adhere to player settings
+  * The display of icons in tooltips for attack style buttons will now properly adhere to player settings
+
 ### [3.3.0] (2025-11-29)
 
 #### Features
